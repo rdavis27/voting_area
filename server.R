@@ -25,7 +25,172 @@ shinyServer(
             line <- paste0(msg,"\n")
             cat(file = filerr, append = TRUE, line)
             cat(file = stderr(), line)
-        }        
+        }
+        createFL_2020_Counties <- function(){
+            files <- list.files(paste0(input_dir,"FL/2020-general-election-rev/"),
+                                "*_PctResults20201103.txt")
+            cc <- substr(files,1,3)
+            print(cc)
+            dd <- data.frame(cc)
+            write_delim(dd, paste0(data_dir,"FL_Counties.csv"), append = FALSE, col_names = TRUE)
+        }
+        fl_counties <- c(
+            "ALA","BAK","BAY","BRA","BRE","BRO","CAL","CHA","CIT","CLA",
+            "CLL","CLM","DAD","DES","DIX","DUV","ESC","FLA","FRA","GAD",
+            "GIL","GLA","GUL","HAM","HAR","HEN","HER","HIG","HIL","HOL",
+            "IND","JAC","JEF","LAF","LAK","LEE","LEO","LEV","LIB","MAD",
+            "MAN","MON","MRN","MRT","NAS","OKA","OKE","ORA","OSC","PAL",
+            "PAS","PIN","POL","PUT","SAN","SAR","SEM","STJ","STL","SUM",
+            "SUW","TAY","UNI","VOL","WAK","WAL","WAS")
+        createFL_2020_President <- function(){
+            cc <- fl_counties
+            xx <- NULL
+            for (i in 1:length(cc)){
+                dd <- read_delim(paste0(input_dir,"FL/2020-general-election-rev/",
+                                        cc[i],"_PctResults20201103.txt"), '\t',
+                                 col_names = FALSE, col_types = "ccdccccddddccdccddd")
+                names(dd) <- c("Code","COUNTY","ElectNo","ElectDate","ElectName",
+                               "AreaId","AREA","RegAll","RegRep","RegDem",
+                               "RegOth","Contest","DIST","ConCode","Candidate",
+                               "Party","RegId","CandNo","Votes")
+                office <- "President of the United States" #UPDATE
+                dd <- dd[dd$Contest == office,]
+                if (NROW(dd) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," COUNTY had no ",office))
+                    next
+                }
+                dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
+                dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                dd <- dd[,c("DIST","COUNTY","AREA","Candidate","Party","Votes")]
+                for (j in 1:NROW(dd)){
+                    dd$Candidate[j] <- head(strsplit(dd$Candidate[j],split="/")[[1]],1) #Biden / Harris
+                    dd$Candidate[j] <- gsub(" ","",trimws(dd$Candidate[j]))
+                    if (!is.na(dd$Party[j])){
+                        dd$Candidate[j] <- paste0(dd$Candidate[j],"_",dd$Party[j])
+                    }
+                }
+                dd <- dd[,-5] # delete Party
+                # check for matches first???
+                dd <- dd %>%
+                    group_by(DIST,COUNTY,AREA,Candidate) %>%
+                    summarize(Votes=sum(Votes))
+                dd <- dd %>% spread(Candidate,Votes)
+                dd$TOTAL <- 0
+                # for (j in 4:(NCOL(dd)-1)){
+                #     dd$TOTAL <- dd$TOTAL + dd[,j]
+                # }
+                xx <- rbind(xx,dd)
+            }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 4:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,3,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 4:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"FL_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createFL_2020_House <- function(){
+            cc <- c(
+                "ALA","BAK","BAY","BRA","BRE","BRO","CAL","CHA","CIT","CLA",
+                "CLL","CLM","DAD","DES","DIX","DUV","ESC","FLA","FRA","GAD",
+                "GIL","GLA","GUL","HAM","HAR","HEN","HER","HIG","HIL","HOL",
+                "IND","JAC","JEF","LAF","LAK","LEE","LEO","LEV","LIB","MAD",
+                "MAN","MON","MRN","MRT","NAS","OKA","OKE","ORA","OSC","PAL",
+                "PAS","PIN","POL","PUT","SAN","SAR","SEM","STJ","STL","SUM",
+                "SUW","TAY","UNI","VOL","WAK","WAL","WAS")
+            zz <- NULL
+            for (i in 1:length(cc)){
+                xx <- read_delim(paste0(input_dir,"FL/2020-general-election-rev/",
+                                        cc[i],"_PctResults20201103.txt"), '\t',
+                                 col_names = FALSE, col_types = "ccdccccddddccdccddd")
+                names(xx) <- c("Code","County","ElectNo","ElectDate","ElectName",
+                               "AreaId","AreaLoc","RegAll","RegRep","RegDem",
+                               "RegOth","Contest","Dist","ConCode","Candidate",
+                               "Party","RegId","CandNo","Votes")
+                xx <- xx[xx$Contest == "Representative in Congress",]
+                if (NROW(xx) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," County had no Representative in Congress"))
+                    next
+                }
+                xx <- xx[,c("Dist","County","AreaLoc","Candidate","Party","Votes")]
+                for (j in 1:NROW(xx)){
+                    if (!is.na(xx$Party[j])){
+                        xx$Candidate[j] <- xx$Party[j]
+                    }
+                    else{
+                        xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                    }
+                }
+                xx <- xx[,-5] # delete Party
+                xx <- xx %>%
+                    group_by(Dist,County,AreaLoc,Candidate) %>%
+                    summarize(Votes=sum(Votes))
+                xx <- xx %>% spread(Candidate,Votes)
+                xx$TOTAL <- 0
+                yy <- xx[,c("Dist","County","AreaLoc","TOTAL")]
+                yy$DEM <- 0
+                yy$REP <- 0
+                yy$NPA <- 0
+                yy$WriteinVotes <- 0
+                yy$OverVotes    <- 0
+                yy$UnderVotes   <- 0
+                if ("DEM" %in% names(xx)){
+                    yy$DEM <- xx$DEM
+                    yy$DEM[is.na(yy$DEM)] <- 0
+                }
+                if ("REP" %in% names(xx)){
+                    yy$REP <- xx$REP
+                    yy$REP[is.na(yy$REP)] <- 0
+                }
+                if ("NPA" %in% names(xx)){
+                    yy$NPA <- xx$NPA
+                    yy$NPA[is.na(yy$NPA)] <- 0
+                }
+                if ("WriteinVotes" %in% names(xx)){
+                    yy$WriteinVotes <- xx$WriteinVotes
+                    yy$WriteinVotes[is.na(yy$WriteinVotes)] <- 0
+                }
+                if ("OverVotes" %in% names(xx)){
+                    yy$OverVotes <- xx$OverVotes
+                    yy$OverVotes[is.na(yy$OverVotes)] <- 0
+                }
+                if ("UnderVotes" %in% names(xx)){
+                    yy$UnderVotes <- xx$UnderVotes
+                    yy$UnderVotes[is.na(yy$UnderVotes)] <- 0
+                }
+                yy$TOTAL <- yy$DEM + yy$REP + yy$NPA + yy$WriteinVotes
+                zz <- rbind(zz,yy)
+            }
+            names(zz) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","NPA","WRITEIN","OVERVOTES","UNDERVOTES")
+            zz$DIST <- gsub("District ","",zz$DIST)
+            zz$DIST <- gsub("^ ","",zz$DIST)
+            write(paste(names(zz), collapse = " "), paste0(data_dir,"FL_2020_House.csv"))
+            write_delim(zz, paste0(data_dir,"FL_2020_House.csv"), append = TRUE, col_names = TRUE)
+        }
         createFL_2020_House_CD27 <- function(){
             catmsg("##### START createFL_2020_House_CD27 #####")
             xx <- read_delim(paste0(input_dir,"FL/2020-general-election-rev/",
@@ -69,8 +234,8 @@ shinyServer(
         createME_2020_Senate <- function(){
             xx <- read_excel(paste0(input_dir,"ME/2020/ME20_ussenator1120.xlsx"), sheet = "US Senator", skip = 2)
             names(xx) <- c("COUNTY","AREA","Collins","Gideon","Linn","Savage","Others","Blank","TBC")
-            xx$COUNTY[grepl(" UOCAVA", xx$AREA),] <- "STATE"
-            xx$AREA[grepl(" UOCAVA", xx$AREA),] <- "UOCAVA"
+            xx$COUNTY[grepl(" UOCAVA", xx$AREA)] <- "STATE"
+            xx$AREA[grepl(" UOCAVA", xx$AREA)] <- "UOCAVA"
             xx <- xx[!grepl(" Total", xx$AREA) & (xx$AREA != "") & !is.na(xx$AREA),]
             xx <- xx[,c(1,2,NCOL(xx),4,3,seq(5,(NCOL(xx)-2)))] # delete Blank
             xx <- xx[!is.na(xx$COUNTY),]
@@ -79,6 +244,157 @@ shinyServer(
             namesxx[4:5] <- c("DEM","REP")
             write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2020_Senate.csv"))
             write_delim(xx, paste0(data_dir,"ME_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createME_2020_House <- function(){
+            xx <- read_excel(paste0(input_dir,"ME/2020/ME20_repcongress1120.xlsx"), sheet = "Dist 1", skip = 2)
+            #names(xx) <- c("DIST","COUNTY","AREA","Allen","Pingree","Others","Blank","TBC")
+            names(xx) <- c("DIST","COUNTY","AREA","REP","DEM","Others","Blank","TBC")
+            xx$COUNTY[grepl(" UOCAVA", xx$AREA)] <- "STATE"
+            xx$AREA[grepl(" UOCAVA", xx$AREA)] <- "UOCAVA"
+            yy <- read_excel(paste0(input_dir,"ME/2020/ME20_repcongress1120.xlsx"), sheet = "Dist 2", skip = 2)
+            #names(yy) <- c("DIST","COUNTY","AREA","Crafts","Golden","Others","Blank","TBC")
+            names(yy) <- c("DIST","COUNTY","AREA","REP","DEM","Others","Blank","TBC")
+            yy$COUNTY[grepl(" UOCAVA", yy$AREA)] <- "STATE"
+            yy$AREA[grepl(" UOCAVA", yy$AREA)] <- "UOCAVA" # set to UOCAVA2 to combine
+            xx <- rbind(xx,yy)
+            # xx[!is.na(xx$AREA) & xx$AREA == "UOCAVA",4:8] <-
+            #     xx[!is.na(xx$AREA) & xx$AREA == "UOCAVA",4:8] +
+            #     xx[!is.na(xx$AREA) & xx$AREA == "UOCAVA2",4:8]
+            # xx <- xx[xx$AREA != "UOCAVA2",]
+            xx <- xx[!grepl(" Total", xx$AREA) & (xx$AREA != "") & !is.na(xx$AREA),]
+            xx <- xx[,c(1,2,3,NCOL(xx),5,4,6)] # delete Blank
+            xx <- xx[!is.na(xx$COUNTY),]
+            names(xx)[4] <- "TOTAL"
+            namesxx <- names(xx)
+            #namesxx[5:6] <- c("DEM","REP")
+            write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2020_House.csv"))
+            write_delim(xx, paste0(data_dir,"ME_2020_House.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2016_President <- function(){
+            catmsg("##### START createTX_2016_President #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2016/","president.csv"))
+            # names(xx) <- c("CNTYVTD","ClintonD_16G_President","TrumpR_16G_President",
+            #                "JohnsonL_16G_President","SteinG_16G_President","Write-InW_16G_President")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(7,8,9,2:6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","Writein")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_AG <- function(){
+            catmsg("##### START createTX_2018_AG #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","attorney gen.csv"))
+            # names(xx) <- c("CNTYVTD","PaxtonR_18G_Attorney Gen","NelsonD_18G_Attorney Gen",
+            #                "HarrisL_18G_Attorney Gen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(5,6,7,3,2,4)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Nelson","Paxton","Harris")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_AG.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_Governor <- function(){
+            catmsg("##### START createTX_2018_Governor #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","governor.csv"))
+            # names(xx) <- c("CNTYVTD","AbbottR_18G_Governor","ValdezD_18G_Governor",
+            #                "TippettsL_18G_Governor")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(5,6,7,3,2,4)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Valdez","Abbott","Tippetts")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_Senate <- function(){
+            catmsg("##### START createTX_2018_Senate #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","u.s. sen.csv"))
+            # names(xx) <- c("CNTYVTD","CruzR_18G_U.S. Sen","O'RourkeD_18G_U.S. Sen",
+            #                "DikemanL_18G_U.S. Sen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(5,6,7,3,2,4)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Cruz","Dikeman")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_President <- function(){
+            catmsg("##### START createTX_2020_President #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2020/","president.csv"))
+            # names(xx) <- c("CNTYVTD","BidenD_20G_President","TrumpR_20G_President",
+            #                "JorgensenL_20G_President","HawkinsG_20G_President","Write-InW_20G_President")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(7,8,9,2:6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_Senate <- function(){
+            catmsg("##### START createTX_2020_Senate #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2020/","u.s. sen.csv"))
+            # names(xx) <- c("CNTYVTD","CornynR_20G_U.S. Sen","HegarD_20G_U.S. Sen",
+            #                "McKennonL_20G_U.S. Sen","CollinsG_20G_U.S. Sen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(6,7,8,3,2,4,5)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
         }
         createWI_2020_President <- function(){
             catmsg("##### START createWI_2020_President #####")
@@ -196,6 +512,54 @@ shinyServer(
             }
             return(dd)
         }
+        getlabels <- function(type){
+            tloc <- input$state2
+            if (tloc == ""){
+                tloc <- "U.S."
+            }
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                tloc <- paste0(input$xcounty," County, ",tloc)
+            }
+            if (input$dist != ""){
+                tloc <- paste0("District ",input$dist,", ",tloc)
+            }
+            tloc <- paste0(tloc,":")
+            tshift <- "Shift in"
+            if (input$units == "Percent"){
+                tunits <- "Vote Share"
+            }
+            else{
+                tunits <- "Votes"
+            }
+            if (type != "plot"){
+                tnote <- paste0("(",input$units,")")
+            }
+            else if (input$party == "Margin"){
+                if (input$plusnote != ""){
+                    plusnote <- input$plusnote
+                }
+                else if (input$xcounty == "" | input$xcounty == "(all)"){
+                    plusnote <- "(positive direction is more Democratic)"
+                }
+                else{
+                    #plusnote <- "(+ = Dem)"
+                    plusnote <- "(positive direction is more Democratic)"
+                }
+                tnote <- paste("in areas with",input$minvotes,"or more votes",plusnote)
+            }
+            else{
+                tnote <- paste("in areas with",input$minvotes,"or more votes")
+            }
+            racex <- input$races[1]
+            racey <- input$races[2]
+            title <- paste(tloc,tshift, input$party, tunits, "from",
+                           racex, "to", racey, tnote)
+            ylabel <- paste(tshift, input$party, tunits, "for", racey)
+            xlabel <- paste0(input$party," ",tunits," for ", racex,
+                             "\nSources: see http://econdataus.com/voting_area.htm")
+            labels <- c(title, xlabel, ylabel)
+            return(labels)
+        }
         output$myUsage <- renderUI({
             includeHTML("http://econdataus.com/voting_area.htm")
         })
@@ -203,7 +567,7 @@ shinyServer(
             areaWidth <<- input$areaWidth
             areaHeight <<- input$areaHeight
             dd <- getdata()
-            if (input$xcounty != ""){
+            if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
             }
             else{
@@ -275,8 +639,11 @@ shinyServer(
             if (input$cvt_x0vote){
                 xx <- xx[xx[4] > 0 & xx[5] > 0,] # delete if DEM or REP votes == 0 
             }
-            if (input$xcounty != ""){
+            if (input$xcounty != "" & input$xcounty != "(all)"){
                 xx <- xx[xx$COUNTY == input$xcounty,]
+            }
+            else{
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
             votesM <- getDeltaM(xx, input$xcounty)[2]
             yy <- xx
@@ -362,6 +729,190 @@ shinyServer(
             gg <- addScales(gg,input$xscale,input$yscale)
             gg
         })
+        output$areaPlot2 <- renderPlot({
+            xx <- getdata12()
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                xx <- xx[xx$COUNTY == input$xcounty,]
+            }
+            else{
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            }
+            names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
+            xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
+            if (input$party == "Democrat"){
+                preparty <- "DEM"
+                party1 <- "DEM1"
+            }
+            else if (input$party == "Republican"){
+                preparty <- "REP"
+                party1 <- "REP1"
+            }
+            else if (input$party == "Total"){
+                preparty <- "TOT"
+                party1 <- "TOTAL1"
+            }
+            else{
+                preparty <- "MAR"
+                party1 <- "MARGIN1"
+            }
+            party_sh <- paste0(preparty,"_SH")
+            party1n <- "TOT1_N"
+            xx$Party <- ""
+            if (input$xlimit2 != ""){
+                vlimit <- as.numeric(unlist(strsplit(input$xlimit2, ",")))
+                vcolor <- unlist(strsplit(input$lcolor2, ","))
+                vcolor <- rep_len(vcolor,(length(vlimit)+1))
+                vparty <- unlist(strsplit(input$xparty2, ","))
+                xx$Party <- vparty[length(vparty)]
+                xx$Party[xx[["MARGIN1"]] < vlimit[1]] <- vparty[1]
+                xx$Color <- vcolor[length(vcolor)]
+                xx$Color[xx[["MARGIN1"]] < vlimit[1]] <- vcolor[1]
+                for (i in 1:(length(vlimit)-1)){
+                    xx$Party[xx[["MARGIN1"]] >= vlimit[i] & xx[["MARGIN1"]] < vlimit[i+1]] <- vparty[i+1]
+                    xx$Color[xx[["MARGIN1"]] >= vlimit[i] & xx[["MARGIN1"]] < vlimit[i+1]] <- vcolor[i+1]
+                }
+            }
+            if (input$vlimit != ""){
+                vlimit <- as.numeric(unlist(strsplit(input$vlimit, ","))) * 1000
+                vdesc <- unlist(strsplit(input$vdesc, ","))
+                xx$Votes <- vdesc[length(vdesc)]
+                xx$Votes[xx[[party1n]] < vlimit[1]] <- vdesc[1]
+                for (i in 1:length(vlimit)){
+                    xx$Votes[xx[[party1n]] >= vlimit[i] & xx[[party1n]] < vlimit[i+1]] <- vdesc[i+1]
+                }
+            }
+            isParty <- NULL
+            for (i in 1:length(vparty)){
+                isParty <- c(isParty, any(xx$Party == vparty[i]))
+            }
+            isVotes <- NULL
+            for (i in 1:length(vdesc)){
+                isVotes <- c(isVotes, any(xx$Votes == vdesc[i]))
+            }
+            gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
+            gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
+                                  aes_string(color="Party",shape="Votes"))
+            if (input$party == "Margin"){
+                gg <- gg + geom_abline(intercept=0, slope=-1, color="gray", linetype="dashed")
+            }
+            if (input$party == "Margin" | input$units == "Count"){
+                gg <- gg + geom_vline(xintercept=0, color="gray")
+            }
+            vcolor <- unlist(strsplit(input$xcolor2, ","))
+            vcolor <- vcolor[isParty]
+            if (length(vcolor) > 0){
+                gg <- gg + scale_fill_manual(values = vcolor) # Bar Plot
+                gg <- gg + scale_color_manual(values = vcolor) # Line Graph
+            }
+            vshape <- as.numeric(unlist(strsplit(input$vshape, ",")))
+            vshape <- vshape[isVotes]
+            if (length(vshape) > 1){
+                gg <- gg + scale_shape_manual(values = vshape) # Line Graph
+            }
+            labels <- getlabels("plot")
+            gg <- gg + ggtitle(labels[1])
+            gg <- gg + xlab(labels[2])
+            gg <- gg + ylab(labels[3])
+            xx$POS   <- 0
+            if (input$showall2){
+                xx$POS <- 2 # default to right
+            }
+            if (input$label2 == "Index"){
+                xx$LABEL <- row.names(xx)
+            }
+            else if (input$label2 == "County"){
+                xx$LABEL <- xx$COUNTY
+            }
+            else if (input$label2 == "CountyID"){
+                if (input$state2 == "TX"){
+                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,1,3))
+                }
+                else{
+                    xx$LABEL <- xx$COUNTY
+                }
+            }
+            else if (input$label2 == "Area"){
+                if (input$state2 == "TX"){
+                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,4))
+                }
+                else{
+                    xx$LABEL <- xx$AREA
+                }
+            }
+            else if (input$label2 == "CNTYVTD"){
+                xx$LABEL <- xx$AREA
+            }
+            spos1_2 <- unlist(strsplit(input$pos1_2, ","))
+            xx$POS[xx$AREA %in% spos1_2] <- 1
+            xx$POS[row.names(xx) %in% spos1_2] <- 1
+            spos2_2 <- unlist(strsplit(input$pos2_2, ","))
+            xx$POS[xx$AREA %in% spos2_2] <- 2
+            xx$POS[row.names(xx) %in% spos2_2] <- 2
+            spos3_2 <- unlist(strsplit(input$pos3_2, ","))
+            xx$POS[xx$AREA %in% spos3_2] <- 3
+            xx$POS[row.names(xx) %in% spos3_2] <- 3
+            xx$VJUST <- 0.5
+            xx$VJUST[xx$POS == 1] <- -1
+            xx$VJUST[xx$POS == 3] <- 2
+            xx$PREPEND <- ""
+            xx$PREPEND[xx$POS == 2] <- "  "
+            xx$LABEL <- paste0(xx$PREPEND,xx$LABEL)
+            xx$LABEL[xx$POS == 0] <- ""
+            if (input$party == "Democrat"){
+                gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM_SH, label = xx$LABEL,
+                                    color="red", hjust = 0, vjust = xx$VJUST)
+            }
+            else if (input$party == "Republican"){
+                gg <- gg + annotate("text", x = xx$REP1, y =xx$REP_SH, label = xx$LABEL,
+                                    color="red", hjust = 0, vjust = xx$VJUST)
+            }
+            else if (input$party == "Total"){
+                gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT_SH, label = xx$LABEL,
+                                    color="red", hjust = 0, vjust = xx$VJUST)
+            }
+            else{
+                gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MAR_SH, label = xx$LABEL,
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+            }
+            xx <- NULL
+            yy <- NULL
+            if(input$xscale2 != ""){
+                sxx <- unlist(strsplit(input$xscale2, ","))
+                xx <- as.numeric(sxx)
+                if (length(sxx) == 3){
+                    gg <- gg + scale_x_continuous(breaks = seq(xx[1],xx[2],xx[3]),
+                                                  minor_breaks = seq(xx[1],xx[2],xx[3]))
+                }
+                else if (length(sxx) == 4){
+                    gg <- gg + scale_x_continuous(breaks = seq(xx[1],xx[2],xx[3]),
+                                                  minor_breaks = seq(xx[1],xx[2],xx[4]))
+                }
+            }
+            if(input$yscale2 != ""){
+                syy <- unlist(strsplit(input$yscale2, ","))
+                yy <- as.numeric(syy)
+                if (length(syy) == 3){
+                    gg <- gg + scale_y_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                                                  minor_breaks = seq(yy[1],yy[2],yy[3]))
+                }
+                else if (length(syy) == 4){
+                    gg <- gg + scale_x_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                                                  minor_breaks = seq(yy[1],yy[2],yy[4]))
+                }
+            }
+            if (length(xx) >= 2){
+                if (length(yy) >= 2){
+                    gg <- gg + coord_cartesian(xlim = c(xx[1], xx[2]), ylim = c(yy[1], yy[2]))
+                }
+                else{
+                    gg <- gg + coord_cartesian(xlim = c(xx[1], xx[2]))
+                }
+            }
+            else if (length(yy) >= 2){
+                gg <- gg + coord_cartesian(ylim = c(yy[1], yy[2]))
+            }
+            return(gg)
+        }, height = 600, width = 1000)
         getDeltaM <- function(xx, county){
             xx <- xx[xx$COUNTY == county,]
             oo <- orderdf(xx,input$xsortcol,input$xsortdir)
@@ -407,12 +958,10 @@ shinyServer(
         })
         output$myTextAreas <- renderPrint({
             dd <- getdata()
-            gd0 <<- dd
-            if (input$xcounty != ""){
+            if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
                 dd <- rbind(dd, data.frame(COUNTY="",AREA="TOTAL",t(colSums(dd[,c(-1,-2)]))))
             }
-            gd1 <<- dd
             ir <- 1
             if (input$xsortcol != 0){
                 if (input$xsortdir == "Ascending"){
@@ -435,10 +984,38 @@ shinyServer(
             row.names(dd) <- seq(1:NROW(dd))
             dd
         })
+        output$myTextAreas2 <- renderPrint({
+            dd <- getdata12()
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                dd <- dd[dd$COUNTY == input$xcounty,]
+            }
+            else{
+                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+            }
+            if (input$units == "Percent"){
+                dd <- dd[,c(1:(NCOL(dd)-4),NCOL(dd))]
+            }
+            else{
+                dd <- dd[,1:(NCOL(dd)-4)]
+            }
+            # Format decimal numbers into character strings
+            dp <- 2
+            for (i in 3:NCOL(dd)){
+                dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
+            }
+            print(dd)
+        })
         createfiles <- function(races){
             if (input$createfiles){
                 for (i in 1:length(races)){
-                    if (races[i] == "FL_2020_House_CD27"){
+                    if (races[i] == "FL_2020_President"){
+                        createFL_2020_President()
+                    }
+                    else if (races[i] == "FL_2020_House"){
+                        #createFL_2020_Counties()
+                        createFL_2020_House()
+                    }
+                    else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
                     }
                     else if (races[i] == "ME_2020_President"){
@@ -446,6 +1023,27 @@ shinyServer(
                     }
                     else if (races[i] == "ME_2020_Senate"){
                         createME_2020_Senate()
+                    }
+                    else if (races[i] == "ME_2020_House"){
+                        createME_2020_House()
+                    }
+                    else if (races[i] == "TX_2016_President"){
+                        createTX_2016_President()
+                    }
+                    else if (races[i] == "TX_2018_AG"){
+                        createTX_2018_AG()
+                    }
+                    else if (races[i] == "TX_2018_Governor"){
+                        createTX_2018_Governor()
+                    }
+                    else if (races[i] == "TX_2018_Senate"){
+                        createTX_2018_Senate()
+                    }
+                    else if (races[i] == "TX_2020_President"){
+                        createTX_2020_President()
+                    }
+                    else if (races[i] == "TX_2020_Senate"){
+                        createTX_2020_Senate()
                     }
                     else if (races[i] == "WI_2020_President"){
                         createWI_2020_President()
@@ -480,7 +1078,7 @@ shinyServer(
                 yy$votesM[i] <- ret[3]
             }
             yy <- orderdf(yy,input$sortcounty,input$sortcountydir)
-            counties <- c(yy$COUNTY,"")  # "" not necessary?
+            counties <- c(yy$COUNTY,"(all)")
             current_county <- input$xcounty
             if (current_county == ""){
                 updateSelectInput(session,"xcounty",choices = counties)
@@ -490,19 +1088,24 @@ shinyServer(
             }
             return(data.frame(yy))
         })
-        getdata <- reactive({
-            races <- input$races
-            nraces <- length(races)
-            filenamex <- paste0(data_dir,races[1],".csv")
-            createfiles(races[1])
+        getrace <- function(race){
+            filenamex <- paste0(data_dir,race,".csv")
+            createfiles(race)
             xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
             
             xx0 <- read_delim(filenamex, ' ', skip = 1)
+            if (names(xx0)[1] == "DIST"){
+                if (input$dist != ""){
+                    xx0 <- xx0[xx0$DIST == input$dist,]
+                }
+                xx0 <- xx0[,-1]
+                xxparty <- xxparty[,-1]
+            }
             # Remove columns where __party starts with X_, rows where AREA starts with X_
             xx0 <- xx0[,!grepl("^X_",xxparty)]
             xxparty <- xxparty[,!grepl("^X_",xxparty)]
             xx0 <- xx0[ !grepl("^X_",xx0$AREA),]
-
+            
             idem <- which(xxparty == "DEM")
             irep <- which(xxparty == "REP")
             xx <- xx0[,c(1,2,3,idem,irep,seq(6,NCOL(xx0)))] # COUNTY,AREA,TOTAL,DEM1,REP1,...
@@ -536,6 +1139,83 @@ shinyServer(
             dd <- rbind(dd,ddtot)
             dd <- dd[dd$TOTAL >= input$minvotes,]
             return(dd)
+        }
+        getdata <- reactive({
+            races <- input$races
+            nraces <- length(races)
+            dd <- NULL
+            if (nraces >= 1){
+                dd <- getrace(races[1])
+            }
+            dd
+        })
+        getdata2 <- reactive({
+            races <- input$races
+            nraces <- length(races)
+            dd <- NULL
+            if (nraces >= 2){
+                dd <- getrace(races[2])
+                }
+            dd
+        })
+        getdata12 <- reactive({
+            xx <- getdata()
+            if (is.null(xx)){
+                cat("ERROR: Select two races\n")
+                return(NULL)
+            }
+            yy <- getdata2()
+            if (is.null(yy)){
+                cat("ERROR: Select second race\n")
+                return(NULL)
+            }
+            namesxx <- names(xx)
+            namesyy <- names(yy)
+            names(xx)[3:5] <- c("TOTAL1","DEM1","REP1")
+            names(yy)[3:5] <- c("TOTAL2","DEM2","REP2")
+            xx$MARGIN1 <- xx$DEM1 - xx$REP1
+            yy$MARGIN2 <- yy$DEM2 - yy$REP2
+            xx <- xx[,c(1,2,4,5,NCOL(xx),3),]
+            yy <- yy[,c(1,2,4,5,NCOL(yy),3),]
+            gxx <<- xx
+            gyy <<- yy
+            if (input$cleanlevel > 0){
+                #xx$COUNTY <- toupper(xx$COUNTY)
+                #yy$COUNTY <- toupper(yy$COUNTY)
+                xx$AREA <- toupper(xx$AREA)
+                yy$AREA <- toupper(yy$AREA)
+            }
+            if (input$cleanlevel > 1){
+                xx$AREA <- gsub(" WARDS "," WARD ",xx$AREA)
+                yy$AREA <- gsub(" WARDS "," WARD ",yy$AREA)
+            }
+            dd <- as.data.frame(merge(xx, yy, by = c("COUNTY","AREA"), all = TRUE))
+            
+            dd$DEM_SH <- dd$DEM2 - dd$DEM1
+            dd$REP_SH <- dd$REP2 - dd$REP1
+            dd$MAR_SH <- dd$MARGIN2 - dd$MARGIN1
+            dd$TOT_SH <- dd$TOTAL2 - dd$TOTAL1
+            dd$DEM1_N <- dd$DEM1
+            dd$REP1_N <- dd$REP1
+            dd$MAR1_N <- dd$MARGIN1
+            dd$TOT1_N <- dd$TOTAL1
+            if (input$units == "Percent"){
+                dd$DEM1 <- 100 * dd$DEM1 / dd$TOTAL1
+                dd$REP1 <- 100 * dd$REP1 / dd$TOTAL1
+                dd$MARGIN1 <- 100 * dd$MARGIN1 / dd$TOTAL1
+                dd$DEM2 <- 100 * dd$DEM2 / dd$TOTAL2
+                dd$REP2 <- 100 * dd$REP2 / dd$TOTAL2
+                dd$MARGIN2 <- 100 * dd$MARGIN2 / dd$TOTAL2
+                dd$TOTAL1 <- dd$DEM1 + dd$REP1
+                dd$TOTAL2 <- dd$DEM2 + dd$REP2
+                dd$DEM_SH <- dd$DEM2 - dd$DEM1
+                dd$REP_SH <- dd$REP2 - dd$REP1
+                dd$MAR_SH <- dd$MARGIN2 - dd$MARGIN1
+                dd$TOT_SH <- dd$TOTAL2 - dd$TOTAL1
+            }
+            names(dd)[3:4] <- namesxx[4:5] # reset names
+            names(dd)[7:8] <- namesyy[4:5]
+            dd
         })
         observeEvent(input$mapsave,{
             eventid <- "Map"
@@ -660,10 +1340,13 @@ shinyServer(
         })
         observeEvent(input$state2,{
             if (input$state2 == "FL"){
-                files <- c("FL_2020_House_CD27")
+                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27")
             }
             else if (input$state2 == "ME"){
-                files <- c("ME_2020_President","ME_2020_Senate")
+                files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House")
+            }
+            else if (input$state2 == "TX"){
+                files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
             }
             else if (input$state2 == "WI"){
                 files <- c("WI_2020_President","WI_2016_President","WI_2016_President_Recount")

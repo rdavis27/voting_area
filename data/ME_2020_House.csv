@@ -1,0 +1,520 @@
+DIST COUNTY AREA TOTAL DEM REP Others
+DIST COUNTY AREA TOTAL DEM REP Others
+1 CUM Baldwin 1005 390 585 0
+1 CUM Bridgton 3306 1698 1534 0
+1 CUM Brunswick 14061 9806 3933 0
+1 CUM "Cape Elizabeth" 7009 5176 1718 0
+1 CUM Casco 2310 1106 1145 0
+1 CUM "Chebeague Island" 331 257 71 0
+1 CUM Cumberland 6087 3858 2090 1
+1 CUM Falmouth 9134 5925 3016 1
+1 CUM Freeport 6241 4242 1859 1
+1 CUM "Frye Island" 57 34 22 0
+1 CUM Gorham 11238 6541 4420 2
+1 CUM Gray 5427 2750 2553 0
+1 CUM Harpswell 3926 2389 1441 0
+1 CUM Harrison 1594 755 783 0
+1 CUM "Long Island" 191 133 52 0
+1 CUM Naples 2520 1127 1328 0
+1 CUM "New Gloucester" 3635 1751 1806 0
+1 CUM "North Yarmouth" 2995 1830 1121 0
+1 CUM Portland 42046 33880 6913 2
+1 CUM Pownal 1216 702 499 0
+1 CUM Raymond 3177 1611 1484 0
+1 CUM Scarborough 15240 9237 5556 0
+1 CUM Sebago 1288 570 676 0
+1 CUM "South Portland" 16451 12125 3901 0
+1 CUM Standish 6123 2959 3006 0
+1 CUM Westbrook 11316 7431 3514 0
+1 CUM Windham 11556 6096 5143 1
+1 CUM Yarmouth 6434 4622 1700 0
+1 KEN Augusta 9855 5517 4060 1
+1 KEN Chelsea 1586 712 835 0
+1 KEN China 2616 1183 1372 0
+1 KEN Farmingdale 1755 944 777 0
+1 KEN Hallowell 1797 1320 440 0
+1 KEN Manchester 1709 840 831 0
+1 KEN Pittston 1800 766 997 0
+1 KEN Readfield 1840 976 825 0
+1 KEN Vassalboro 2575 1162 1367 0
+1 KEN Waterville 8013 5048 2687 1
+1 KEN Windsor 1449 553 858 0
+1 KEN Winslow 4725 2342 2260 0
+1 KEN Winthrop 3781 2038 1659 0
+1 KNO Appleton 924 499 401 0
+1 KNO Camden 3874 2927 875 0
+1 KNO Cushing 971 465 482 0
+1 KNO Friendship 809 331 463 0
+1 KNO Hope 1125 666 436 0
+1 KNO "Isle Au Haut" 67 59 7 0
+1 KNO "Matinicus Isle Plt" 51 33 16 0
+1 KNO "North Haven" 327 250 73 0
+1 KNO "Owls Head" 1089 617 449 0
+1 KNO Rockland 4019 2636 1283 0
+1 KNO Rockport 2563 1723 771 0
+1 KNO "Saint George" 1845 1190 614 0
+1 KNO "South Thomaston" 1006 605 376 0
+1 KNO Thomaston 1685 1024 631 0
+1 KNO Union 1575 756 792 0
+1 KNO Vinalhaven 843 592 234 0
+1 KNO Warren 2256 1018 1196 0
+1 KNO Washington 1003 436 538 0
+1 LIN Alna 524 332 183 0
+1 LIN Boothbay 2232 1216 964 0
+1 LIN "Boothbay Harbor" 1416 822 563 0
+1 LIN Bremen 571 369 189 0
+1 LIN Bristol 2149 1223 890 0
+1 LIN Damariscotta 1495 959 498 0
+1 LIN Dresden 1170 596 543 1
+1 LIN Edgecomb 894 519 362 0
+1 LIN Jefferson 1709 714 971 0
+1 LIN "Monhegan Island Plt" 63 58 4 0
+1 LIN Newcastle 1377 908 450 0
+1 LIN Nobleboro 1326 746 562 0
+1 LIN Somerville 361 140 210 0
+1 LIN "South Bristol" 726 428 291 0
+1 LIN Southport 496 289 199 0
+1 LIN Waldoboro 2955 1382 1501 0
+1 LIN "Westport Island" 557 304 239 0
+1 LIN Whitefield 1491 709 754 0
+1 LIN Wiscasset 2345 1188 1118 1
+1 SAG Arrowsic 375 262 107 0
+1 SAG Bath 5202 3550 1532 0
+1 SAG Bowdoin 1888 790 1052 0
+1 SAG Bowdoinham 2084 1201 836 0
+1 SAG Georgetown 844 515 312 0
+1 SAG Phippsburg 1586 821 724 1
+1 SAG Richmond 2102 1011 1040 0
+1 SAG Topsham 6619 3991 2470 0
+1 SAG "West Bath" 1407 757 608 0
+1 SAG Woolwich 2173 1080 1041 0
+1 YOR Acton 1653 695 915 0
+1 YOR Alfred 2017 1060 889 0
+1 YOR Arundel 2854 1487 1281 0
+1 YOR Berwick 4413 2113 2168 0
+1 YOR Biddeford 11207 7323 3558 0
+1 YOR Buxton 5344 2588 2635 0
+1 YOR Cornish 951 478 453 0
+1 YOR Dayton 1396 630 721 0
+1 YOR Eliot 4776 2653 1508 0
+1 YOR Hollis 2934 1388 1485 0
+1 YOR Kennebunk 8347 5233 2887 0
+1 YOR Kennebunkport 2781 1723 1003 0
+1 YOR Kittery 6482 4358 1943 0
+1 YOR Lebanon 3565 1338 2101 0
+1 YOR Limerick 1862 920 878 0
+1 YOR Limington 2321 990 1273 0
+1 YOR Lyman 2980 1413 1489 0
+1 YOR Newfield 974 407 541 0
+1 YOR "North Berwick" 3146 1504 1543 0
+1 YOR Ogunquit 1068 711 325 0
+1 YOR "Old Orchard Beach" 6276 3834 2290 0
+1 YOR Parsonsfield 1077 509 521 0
+1 YOR Saco 12767 7999 4445 0
+1 YOR Sanford 11040 5710 4957 0
+1 YOR Shapleigh 1802 780 971 0
+1 YOR "South Berwick" 4681 2772 1802 0
+1 YOR Waterboro 4513 1993 2404 0
+1 YOR Wells 8051 4491 3340 0
+1 YOR York 9764 6005 3516 0
+1 STATE UOCAVA 3355 2790 479 2
+2 AND Auburn 12430 7414 4819 0
+2 AND Durham 2822 1488 1292 0
+2 AND Greene 2665 1157 1481 0
+2 AND Leeds 1370 656 701 0
+2 AND Lewiston 17629 11136 6169 0
+2 AND Lisbon 5298 2487 2759 0
+2 AND Livermore 1403 688 701 0
+2 AND "Livermore Falls" 1405 696 686 0
+2 AND "Mechanic Falls" 1716 814 866 0
+2 AND Minot 1789 813 947 0
+2 AND Poland 3536 1797 1693 0
+2 AND Sabattus 2913 1278 1585 0
+2 AND Turner 3463 1629 1798 0
+2 AND Wales 922 364 547 0
+2 ARO Allagash 170 90 67 0
+2 ARO Amity 127 37 83 0
+2 ARO "Ashland/T8 R11 Twp" 620 279 323 0
+2 ARO Blaine 403 137 255 1
+2 ARO Bridgewater 294 106 184 0
+2 ARO "Caribou/Connor Twp" 4067 2068 1897 0
+2 ARO "Castle Hill" 234 108 121 0
+2 ARO Caswell 136 78 56 0
+2 ARO Chapman 281 131 146 0
+2 ARO "Cross Lake Twp" 126 68 58 0
+2 ARO Crystal 165 48 109 0
+2 ARO "Cyr Plt" 57 26 28 0
+2 ARO "Dyer Brook" 154 52 99 0
+2 ARO "E Twp" 44 19 23 0
+2 ARO "Eagle Lake/T15 R6 Twp" 475 248 208 0
+2 ARO Easton 720 327 381 0
+2 ARO "Fort Fairfield" 1721 830 846 2
+2 ARO "Fort Kent/Big Twenty Twp/T15 R15 Wels" 2306 1282 947 0
+2 ARO Frenchville 622 305 297 0
+2 ARO "Garfield Plt" 57 20 34 0
+2 ARO "Glenwood Plt" 1 0 1 0
+2 ARO "Grand Isle" 239 136 93 0
+2 ARO Hamlin 110 52 55 0
+2 ARO Hammond 47 20 25 0
+2 ARO Haynesville 66 16 46 0
+2 ARO Hersey 42 11 28 0
+2 ARO Hodgdon 818 263 528 0
+2 ARO Houlton 2760 1277 1397 0
+2 ARO "Island Falls" 455 169 277 0
+2 ARO Limestone 768 390 367 0
+2 ARO Linneus 512 125 365 0
+2 ARO Littleton 534 177 338 0
+2 ARO Ludlow 255 103 140 0
+2 ARO "Macwahoc Plt" 43 15 28 0
+2 ARO Madawaska 2148 1327 764 0
+2 ARO "Madawaska Lake" 96 53 38 0
+2 ARO Mapleton 1167 528 611 0
+2 ARO "Mars Hill" 753 296 438 0
+2 ARO Masardis 124 52 65 0
+2 ARO Merrill 136 49 85 0
+2 ARO Monticello 436 142 274 0
+2 ARO "Moro Plt" 30 4 26 0
+2 ARO "Nashville Plt" 23 9 14 0
+2 ARO "New Canada" 159 78 78 0
+2 ARO "New Limerick" 374 142 220 0
+2 ARO "New Sweden" 354 166 176 0
+2 ARO Oakfield 414 145 253 0
+2 ARO Orient 90 31 57 0
+2 ARO "Oxbow North Twp" 35 12 22 0
+2 ARO Perham 218 80 131 0
+2 ARO "Portage Lake" 269 124 141 0
+2 ARO "Presque Isle" 4280 2259 1918 0
+2 ARO "Reed Plt" 82 26 51 0
+2 ARO "Saint Agatha/Sinclair" 651 353 278 0
+2 ARO "Saint Francis" 254 160 86 0
+2 ARO "Saint John Plt" 173 90 78 0
+2 ARO "Sherman/Benedicta/Silver Ridge" 669 191 461 0
+2 ARO Smyrna 159 54 103 0
+2 ARO Stockholm 163 82 75 0
+2 ARO "T11 R4 WELS" 18 8 10 0
+2 ARO "T15 R6 WELS TWP" 4 2 2 0
+2 ARO "T4 R3 Twp" 1 1 0 0
+2 ARO "TD R2 TWP" 5 5 0 0
+2 ARO "Van Buren/Van Buren Cove" 918 530 349 0
+2 ARO Wade 146 68 74 1
+2 ARO Wallagrass 294 187 100 0
+2 ARO Washburn 828 371 419 5
+2 ARO Westfield 273 112 149 0
+2 ARO Westmanland 55 32 22 0
+2 ARO Weston 184 67 113 0
+2 ARO "Winterville Plt." 125 68 57 0
+2 ARO Woodland 673 312 343 0
+2 FRA Avon 264 128 132 0
+2 FRA "Carrabassett Valley/Wyman Twp" 536 382 151 0
+2 FRA Carthage 315 113 190 0
+2 FRA Chesterville 811 409 396 0
+2 FRA "Coplin Plt" 112 63 47 0
+2 FRA "Dallas Plt" 212 119 90 0
+2 FRA Eustis 455 231 216 6
+2 FRA Farmington 3966 2524 1367 0
+2 FRA Industry 511 278 226 0
+2 FRA Jay 2688 1487 1168 0
+2 FRA Kingfield 899 506 370 0
+2 FRA "New Sharon" 963 486 462 0
+2 FRA "New Vineyard" 463 197 256 1
+2 FRA "Perkins Twp" 13 9 4 0
+2 FRA Phillips 668 336 313 0
+2 FRA "Rangeley/Adamstown Twp" 768 347 396 0
+2 FRA "Rangeley Plt" 147 67 77 0
+2 FRA "Sandy River Plt" 103 70 33 0
+2 FRA "Strong/Freeman Twp" 819 353 451 0
+2 FRA Temple 337 192 137 0
+2 FRA Weld 309 166 137 0
+2 FRA "Wilton/Washington Twp" 2201 1189 960 0
+2 FRA "Wyman Twp" 39 25 14 0
+2 HAN Amherst 191 83 106 0
+2 HAN Aurora 72 29 42 0
+2 HAN "Bar Harbor" 3608 2796 762 1
+2 HAN "Blue Hill" 1993 1410 554 0
+2 HAN Brooklin 632 447 171 0
+2 HAN Brooksville 697 505 183 0
+2 HAN Bucksport 2874 1522 1301 0
+2 HAN Castine 501 357 132 0
+2 HAN "Cranberry Isles" 140 107 30 0
+2 HAN Dedham 1177 625 540 0
+2 HAN "Deer Isle" 1339 909 409 0
+2 HAN Eastbrook 224 87 133 0
+2 HAN Ellsworth 4891 2623 2180 0
+2 HAN "Franklin/T9 T10 SD" 871 444 408 0
+2 HAN Frenchboro 33 19 12 0
+2 HAN Gouldsboro 1128 571 540 0
+2 HAN "Great Pond" 43 21 22 0
+2 HAN Hancock 1486 767 692 0
+2 HAN Lamoine 1221 683 514 0
+2 HAN Mariaville 311 125 179 0
+2 HAN "Mount Desert" 1511 1123 359 0
+2 HAN Orland 1438 801 613 0
+2 HAN Osborn 44 13 30 0
+2 HAN Otis 491 183 300 0
+2 HAN Penobscot 852 570 271 0
+2 HAN Sedgwick 851 550 291 0
+2 HAN Sorrento 191 99 89 0
+2 HAN "Southwest Harbor" 1141 785 338 0
+2 HAN Stonington 646 470 166 0
+2 HAN Sullivan 730 404 314 0
+2 HAN Surry 1106 654 438 0
+2 HAN "Swans Island" 268 140 125 0
+2 HAN "T22 MD Twp" 8 3 5 0
+2 HAN "T3 ND Twp" 5 3 2 0
+2 HAN Tremont 1049 647 387 0
+2 HAN Trenton 996 575 411 0
+2 HAN "Verona Island" 353 182 171 0
+2 HAN Waltham 231 84 141 0
+2 HAN "Winter Harbor" 333 177 148 0
+2 KEN Albion 1225 477 727 0
+2 KEN Belgrade 2234 1169 1045 0
+2 KEN Benton 1643 754 854 0
+2 KEN Clinton 1820 803 968 0
+2 KEN Fayette 832 463 363 0
+2 KEN Gardiner 3309 1990 1266 1
+2 KEN Litchfield 2192 1033 1133 0
+2 KEN Monmouth 2597 1342 1224 0
+2 KEN "Mount Vernon" 1166 661 494 0
+2 KEN Oakland 3667 2002 1621 0
+2 KEN Randolph 1043 599 424 0
+2 KEN Rome 719 390 317 0
+2 KEN Sidney 2981 1407 1524 0
+2 KEN Vienna 409 218 184 0
+2 KEN Wayne 877 565 305 0
+2 KEN "West Gardiner" 2400 1240 1128 0
+2 OXF "Albany Twp" 336 179 147 0
+2 OXF Andover 542 272 260 0
+2 OXF "Bethel/Mason Twp" 1839 1134 679 0
+2 OXF Brownfield 967 536 407 0
+2 OXF Buckfield 1103 531 553 0
+2 OXF Byron 94 39 51 0
+2 OXF Canton 550 231 307 0
+2 OXF Denmark 834 453 361 0
+2 OXF Dixfield 1313 595 696 0
+2 OXF Fryeburg 1957 1202 713 0
+2 OXF Gilead 125 59 62 0
+2 OXF Greenwood 537 295 232 0
+2 OXF Hanover 201 112 88 0
+2 OXF Hartford 728 329 386 0
+2 OXF Hebron 783 398 370 0
+2 OXF Hiram 931 424 479 0
+2 OXF "Lincoln Plt" 32 13 18 0
+2 OXF Lovell 775 422 334 0
+2 OXF "Magalloway Plt" 16 7 8 0
+2 OXF Mexico 1280 708 551 0
+2 OXF Newry 290 165 122 0
+2 OXF Norway 2892 1674 1173 0
+2 OXF Otisfield 1182 625 533 0
+2 OXF Oxford 2351 1057 1275 0
+2 OXF Paris 2884 1543 1286 0
+2 OXF Peru 923 441 468 0
+2 OXF Porter 883 401 452 0
+2 OXF Roxbury 246 116 128 0
+2 OXF Rumford 2900 1574 1270 0
+2 OXF Stoneham 186 96 88 0
+2 OXF Stow 256 158 94 0
+2 OXF Sumner 561 253 295 0
+2 OXF Sweden 283 179 99 0
+2 OXF Upton 64 19 45 0
+2 OXF Waterford 1044 548 484 0
+2 OXF "West Paris" 967 461 484 0
+2 OXF "Woodstock/Milton Twp" 955 454 480 0
+2 PEN Alton 481 215 263 0
+2 PEN "Argyle Twp" 85 39 44 0
+2 PEN Bangor 16387 10366 5671 0
+2 PEN Bradford 694 243 446 0
+2 PEN Bradley 895 454 431 0
+2 PEN Brewer 5332 2867 2363 0
+2 PEN Burlington 209 67 135 0
+2 PEN Carmel 1794 697 1071 0
+2 PEN "Carroll Plt" 88 15 72 0
+2 PEN Charleston 765 216 537 0
+2 PEN Chester 327 79 239 0
+2 PEN Clifton 537 229 292 1
+2 PEN Corinna 1254 456 777 3
+2 PEN Corinth 1579 508 1047 0
+2 PEN Dexter 1863 766 1062 0
+2 PEN Dixmont 737 342 380 0
+2 PEN "Drew Plt" 19 6 13 0
+2 PEN "East Millinocket" 962 474 475 0
+2 PEN Eddington 1473 606 843 0
+2 PEN Edinburg 106 43 62 0
+2 PEN Enfield 887 365 508 0
+2 PEN Etna 731 273 450 0
+2 PEN Exeter 583 230 342 0
+2 PEN Garland 615 217 387 0
+2 PEN Glenburn 2815 1311 1464 0
+2 PEN "Grand Falls Twp" 11 4 6 0
+2 PEN Greenbush 720 256 453 0
+2 PEN Hampden 4930 2627 2227 0
+2 PEN Hermon 3995 1697 2237 0
+2 PEN "Herseytown Twp" 22 0 20 0
+2 PEN Holden 2145 1049 1065 0
+2 PEN Howland 649 306 323 0
+2 PEN Hudson 615 177 430 0
+2 PEN Kenduskeag 774 307 459 0
+2 PEN "Kingman Twp" 67 11 56 0
+2 PEN "Lagrange/Orneville Twp" 360 142 212 0
+2 PEN Lakeville 69 32 37 0
+2 PEN Lee 513 173 329 0
+2 PEN Levant 1678 590 1061 0
+2 PEN Lincoln 2617 1003 1563 0
+2 PEN Lowell 258 75 179 0
+2 PEN "Mattamiscontis Twp" 52 10 42 0
+2 PEN "Mattawamkeag/Molunkus Twp" 392 162 225 0
+2 PEN Maxfield 70 22 47 0
+2 PEN Medway/Townships 759 258 489 0
+2 PEN "Milford/Greenfield Twp" 1867 1008 819 0
+2 PEN Millinocket 2417 1234 1131 0
+2 PEN "Millinocket Penobscot Twps" 172 96 72 0
+2 PEN "Mount Chase" 125 50 71 0
+2 PEN Newburgh 1004 433 561 0
+2 PEN Newport 1760 719 1003 0
+2 PEN "Old Town/Argyle Twp" 4305 2702 1522 0
+2 PEN Orono 5268 3894 1241 1
+2 PEN Orrington 2581 1266 1277 0
+2 PEN Passadumkeag 225 62 157 0
+2 PEN Patten 526 197 306 0
+2 PEN "Penobscot Nation Voting District" 309 249 51 0
+2 PEN Plymouth 756 284 461 0
+2 PEN "Prentiss Twp" 92 26 63 0
+2 PEN "Seboeis Plt" 41 20 21 0
+2 PEN Springfield 163 37 122 0
+2 PEN Stacyville 210 51 152 0
+2 PEN Stetson 773 272 491 0
+2 PEN "T5 R7 Twp/T5 R8 Twp/T6 R8 Twp" 10 4 6 0
+2 PEN Veazie 1228 737 473 0
+2 PEN "Webster Plt" 42 15 25 0
+2 PEN Winn 207 66 138 0
+2 PEN Woodville 138 38 96 0
+2 PIS Abbot 421 152 263 0
+2 PIS "Atkinson Township" 175 69 100 0
+2 PIS "Beaver Cove" 119 67 51 0
+2 PIS Bowerbank 118 48 68 0
+2 PIS Brownville/Twps 782 342 425 0
+2 PIS Dover-Foxcroft 2363 1100 1225 0
+2 PIS Greenville 1169 579 568 0
+2 PIS "Guilford/Kingsbury Plt" 738 321 401 0
+2 PIS "Lake View Plt" 114 57 57 0
+2 PIS Medford 164 59 101 0
+2 PIS "Millinocket Piscataquis Twps" 88 32 54 0
+2 PIS "Milo/Orneville Twp" 1231 555 662 0
+2 PIS "Monson/Elliotsville Twp" 484 205 270 0
+2 PIS Parkman 493 179 301 0
+2 PIS Sangerville 759 312 436 0
+2 PIS Sebec 432 137 287 0
+2 PIS Shirley 134 44 87 0
+2 PIS Wellington 119 54 64 0
+2 PIS Willimantic 93 26 63 0
+2 SOM Anson 1238 505 705 0
+2 SOM Athens 515 212 286 0
+2 SOM Bingham 584 269 299 0
+2 SOM "Brighton Plt" 50 24 24 0
+2 SOM Cambridge 258 95 160 0
+2 SOM Canaan 1170 495 642 0
+2 SOM Caratunk 61 26 34 0
+2 SOM Cornville 789 351 427 1
+2 SOM "Dennistown Plt" 24 5 19 0
+2 SOM Detroit 442 183 247 0
+2 SOM Embden 570 227 331 0
+2 SOM Fairfield 3421 1758 1605 0
+2 SOM Harmony 492 187 287 0
+2 SOM Hartland 909 336 556 0
+2 SOM "Highland Plt" 116 48 67 0
+2 SOM Jackman 538 171 350 0
+2 SOM "Lexington Twp/Spring Lake Twp" 27 8 19 0
+2 SOM Madison 2407 1151 1218 0
+2 SOM Mercer 484 214 260 0
+2 SOM "Moose River" 125 23 98 0
+2 SOM Moscow 283 97 176 0
+2 SOM "New Portland" 489 234 244 0
+2 SOM Norridgewock 1889 875 979 0
+2 SOM Palmyra 1166 407 742 0
+2 SOM Pittsfield 2069 995 1045 0
+2 SOM "Pleasant Ridge Plt" 54 19 33 0
+2 SOM Ripley 302 133 165 0
+2 SOM "Rockwood Strip Twp" 215 75 138 0
+2 SOM "Saint Albans" 1193 416 763 0
+2 SOM Skowhegan 4245 2231 1919 0
+2 SOM Smithfield 643 329 304 0
+2 SOM "Solon/Concord Twp" 627 285 326 0
+2 SOM "Spring Lake Twp" 2 0 2 0
+2 SOM Starks 383 166 213 0
+2 SOM "The Forks Plt" 39 27 12 0
+2 SOM "West Forks Plt" 54 21 32 0
+2 WAL Belfast 4293 3040 1159 0
+2 WAL Belmont 603 304 286 0
+2 WAL Brooks 602 298 299 0
+2 WAL Burnham 647 293 346 0
+2 WAL Frankfort 693 293 392 0
+2 WAL Freedom 474 254 207 0
+2 WAL Islesboro 446 331 111 0
+2 WAL Jackson 341 150 181 0
+2 WAL Knox 484 192 281 0
+2 WAL Liberty 594 295 281 0
+2 WAL Lincolnville 1667 1123 522 0
+2 WAL Monroe 608 354 240 0
+2 WAL Montville 658 403 243 0
+2 WAL Morrill 614 286 316 2
+2 WAL Northport 1119 722 379 0
+2 WAL Palermo 956 462 479 0
+2 WAL Prospect 430 204 217 0
+2 WAL Searsmont 943 490 440 0
+2 WAL Searsport 1627 966 630 0
+2 WAL "Stockton Springs" 1070 593 462 0
+2 WAL Swanville 835 412 411 0
+2 WAL Thorndike 449 248 188 1
+2 WAL Troy 599 276 310 0
+2 WAL Unity 957 521 412 0
+2 WAL Waldo 507 249 245 0
+2 WAL Winterport 2350 1159 1168 0
+2 WAS Addison 718 322 382 1
+2 WAS Alexander 316 106 202 0
+2 WAS Baileyville 676 300 359 0
+2 WAS "Baring Plt" 114 56 57 0
+2 WAS Beals 296 129 165 0
+2 WAS Beddington 51 17 34 0
+2 WAS Calais 1534 734 769 0
+2 WAS "Cathance Twp" 7 2 5 0
+2 WAS "Centerville Twp" 20 8 11 0
+2 WAS Charlotte 219 83 134 0
+2 WAS Cherryfield/T10 656 265 375 0
+2 WAS Columbia 234 85 144 0
+2 WAS "Columbia Falls" 335 137 195 0
+2 WAS Cooper 98 40 57 0
+2 WAS Crawford 66 22 44 0
+2 WAS Cutler 317 109 198 0
+2 WAS Danforth 427 141 273 0
+2 WAS Deblois 40 5 34 0
+2 WAS Dennysville 362 178 177 0
+2 WAS "East Machias/Twps" 820 341 471 0
+2 WAS Eastport 840 536 292 0
+2 WAS "Grand Lake Stream Plt" 100 39 60 0
+2 WAS Harrington 547 202 335 0
+2 WAS "Indian Township" 268 205 51 0
+2 WAS Jonesboro 348 146 197 2
+2 WAS Jonesport 720 305 397 0
+2 WAS Lubec 893 529 354 0
+2 WAS Machias 910 466 421 0
+2 WAS Machiasport 571 255 302 0
+2 WAS Marshfield 318 117 197 0
+2 WAS Meddybemps 106 42 63 0
+2 WAS Milbridge/T10 742 376 348 0
+2 WAS Northfield 125 51 72 0
+2 WAS Pembroke 485 240 237 0
+2 WAS Perry 476 239 231 2
+2 WAS "Pleasant Point Voting District" 238 197 29 0
+2 WAS Princeton 477 173 291 0
+2 WAS Robbinston 358 148 202 0
+2 WAS "Roque Bluffs" 184 110 70 0
+2 WAS "Sakom Twp" 0 0 0 0
+2 WAS Steuben/T7SD 676 305 349 0
+2 WAS "T26 ED BPP" 4 0 4 0
+2 WAS Talmadge 32 16 16 0
+2 WAS Topsfield 124 29 92 0
+2 WAS Vanceboro 95 31 59 0
+2 WAS Waite 51 17 33 0
+2 WAS Wesley 79 36 42 0
+2 WAS Whiting 367 169 189 0
+2 WAS Whitneyville 130 66 59 0
+2 STATE UOCAVA 2416 1818 510 1

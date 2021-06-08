@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
     sidebarPanel(
         width = 2,
         selectInput("state2", "STATE",
-                    choices = c("FL","ME","WI"),
+                    choices = c("FL","ME","TX","WI"),
                     selected = "WI",
                     multiple = FALSE),
         selectInput("races", "RACE",
@@ -13,12 +13,20 @@ shinyUI(pageWithSidebar(
                                 "WI_2016_President",
                                 "WI_2016_President_Recount"),
                     selected = "WI_2020_President",
-                    multiple = FALSE),
+                    multiple = TRUE),
         selectInput("xcounty", "COUNTY",
                     choices = c(""),
                     selected = "",
                     multiple = FALSE),
         textInput("xarea", "AREA", value = ""),
+        splitLayout(
+            numericInput("minvotes","Min Votes",20,min = 0),
+            textInput("dist", "DIST", value = "")
+        ),
+        selectInput("units", "Units",
+                    choices = c("Count","Percent"),
+                    selected = "Percent",
+                    multiple = FALSE),
         selectInput("sortcounty", "Sort Counties",
                     choices = c("COUNTY","AREAS","VOTES","deltaM","deltaMxV","totalM","votesM"),
                     selected = "COUNTY",
@@ -26,7 +34,11 @@ shinyUI(pageWithSidebar(
         radioButtons("sortcountydir", NULL, c("Ascending","Desc"), "Ascending", inline = TRUE),
         numericInput("xsortcol", "Sort Areas (column)", 3),
         radioButtons("xsortdir", NULL, c("Ascending","Desc"), "Ascending", inline = TRUE),
-        numericInput("minvotes","Min Votes",0,min = 0),
+        selectInput("party", "Party",
+                    choices = c("Democrat","Republican","Margin","Total"),
+                    selected = "Margin",
+                    multiple = FALSE),
+        numericInput("cleanlevel", "Clean Level", 2, min = 0),
         textInput("incl_cand", "Include candidates", value = "1,2,3,4,5"),
         textInput("skip_rows", "Skip rows", value = ""),
         checkboxInput("createfiles","Create Data Files",value = FALSE)
@@ -91,6 +103,43 @@ shinyUI(pageWithSidebar(
                      mainPanel(
                          width = 9,
                          plotOutput("cvtPlot")
+                     )
+            ),
+            tabPanel("Areas2",
+                     mainPanel(
+                         width = 12,
+                         verbatimTextOutput("myTextAreas2")
+                     )
+            ),
+            tabPanel("Area Plot2",
+                     sidebarPanel(
+                         width = 3,
+                         checkboxInput("showall2","Show all labels",value = TRUE),
+                         selectInput("label2", "Label type",
+                                     choices = c("Index","County","CountyID","Area","CNTYVTD"),
+                                     selected = "Index",
+                                     multiple = FALSE),
+                         textInput("pos1_2", "Position above", value = ""),
+                         textInput("pos2_2", "Position right", value = ""),
+                         textInput("pos3_2", "Position below", value = ""),
+                         textInput("xscale2", "X From,To,Step,Tick", value = ""),
+                         textInput("yscale2", "Y From,To,Step,Tick", value = ""),
+                         textInput("xlimit2","Limit",value = "-9,-3,3,9"),
+                         textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
+                         textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
+                         textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
+                         textInput("vlimit","Vote Limit (1000s)",value = "0.1,1,10,100"),
+                         textInput("vshape","Vote Shape",value = "1,10,16,17,15"),
+                         textInput("vdesc","Vote Desc",value = "< 100,>=    100,>=   1k,>=  10k,>= 100k"),
+                         textInput("plusnote","Add to title",value = ""),
+                         splitLayout(
+                             numericInput("plotload2", "Load", 1),
+                             actionButton("plotsave2", "Save")
+                         )
+                     ),
+                     mainPanel(
+                         width = 9,
+                         plotOutput("areaPlot2")
                      )
             ),
             tabPanel("Usage",
