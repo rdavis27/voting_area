@@ -94,7 +94,7 @@ shinyUI(pageWithSidebar(
                          numericInput("cvt_window","Rolling window",0,min = 0),
                          checkboxInput("cvt_x0vote","Exclude 0 votes",value = TRUE),
                          checkboxInput("votes1000","Votes in 1000s",value = TRUE),
-                         checkboxInput("plotbyarea","Plot by Area",value = FALSE),
+                         checkboxInput("plotbyarea","Plot by Area",value = TRUE),
                          splitLayout(
                              numericInput("plotload", "Load", 1),
                              actionButton("plotsave", "Save")

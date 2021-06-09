@@ -42,6 +42,92 @@ shinyServer(
             "MAN","MON","MRN","MRT","NAS","OKA","OKE","ORA","OSC","PAL",
             "PAS","PIN","POL","PUT","SAN","SAR","SEM","STJ","STL","SUM",
             "SUW","TAY","UNI","VOL","WAK","WAL","WAS")
+        createFL_2018_Senate <- function(){
+            cc <- fl_counties
+            xx <- NULL
+            for (i in 1:length(cc)){
+                dd <- read_delim(paste0(input_dir,"FL/precinctlevelelectionresults2018gen/",
+                                        cc[i],"_PctResults20181106.txt"), '\t',
+                                 col_names = FALSE, col_types = "ccdccccddddccdccddd")
+                names(dd) <- c("Code","COUNTY","ElectNo","ElectDate","ElectName",
+                               "AreaId","AREA","RegAll","RegRep","RegDem",
+                               "RegOth","Contest","DIST","ConCode","Candidate",
+                               "Party","RegId","CandNo","Votes")
+                office <- "United States Senator" #UPDATE
+                dd <- dd[dd$Contest == office,]
+                if (NROW(dd) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," COUNTY had no ",office))
+                    next
+                }
+                #dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
+                #dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                if (cc[i] %in% c("HEN","HER","OKE","PUT")){
+                    dd$AREA <- sub("^0+", "", dd$AreaId)
+                }
+                else if (cc[i] %in% c("ALA","DIX","HAR")){
+                    dd$AREA <- str_pad(dd$AreaId,2,side = "left",pad = "0")
+                }
+                else if (cc[i] == "PAS"){
+                    dd$AREA <- str_pad(dd$AreaId,3,side = "left",pad = "0")
+                }
+                else if (cc[i] == "DAD"){
+                    dd$AREA <- str_pad(paste0(dd$AreaId,"0"),4,side = "left",pad = "0")
+                }
+                else{
+                    dd$AREA <- dd$AreaId
+                }
+                dd <- dd[,c("DIST","COUNTY","AREA","Candidate","Party","Votes")]
+                for (j in 1:NROW(dd)){
+                    dd$Candidate[j] <- head(strsplit(dd$Candidate[j],split="/")[[1]],1) #Biden / Harris
+                    dd$Candidate[j] <- gsub(" ","",trimws(dd$Candidate[j]))
+                    if (!is.na(dd$Party[j])){
+                        dd$Candidate[j] <- paste0(dd$Candidate[j],"_",dd$Party[j])
+                    }
+                }
+                dd <- dd[,-5] # delete Party
+                # check for matches first???
+                dd <- dd %>%
+                    group_by(DIST,COUNTY,AREA,Candidate) %>%
+                    summarize(Votes=sum(Votes))
+                dd <- dd %>% spread(Candidate,Votes)
+                dd$TOTAL <- 0
+                # for (j in 4:(NCOL(dd)-1)){
+                #     dd$TOTAL <- dd$TOTAL + dd[,j]
+                # }
+                xx <- rbind(xx,dd)
+            }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 4:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,3,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 4:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"FL_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createFL_2020_President <- function(){
             cc <- fl_counties
             xx <- NULL
@@ -59,8 +145,9 @@ shinyServer(
                     catmsg(paste0("====> WARNING: ",cc[i]," COUNTY had no ",office))
                     next
                 }
-                dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
-                dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                #dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
+                #dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                dd$AREA <- dd$AreaId
                 dd <- dd[,c("DIST","COUNTY","AREA","Candidate","Party","Votes")]
                 for (j in 1:NROW(dd)){
                     dd$Candidate[j] <- head(strsplit(dd$Candidate[j],split="/")[[1]],1) #Biden / Harris
@@ -860,15 +947,15 @@ shinyServer(
             xx$LABEL[xx$POS == 0] <- ""
             if (input$party == "Democrat"){
                 gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM_SH, label = xx$LABEL,
-                                    color="red", hjust = 0, vjust = xx$VJUST)
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
             }
             else if (input$party == "Republican"){
                 gg <- gg + annotate("text", x = xx$REP1, y =xx$REP_SH, label = xx$LABEL,
-                                    color="red", hjust = 0, vjust = xx$VJUST)
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
             }
             else if (input$party == "Total"){
                 gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT_SH, label = xx$LABEL,
-                                    color="red", hjust = 0, vjust = xx$VJUST)
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
             }
             else{
                 gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MAR_SH, label = xx$LABEL,
@@ -958,6 +1045,10 @@ shinyServer(
         })
         output$myTextAreas <- renderPrint({
             dd <- getdata()
+            #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
+            if (input$cvt_x0vote){
+                dd <- dd[dd[4] > 0 & dd[5] > 0,] # delete if DEM or REP votes == 0 
+            }
             if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
                 dd <- rbind(dd, data.frame(COUNTY="",AREA="TOTAL",t(colSums(dd[,c(-1,-2)]))))
@@ -977,6 +1068,11 @@ shinyServer(
                     }
                 }
             }
+            csum <- cumsum(dd[3])
+            dd$DEM_CVT <- 100 * cumsum(dd[4]) / csum
+            dd$REP_CVT <- 100 * cumsum(dd[5]) / csum
+            #dd <- dd %>% mutate(DDEM=100*(DEM-lag(DEM)))
+            #dd <- dd %>% mutate(DREP=100*(REP-lag(REP)))
             dp <- 2
             for (i in 3:NCOL(dd)){
                 dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
@@ -1008,7 +1104,10 @@ shinyServer(
         createfiles <- function(races){
             if (input$createfiles){
                 for (i in 1:length(races)){
-                    if (races[i] == "FL_2020_President"){
+                    if (races[i] == "FL_2018_Senate"){
+                        createFL_2018_Senate()
+                    }
+                    else if (races[i] == "FL_2020_President"){
                         createFL_2020_President()
                     }
                     else if (races[i] == "FL_2020_House"){
@@ -1340,7 +1439,7 @@ shinyServer(
         })
         observeEvent(input$state2,{
             if (input$state2 == "FL"){
-                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27")
+                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2018_Senate")
             }
             else if (input$state2 == "ME"){
                 files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House")
