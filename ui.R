@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
     sidebarPanel(
         width = 2,
         selectInput("state2", "STATE",
-                    choices = c("FL","ME","TX","WI"),
+                    choices = c("FL","ME","NC","TX","WI"),
                     selected = "WI",
                     multiple = FALSE),
         selectInput("races", "RACE",
@@ -128,9 +128,12 @@ shinyUI(pageWithSidebar(
                          textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
                          textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
                          textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
-                         textInput("vlimit","Vote Limit (1000s)",value = "0.1,1,10,100"),
+                         # textInput("vlimit","Vote Limit (1000s)",value = "0.1,1,10,100"),
+                         # textInput("vshape","Vote Shape",value = "1,10,16,17,15"),
+                         # textInput("vdesc","Vote Desc",value = "< 100,>=    100,>=   1k,>=  10k,>= 100k"),
+                         textInput("vlimit","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
                          textInput("vshape","Vote Shape",value = "1,10,16,17,15"),
-                         textInput("vdesc","Vote Desc",value = "< 100,>=    100,>=   1k,>=  10k,>= 100k"),
+                         textInput("vdesc","Vote Desc",value = "< 100,>=    100,>=    500,>=   1k,>=   2k"),
                          textInput("plusnote","Add to title",value = ""),
                          splitLayout(
                              numericInput("plotload2", "Load", 1),

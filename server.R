@@ -304,6 +304,34 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_House_CD27.csv"))
             write_delim(xx, paste0(data_dir,"FL_2020_House_CD27.csv"), append = TRUE, col_names = TRUE)
         }
+        createME_2018_Governor <- function(){
+            xx <- read_excel(paste0(input_dir,"ME/2018/governor11-6-18.xlsx"), sheet = "Gov", skip = 3)
+            names(xx) <- c("COUNTY","AREA","Hayes","Mills","Moody","Others","Blank","TBC")
+            xx$COUNTY[grepl(" UOCAVA", xx$AREA)] <- "STATE"
+            xx$AREA[grepl(" UOCAVA", xx$AREA)] <- "UOCAVA"
+            xx <- xx[!grepl(" Totals", xx$AREA) & (xx$AREA != "") & !is.na(xx$AREA),]
+            xx <- xx[,c(1,2,NCOL(xx),4,5,3,6)] # delete Blank
+            xx <- xx[!is.na(xx$COUNTY),]
+            names(xx)[3] <- "TOTAL"
+            namesxx <- names(xx)
+            namesxx[4:5] <- c("DEM","REP")
+            write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"ME_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createME_2018_Senate <- function(){
+            xx <- read_excel(paste0(input_dir,"ME/2018/us-senate11-6-18.xlsx"), sheet = "US", skip = 3)
+            names(xx) <- c("COUNTY","AREA","Brakey","King","Ringelstein","Others","Blank","TBC")
+            xx$COUNTY[grepl(" UOCAVA", xx$AREA)] <- "STATE"
+            xx$AREA[grepl(" UOCAVA", xx$AREA)] <- "UOCAVA"
+            xx <- xx[!grepl(" Totals", xx$AREA) & (xx$AREA != "") & !is.na(xx$AREA),]
+            xx <- xx[,c(1,2,NCOL(xx),4,3,seq(5,(NCOL(xx)-2)))] # delete Blank
+            xx <- xx[!is.na(xx$COUNTY),]
+            names(xx)[3] <- "TOTAL"
+            namesxx <- names(xx)
+            namesxx[4:5] <- c("DEM","REP")
+            write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"ME_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createME_2020_President <- function(){
             xx <- read_excel(paste0(input_dir,"ME/2020/ME20_presandvisecnty1120.xlsx"), sheet = "Statewide", skip = 2)
             names(xx) <- c("COUNTY","AREA","Biden","De_La_Fuente","Hawkins","Jorgensen","Trump","Others","Blank","TBC")
@@ -356,6 +384,281 @@ shinyServer(
             #namesxx[5:6] <- c("DEM","REP")
             write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2020_House.csv"))
             write_delim(xx, paste0(data_dir,"ME_2020_House.csv"), append = TRUE, col_names = TRUE)
+        }
+        createNC_2018_House <- function(){
+            xx <- read_delim(paste0(input_dir,"NC/results_pct_20181106/",
+                                    "results_pct_20181106.txt"), '\t')
+            #                 col_names = TRUE, col_types = "cccdccccddddddc")
+            names(xx) <- c("COUNTY","ElectionDate","AREA","ContestID","ContestType",
+                           "ContestName","Candidate","Party","VoteFor","ElectionDay",
+                           "OneStop","Absentee","Provisional","Votes","RealPrecinct",
+                           "NA16")
+            office <- "US HOUSE OF REPRESENTATIVES DISTRICT " #UPDATE
+            office_start <- "^US HOUSE OF REPRESENTATIVES" #UPDATE
+            xx <- xx[grepl(office_start, xx$ContestName),]
+            xx <- xx[,c("COUNTY","AREA","Candidate","Party","Votes")]
+            gxx1 <<- xx #DEBUG-RM
+            for (j in 1:NROW(xx)){
+                #xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                if (!is.na(xx$Party[j])){
+                    #xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                    xx$Candidate[j] <- xx$Party[j]
+                }
+            }
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            gxx2 <<- xx #DEBUG-RM
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            # for (j in 3:(NCOL(xx)-1)){
+            #     partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+            #     namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            # }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            xx <- xx[!is.na(xx$DEM),] #drop if no DEM candidate
+            xx <- xx[!is.na(xx$REP),] #drop if no REP candidate
+            for (j in 6:NCOL(xx)){
+                xx[,j][is.na(xx[,j])] <- 0
+            }
+            gxx3 <<- xx #DEBUG-RM
+            # xx <- xx[,c(1:5,8:10,7,6)]
+            # names(xx)[9:10] <- c("Writein","Misc")
+            # xx$Writein[is.na(xx$Writein)] <- 0
+            # namesxx <- namesxx[c(1:5,8:10,7,6)]
+            # partyxx <- partyxx[c(1:5,8:10,7,6)]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2018_House.csv"))
+            write_delim(xx, paste0(data_dir,"NC_2018_House.csv"), append = TRUE, col_names = TRUE)
+        }
+        createNC_2020_President <- function(){
+            xx <- read_delim(paste0(input_dir,"NC/results_pct_20201103/",
+                                    "results_pct_20201103.txt"), '\t')
+            #                 col_names = TRUE, col_types = "cccdccccddddddc")
+            names(xx) <- c("COUNTY","ElectionDate","AREA","ContestID","ContestType",
+                           "ContestName","Candidate","Party","VoteFor","ElectionDay",
+                           "OneStop","Absentee","Provisional","Votes","RealPrecinct",
+                           "NA16")
+            office <- "US PRESIDENT" #UPDATE
+            xx <- xx[xx$ContestName == office,]
+            xx <- xx[,c("COUNTY","AREA","Candidate","Party","Votes")]
+            for (j in 1:NROW(xx)){
+                xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                if (!is.na(xx$Party[j])){
+                    xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                }
+            }
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            #gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            #gxx3 <<- xx #DEBUG-RM
+            #START OF CODE FOR PRESIDENT ONLY
+            xx <- xx[,c(1:5,8:10,7,6)]
+            names(xx)[9:10] <- c("Writein","Misc")
+            xx$Writein[is.na(xx$Writein)] <- 0
+            namesxx <- namesxx[c(1:5,8:10,7,6)]
+            partyxx <- partyxx[c(1:5,8:10,7,6)]
+            #END OF CODE FOR PRESIDENT ONLY
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"NC_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createNC_2020_Senate <- function(){
+            xx <- read_delim(paste0(input_dir,"NC/results_pct_20201103/",
+                                    "results_pct_20201103.txt"), '\t')
+            #                 col_names = TRUE, col_types = "cccdccccddddddc")
+            names(xx) <- c("COUNTY","ElectionDate","AREA","ContestID","ContestType",
+                           "ContestName","Candidate","Party","VoteFor","ElectionDay",
+                           "OneStop","Absentee","Provisional","Votes","RealPrecinct",
+                           "NA16")
+            office <- "US SENATE" #UPDATE
+            xx <- xx[xx$ContestName == office,]
+            xx <- xx[,c("COUNTY","AREA","Candidate","Party","Votes")]
+            for (j in 1:NROW(xx)){
+                xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                if (!is.na(xx$Party[j])){
+                    xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                }
+            }
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            gxx3 <<- xx #DEBUG-RM
+            # xx <- xx[,c(1:5,8:10,7,6)]
+            # names(xx)[9:10] <- c("Writein","Misc")
+            # xx$Writein[is.na(xx$Writein)] <- 0
+            # namesxx <- namesxx[c(1:5,8:10,7,6)]
+            # partyxx <- partyxx[c(1:5,8:10,7,6)]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"NC_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createNC_2020_Governor <- function(){
+            xx <- read_delim(paste0(input_dir,"NC/results_pct_20201103/",
+                                    "results_pct_20201103.txt"), '\t')
+            #                 col_names = TRUE, col_types = "cccdccccddddddc")
+            names(xx) <- c("COUNTY","ElectionDate","AREA","ContestID","ContestType",
+                           "ContestName","Candidate","Party","VoteFor","ElectionDay",
+                           "OneStop","Absentee","Provisional","Votes","RealPrecinct",
+                           "NA16")
+            office <- "NC GOVERNOR" #UPDATE
+            xx <- xx[xx$ContestName == office,]
+            xx <- xx[,c("COUNTY","AREA","Candidate","Party","Votes")]
+            for (j in 1:NROW(xx)){
+                xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                if (!is.na(xx$Party[j])){
+                    xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                }
+            }
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            gxx3 <<- xx #DEBUG-RM
+            # xx <- xx[,c(1:5,8:10,7,6)]
+            # names(xx)[9:10] <- c("Writein","Misc")
+            # xx$Writein[is.na(xx$Writein)] <- 0
+            # namesxx <- namesxx[c(1:5,8:10,7,6)]
+            # partyxx <- partyxx[c(1:5,8:10,7,6)]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"NC_2020_Governor.csv"), append = TRUE, col_names = TRUE)
         }
         createTX_2016_President <- function(){
             catmsg("##### START createTX_2016_President #####")
@@ -1117,6 +1420,12 @@ shinyServer(
                     else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
                     }
+                    else if (races[i] == "ME_2018_Governor"){
+                        createME_2018_Governor()
+                    }
+                    else if (races[i] == "ME_2018_Senate"){
+                        createME_2018_Senate()
+                    }
                     else if (races[i] == "ME_2020_President"){
                         createME_2020_President()
                     }
@@ -1125,6 +1434,18 @@ shinyServer(
                     }
                     else if (races[i] == "ME_2020_House"){
                         createME_2020_House()
+                    }
+                    else if (races[i] == "NC_2018_House"){
+                        createNC_2018_House()
+                    }
+                    else if (races[i] == "NC_2020_President"){
+                        createNC_2020_President()
+                    }
+                    else if (races[i] == "NC_2020_Senate"){
+                        createNC_2020_Senate()
+                    }
+                    else if (races[i] == "NC_2020_Governor"){
+                        createNC_2020_Governor()
                     }
                     else if (races[i] == "TX_2016_President"){
                         createTX_2016_President()
@@ -1442,7 +1763,10 @@ shinyServer(
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2018_Senate")
             }
             else if (input$state2 == "ME"){
-                files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House")
+                files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House","ME_2018_Governor","ME_2018_Senate")
+            }
+            else if (input$state2 == "NC"){
+                files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
             }
             else if (input$state2 == "TX"){
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
