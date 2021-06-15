@@ -304,6 +304,452 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_House_CD27.csv"))
             write_delim(xx, paste0(data_dir,"FL_2020_House_CD27.csv"), append = TRUE, col_names = TRUE)
         }
+        createIA_2020_Counties <- function(){
+            #input_dir <- "input/"
+            files <- list.files(paste0(input_dir,"IA/2020/"),"*.xlsx")
+            cc <- gsub(".xlsx","",files)
+            print(cc)
+            dd <- data.frame(cc)
+            write_delim(dd, paste0(data_dir,"IA_Counties.csv"), append = FALSE, col_names = TRUE)
+        }
+        createIA_2018_Governor <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                dd <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "3", skip = 2)
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                # idem <- which(names(yy) == "Hart") #Hubbell
+                # irep <- which(names(yy) == "Gregg") #Reynolds
+                # ilib <- which(names(yy) == "Gentry") #Porter
+                # ind1 <- which(names(yy) == "Blaskovich") #Siegwarth
+                # iwri <- which(names(yy) == "Write-in")
+                idem <- which(names(yy) %in% c("Hart", "Hubbell"))
+                irep <- which(names(yy) %in% c("Gregg", "Reynolds"))
+                ilib <- which(names(yy) %in% c("Gentry", "Porter"))
+                ind1 <- which(names(yy) %in% c("Blaskovich", "Siegwarth"))
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,ind1,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Hubbell","Reynolds",
+                               "Porter","Siegwarth","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:7] <- c("DEM","REP","LIB","IND")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2018_Governor.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createIA_2018_House_CD1 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                aa <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 0, n_max = 0) # read names
+                if (!grepl("^United States Representative District 1", names(aa))){
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 2)
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Finkenauer")
+                irep <- which(names(yy) == "Blum")
+                ilib <- which(names(yy) == "Hageman")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Finkenauer","Blum",
+                               "Hageman","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","LIB")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2018_House_CD1.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2018_House_CD1.csv"), append = TRUE, col_names = TRUE)
+        }
+        createIA_2020_House_CD1 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                aa <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 0, n_max = 0) # read names
+                if (!grepl("^United States Representative District 1", names(aa))){
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 2)
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Finkenauer")
+                irep <- which(names(yy) == "Hinson")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Finkenauer","Hinson","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_House_CD1.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2020_House_CD1.csv"), append = TRUE, col_names = TRUE)
+        }
+        createIA_2018_House_CD2 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 0, n_max = 0) #UPDATE YEAR & SHEET
+                if (!grepl("^United States Representative District 2", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 1, n_max = 0) #UPDATE YEAR & SHEET
+                xx <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 2) #UPDATE YEAR & SHEET
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Loebsack") #UPDATE NAMES
+                irep <- which(names(yy) == "Peters")
+                ilib <- which(names(yy) == "Strauss")
+                ind1 <- which(names(yy) == "Clark")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,ind1,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Loebsack","Peters",
+                               "Strauss","Clark","Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","LIB") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2018_House_CD2.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2018_House_CD2.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2020_House_CD2 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 0, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                if (!grepl("^United States Representative District 2", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 1, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 2) #UPDATE YEAR, SHEET & EXTENSION
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Hart") #UPDATE NAMES
+                irep <- which(names(yy) == "Miller-Meeks")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Hart","Miller_Meeks",
+                               "Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_House_CD2.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2020_House_CD2.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2018_House_CD3 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 0, n_max = 0) #UPDATE YEAR & SHEET
+                if (!grepl("^United States Representative District 3", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 1, n_max = 0) #UPDATE YEAR & SHEET
+                xx <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 2) #UPDATE YEAR & SHEET
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Axne") #UPDATE NAMES
+                irep <- which(names(yy) == "Young")
+                ilib <- which(names(yy) == "Holder")
+                ind1 <- which(names(yy) == "Knupp")
+                ind2 <- which(names(yy) == "Jr.")
+                ind3 <- which(names(yy) == "Grandanette")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,ind1,ind2,ind3,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Axne","Young",
+                               "Holder","Knupp","Elworth_Jr","Grandanette","Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","LIB") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2018_House_CD3.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2018_House_CD3.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2020_House_CD3 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 0, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                if (!grepl("^United States Representative District 3", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 1, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 2) #UPDATE YEAR, SHEET & EXTENSION
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Axne") #UPDATE NAMES
+                irep <- which(names(yy) == "Young")
+                ilib <- which(names(yy) == "Holder")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Axne","Young",
+                               "Holder","Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","LIB") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_House_CD3.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2020_House_CD3.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2018_House_CD4 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 0, n_max = 0) #UPDATE YEAR & SHEET
+                if (!grepl("^United States Representative District 4", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 1, n_max = 0) #UPDATE YEAR & SHEET
+                xx <- read_excel(paste0(input_dir,"IA/2018/",cc[i],".xls.xlsx"), sheet = "2", skip = 2) #UPDATE YEAR & SHEET
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Scholten") #UPDATE NAMES
+                irep <- which(names(yy) == "King")
+                ilib <- which(names(yy) == "Aldrich")
+                ind1 <- which(names(yy) == "Peterson")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,ind1,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Scholten","King",
+                               "Aldrich","Peterson","Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","LIB") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2018_House_CD4.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2018_House_CD4.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2020_House_CD4 <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                catmsg(paste0("START read_excel(",cc[i],")"))
+                #NEED TO VERIFY SHEET FOR ALL COUNTIES!!!
+                aa <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 0, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                if (!grepl("^United States Representative District 4", names(aa))){ #UPDATE CD
+                    catmsg(paste0("SKIP ",names(aa)))
+                    next
+                }
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 1, n_max = 0) #UPDATE YEAR, SHEET & EXTENSION
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "4", skip = 2) #UPDATE YEAR, SHEET & EXTENSION
+                yy <- data.frame(xx[,1])
+                gxx <<- xx #DEBUG-RM
+                gyy <<- yy #DEBUG-RM
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Scholten") #UPDATE NAMES
+                irep <- which(names(yy) == "Feenstra")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,iwri)] #UPDATE PARTIES
+                names(yy) <- c("COUNTY","AREA","TOTAL","Scholten","Feenstra",
+                               "Writein") #UPDATE NAMES (change - to _)
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP") #UPDATE PARTIES IF NEEDED (only DEM, REP critical)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_House_CD4.csv")) #UPDATE FILENAME
+            write_delim(zz, paste0(data_dir,"IA_2020_House_CD4.csv"), append = TRUE, col_names = TRUE) #UPDATE FILENAME
+        }
+        createIA_2020_President <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "2", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "2", skip = 2)
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Harris") #Biden
+                irep <- which(names(yy) == "Pence") #Trump
+                ind1 <- which(names(yy) == "Richardson") #DeLaFuente
+                ind2 <- which(names(yy) == "Mohr") #Blankenship
+                ind3 <- which(names(yy) == "Chandler") #King
+                ind4 <- which(names(yy) == "Walker") #Hawkins
+                ind5 <- which(names(yy) == "Cohen") #Jorgensen
+                ind6 <- which(names(yy) == "Ballard") #Pierce
+                ind7 <- which(names(yy) == "Tidball") #West
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ind1,ind2,ind3,ind4,ind5,ind6,ind7,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Biden","Trump",
+                               "DeLaFuente","Blankenship","King","Hawkins","Jorgensen",
+                               "Pierce","West","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_President.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createIA_2020_Senate <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+            #for (i in 1:1){
+                dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "3", skip = 2)
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- cc[i]
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),3)]
+                for (j in seq(5,NCOL(xx),3)){
+                    yy[,k] <- xx[,j]
+                    nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- nn[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "Greenfield")
+                irep <- which(names(yy) == "Ernst")
+                ind1 <- which(names(yy) == "Herzog")
+                iwri <- which(names(yy) == "Write-in")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ind1,iwri)]
+                names(yy)[2] <- "AREA"
+                names(yy)[7] <- "Writein"
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2020_Senate.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createME_2018_Governor <- function(){
             xx <- read_excel(paste0(input_dir,"ME/2018/governor11-6-18.xlsx"), sheet = "Gov", skip = 3)
             names(xx) <- c("COUNTY","AREA","Hayes","Mills","Moody","Others","Blank","TBC")
@@ -1188,6 +1634,11 @@ shinyServer(
             if (input$party == "Margin" | input$units == "Count"){
                 gg <- gg + geom_vline(xintercept=0, color="gray")
             }
+            if (input$party == "Margin" &
+                    min(xx$MAR_SH, na.rm = TRUE) <= 0 &
+                    max(xx$MAR_SH, na.rm = TRUE) >= 0){
+                gg <- gg + geom_hline(yintercept=0, color="gray")
+            }
             vcolor <- unlist(strsplit(input$xcolor2, ","))
             vcolor <- vcolor[isParty]
             if (length(vcolor) > 0){
@@ -1420,6 +1871,40 @@ shinyServer(
                     else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
                     }
+                    else if (races[i] == "IA_2018_Governor"){
+                        createIA_2018_Governor()
+                    }
+                    else if (races[i] == "IA_2018_House_CD1"){
+                        createIA_2018_House_CD1()
+                    }
+                    else if (races[i] == "IA_2020_House_CD1"){
+                        createIA_2020_House_CD1()
+                    }
+                    else if (races[i] == "IA_2018_House_CD2"){
+                        createIA_2018_House_CD2()
+                    }
+                    else if (races[i] == "IA_2020_House_CD2"){
+                        createIA_2020_House_CD2()
+                    }
+                    else if (races[i] == "IA_2018_House_CD3"){
+                        createIA_2018_House_CD3()
+                    }
+                    else if (races[i] == "IA_2020_House_CD3"){
+                        createIA_2020_House_CD3()
+                    }
+                    else if (races[i] == "IA_2018_House_CD4"){
+                        createIA_2018_House_CD4()
+                    }
+                    else if (races[i] == "IA_2020_House_CD4"){
+                        createIA_2020_House_CD4()
+                    }
+                    else if (races[i] == "IA_2020_President"){
+                        #createIA_2020_Counties()
+                        createIA_2020_President()
+                    }
+                    else if (races[i] == "IA_2020_Senate"){
+                        createIA_2020_Senate()
+                    }
                     else if (races[i] == "ME_2018_Governor"){
                         createME_2018_Governor()
                     }
@@ -1511,9 +1996,23 @@ shinyServer(
         getrace <- function(race){
             filenamex <- paste0(data_dir,race,".csv")
             createfiles(race)
-            xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
-            
-            xx0 <- read_delim(filenamex, ' ', skip = 1)
+            tryCatch(
+                expr = {
+                    xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
+                    xx0 <- read_delim(filenamex, ' ', skip = 1)
+                },
+                error = function(e){
+                    message('Caught an error!')
+                    print(e)
+                },
+                warning = function(w){
+                    message('Caught a warning!')
+                    print(w)
+                },
+                finally = {
+                    message('All done, quitting.')
+                }
+            )    
             if (names(xx0)[1] == "DIST"){
                 if (input$dist != ""){
                     xx0 <- xx0[xx0$DIST == input$dist,]
@@ -1761,6 +2260,9 @@ shinyServer(
         observeEvent(input$state2,{
             if (input$state2 == "FL"){
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2018_Senate")
+            }
+            else if (input$state2 == "IA"){
+                files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4")
             }
             else if (input$state2 == "ME"){
                 files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House","ME_2018_Governor","ME_2018_Senate")
