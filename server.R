@@ -1797,7 +1797,7 @@ shinyServer(
             }
             dd
         })
-        output$myTextAreas <- renderPrint({
+        getAreas <- function(){
             dd <- getdata()
             #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
             if (input$cvt_x0vote){
@@ -1822,11 +1822,17 @@ shinyServer(
                     }
                 }
             }
+            return(dd)
+        }
+        output$myTextAreas <- renderPrint({
+            dd <- getAreas()
+            #START OF CODE THAT DOWNLOADED AS (c(...))
             csum <- cumsum(dd[3])
             dd$DEM_CVT <- 100 * cumsum(dd[4]) / csum
             dd$REP_CVT <- 100 * cumsum(dd[5]) / csum
             #dd <- dd %>% mutate(DDEM=100*(DEM-lag(DEM)))
             #dd <- dd %>% mutate(DREP=100*(REP-lag(REP)))
+            #END OF CODE THAT DOWNLOADED AS (c(...))
             dp <- 2
             for (i in 3:NCOL(dd)){
                 dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
@@ -1834,7 +1840,7 @@ shinyServer(
             row.names(dd) <- seq(1:NROW(dd))
             dd
         })
-        output$myTextAreas2 <- renderPrint({
+        getAreas2 <- function(){
             dd <- getdata12()
             if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
@@ -1848,6 +1854,10 @@ shinyServer(
             else{
                 dd <- dd[,1:(NCOL(dd)-4)]
             }
+            return(dd)
+        }
+        output$myTextAreas2 <- renderPrint({
+            dd <- getAreas2()
             # Format decimal numbers into character strings
             dp <- 2
             for (i in 3:NCOL(dd)){
@@ -1855,6 +1865,54 @@ shinyServer(
             }
             print(dd)
         })
+        output$getcsv <- downloadHandler(
+            filename = function(){
+                paste0(input$races[1],"_",input$xcounty,"_",input$units,".csv")
+            },
+            content = function(file){
+                xx <- getAreas()
+                fn <- paste0(input$races[1],"_",input$xcounty,"_",input$units,".csv")
+                catmsg(paste0("====> write_cvs(",fn,")"))
+                write_csv(xx, file)
+            }
+        )
+        output$getexcel <- downloadHandler(
+            filename = function(){
+                paste0(input$races[1],"_",input$xcounty,"_",input$units,".xlsx")
+            },
+            content = function(file){
+                xx <- getAreas()
+                fn <- paste0(input$races[1],"_",input$xcounty,"_",input$units,".xlsx")
+                catmsg(paste0("====> write.xlsx(",fn,")"))
+                write.xlsx(xx,file,sheetName = input$xcounty)
+            }
+        )
+        output$getcsv2 <- downloadHandler(
+            filename = function(){
+                paste0(input$races[1],"_",input$races[2],"_",
+                       input$xcounty,"_",input$units,".csv")
+            },
+            content = function(file){
+                xx <- getAreas2()
+                fn <- paste0(input$races[1],"_",input$races[2],"_",
+                             input$xcounty,"_",input$units,".csv")
+                catmsg(paste0("====> write_cvs(",fn,")"))
+                write_csv(xx, file)
+            }
+        )
+        output$getexcel2 <- downloadHandler(
+            filename = function(){
+                paste0(input$races[1],"_",input$races[2],"_",
+                       input$xcounty,"_",input$units,".xlsx")
+            },
+            content = function(file){
+                xx <- getAreas2()
+                fn <- paste0(input$races[1],"_",input$races[2],"_",
+                             input$xcounty,"_",input$units,".xlsx")
+                catmsg(paste0("====> write.xlsx(",fn,")"))
+                write.xlsx(xx,file,sheetName = input$xcounty)
+            }
+        )
         createfiles <- function(races){
             if (input$createfiles){
                 for (i in 1:length(races)){

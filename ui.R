@@ -52,6 +52,11 @@ shinyUI(pageWithSidebar(
                 )
             ),
             tabPanel("Areas",
+                     sidebarPanel(
+                         width = 2,
+                         downloadButton("getcsv","Get CSV"),
+                         downloadButton("getexcel","Get Excel")
+                     ),
                      mainPanel(
                          width = 12,
                          verbatimTextOutput("myTextAreas")
@@ -106,6 +111,11 @@ shinyUI(pageWithSidebar(
                      )
             ),
             tabPanel("Areas2",
+                     sidebarPanel(
+                         width = 2,
+                         downloadButton("getcsv2","Get CSV"),
+                         downloadButton("getexcel2","Get Excel")
+                     ),
                      mainPanel(
                          width = 12,
                          verbatimTextOutput("myTextAreas2")
