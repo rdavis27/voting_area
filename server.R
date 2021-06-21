@@ -26,6 +26,256 @@ shinyServer(
             cat(file = filerr, append = TRUE, line)
             cat(file = stderr(), line)
         }
+        createAZ_2018_Senate <- function(){ # currently just loads Maricopa
+            xx <- read_delim(paste0(input_dir,"AZ/2018/6989.Maricopa.Detail.txt"),'\t',
+                             col_names = TRUE, col_types = "cccdddddcdddddddddd")
+            office <- "US Senate" #UPDATE
+            xx <- xx[xx$CONTEST_FULL_NAME == office,]
+            xx <- xx[,c("PRECINCT_NAME","CANDIDATE_FULL_NAME","TOTAL")] #"IS_WRITEIN","undervote","overvote"
+            xx$COUNTY <- "Maricopa"
+            xx$TOT <- 0
+            xx <- xx[,c("COUNTY","PRECINCT_NAME","CANDIDATE_FULL_NAME","TOTAL")]
+            names(xx) <- c("COUNTY","AREA","Candidate","Votes")
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                if (namesxx[j] == "Write-In Candidate"){
+                    partyxx[j] <- "Writein"
+                    namesxx[j] <- "Writein"
+                }
+                else{
+                    strs <- unlist(strsplit(namesxx[j],split=" - "))
+                    partyxx[j] <- strs[1]
+                    if (length(strs) >= 2){
+                        fullname <- strs[2]
+                        namesxx[j] <- unlist(strsplit(fullname,split=","))[1] #last name
+                    }
+                }
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 4:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"AZ_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"AZ_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createAZ_2020_President <- function(votetypes){
+            txt <- "text"
+            num <- "numeric"
+            key <- "text"
+            boo <- "text" # boo as numeric causes error
+            xx <- read_excel(paste0(input_dir,"AZ/2020/Results.Detail_2020General.xml/",
+                                    "Results.Detail_2020General .xls.xlsx"),
+                             sheet = "Sheet1", skip = 0, col_names = TRUE,
+                             col_types = c(txt,txt,txt,num,key, #key
+                                           txt,num,num,num,num, #precinctsParticipating
+                                           num,num,key,txt,key, #districtKey
+                                           txt,num,num,boo,num, #countiesParticipating
+                                           num,num,num,num,key, #key6
+                                           txt,num,num,num,key, #key11
+                                           txt,num,txt,num,boo, #isWriteIn
+                                           key,txt,num,txt,num, #votes14
+                                           key,txt,num,txt,num)) #votes19
+            office <- "President of the United States" #UPDATE
+            xx <- xx[xx$contestLongName == office,]
+            if (votetypes != "" & votetypes != "all"){
+                xx <- xx[xx$voteTypeName18 %in% votetypes,]
+            }
+            xx <- xx[,c("name13","name16","choiceName","party","votes19")]
+            names(xx) <- c("COUNTY","AREA","Candidate","Party","Votes")
+            xx <- xx[!is.na(xx$AREA),]
+            xx$Party[xx$Party == "Party for Socialism and Liberation"] <- "PSL"
+            for (j in 1:NROW(xx)){
+                xx$Candidate[j] <- head(strsplit(xx$Candidate[j],split=",")[[1]],1) #use last name
+                xx$Candidate[j] <- gsub(" ","",xx$Candidate[j]) # remove blanks
+                if (!is.na(xx$Party[j])){
+                    xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                }
+            }
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            #gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            #gxx3 <<- xx #DEBUG-RM
+            #START OF CODE FOR PRESIDENT ONLY
+            # xx <- xx[,c(1:5,8:10,7,6)]
+            # names(xx)[9:10] <- c("Writein","Misc")
+            # xx$Writein[is.na(xx$Writein)] <- 0
+            # namesxx <- namesxx[c(1:5,8:10,7,6)]
+            # partyxx <- partyxx[c(1:5,8:10,7,6)]
+            #END OF CODE FOR PRESIDENT ONLY
+            names(xx) <- namesxx
+            if (votetypes[1] == "Early Ballots"){
+                fileout <- paste0("AZ_2020_President_Early.csv")
+            }
+            else if (votetypes[1] == "Polling Place"){
+                fileout <- paste0("AZ_2020_President_Polls.csv")
+            }
+            else if (votetypes[1] == "Provisional Ballots"){
+                fileout <- paste0("AZ_2020_President_Prov.csv")
+            }
+            else{
+                fileout <- paste0("AZ_2020_President.csv")
+            }
+            write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
+            write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
+        }
+        createAZ_2020_Senate <- function(votetypes){
+            txt <- "text"
+            num <- "numeric"
+            key <- "text"
+            boo <- "text" # boo as numeric causes error
+            xx <- read_excel(paste0(input_dir,"AZ/2020/Results.Detail_2020General.xml/",
+                                    "Results.Detail_2020General .xls.xlsx"),
+                             sheet = "Sheet1", skip = 0, col_names = TRUE,
+                             col_types = c(txt,txt,txt,num,key, #key
+                                           txt,num,num,num,num, #precinctsParticipating
+                                           num,num,key,txt,key, #districtKey
+                                           txt,num,num,boo,num, #countiesParticipating
+                                           num,num,num,num,key, #key6
+                                           txt,num,num,num,key, #key11
+                                           txt,num,txt,num,boo, #isWriteIn
+                                           key,txt,num,txt,num, #votes14
+                                           key,txt,num,txt,num)) #votes19
+            office <- "U.S. Senator (Term Expires Jan. 2023)" #UPDATE
+            xx <- xx[xx$contestLongName == office,]
+            if (votetypes != "" & votetypes != "all"){
+                xx <- xx[xx$voteTypeName18 %in% votetypes,]
+            }
+            xx <- xx[,c("name13","name16","choiceName","party","votes19")]
+            names(xx) <- c("COUNTY","AREA","Candidate","Party","Votes")
+            xx <- xx[!is.na(xx$AREA),]
+            xx$Party[xx$Party == "Party for Socialism and Liberation"] <- "PSL"
+            for (j in 1:NROW(xx)){
+                xx$Candidate[j] <- head(strsplit(xx$Candidate[j],split=",")[[1]],1) #use last name
+                xx$Candidate[j] <- gsub(" ","",xx$Candidate[j]) # remove blanks
+                if (!is.na(xx$Party[j])){
+                    xx$Candidate[j] <- paste0(xx$Candidate[j],"_",xx$Party[j])
+                }
+            }
+            xx$Candidate[xx$Candidate == "Rodriguez_IND"] <- "Rodriguez1_IND"
+            xx <- xx[,-4] # delete Party
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            #gxx2 <<- xx #DEBUG-RM
+            # for (j in 4:(NCOL(xx)-1)){
+            #     xx$TOTAL <- xx$TOTAL + xx[,j]
+            # }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(namesxx == "Kelly") #specify name if multiple DEMs
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(namesxx == "McSally") #specify name if multiple REPs
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                # if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                #     xx$TOTAL <- xx$TOTAL + xx[,j]
+                # }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            #gxx3 <<- xx #DEBUG-RM
+            #START OF CODE FOR PRESIDENT ONLY
+            # xx <- xx[,c(1:5,8:10,7,6)]
+            # names(xx)[9:10] <- c("Writein","Misc")
+            # xx$Writein[is.na(xx$Writein)] <- 0
+            # namesxx <- namesxx[c(1:5,8:10,7,6)]
+            # partyxx <- partyxx[c(1:5,8:10,7,6)]
+            #END OF CODE FOR PRESIDENT ONLY
+            names(xx) <- namesxx
+            if (votetypes[1] == "Early Ballots"){
+                fileout <- paste0("AZ_2020_Senate_Early.csv")
+            }
+            else if (votetypes[1] == "Polling Place"){
+                fileout <- paste0("AZ_2020_Senate_Polls.csv")
+            }
+            else if (votetypes[1] == "Provisional Ballots"){
+                fileout <- paste0("AZ_2020_Senate_Prov.csv")
+            }
+            else{
+                fileout <- paste0("AZ_2020_Senate.csv")
+            }
+            write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
+            write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
+        }
         createFL_2020_Counties <- function(){
             files <- list.files(paste0(input_dir,"FL/2020-general-election-rev/"),
                                 "*_PctResults20201103.txt")
@@ -1916,7 +2166,34 @@ shinyServer(
         createfiles <- function(races){
             if (input$createfiles){
                 for (i in 1:length(races)){
-                    if (races[i] == "FL_2018_Senate"){
+                    if (races[i] == "AZ_2018_Senate"){
+                        createAZ_2018_Senate()
+                    }
+                    else if (races[i] == "AZ_2020_President"){
+                        createAZ_2020_President("")
+                    }
+                    else if (races[i] == "AZ_2020_President_Early"){
+                        createAZ_2020_President("Early Ballots")
+                    }
+                    else if (races[i] == "AZ_2020_President_Polls"){
+                        createAZ_2020_President("Polling Place")
+                    }
+                    else if (races[i] == "AZ_2020_President_Prov"){
+                        createAZ_2020_President("Provisional Ballots")
+                    }
+                    else if (races[i] == "AZ_2020_Senate"){
+                        createAZ_2020_Senate("")
+                    }
+                    else if (races[i] == "AZ_2020_Senate_Early"){
+                        createAZ_2020_Senate("Early Ballots")
+                    }
+                    else if (races[i] == "AZ_2020_Senate_Polls"){
+                        createAZ_2020_Senate("Polling Place")
+                    }
+                    else if (races[i] == "AZ_2020_Senate_Prov"){
+                        createAZ_2020_Senate("Provisional Ballots")
+                    }
+                    else if (races[i] == "FL_2018_Senate"){
                         createFL_2018_Senate()
                     }
                     else if (races[i] == "FL_2020_President"){
@@ -2057,7 +2334,7 @@ shinyServer(
             tryCatch(
                 expr = {
                     xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
-                    xx0 <- read_delim(filenamex, ' ', skip = 1)
+                    xx0 <<- read_delim(filenamex, ' ', skip = 1) #make xx0 available after tryCatch
                 },
                 error = function(e){
                     message('Caught an error!')
@@ -2083,8 +2360,8 @@ shinyServer(
             xxparty <- xxparty[,!grepl("^X_",xxparty)]
             xx0 <- xx0[ !grepl("^X_",xx0$AREA),]
             
-            idem <- which(xxparty == "DEM")
-            irep <- which(xxparty == "REP")
+            idem <- which(xxparty == "DEM")[1]
+            irep <- which(xxparty == "REP")[1]
             xx <- xx0[,c(1,2,3,idem,irep,seq(6,NCOL(xx0)))] # COUNTY,AREA,TOTAL,DEM1,REP1,...
             xx <- as.data.frame(xx)
             
@@ -2316,7 +2593,12 @@ shinyServer(
             }
         })
         observeEvent(input$state2,{
-            if (input$state2 == "FL"){
+            if (input$state2 == "AZ"){
+                files <- c("AZ_2020_President","AZ_2020_President_Early","AZ_2020_President_Polls","AZ_2020_President_Prov",
+                           "AZ_2020_Senate","AZ_2020_Senate_Early","AZ_2020_Senate_Polls","AZ_2020_Senate_Prov",
+                           "AZ_2018_Senate")
+            }
+            else if (input$state2 == "FL"){
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2018_Senate")
             }
             else if (input$state2 == "IA"){
