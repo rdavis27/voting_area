@@ -155,6 +155,40 @@ shinyUI(pageWithSidebar(
                          plotOutput("areaPlot2")
                      )
             ),
+            tabPanel("Area Plot2b",
+                     sidebarPanel(
+                         width = 3,
+                         checkboxInput("showall2b","Show all labels",value = TRUE),
+                         selectInput("label2b", "Label type",
+                                     choices = c("Index","County","CountyID","Area","CNTYVTD"),
+                                     selected = "Index",
+                                     multiple = FALSE),
+                         textInput("pos1_2b", "Position above", value = ""),
+                         textInput("pos2_2b", "Position right", value = ""),
+                         textInput("pos3_2b", "Position below", value = ""),
+                         textInput("xscale2b", "X From,To,Step,Tick", value = ""),
+                         textInput("yscale2b", "Y From,To,Step,Tick", value = ""),
+                         textInput("xlimit2b","Limit",value = "-9,-3,3,9"),
+                         textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
+                         textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
+                         textInput("xparty2b","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
+                         # textInput("vlimitb","Vote Limit (1000s)",value = "0.1,1,10,100"),
+                         # textInput("vshapeb","Vote Shape",value = "1,10,16,17,15"),
+                         # textInput("vdescb","Vote Desc",value = "< 100,>=    100,>=   1k,>=  10k,>= 100k"),
+                         textInput("vlimitb","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
+                         textInput("vshapeb","Vote Shape",value = "1,16,17,15"),
+                         textInput("vdescb","Vote Desc",value = "< 100,>=    100,>=    500,>=   1k,>=   2k"),
+                         textInput("plusnoteb","Add to title",value = ""),
+                         splitLayout(
+                             numericInput("plotload2b", "Load", 1),
+                             actionButton("plotsave2b", "Save")
+                         )
+                     ),
+                     mainPanel(
+                         width = 9,
+                         plotOutput("areaPlot2b")
+                     )
+            ),
             tabPanel("Usage",
                      htmlOutput(outputId = "myUsage")
             )

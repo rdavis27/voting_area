@@ -1825,7 +1825,7 @@ shinyServer(
             else{
                 tunits <- "Votes"
             }
-            if (type != "plot"){
+            if (type != "plot" & type != "plot2b"){
                 tnote <- paste0("(",input$units,")")
             }
             else if (input$party == "Margin"){
@@ -1848,9 +1848,18 @@ shinyServer(
             racey <- input$races[2]
             title <- paste(tloc,tshift, input$party, tunits, "from",
                            racex, "to", racey, tnote)
-            ylabel <- paste(tshift, input$party, tunits, "for", racey)
-            xlabel <- paste0(input$party," ",tunits," for ", racex,
-                             "\nSources: see http://econdataus.com/voting_area.htm")
+            if (type == "plot2b"){
+                #START areaPlot2b code
+                ylabel <- paste("Areas ordered by ",input$party, tunits, "for", racex)
+                xlabel <- paste0(input$party," ",tunits," for ", racex," and ",racey,
+                                 "\nSources: see http://econdataus.com/voting_area.htm")
+                #STOP areaPlot2b code
+            }
+            else{
+                ylabel <- paste(tshift, input$party, tunits, "for", racey)
+                xlabel <- paste0(input$party," ",tunits," for ", racex,
+                                 "\nSources: see http://econdataus.com/voting_area.htm")
+            }
             labels <- c(title, xlabel, ylabel)
             return(labels)
         }
@@ -2189,6 +2198,236 @@ shinyServer(
             }
             if(input$yscale2 != ""){
                 syy <- unlist(strsplit(input$yscale2, ","))
+                yy <- as.numeric(syy)
+                if (length(syy) == 3){
+                    gg <- gg + scale_y_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                                                  minor_breaks = seq(yy[1],yy[2],yy[3]))
+                }
+                else if (length(syy) == 4){
+                    gg <- gg + scale_x_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                                                  minor_breaks = seq(yy[1],yy[2],yy[4]))
+                }
+            }
+            if (length(xx) >= 2){
+                if (length(yy) >= 2){
+                    gg <- gg + coord_cartesian(xlim = c(xx[1], xx[2]), ylim = c(yy[1], yy[2]))
+                }
+                else{
+                    gg <- gg + coord_cartesian(xlim = c(xx[1], xx[2]))
+                }
+            }
+            else if (length(yy) >= 2){
+                gg <- gg + coord_cartesian(ylim = c(yy[1], yy[2]))
+            }
+            return(gg)
+        }, height = 600, width = 1000)
+        output$areaPlot2b <- renderPlot({
+            xx <- getdata12()
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                xx <- xx[xx$COUNTY == input$xcounty,]
+            }
+            else{
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            }
+            names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
+            xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
+            if (input$party == "Democrat"){
+                preparty <- "DEM"
+                party1 <- "DEM1"
+                party2 <- "DEM2" # areaPlot2b code
+            }
+            else if (input$party == "Republican"){
+                preparty <- "REP"
+                party1 <- "REP1"
+                party2 <- "REP2" # areaPlot2b code
+            }
+            else if (input$party == "Total"){
+                preparty <- "TOT"
+                party1 <- "TOTAL1"
+                party2 <- "TOTAL2" # areaPlot2b code
+            }
+            else{
+                preparty <- "MAR"
+                party1 <- "MARGIN1"
+                party2 <- "MARGIN2" # areaPlot2b code
+            }
+            party_sh <- paste0(preparty,"_SH")
+            party1n <- "TOT1_N"
+            xx$Party <- ""
+            if (input$xlimit2b != ""){
+                vlimit <- as.numeric(unlist(strsplit(input$xlimit2b, ",")))
+                vcolor <- unlist(strsplit(input$lcolor2b, ","))
+                vcolor <- rep_len(vcolor,(length(vlimit)+1))
+                vparty <- unlist(strsplit(input$xparty2b, ","))
+                xx$Party <- vparty[length(vparty)]
+                xx$Party[xx[["MARGIN1"]] < vlimit[1]] <- vparty[1]
+                xx$Color <- vcolor[length(vcolor)]
+                xx$Color[xx[["MARGIN1"]] < vlimit[1]] <- vcolor[1]
+                #START areaPlot2b code
+                xx$Party2 <- vparty[length(vparty)]
+                xx$Party2[xx[["MARGIN2"]] < vlimit[1]] <- vparty[1]
+                xx$Color2 <- vcolor[length(vcolor)]
+                xx$Color2[xx[["MARGIN2"]] < vlimit[1]] <- vcolor[1]
+                #STOP areaPlot2b code
+                for (i in 1:(length(vlimit)-1)){
+                    xx$Party[xx[["MARGIN1"]] >= vlimit[i] & xx[["MARGIN1"]] < vlimit[i+1]] <- vparty[i+1]
+                    xx$Color[xx[["MARGIN1"]] >= vlimit[i] & xx[["MARGIN1"]] < vlimit[i+1]] <- vcolor[i+1]
+                    #START areaPlot2b code
+                    xx$Party2[xx[["MARGIN2"]] >= vlimit[i] & xx[["MARGIN2"]] < vlimit[i+1]] <- vparty[i+1]
+                    xx$Color2[xx[["MARGIN2"]] >= vlimit[i] & xx[["MARGIN2"]] < vlimit[i+1]] <- vcolor[i+1]
+                    #STOP areaPlot2b code
+                }
+            }
+            if (input$vlimitb != ""){
+                vlimit <- as.numeric(unlist(strsplit(input$vlimitb, ","))) * 1000
+                vdesc <- unlist(strsplit(input$vdescb, ","))
+                xx$Votes <- vdesc[length(vdesc)]
+                xx$Votes[xx[[party1n]] < vlimit[1]] <- vdesc[1]
+                for (i in 1:length(vlimit)){
+                    xx$Votes[xx[[party1n]] >= vlimit[i] & xx[[party1n]] < vlimit[i+1]] <- vdesc[i+1]
+                }
+            }
+            isParty <- NULL
+            for (i in 1:length(vparty)){
+                # isParty <- c(isParty, any(xx$Party == vparty[i])) # areaPlot2 code
+                isParty <- c(isParty, any(xx$Party == vparty[i]) | any(xx$Party2 == vparty[i])) # areaPlot2b code
+            }
+            isVotes <- NULL
+            for (i in 1:length(vdesc)){
+                isVotes <- c(isVotes, any(xx$Votes == vdesc[i]))
+            }
+            #START areaPlot2b code
+            # gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
+            # gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
+            #                       aes_string(color="Party",shape="Votes"))
+            xx <- xx[order(xx[[party1]]),]
+            if (substr(input$races[1], 9, 12) == "Pres"){
+                xx$Race <- substr(input$races[1], 4, 12)
+            }
+            else{
+                xx$Race <- substr(input$races[1], 4, 11)
+            }
+            xx[[party_sh]] <- seq(1,NROW(xx))
+            xx2 <- xx
+            if (substr(input$races[2], 9, 12) == "Pres"){
+                xx2$Race <- substr(input$races[2], 4, 12)
+            }
+            else{
+                xx2$Race <- substr(input$races[2], 4, 11)
+            }
+            xx2[[party1]] <- xx2[[party2]]
+            gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
+            gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
+                                  aes_string(color="Party",shape="Race"))
+            gg <- gg + geom_point(data=xx2, size=3, alpha=0.7,
+                                  aes_string(color="Party2",shape="Race"))
+            gg <- gg + scale_y_reverse()
+            #STOP areaPlot2b code
+            # if (input$party == "Margin"){ # areaPlot2 code only
+            #     gg <- gg + geom_abline(intercept=0, slope=-1, color="gray", linetype="dashed")
+            # }
+            if (input$party == "Margin" | input$units == "Count"){
+                gg <- gg + geom_vline(xintercept=0, color="gray")
+            }
+            if (input$party == "Margin" &
+                min(xx$MAR_SH, na.rm = TRUE) <= 0 &
+                max(xx$MAR_SH, na.rm = TRUE) >= 0){
+                gg <- gg + geom_hline(yintercept=0, color="gray")
+            }
+            vcolor <- unlist(strsplit(input$xcolor2b, ","))
+            vcolor <- vcolor[isParty]
+            if (length(vcolor) > 0){
+                gg <- gg + scale_fill_manual(values = vcolor) # Bar Plot
+                gg <- gg + scale_color_manual(values = vcolor) # Line Graph
+            }
+            vshape <- as.numeric(unlist(strsplit(input$vshapeb, ",")))
+            vshape <- vshape[isVotes]
+            if (length(vshape) > 1){
+                gg <- gg + scale_shape_manual(values = vshape) # Line Graph
+            }
+            labels <- getlabels("plot2b")
+            gg <- gg + ggtitle(labels[1])
+            gg <- gg + xlab(labels[2])
+            gg <- gg + ylab(labels[3])
+            xx$POS   <- 0
+            if (input$showall2b){
+                xx$POS <- 2 # default to right
+            }
+            if (input$label2b == "Index"){
+                xx$LABEL <- row.names(xx)
+            }
+            else if (input$label2b == "County"){
+                xx$LABEL <- xx$COUNTY
+            }
+            else if (input$label2b == "CountyID"){
+                if (input$state2 == "TX"){
+                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,1,3))
+                }
+                else{
+                    xx$LABEL <- xx$COUNTY
+                }
+            }
+            else if (input$label2b == "Area"){
+                if (input$state2 == "TX"){
+                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,4))
+                }
+                else{
+                    xx$LABEL <- xx$AREA
+                }
+            }
+            else if (input$label2b == "CNTYVTD"){
+                xx$LABEL <- xx$AREA
+            }
+            spos1_2 <- unlist(strsplit(input$pos1_2b, ","))
+            xx$POS[xx$AREA %in% spos1_2] <- 1
+            xx$POS[row.names(xx) %in% spos1_2] <- 1
+            spos2_2 <- unlist(strsplit(input$pos2_2b, ","))
+            xx$POS[xx$AREA %in% spos2_2] <- 2
+            xx$POS[row.names(xx) %in% spos2_2] <- 2
+            spos3_2 <- unlist(strsplit(input$pos3_2b, ","))
+            xx$POS[xx$AREA %in% spos3_2] <- 3
+            xx$POS[row.names(xx) %in% spos3_2] <- 3
+            xx$VJUST <- 0.5
+            xx$VJUST[xx$POS == 1] <- -1
+            xx$VJUST[xx$POS == 3] <- 2
+            xx$PREPEND <- ""
+            xx$PREPEND[xx$POS == 2] <- "  "
+            xx$LABEL <- paste0(xx$PREPEND,xx$LABEL)
+            xx$LABEL[xx$POS == 0] <- ""
+            if (input$party == "Democrat"){
+                gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM_SH, label = xx$LABEL,
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+            }
+            else if (input$party == "Republican"){
+                gg <- gg + annotate("text", x = xx$REP1, y =xx$REP_SH, label = xx$LABEL,
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+            }
+            else if (input$party == "Total"){
+                gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT_SH, label = xx$LABEL,
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+            }
+            else{
+                gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MAR_SH, label = xx$LABEL,
+                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                gg <- gg + annotate("text", x = xx$MARGIN2, y =xx$MAR_SH, label = xx$LABEL,
+                                    color=xx2$Color2, hjust = 0, vjust = xx$VJUST) # areaPlot2b code
+            }
+            xx <- NULL
+            yy <- NULL
+            if(input$xscale2b != ""){
+                sxx <- unlist(strsplit(input$xscale2b, ","))
+                xx <- as.numeric(sxx)
+                if (length(sxx) == 3){
+                    gg <- gg + scale_x_continuous(breaks = seq(xx[1],xx[2],xx[3]),
+                                                  minor_breaks = seq(xx[1],xx[2],xx[3]))
+                }
+                else if (length(sxx) == 4){
+                    gg <- gg + scale_x_continuous(breaks = seq(xx[1],xx[2],xx[3]),
+                                                  minor_breaks = seq(xx[1],xx[2],xx[4]))
+                }
+            }
+            if(input$yscale2b != ""){
+                syy <- unlist(strsplit(input$yscale2b, ","))
                 yy <- as.numeric(syy)
                 if (length(syy) == 3){
                     gg <- gg + scale_y_continuous(breaks = seq(yy[1],yy[2],yy[3]),
