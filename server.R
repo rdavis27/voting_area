@@ -2075,26 +2075,14 @@ shinyServer(
                     xx$Color[xx[["MARGIN1"]] >= vlimit[i] & xx[["MARGIN1"]] < vlimit[i+1]] <- vcolor[i+1]
                 }
             }
-            if (input$vlimit != ""){
-                vlimit <- as.numeric(unlist(strsplit(input$vlimit, ","))) * 1000
-                vdesc <- unlist(strsplit(input$vdesc, ","))
-                xx$Votes <- vdesc[length(vdesc)]
-                xx$Votes[xx[[party1n]] < vlimit[1]] <- vdesc[1]
-                for (i in 1:length(vlimit)){
-                    xx$Votes[xx[[party1n]] >= vlimit[i] & xx[[party1n]] < vlimit[i+1]] <- vdesc[i+1]
-                }
-            }
             isParty <- NULL
             for (i in 1:length(vparty)){
                 isParty <- c(isParty, any(xx$Party == vparty[i]))
             }
-            isVotes <- NULL
-            for (i in 1:length(vdesc)){
-                isVotes <- c(isVotes, any(xx$Votes == vdesc[i]))
-            }
+            xx$Votes <- xx[[party1n]]
             gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
-            gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
-                                  aes_string(color="Party",shape="Votes"))
+            gg <- gg + geom_point(data=xx, alpha=0.7,
+                                  aes_string(color="Party",size="Votes"))
             if (input$party == "Margin"){
                 gg <- gg + geom_abline(intercept=0, slope=-1, color="gray", linetype="dashed")
             }
@@ -2112,10 +2100,15 @@ shinyServer(
                 gg <- gg + scale_fill_manual(values = vcolor) # Bar Plot
                 gg <- gg + scale_color_manual(values = vcolor) # Line Graph
             }
-            vshape <- as.numeric(unlist(strsplit(input$vshape, ",")))
-            vshape <- vshape[isVotes]
-            if (length(vshape) > 1){
-                gg <- gg + scale_shape_manual(values = vshape) # Line Graph
+            vrange_n <- as.numeric(unlist(strsplit(input$vrange, ",")))
+            if (input$vbreaks != ""){
+                vbreaks_n <- as.numeric(unlist(strsplit(input$vbreaks, ",")))
+                gg <- gg + scale_size_continuous(range = vrange_n,
+                                                 breaks = vbreaks_n)
+            }
+            else if (input$vtrans != ""){
+                gg <- gg + scale_size_continuous(range = vrange_n,
+                                                 trans = input$vtrans)
             }
             labels <- getlabels("plot")
             gg <- gg + ggtitle(labels[1])
@@ -2278,23 +2271,10 @@ shinyServer(
                     #STOP areaPlot2b code
                 }
             }
-            if (input$vlimitb != ""){
-                vlimit <- as.numeric(unlist(strsplit(input$vlimitb, ","))) * 1000
-                vdesc <- unlist(strsplit(input$vdescb, ","))
-                xx$Votes <- vdesc[length(vdesc)]
-                xx$Votes[xx[[party1n]] < vlimit[1]] <- vdesc[1]
-                for (i in 1:length(vlimit)){
-                    xx$Votes[xx[[party1n]] >= vlimit[i] & xx[[party1n]] < vlimit[i+1]] <- vdesc[i+1]
-                }
-            }
             isParty <- NULL
             for (i in 1:length(vparty)){
                 # isParty <- c(isParty, any(xx$Party == vparty[i])) # areaPlot2 code
                 isParty <- c(isParty, any(xx$Party == vparty[i]) | any(xx$Party2 == vparty[i])) # areaPlot2b code
-            }
-            isVotes <- NULL
-            for (i in 1:length(vdesc)){
-                isVotes <- c(isVotes, any(xx$Votes == vdesc[i]))
             }
             #START areaPlot2b code
             # gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
@@ -2316,11 +2296,13 @@ shinyServer(
                 xx2$Race <- substr(input$races[2], 4, 11)
             }
             xx2[[party1]] <- xx2[[party2]]
+            xx$Votes <- xx[[party1n]]
+            xx2$Votes <- xx2[[party1n]]
             gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
-            gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
-                                  aes_string(color="Party",shape="Race"))
-            gg <- gg + geom_point(data=xx2, size=3, alpha=0.7,
-                                  aes_string(color="Party2",shape="Race"))
+            gg <- gg + geom_point(data=xx, alpha=0.7,
+                                  aes_string(color="Party",shape="Race",size="Votes"))
+            gg <- gg + geom_point(data=xx2, alpha=0.7,
+                                  aes_string(color="Party2",shape="Race",size="Votes"))
             gg <- gg + scale_y_reverse()
             #STOP areaPlot2b code
             # if (input$party == "Margin"){ # areaPlot2 code only
@@ -2341,9 +2323,18 @@ shinyServer(
                 gg <- gg + scale_color_manual(values = vcolor) # Line Graph
             }
             vshape <- as.numeric(unlist(strsplit(input$vshapeb, ",")))
-            vshape <- vshape[isVotes]
             if (length(vshape) > 1){
                 gg <- gg + scale_shape_manual(values = vshape) # Line Graph
+            }
+            vrange_n <- as.numeric(unlist(strsplit(input$vrange2b, ",")))
+            if (input$vbreaks2b != ""){
+                vbreaks_n <- as.numeric(unlist(strsplit(input$vbreaks2b, ",")))
+                gg <- gg + scale_size_continuous(range = vrange_n,
+                                                 breaks = vbreaks_n)
+            }
+            else if (input$vtrans2b != ""){
+                gg <- gg + scale_size_continuous(range = vrange_n,
+                                                 trans = input$vtrans2b)
             }
             labels <- getlabels("plot2b")
             gg <- gg + ggtitle(labels[1])
