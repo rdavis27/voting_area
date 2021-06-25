@@ -41,6 +41,7 @@ shinyUI(pageWithSidebar(
         numericInput("cleanlevel", "Clean Level", 2, min = 0),
         textInput("incl_cand", "Include candidates", value = "1,2,3,4,5"),
         textInput("skip_rows", "Skip rows", value = ""),
+        checkboxInput("displaytotal","Display TOTAL",value = TRUE),
         checkboxInput("createfiles","Create Data Files",value = FALSE)
     ),
     mainPanel(

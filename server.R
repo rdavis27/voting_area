@@ -2034,11 +2034,8 @@ shinyServer(
         })
         output$areaPlot2 <- renderPlot({
             xx <- getdata12()
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                xx <- xx[xx$COUNTY == input$xcounty,]
-            }
-            else{
-                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            if (!input$displaytotal){
+                xx <- xx[xx$AREA != "TOTAL",]
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
@@ -2216,11 +2213,8 @@ shinyServer(
         }, height = 600, width = 1000)
         output$areaPlot2b <- renderPlot({
             xx <- getdata12()
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                xx <- xx[xx$COUNTY == input$xcounty,]
-            }
-            else{
-                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            if (!input$displaytotal){
+                xx <- xx[xx$AREA != "TOTAL",]
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
@@ -2530,12 +2524,6 @@ shinyServer(
         })
         getAreas2 <- function(){
             dd <- getdata12()
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                dd <- dd[dd$COUNTY == input$xcounty,]
-            }
-            else{
-                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
-            }
             if (input$units == "Percent"){
                 dd <- dd[,c(1:(NCOL(dd)-4),NCOL(dd))]
             }
@@ -2908,6 +2896,17 @@ shinyServer(
             dd$REP1_N <- dd$REP1
             dd$MAR1_N <- dd$MARGIN1
             dd$TOT1_N <- dd$TOTAL1
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                dd <- dd[dd$COUNTY == input$xcounty,]
+                dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
+                                           t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
+            }
+            else{
+                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+                dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
+                                           t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
+            }
+            
             if (input$units == "Percent"){
                 dd$DEM1 <- 100 * dd$DEM1 / dd$TOTAL1
                 dd$REP1 <- 100 * dd$REP1 / dd$TOTAL1
@@ -2924,6 +2923,7 @@ shinyServer(
             }
             names(dd)[3:4] <- namesxx[4:5] # reset names
             names(dd)[7:8] <- namesyy[4:5]
+            row.names(dd) <- seq(1:NROW(dd))
             dd
         })
         observeEvent(input$mapsave,{
