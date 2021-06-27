@@ -26,30 +26,103 @@ shinyServer(
             cat(file = filerr, append = TRUE, line)
             cat(file = stderr(), line)
         }
+        ## All ElectionWare (EW) counties and filenames
+        # az_ew_counties <- c(
+        #     "Apache","Cochise",
+        #     "Gila","Graham",
+        #     "Greenlee","La Paz",
+        #     "Mohave","Navajo",
+        #     "Pima","Pinal",
+        #     "Santa Cruz","Yuma")
+        # az_ew_files <- c(
+        #     "6967.Apache.Detail.txt","6970.Cochise.Detail.txt",
+        #     "6972.Gila_.Detail.txt","6887.Graham.Detail.txt",
+        #     "6841.Greenlee.Detail.txt","6957.La Paz.Detail.txt",
+        #     "6969.Mohave.Detail.txt","6955.Navajo.Detail.txt",
+        #     "6981.Pima_.Detail.txt","6956.Pinal_.Detail.txt",
+        #     "6971.Santa Cruz.Detail.txt","6979.Yuma_.Detail.txt")
+        ## Only the following ElectionWare (EW) counties work currently
+        ## due to changes in precinct names from 2018 to 2020.
+        az_ew_counties <- c(
+            "Pima","Yuma")
+        az_ew_files <- c(
+            "6981.Pima_.Detail.txt","6979.Yuma_.Detail.txt")
         createAZ_2018_Senate <- function(){ # currently just loads Maricopa
             xx <- read_delim(paste0(input_dir,"AZ/2018/6989.Maricopa.Detail.txt"),'\t',
                              col_names = TRUE, col_types = "cccdddddcdddddddddd")
             office <- "US Senate" #UPDATE
             xx <- xx[xx$CONTEST_FULL_NAME == office,]
-            xx <- xx[,c("PRECINCT_NAME","CANDIDATE_FULL_NAME","TOTAL")] #"IS_WRITEIN","undervote","overvote"
+            xx <- xx[,c("PRECINCT_NAME","CANDIDATE_FULL_NAME","TOTAL")] #leave off "IS_WRITEIN","undervote","overvote"
             xx$COUNTY <- "Maricopa"
             xx$TOT <- 0
             xx <- xx[,c("COUNTY","PRECINCT_NAME","CANDIDATE_FULL_NAME","TOTAL")]
             names(xx) <- c("COUNTY","AREA","Candidate","Votes")
+            xx$Candidate <- gsub(" - ","_",xx$Candidate)
+            xx$Candidate <- gsub(" ","",xx$Candidate)
+            xx$Candidate[xx$Candidate == "Write-InCandidate"] <- "NON_WRITEIN"
             xx <- xx %>%
                 group_by(COUNTY,AREA,Candidate) %>%
                 summarize(Votes=sum(Votes))
             xx <- xx %>% spread(Candidate,Votes)
             xx$TOTAL <- 0
+            #COUNTY   AREA           `DEM_SINEMA,KYRSTEN` `GRN_GREEN,ANGELA` NON_WRITEIN `REP_MCSALLY,MARTHA` TOTAL
+            #Maricopa 0001 ACACIA                    1209                 84           8                  891     0
+
+            start <- c( 8,12,102,112,168)
+            end   <- c(11,17,104,167,205)
+            nms   <- c("AREA","Votes","Party","Contest","Candidate")
+            cc <- az_ew_files
+            for (i in 1:length(cc)){
+                filename <- paste0(input_dir,"AZ/2018/",cc[i])
+                dd <- read_fwf(filename, fwf_positions(start, end, nms), col_types = "ciccc")
+                if (az_ew_counties[i] == "Pima"){
+                    office <- "U.S. SENATOR" #UPDATE
+                }
+                else if (az_ew_counties[i] %in% c("Gila","Greenlee","Mohave")){
+                    office <- "United States Senator" #UPDATE
+                }
+                else{
+                    office <- "U.S. Senator" #UPDATE
+                }
+                dd <- dd[substr(dd$Contest,1,nchar(office)) == office,]
+                if (NROW(dd) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," COUNTY had no ",office))
+                    next
+                }
+                dd$COUNTY <- az_ew_counties[i]
+                #dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
+                #dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                dd <- dd[,c("COUNTY","AREA","Candidate","Party","Votes")]
+                dd$AREA[dd$COUNTY == "Pima"] <- gsub("^0","",dd$AREA[dd$COUNTY == "Pima"])
+                dd$AREA[dd$COUNTY == "Yuma"] <- gsub("^0","",dd$AREA[dd$COUNTY == "Yuma"])
+                dd$Party[dd$Party == "."] <- "NON"
+                dd$Candidate[dd$Candidate == "WRITE-IN"] <- "WRITEIN"
+                for (j in 1:NROW(dd)){
+                    dd$Candidate[j] <- head(strsplit(dd$Candidate[j],split="/")[[1]],1) #Biden / Harris
+                    dd$Candidate[j] <- gsub(" ","",trimws(dd$Candidate[j]))
+                    if (!is.na(dd$Party[j])){
+                        dd$Candidate[j] <- paste0(dd$Party[j],"_",dd$Candidate[j])
+                    }
+                }
+                dd <- dd[,-4] # delete Party
+                # check for matches first???
+                dd <- dd %>%
+                    group_by(COUNTY,AREA,Candidate) %>%
+                    summarize(Votes=sum(Votes))
+                dd <- dd %>% spread(Candidate,Votes)
+                dd$TOTAL <- 0
+                dd <- subset(dd,select = -c(OVERVOTES,UNDERVOTES))
+                xx <- rbind(xx,dd)
+            }
             namesxx <- names(xx)
             partyxx <- namesxx
             for (j in 3:(NCOL(xx)-1)){
-                if (namesxx[j] == "Write-In Candidate"){
+                if (namesxx[j] == "WRITE-IN"){
                     partyxx[j] <- "Writein"
                     namesxx[j] <- "Writein"
                 }
                 else{
-                    strs <- unlist(strsplit(namesxx[j],split=" - "))
+                    strs <- unlist(strsplit(namesxx[j],split="_"))
                     partyxx[j] <- strs[1]
                     if (length(strs) >= 2){
                         fullname <- strs[2]
@@ -68,7 +141,7 @@ shinyServer(
                 irep <- which(partyxx == "REP")
                 ii <- c(ii, irep)
             }
-            for (j in 4:(NCOL(xx)-1)){
+            for (j in 3:(NCOL(xx)-1)){
                 if (j != idem & j != irep){
                     ii <- c(ii, j)
                 }
@@ -108,6 +181,7 @@ shinyServer(
             xx <- xx[,c("name13","name16","choiceName","party","votes19")]
             names(xx) <- c("COUNTY","AREA","Candidate","Party","Votes")
             xx <- xx[!is.na(xx$AREA),]
+            xx$AREA[xx$COUNTY == "Yuma"] <- gsub("^PRECINCT ","",xx$AREA[xx$COUNTY == "Yuma"])
             xx$Party[xx$Party == "Party for Socialism and Liberation"] <- "PSL"
             for (j in 1:NROW(xx)){
                 xx$Candidate[j] <- head(strsplit(xx$Candidate[j],split=",")[[1]],1) #use last name
@@ -204,6 +278,7 @@ shinyServer(
             xx <- xx[,c("name13","name16","choiceName","party","votes19")]
             names(xx) <- c("COUNTY","AREA","Candidate","Party","Votes")
             xx <- xx[!is.na(xx$AREA),]
+            xx$AREA[xx$COUNTY == "Yuma"] <- gsub("^PRECINCT ","",xx$AREA[xx$COUNTY == "Yuma"])
             xx$Party[xx$Party == "Party for Socialism and Liberation"] <- "PSL"
             for (j in 1:NROW(xx)){
                 xx$Candidate[j] <- head(strsplit(xx$Candidate[j],split=",")[[1]],1) #use last name
