@@ -351,24 +351,55 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
             write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
         }
-        createFL_2020_Counties <- function(){
+        createFL_2020_County_Codes <- function(){
             files <- list.files(paste0(input_dir,"FL/2020-general-election-rev/"),
                                 "*_PctResults20201103.txt")
             cc <- substr(files,1,3)
             print(cc)
             dd <- data.frame(cc)
+            write_delim(dd, paste0(data_dir,"FL_County_Codes.csv"), append = FALSE, col_names = TRUE)
+        }
+        createFL_2020_Counties <- function(){
+            filenamex <- paste0(data_dir,"FL_2020_President.csv")
+            xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
+            xx0 <<- read_delim(filenamex, ' ', skip = 1) #make xx0 available after tryCatch
+            xx <- unique(xx0$COUNTY)
+            dd <- data.frame(xx)
+            names(dd) <- "COUNTY"
             write_delim(dd, paste0(data_dir,"FL_Counties.csv"), append = FALSE, col_names = TRUE)
         }
+        fl_county_codes <- c(
+            "ALA","BAK","BAY","BRA","BRE",
+            "BRO","CAL","CHA","CIT","CLA",
+            "CLL","CLM","DAD","DES","DIX",
+            "DUV","ESC","FLA","FRA","GAD",
+            "GIL","GLA","GUL","HAM","HAR",
+            "HEN","HER","HIG","HIL","HOL",
+            "IND","JAC","JEF","LAF","LAK",
+            "LEE","LEO","LEV","LIB","MAD",
+            "MAN","MON","MRN","MRT","NAS",
+            "OKA","OKE","ORA","OSC","PAL",
+            "PAS","PIN","POL","PUT","SAN",
+            "SAR","SEM","STJ","STL","SUM",
+            "SUW","TAY","UNI","VOL","WAK",
+            "WAL","WAS")
         fl_counties <- c(
-            "ALA","BAK","BAY","BRA","BRE","BRO","CAL","CHA","CIT","CLA",
-            "CLL","CLM","DAD","DES","DIX","DUV","ESC","FLA","FRA","GAD",
-            "GIL","GLA","GUL","HAM","HAR","HEN","HER","HIG","HIL","HOL",
-            "IND","JAC","JEF","LAF","LAK","LEE","LEO","LEV","LIB","MAD",
-            "MAN","MON","MRN","MRT","NAS","OKA","OKE","ORA","OSC","PAL",
-            "PAS","PIN","POL","PUT","SAN","SAR","SEM","STJ","STL","SUM",
-            "SUW","TAY","UNI","VOL","WAK","WAL","WAS")
+            "Alachua","Baker","Bay","Bradford","Brevard",
+            "Broward","Calhoun","Charlotte","Citrus","Clay",
+            "Collier","Columbia","Miami-Dade","Desoto","Dixie",
+            "Duval","Escambia","Flagler","Franklin","Gadsden",
+            "Gilchrist","Glades","Gulf","Hamilton","Hardee",
+            "Hendry","Hernando","Highlands","Hillsborough","Holmes",
+            "Indian River","Jackson","Jefferson","Lafayette","Lake",
+            "Lee","Leon","Levy","Liberty","Madison",
+            "Manatee","Monroe","Marion","Martin","Nassau",
+            "Okaloosa","Okeechobee","Orange","Osceola","Palm Beach",
+            "Pasco","Pinellas","Polk","Putnam","Santa Rosa",
+            "Sarasota","Seminole","St. Johns","St. Lucie","Sumter",
+            "Suwannee","Taylor","Union","Volusia","Wakulla",
+            "Walton","Washington")
         createFL_2018_Senate <- function(){
-            cc <- fl_counties
+            cc <- fl_county_codes
             xx <- NULL
             for (i in 1:length(cc)){
                 dd <- read_delim(paste0(input_dir,"FL/precinctlevelelectionresults2018gen/",
@@ -454,7 +485,7 @@ shinyServer(
             write_delim(xx, paste0(data_dir,"FL_2018_Senate.csv"), append = TRUE, col_names = TRUE)
         }
         createFL_2020_President <- function(){
-            cc <- fl_counties
+            cc <- fl_county_codes
             xx <- NULL
             for (i in 1:length(cc)){
                 dd <- read_delim(paste0(input_dir,"FL/2020-general-election-rev/",
@@ -548,7 +579,7 @@ shinyServer(
                     catmsg(paste0("====> WARNING: ",cc[i]," County had no Representative in Congress"))
                     next
                 }
-                xx <- xx[,c("Dist","County","AreaLoc","Candidate","Party","Votes")]
+                xx <- xx[,c("Dist","County","AreaId","Candidate","Party","Votes")]
                 for (j in 1:NROW(xx)){
                     if (!is.na(xx$Party[j])){
                         xx$Candidate[j] <- xx$Party[j]
@@ -559,11 +590,11 @@ shinyServer(
                 }
                 xx <- xx[,-5] # delete Party
                 xx <- xx %>%
-                    group_by(Dist,County,AreaLoc,Candidate) %>%
+                    group_by(Dist,County,AreaId,Candidate) %>%
                     summarize(Votes=sum(Votes))
                 xx <- xx %>% spread(Candidate,Votes)
                 xx$TOTAL <- 0
-                yy <- xx[,c("Dist","County","AreaLoc","TOTAL")]
+                yy <- xx[,c("Dist","County","AreaId","TOTAL")]
                 yy$DEM <- 0
                 yy$REP <- 0
                 yy$NPA <- 0
@@ -615,7 +646,7 @@ shinyServer(
             xx027 <<- xx
             xx <- xx[xx$Contest == "Representative in Congress",]
             xx <- xx[xx$Dist == " District 27",]
-            xx <- xx[,c("County","AreaLoc","Candidate","Votes")]
+            xx <- xx[,c("County","AreaId","Candidate","Votes")]
             for (i in 1:NROW(xx)){
                 xx$Candidate[i] <- tail(strsplit(xx$Candidate[i],split=" ")[[1]],1) #use last name
             }
@@ -628,6 +659,43 @@ shinyServer(
             partyxx[4:5] <- c("DEM","REP")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_House_CD27.csv"))
             write_delim(xx, paste0(data_dir,"FL_2020_House_CD27.csv"), append = TRUE, col_names = TRUE)
+        }
+        createFL_2020_Registered <- function(){
+            txt <- "text"
+            num <- "numeric"
+            xx <- read_excel(paste0(input_dir,"FL/2020-general-election-rev/4-2020-gen-by-precinct.xlsx"),
+                             sheet = "RegistrationByPrecinct", skip = 8, col_names = TRUE,
+                             col_types = c(txt,txt,num,num,num,num))
+            xxr <<- xx #DEBUG-RM
+            names(xx) <- c("CODE","AreaId","Republican","Democrat","Other","TOTAL")
+            xx$COUNTY <- xx$CODE
+            for (i in 1:(NROW(xx)-1)){
+                if (xx$COUNTY[i] != "Total"){
+                    xx$COUNTY[i] <- fl_counties[which(fl_county_codes == xx$CODE[i])]
+                }
+                if (xx$CODE[i] %in% c("HEN","HER","OKE","PUT")){
+                    xx$AREA[i] <- sub("^0+", "", xx$AreaId[i])
+                }
+                else if (xx$CODE[i] %in% c("ALA","DIX","HAR")){
+                    xx$AREA[i] <- str_pad(xx$AreaId[i],2,side = "left",pad = "0")
+                }
+                else if (xx$CODE[i] == "PAS"){
+                    xx$AREA[i] <- str_pad(xx$AreaId[i],3,side = "left",pad = "0")
+                }
+                else if (xx$CODE[i] == "DAD"){
+                    xx$AREA[i] <- str_pad(paste0(xx$AreaId[i],"0"),4,side = "left",pad = "0")
+                }
+                else{
+                    xx$AREA[i] <- xx$AreaId[i]
+                }
+            }
+            #xx$COUNTY <- fl_counties[which(fl_county_codes == xx$CODE)]
+            xx <- xx[,c("COUNTY","AREA","TOTAL","Democrat","Republican","Other")]
+            xxr2 <<- xx #DEBUG-RM
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_Registered.csv"))
+            write_delim(xx, paste0(data_dir,"FL_2020_Registered.csv"), append = TRUE, col_names = TRUE)
         }
         createIA_2020_Counties <- function(){
             #input_dir <- "input/"
@@ -2699,13 +2767,17 @@ shinyServer(
                     }
                     else if (races[i] == "FL_2020_President"){
                         createFL_2020_President()
+                        #createFL_2020_Counties()
+                        #createFL_2020_County_Codes()
                     }
                     else if (races[i] == "FL_2020_House"){
-                        #createFL_2020_Counties()
                         createFL_2020_House()
                     }
                     else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
+                    }
+                    else if (races[i] == "FL_2020_Registered"){
+                        createFL_2020_Registered()
                     }
                     else if (races[i] == "IA_2018_Governor"){
                         createIA_2018_Governor()
@@ -2996,6 +3068,12 @@ shinyServer(
                 dd$MAR_SH <- dd$MARGIN2 - dd$MARGIN1
                 dd$TOT_SH <- dd$TOTAL2 - dd$TOTAL1
             }
+            else if (input$units == "Percent ratio"){
+                dd$DEM_SH <- 100 * dd$DEM1 / dd$DEM2
+                dd$REP_SH <- 100 * dd$REP1 / dd$REP2
+                dd$MAR_SH <- 100 * dd$MARGIN1 / dd$MARGIN2
+                dd$TOT_SH <- 100 * dd$TOTAL1 / dd$TOTAL2
+            }
             names(dd)[3:4] <- namesxx[4:5] # reset names
             names(dd)[7:8] <- namesyy[4:5]
             row.names(dd) <- seq(1:NROW(dd))
@@ -3129,7 +3207,7 @@ shinyServer(
                            "AZ_2018_Senate")
             }
             else if (input$state2 == "FL"){
-                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2018_Senate")
+                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Senate")
             }
             else if (input$state2 == "IA"){
                 files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4")

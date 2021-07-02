@@ -24,7 +24,7 @@ shinyUI(pageWithSidebar(
             textInput("dist", "DIST", value = "")
         ),
         selectInput("units", "Units",
-                    choices = c("Count","Percent"),
+                    choices = c("Count","Percent","Percent ratio"),
                     selected = "Percent",
                     multiple = FALSE),
         selectInput("sortcounty", "Sort Counties",
@@ -41,7 +41,7 @@ shinyUI(pageWithSidebar(
         numericInput("cleanlevel", "Clean Level", 2, min = 0),
         textInput("incl_cand", "Include candidates", value = "1,2,3,4,5"),
         textInput("skip_rows", "Skip rows", value = ""),
-        checkboxInput("displaytotal","Display TOTAL",value = TRUE),
+        checkboxInput("displaytotal","Display TOTAL",value = FALSE),
         checkboxInput("createfiles","Create Data Files",value = FALSE)
     ),
     mainPanel(
