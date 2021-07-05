@@ -18,7 +18,8 @@ shinyUI(pageWithSidebar(
                     choices = c(""),
                     selected = "",
                     multiple = FALSE),
-        textInput("xarea", "AREA", value = ""),
+        #textInput("xarea", "AREA", value = ""),
+        checkboxInput("showother","Show Other Areas",value = TRUE),
         splitLayout(
             numericInput("minvotes","Min Votes",20,min = 0),
             textInput("dist", "DIST", value = "")
@@ -32,8 +33,16 @@ shinyUI(pageWithSidebar(
                     selected = "COUNTY",
                     multiple = FALSE),
         radioButtons("sortcountydir", NULL, c("Ascending","Desc"), "Ascending", inline = TRUE),
-        numericInput("xsortcol", "Sort Areas (column)", 3),
-        radioButtons("xsortdir", NULL, c("Ascending","Desc"), "Ascending", inline = TRUE),
+        # numericInput("xsortcol_1", "Sort Areas (column)", 3),
+        # radioButtons("xsortdir", NULL, c("Ascending","Desc"), "Ascending", inline = TRUE),
+        splitLayout(
+            numericInput("xsortcol", "Sort Areas,", 3),
+            numericInput("xsortcol2", "Areas2 (col)", 0)
+        ),
+        splitLayout(
+            checkboxInput("xsortdesc","Desc",value = FALSE),
+            checkboxInput("xsortdesc2","Desc",value = FALSE)
+        ),
         selectInput("party", "Party",
                     choices = c("Democrat","Republican","Margin","Total"),
                     selected = "Margin",
@@ -125,7 +134,8 @@ shinyUI(pageWithSidebar(
             tabPanel("Area Plot2",
                      sidebarPanel(
                          width = 3,
-                         checkboxInput("showall2","Show all labels",value = TRUE),
+                         checkboxInput("showall2","Show all labels,",value = TRUE),
+                         checkboxInput("sizefor2","Size for race 2",value = TRUE),
                          selectInput("label2", "Label type",
                                      choices = c("Index","County","CountyID","Area","CNTYVTD"),
                                      selected = "Index",
@@ -140,7 +150,7 @@ shinyUI(pageWithSidebar(
                          textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
                          textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
                          textInput("vrange","Vote Point Range",value = "1,4"),
-                         textInput("vtrans","Vote Transform",value = "log10"),
+                         textInput("vtrans","Vote Transform",value = "#log10"),
                          textInput("vbreaks","Vote Breaks", value = ""),
                          textInput("plusnote","Add to title",value = ""),
                          splitLayout(
@@ -173,7 +183,7 @@ shinyUI(pageWithSidebar(
                          textInput("vlimitb","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
                          textInput("vshapeb","Vote Shape",value = "1,16,17,15"),
                          textInput("vrange2b","Vote Point Range",value = "1,4"),
-                         textInput("vtrans2b","Vote Transform",value = "log10"),
+                         textInput("vtrans2b","Vote Transform",value = "#log10"),
                          textInput("vbreaks2b","Vote Breaks", value = ""),
                          textInput("plusnoteb","Add to title",value = ""),
                          splitLayout(
