@@ -19,9 +19,10 @@ shinyUI(pageWithSidebar(
                     selected = "",
                     multiple = FALSE),
         #textInput("xarea", "AREA", value = ""),
+        textInput("areamod", "AREA modify", value = "#-.$"),
         checkboxInput("showother","Show Other Areas",value = TRUE),
         splitLayout(
-            numericInput("minvotes","Min Votes",20,min = 0),
+            numericInput("minvotes","Min Votes",30,min = 0),
             textInput("dist", "DIST", value = "")
         ),
         selectInput("units", "Units",
@@ -148,6 +149,7 @@ shinyUI(pageWithSidebar(
                          textInput("xlimit2","Limit",value = "-9,-3,3,9"),
                          textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
                          textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
+                         textInput("ncolor2","Color (lines)",value = "darkgray"),
                          textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
                          textInput("vrange","Vote Point Range",value = "1,4"),
                          textInput("vtrans","Vote Transform",value = "#log10"),
@@ -179,6 +181,7 @@ shinyUI(pageWithSidebar(
                          textInput("xlimit2b","Limit",value = "-9,-3,3,9"),
                          textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
                          textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
+                         textInput("ncolor2b","Color (lines)",value = "darkgray"),
                          textInput("xparty2b","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
                          textInput("vlimitb","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
                          textInput("vshapeb","Vote Shape",value = "1,16,17,15"),

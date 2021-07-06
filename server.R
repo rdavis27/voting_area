@@ -2116,7 +2116,7 @@ shinyServer(
                                                   minor_breaks = seq(yy[1],yy[2],yy[3]))
                 }
                 else if (length(syy) == 4){
-                    gg <- gg + scale_x_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                    gg <- gg + scale_y_continuous(breaks = seq(yy[1],yy[2],yy[3]),
                                                   minor_breaks = seq(yy[1],yy[2],yy[4]))
                 }
             }
@@ -2215,6 +2215,7 @@ shinyServer(
             areaHeight <<- input$areaHeight
             dd <- getdata()
             dd <- dd[is.na(dd$TOTAL) | dd$TOTAL >= input$minvotes,]
+            row.names(dd) <- seq(1:NROW(dd))
             if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
             }
@@ -2285,6 +2286,7 @@ shinyServer(
         output$cvtPlot <- renderPlot({
             xx <- getdata()
             xx <- xx[is.na(xx$TOTAL) | xx$TOTAL >= input$minvotes,]
+            row.names(xx) <- seq(1:NROW(xx))
             if (input$cvt_x0vote){
                 xx <- xx[xx[4] > 0 & xx[5] > 0,] # delete if DEM or REP votes == 0 
             }
@@ -2386,8 +2388,9 @@ shinyServer(
                 xx <- xx[xx$AREA != "TOTAL",]
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
-            xx <- xx[(is.na(xx$TOTAL1) | xx$TOTAL1 >= input$minvotes) &
-                     (is.na(xx$TOTAL2) | xx$TOTAL2 >= input$minvotes),]
+            xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
+                     (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes),]
+            row.names(xx) <- seq(1:NROW(xx))
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
             if (input$party == "Democrat"){
                 preparty <- "DEM"
@@ -2437,15 +2440,15 @@ shinyServer(
             gg <- gg + geom_point(data=xx, alpha=0.7,
                                   aes_string(color="Party",size="Votes"))
             if (input$party == "Margin"){
-                gg <- gg + geom_abline(intercept=0, slope=-1, color="gray", linetype="dashed")
+                gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
             }
             if (input$party == "Margin" | input$units == "Count"){
-                gg <- gg + geom_vline(xintercept=0, color="gray")
+                gg <- gg + geom_vline(xintercept=0, color=input$ncolor2)
             }
             if (input$party == "Margin" &
                     min(xx$MAR_SH, na.rm = TRUE) <= 0 &
                     max(xx$MAR_SH, na.rm = TRUE) >= 0){
-                gg <- gg + geom_hline(yintercept=0, color="gray")
+                gg <- gg + geom_hline(yintercept=0, color=input$ncolor2)
             }
             vcolor <- unlist(strsplit(input$xcolor2, ","))
             vcolor <- vcolor[isParty]
@@ -2550,7 +2553,7 @@ shinyServer(
                                                   minor_breaks = seq(yy[1],yy[2],yy[3]))
                 }
                 else if (length(syy) == 4){
-                    gg <- gg + scale_x_continuous(breaks = seq(yy[1],yy[2],yy[3]),
+                    gg <- gg + scale_y_continuous(breaks = seq(yy[1],yy[2],yy[3]),
                                                   minor_breaks = seq(yy[1],yy[2],yy[4]))
                 }
             }
@@ -2573,8 +2576,9 @@ shinyServer(
                 xx <- xx[xx$AREA != "TOTAL",]
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
-            xx <- xx[(is.na(xx$TOTAL1) | xx$TOTAL1 >= input$minvotes) &
-                     (is.na(xx$TOTAL2) | xx$TOTAL2 >= input$minvotes),]
+            xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
+                     (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes),]
+            row.names(xx) <- seq(1:NROW(xx))
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
             if (input$party == "Democrat"){
                 preparty <- "DEM"
@@ -2659,15 +2663,15 @@ shinyServer(
             gg <- gg + scale_y_reverse()
             #STOP areaPlot2b code
             # if (input$party == "Margin"){ # areaPlot2 code only
-            #     gg <- gg + geom_abline(intercept=0, slope=-1, color="gray", linetype="dashed")
+            #     gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2b, linetype="dashed")
             # }
             if (input$party == "Margin" | input$units == "Count"){
-                gg <- gg + geom_vline(xintercept=0, color="gray")
+                gg <- gg + geom_vline(xintercept=0, color=input$ncolor2b)
             }
             if (input$party == "Margin" &
                 min(xx$MAR_SH, na.rm = TRUE) <= 0 &
                 max(xx$MAR_SH, na.rm = TRUE) >= 0){
-                gg <- gg + geom_hline(yintercept=0, color="gray")
+                gg <- gg + geom_hline(yintercept=0, color=input$ncolor2b)
             }
             vcolor <- unlist(strsplit(input$xcolor2b, ","))
             vcolor <- vcolor[isParty]
@@ -2841,6 +2845,7 @@ shinyServer(
         getAreas <- function(){
             dd <- getdata()
             dd <- dd[is.na(dd$TOTAL) | dd$TOTAL >= input$minvotes,]
+            row.names(dd) <- seq(1:NROW(dd))
             #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
             if (input$cvt_x0vote){
                 dd <- dd[dd[4] > 0 & dd[5] > 0,] # delete if DEM or REP votes == 0 
@@ -2884,8 +2889,11 @@ shinyServer(
         })
         getAreas2 <- function(){
             dd <- getdata12()
-            dd <- dd[(is.na(dd$TOTAL1) | dd$TOTAL1 >= input$minvotes) &
-                     (is.na(dd$TOTAL2) | dd$TOTAL2 >= input$minvotes),]
+            ddd <<- dd #DEBUG-RM
+            dd <- dd[(is.na(dd$TOT1_N) | dd$TOT1_N >= input$minvotes) |
+                     (is.na(dd$TOT2_N) | dd$TOT2_N >= input$minvotes),]
+            row.names(dd) <- seq(1:NROW(dd))
+            #dd <- dd[dd$DEM1 > 0 & dd$REP1 > 0 & dd$DEM2 > 0 & dd$REP2 > 0,] #keep
             if (input$units == "Percent"){
                 dd <- dd[,c(1:(NCOL(dd)-5),(NCOL(dd)-1),NCOL(dd))]
             }
@@ -2915,6 +2923,7 @@ shinyServer(
             for (i in 3:NCOL(dd)){
                 dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
             }
+            cat(paste0(getlabels("text")[1],"\n\n"))
             print(dd)
         })
         output$getcsv <- downloadHandler(
@@ -3127,6 +3136,7 @@ shinyServer(
         getCounties <- reactive({
             xx <- getdata()
             xx <- xx[is.na(xx$TOTAL) | xx$TOTAL >= input$minvotes,]
+            row.names(xx) <- seq(1:NROW(xx))
             yy <- xx %>%
                 group_by(COUNTY) %>%
                 summarize(AREAS = length(AREA), VOTES = sum(TOTAL))
@@ -3277,6 +3287,30 @@ shinyServer(
                 yy$AREA <- gsub(" WARDS "," WARD ",yy$AREA)
             }
             dd <- as.data.frame(merge(xx, yy, by = c("COUNTY","AREA"), all = TRUE))
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                dd <- dd[dd$COUNTY == input$xcounty,]
+            }
+            else{
+                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+            }
+            if (input$areamod != ""){
+                ch1 <- substr(input$areamod,1,1)
+                pat <- substring(input$areamod,2)
+                if (ch1 == "-"){
+                    dd$AREA <- gsub(pat,"",dd$AREA)
+                    dd <- dd %>%
+                        group_by(COUNTY,AREA) %>%
+                        summarize(DEM1=sum(DEM1, na.rm = TRUE),
+                                  REP1=sum(REP1, na.rm = TRUE),
+                                  MARGIN1=sum(MARGIN1, na.rm = TRUE),
+                                  TOTAL1=sum(TOTAL1, na.rm = TRUE),
+                                  DEM2=sum(DEM2, na.rm = TRUE),
+                                  REP2=sum(REP2, na.rm = TRUE),
+                                  MARGIN2=sum(MARGIN2, na.rm = TRUE),
+                                  TOTAL2=sum(TOTAL2, na.rm = TRUE))
+                    dd <- as.data.frame(dd)
+                }
+            }
             if (input$showother){
                 ee <- dd[is.na(dd$MARGIN1) | is.na(dd$MARGIN2),]
                 if (NROW(ee) > 0){
@@ -3305,16 +3339,8 @@ shinyServer(
             dd$MAR1_N <- dd$MARGIN1
             dd$TOT1_N <- dd$TOTAL1
             dd$TOT2_N <- dd$TOTAL2
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                dd <- dd[dd$COUNTY == input$xcounty,]
-                dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
-                                           t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
-            }
-            else{
-                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
-                dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
-                                           t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
-            }
+            dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
+                                       t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
             
             if (input$units == "Percent"){
                 dd$DEM1 <- 100 * dd$DEM1 / dd$TOTAL1
