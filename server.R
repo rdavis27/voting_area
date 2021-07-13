@@ -1945,6 +1945,162 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_Governor.csv"))
             write_delim(xx, paste0(data_dir,"NC_2020_Governor.csv"), append = TRUE, col_names = TRUE)
         }
+        createSC_2018_Governor <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            file <- list.files(paste0(input_dir,"SC/2018/"),"*.xls.xlsx")
+            cc <- gsub(".xls.xlsx","",file)
+            #cc <- unlist(read_delim(paste0(data_dir,"SC_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                #catmsg(paste0("START read_excel(",cc[i],") 2018_Gov"))
+                dd <- read_excel(paste0(input_dir,"SC/2018/",cc[i],".xls.xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"SC/2018/",cc[i],".xls.xlsx"), sheet = "3", skip = 2)
+                gdd <<- dd #DEBUG-RM
+                gxx <<- xx #DEBUG-RM
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- str_to_title(cc[i])
+                k <- 3
+                nn <- names(dd)[seq(3,(length(dd)-1),2)]
+                gnn <<- nn #DEBUG-RM
+                
+                for (j in 1:(length(nn))){
+                    m <- 2 * (j+1)
+                    if (grepl(" Smith", nn[j])){
+                        yy[,k] <- xx[,m]
+                        idem <- k
+                    }
+                    else if (grepl(" McMaster", nn[j])){
+                        yy[,k] <- xx[,m]
+                        irep <- k
+                    }
+                    else if (grepl("Write-In", nn[j])){
+                        yy[,k] <- xx[,m]
+                        iwri <- k
+                    }
+                    else if (grepl("WRITE-IN", nn[j])){
+                        yy[,k] <- xx[,m]
+                        iwri <- k
+                    }
+                    else{
+                        catmsg(paste0("UNEXPECTED name=",nn[j]))
+                    }
+                    k <- k+1
+                }
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Smith","McMaster","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:6] <- c("DEM","REP","WRI")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2018_Governor.csv"))
+            write_delim(zz, paste0(data_dir,"SC_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createSC_2020_President <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            file <- list.files(paste0(input_dir,"SC/2020/"),"*.xls.xlsx")
+            cc <- gsub(".xls.xlsx","",file)
+            #cc <- unlist(read_delim(paste0(data_dir,"SC_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                #catmsg(paste0("START read_excel(",cc[i],") Pres"))
+                dd <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "3", skip = 2)
+                gdd <<- dd #DEBUG-RM
+                gxx <<- xx #DEBUG-RM
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- str_to_title(cc[i])
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),7)]
+                gnn <<- nn #DEBUG-RM
+                party <- rep("",length(nn)-1)
+                for (j in 1:(length(nn)-1)){
+                    party[j] <- head(strsplit(nn[j],split=" ")[[1]],1)
+                }
+                #pp <- paste0(party,collapse = ",") #DEBUG
+                #print(paste0(pp,"  ",cc[i])) #DEBUG
+                for (j in seq(9,NCOL(xx),7)){
+                    yy[,k] <- xx[,j]
+                    #nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- party[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "DEM") #Biden
+                irep <- which(names(yy) == "REP") #Trump
+                igrn <- which(names(yy) == "GRN") #Hawkins
+                ialn <- which(names(yy) == "ALN") #DeLaFuente
+                ilib <- which(names(yy) == "LIB") #Jorgensen
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,igrn,ialn,ilib)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Biden","Trump",
+                               "Hawkins","DeLaFuente","Jorgensen")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:8] <- c("DEM","REP","GRN","ALN","LIB")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2020_President.csv"))
+            write_delim(zz, paste0(data_dir,"SC_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createSC_2020_Senate <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            file <- list.files(paste0(input_dir,"SC/2020/"),"*.xls.xlsx")
+            cc <- gsub(".xls.xlsx","",file)
+            #cc <- unlist(read_delim(paste0(data_dir,"SC_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                #catmsg(paste0("START read_excel(",cc[i],") Senate"))
+                dd <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "4", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "4", skip = 2)
+                gdd <<- dd #DEBUG-RM
+                gxx <<- xx #DEBUG-RM
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- str_to_title(cc[i])
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),7)]
+                gnn <<- nn #DEBUG-RM
+                party <- rep("",length(nn)-1)
+                for (j in 1:(length(nn)-1)){
+                    party[j] <- head(strsplit(nn[j],split=" ")[[1]],1)
+                }
+                pp <- paste0(party,collapse = ",") #DEBUG
+                catmsg(paste0(pp,"  ",cc[i])) #DEBUG
+                for (j in seq(9,NCOL(xx),7)){
+                    yy[,k] <- xx[,j]
+                    #nn[k-2] <- tail(strsplit(nn[k-2],split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- party[k-2]
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                idem <- which(names(yy) == "DEM") #Harrison
+                irep <- which(names(yy) == "REP") #Graham
+                icon <- which(names(yy) == "CON") #Bledsoe
+                if (cc[i] == "dorchester"){ #Writein
+                    iwri <- which(names(yy) == "Write-in")
+                }
+                else if (cc[i] == "abbeville"){
+                    iwri <- which(names(yy) == "name")
+                }
+                else{
+                    iwri <- which(names(yy) == "Write-In")
+                }
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,icon,iwri)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Harrison","Graham",
+                               "Bledsoe","Writein")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:7] <- c("DEM","REP","CON","WRI")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2020_Senate.csv"))
+            write_delim(zz, paste0(data_dir,"SC_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createTX_2016_President <- function(){
             catmsg("##### START createTX_2016_President #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
@@ -3140,6 +3296,15 @@ shinyServer(
                     else if (races[i] == "NC_2020_Governor"){
                         createNC_2020_Governor()
                     }
+                    else if (races[i] == "SC_2018_Governor"){
+                        createSC_2018_Governor()
+                    }
+                    else if (races[i] == "SC_2020_President"){
+                        createSC_2020_President()
+                    }
+                    else if (races[i] == "SC_2020_Senate"){
+                        createSC_2020_Senate()
+                    }
                     else if (races[i] == "TX_2016_President"){
                         createTX_2016_President()
                     }
@@ -3548,6 +3713,9 @@ shinyServer(
             }
             else if (input$state2 == "NC"){
                 files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
+            }
+            else if (input$state2 == "SC"){
+                files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor")
             }
             else if (input$state2 == "TX"){
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
