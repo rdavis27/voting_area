@@ -82,7 +82,10 @@ shinyUI(pageWithSidebar(
                     textInput("pos3", "Position below", value = ""),
                     textInput("areaxscale", "X From,To,Step,Tick", value = ""),
                     textInput("areayscale", "Y From,To,Step,Tick", value = ""),
-                    textInput("xlimit","Limit",value = "-9,-3,3,9"),
+                    splitLayout(
+                        textInput("xlimit","Limit",value = "-9,-3,3,9"),
+                        textInput("xalpha","Alpha",value = "0.7")
+                    ),
                     textInput("areaColor","Color",value = "red3,orange,green3,violet,blue3"),
                     textInput("xparty","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
                     checkboxInput("area_x0vote","Exclude 0 votes",value = TRUE),
@@ -146,7 +149,10 @@ shinyUI(pageWithSidebar(
                          textInput("pos3_2", "Position below", value = ""),
                          textInput("xscale2", "X From,To,Step,Tick", value = ""),
                          textInput("yscale2", "Y From,To,Step,Tick", value = ""),
-                         textInput("xlimit2","Limit",value = "-9,-3,3,9"),
+                         splitLayout(
+                             textInput("xlimit2","Limit",value = "-9,-3,3,9"),
+                             textInput("xalpha2","Alpha",value = "0.7")
+                         ),
                          textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
                          textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
                          textInput("ncolor2","Color (lines)",value = "darkgray"),
@@ -178,7 +184,10 @@ shinyUI(pageWithSidebar(
                          textInput("pos3_2b", "Position below", value = ""),
                          textInput("xscale2b", "X From,To,Step,Tick", value = ""),
                          textInput("yscale2b", "Y From,To,Step,Tick", value = ""),
-                         textInput("xlimit2b","Limit",value = "-9,-3,3,9"),
+                         splitLayout(
+                             textInput("xlimit2b","Limit",value = "-9,-3,3,9"),
+                             textInput("xalpha2b","Alpha",value = "0.7")
+                         ),
                          textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
                          textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
                          textInput("ncolor2b","Color (lines)",value = "darkgray"),

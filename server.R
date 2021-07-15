@@ -1945,6 +1945,61 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_Governor.csv"))
             write_delim(xx, paste0(data_dir,"NC_2020_Governor.csv"), append = TRUE, col_names = TRUE)
         }
+        createSC_2016_President <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            file <- list.files(paste0(input_dir,"SC/2016/"),"*.xls.xlsx")
+            cc <- gsub(".xls.xlsx","",file)
+            #cc <- unlist(read_delim(paste0(data_dir,"SC_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                #catmsg(paste0("START read_excel(",cc[i],") Pres"))
+                dd <- read_excel(paste0(input_dir,"SC/2016/",cc[i],".xls.xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"SC/2016/",cc[i],".xls.xlsx"), sheet = "3", skip = 2)
+                gdd <<- dd #DEBUG-RM
+                gxx <<- xx #DEBUG-RM
+                yy <- data.frame(xx[,1])
+                yy$COUNTY <- str_to_title(cc[i])
+                k <- 3
+                nn <- names(dd)[seq(3,length(dd),2)]
+                gnn <<- nn #DEBUG-RM
+                party <- rep("",length(nn)-1)
+                # for (j in 1:(length(nn)-1)){
+                #     party[j] <- head(strsplit(nn[j],split=" ")[[1]],1)
+                # }
+                #pp <- paste0(party,collapse = ",") #DEBUG
+                #print(paste0(pp,"  ",cc[i])) #DEBUG
+                for (j in seq(4,NCOL(xx),2)){
+                    yy[,k] <- xx[,j]
+                    lname <- head(strsplit(nn[k-2],split="/")[[1]],1) #Biden / Harris
+                    #lname <- gsub(" ","",trimws(lname))
+                    lname <- trimws(lname)
+                    lname <- tail(strsplit(lname,split=" ")[[1]],1) #use last name
+                    names(yy)[k] <- lname
+                    k <- k+1
+                }
+                yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                gyy2 <<- yy #DEBUG-RM
+                idem <- which(names(yy) == "Clinton")
+                irep <- which(names(yy) == "Trump")
+                ilib <- which(names(yy) == "Johnson")
+                igrn <- which(names(yy) == "Stein")
+                icon <- which(names(yy) == "Castle")
+                ind1 <- which(names(yy) == "McMullin")
+                iasc <- which(names(yy) == "Skewes")
+                yy <- yy[,c(2,1,NCOL(yy),idem,irep,ilib,igrn,icon,ind1,iasc)]
+                names(yy) <- c("COUNTY","AREA","TOTAL","Clinton","Trump",
+                               "Johnson","Stein","Castle","McMullin","Skewes")
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                gyy3 <<- yy #DEBUG-RM
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            partyzz[4:10] <- c("DEM","REP","LIB","GRN","CON","IND","ASC")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2016_President.csv"))
+            write_delim(zz, paste0(data_dir,"SC_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createSC_2018_Governor <- function(){
             #input_dir <- "input/"
             #data_dir  <- "data/"
@@ -2100,6 +2155,38 @@ shinyServer(
             partyzz[4:7] <- c("DEM","REP","CON","WRI")
             write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2020_Senate.csv"))
             write_delim(zz, paste0(data_dir,"SC_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createSC_2020_Registered <- function(){
+            #input_dir <- "input/"
+            #data_dir  <- "data/"
+            file <- list.files(paste0(input_dir,"SC/2020/"),"*.xls.xlsx")
+            cc <- gsub(".xls.xlsx","",file)
+            #cc <- unlist(read_delim(paste0(data_dir,"SC_Counties.csv")," "))
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                #catmsg(paste0("START read_excel(",cc[i],") Pres"))
+                #dd <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "Registered Voters", skip = 1, n_max = 0) # read names
+                xx <- read_excel(paste0(input_dir,"SC/2020/",cc[i],".xls.xlsx"), sheet = "Registered Voters", skip = 0)
+                gxx <<- xx #DEBUG-RM
+                yy <- data.frame(xx[,c(1,2)]) #AREA,Registered
+                yy$COUNTY <- str_to_title(cc[i])
+                yy <- yy[,c(3,1,2)] #put COUNTY in front
+                gyy1 <<- yy #DEBUG-RM
+                names(yy) <- c("COUNTY","AREA","TOTAL")
+                yy$DEM <- 1
+                yy$REP <- yy$TOTAL - 1
+                gyy2 <<- yy #DEBUG-RM
+                yy <- yy[yy$AREA != "Failsafe",]
+                yy <- yy[yy$AREA != "Provisional",]
+                yy <- yy[yy$AREA != "Failsafe Provisional",]
+                yy <- yy[yy$AREA != "Total:",] #delete Total
+                gyy3 <<- yy #DEBUG-RM
+                zz <- rbind(zz,yy)
+            }
+            partyzz <- names(zz)
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2020_Registered.csv"))
+            write_delim(zz, paste0(data_dir,"SC_2020_Registered.csv"), append = TRUE, col_names = TRUE)
         }
         createTX_2016_President <- function(){
             catmsg("##### START createTX_2016_President #####")
@@ -2532,8 +2619,8 @@ shinyServer(
                 xlabel <- "Votes (thousands)"
             }
             gg <- ggplot(zz, aes(x = Votes, y = Share))
-            gg <- gg + geom_point(aes_string(color="Candidate",shape="Candidate"), size=3, alpha=0.7)
-            gg <- gg + geom_line(aes_string(color="Candidate"), size=2, alpha=0.7)
+            gg <- gg + geom_point(aes_string(color="Candidate",shape="Candidate"), size=3, alpha=as.numeric(input$xalpha))
+            gg <- gg + geom_line(aes_string(color="Candidate"), size=2, alpha=as.numeric(input$xalpha))
             gg <- gg + geom_vline(aes(xintercept = votesM))
             gg <- gg + ggtitle(title)
             gg <- gg + xlab(xlabel) + ylab(ylabel)
@@ -2630,7 +2717,7 @@ shinyServer(
                 xx$Votes <- xx[[party1n]]
             }
             gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
-            gg <- gg + geom_point(data=xx, alpha=0.7,
+            gg <- gg + geom_point(data=xx, alpha=as.numeric(input$xalpha2),
                                   aes_string(color="Party",size="Votes"))
             if (input$party == "Margin"){
                 gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
@@ -2828,7 +2915,7 @@ shinyServer(
             }
             #START areaPlot2b code
             # gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
-            # gg <- gg + geom_point(data=xx, size=3, alpha=0.7,
+            # gg <- gg + geom_point(data=xx, size=3, alpha=as.numeric(input$xalpha2b),
             #                       aes_string(color="Party",shape="Votes"))
             xx <- xx[order(xx[[party1]]),]
             if (substr(input$races[1], 9, 12) == "Pres"){
@@ -2849,9 +2936,9 @@ shinyServer(
             xx$Votes <- xx[[party1n]]
             xx2$Votes <- xx2[[party2n]]
             gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
-            gg <- gg + geom_point(data=xx, alpha=0.7,
+            gg <- gg + geom_point(data=xx, alpha=as.numeric(input$xalpha2b),
                                   aes_string(color="Party",shape="Race",size="Votes"))
-            gg <- gg + geom_point(data=xx2, alpha=0.7,
+            gg <- gg + geom_point(data=xx2, alpha=as.numeric(input$xalpha2b),
                                   aes_string(color="Party2",shape="Race",size="Votes"))
             gg <- gg + scale_y_reverse()
             #STOP areaPlot2b code
@@ -3296,6 +3383,9 @@ shinyServer(
                     else if (races[i] == "NC_2020_Governor"){
                         createNC_2020_Governor()
                     }
+                    else if (races[i] == "SC_2016_President"){
+                        createSC_2016_President()
+                    }
                     else if (races[i] == "SC_2018_Governor"){
                         createSC_2018_Governor()
                     }
@@ -3304,6 +3394,9 @@ shinyServer(
                     }
                     else if (races[i] == "SC_2020_Senate"){
                         createSC_2020_Senate()
+                    }
+                    else if (races[i] == "SC_2020_Registered"){
+                        createSC_2020_Registered()
                     }
                     else if (races[i] == "TX_2016_President"){
                         createTX_2016_President()
@@ -3715,7 +3808,7 @@ shinyServer(
                 files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
             }
             else if (input$state2 == "SC"){
-                files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor")
+                files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
