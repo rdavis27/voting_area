@@ -8,6 +8,7 @@ library(leaflet)
 library(htmltools)
 library(xlsx)
 library(RcppRoll)
+library(cowplot)
 
 areaWidth <- 900
 areaHeight <- 600
@@ -2563,20 +2564,19 @@ shinyServer(
             gg <- addScales(gg,input$areaxscale,input$areayscale)
             gg
         }, width = areaWidth, height = areaHeight)
-        output$cvtPlot <- renderPlot({
-            xx <- getdata()
+        doCvtPlot <- function(xx, xcounty, xtype){
             xx <- xx[is.na(xx$TOTAL) | xx$TOTAL >= input$minvotes,]
             row.names(xx) <- seq(1:NROW(xx))
             if (input$cvt_x0vote){
                 xx <- xx[xx[4] > 0 & xx[5] > 0,] # delete if DEM or REP votes == 0 
             }
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                xx <- xx[xx$COUNTY == input$xcounty,]
+            if (xcounty != "" & xcounty != "(all)"){
+                xx <- xx[xx$COUNTY == xcounty,]
             }
             else{
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
-            votesM <- getDeltaM(xx, input$xcounty)[2]
+            votesM <- getDeltaM(xx, xcounty)[2]
             yy <- xx
             yy <- orderdf(yy,input$xsortcol,input$xsortdesc)
             names(yy)[3] <- "Votes"
@@ -2607,7 +2607,12 @@ shinyServer(
             zz$Candidate <- factor(zz$Candidate, levels = names(yy)[4:NCOL(yy)])
             xsortdir <- "Ascending"
             if (input$xsortdesc) xsortdir <- "Desc"
-            title <- paste0(input$xcounty," County, ",input$races[1]," - Cumulative Vote Tally, ordered by ",names(zz)[input$xsortcol],", ",xsortdir)
+            if (xtype == 2){
+                title <- paste0(xcounty," County, ",input$races[1])
+            }
+            else{
+                title <- paste0(xcounty," County, ",input$races[1]," - Cumulative Vote Tally, ordered by ",names(zz)[input$xsortcol],", ",xsortdir)
+            }
             xlabel <- "Votes"
             ylabel <- "Percent of Votes"
             if (input$plotbyarea){
@@ -2661,7 +2666,24 @@ shinyServer(
             }
             gg <- addScales(gg,input$xscale,input$yscale)
             gg
+        }
+        output$cvtPlot <- renderPlot({
+            xx <- getdata()
+            doCvtPlot(xx, input$xcounty, 1)
         })
+        output$cvtPlots <- renderPlot({
+            xx <- getdata()
+            cc <- getCounties()
+            gcc <<- cc
+            nn <- input$cvt_cols * input$cvt_rows
+            ist <- input$cvt_start
+            imx <- min(nn, (1+nrow(cc)-ist))
+            pp <- NULL
+            for (i in 1:nn) pp[[i]] <- ggplot() + theme_void()
+            for (i in 1:imx) pp[[i]] <- doCvtPlot(xx, cc[(ist+i-1),"COUNTY"], 2)
+            plot_grid(plotlist = pp, ncol = input$cvt_cols)
+        #})
+        }, height = 600, width = 1000)
         output$areaPlot2 <- renderPlot({
             xx <- getdata12()
             if (!input$displaytotal){

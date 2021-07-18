@@ -124,6 +124,30 @@ shinyUI(pageWithSidebar(
                          plotOutput("cvtPlot")
                      )
             ),
+            tabPanel("CVTs",
+                     sidebarPanel(
+                         width = 2,
+                         numericInput("cvt_start","Starting index",1,min = 1,step = 9),
+                         numericInput("cvt_cols","Number of columns",3,min = 1),
+                         numericInput("cvt_rows","Number of rows",3,min = 1)
+                         # textInput("xscale", "X From,To,Step,Tick", value = ""),
+                         # textInput("yscale", "Y From,To,Step,Tick", value = ""),
+                         # textInput("xcolor","Color",value = "blue3,red3,orange,green3,violet"),
+                         # textInput("xshape","Shape",value = "3,8,0,1,2,15,16,17"),
+                         # numericInput("cvt_window","Rolling window",0,min = 0),
+                         # checkboxInput("cvt_x0vote","Exclude 0 votes",value = TRUE),
+                         # checkboxInput("votes1000","Votes in 1000s",value = TRUE),
+                         # checkboxInput("plotbyarea","Plot by Area",value = TRUE),
+                         # splitLayout(
+                         #     numericInput("plotload", "Load", 1),
+                         #     actionButton("plotsave", "Save")
+                         # )
+                     ),
+                     mainPanel(
+                         width = 9,
+                         plotOutput("cvtPlots")
+                     )
+            ),
             tabPanel("Areas2",
                      sidebarPanel(
                          width = 2,
