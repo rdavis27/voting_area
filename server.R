@@ -2574,7 +2574,7 @@ shinyServer(
                 xx <- xx[xx$COUNTY == xcounty,]
             }
             else{
-                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),] # removes TOTAL
             }
             votesM <- getDeltaM(xx, xcounty)[2]
             yy <- xx
@@ -3146,6 +3146,7 @@ shinyServer(
         })
         getAreas <- function(){
             dd <- getdata()
+            dd <- dd[dd$AREA != "TOTAL",] #remove TOTAL
             dd <- dd[is.na(dd$TOTAL) | dd$TOTAL >= input$minvotes,]
             row.names(dd) <- seq(1:NROW(dd))
             #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
@@ -3154,7 +3155,6 @@ shinyServer(
             }
             if (input$xcounty != "" & input$xcounty != "(all)"){
                 dd <- dd[dd$COUNTY == input$xcounty,]
-                dd <- rbind(dd, data.frame(COUNTY="",AREA="TOTAL",t(colSums(dd[,c(-1,-2)]))))
             }
             ir <- 1
             if (input$xsortcol != 0){
@@ -3171,6 +3171,7 @@ shinyServer(
                     }
                 }
             }
+            dd <- rbind(dd, data.frame(COUNTY="",AREA="TOTAL",t(colSums(dd[,c(-1,-2)]))))
             return(dd)
         }
         output$myTextAreas <- renderPrint({
