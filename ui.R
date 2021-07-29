@@ -162,6 +162,7 @@ shinyUI(pageWithSidebar(
             tabPanel("Area Plot2",
                      sidebarPanel(
                          width = 3,
+                         checkboxInput("xdxplot2","x/dx plot (else x/y)",value = TRUE),
                          checkboxInput("showall2","Show all labels,",value = TRUE),
                          checkboxInput("sizefor2","Size for race 2",value = TRUE),
                          selectInput("label2", "Label type",
@@ -179,7 +180,7 @@ shinyUI(pageWithSidebar(
                          ),
                          textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
                          textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
-                         textInput("ncolor2","Color (lines)",value = "darkgray"),
+                         textInput("ncolor2","Color (lines)",value = "black"),
                          textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
                          textInput("vrange","Vote Point Range",value = "1,4"),
                          textInput("vtrans","Vote Transform",value = "#log10"),

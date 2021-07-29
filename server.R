@@ -2471,8 +2471,14 @@ shinyServer(
             }
             racex <- input$races[1]
             racey <- input$races[2]
-            title <- paste(tloc,tshift, input$party, tunits, "from",
-                           racex, "to", racey, tnote)
+            if (input$xdxplot2){
+                title <- paste(tloc,tshift, input$party, tunits, "from",
+                               racex, "to", racey, tnote)
+            }
+            else{
+                title <- paste(tloc, input$party, tunits, "for",
+                               racex, "and", racey, tnote)
+            }
             if (type == "plot2b"){
                 #START areaPlot2b code
                 ylabel <- paste("Areas ordered by ",input$party, tunits, "for", racex)
@@ -2481,7 +2487,12 @@ shinyServer(
                 #STOP areaPlot2b code
             }
             else{
-                ylabel <- paste(tshift, input$party, tunits, "for", racey)
+                if (input$xdxplot2){
+                    ylabel <- paste(tshift, input$party, tunits, "for", racey)
+                }
+                else{
+                    ylabel <- paste(input$party, tunits, "for", racey)
+                }
                 xlabel <- paste0(input$party," ",tunits," for ", racex,
                                  "\nSources: see http://econdataus.com/voting_area.htm")
             }
@@ -2616,7 +2627,7 @@ shinyServer(
             xlabel <- "Votes"
             ylabel <- "Percent of Votes"
             if (input$plotbyarea){
-                xlabel <- "Areas"
+                xlabel <- "Number of Areas"
             }
             else if (input$votes1000){
                 votesM <- votesM/1000
@@ -2697,18 +2708,22 @@ shinyServer(
             if (input$party == "Democrat"){
                 preparty <- "DEM"
                 party1 <- "DEM1"
+                party2 <- "DEM2"
             }
             else if (input$party == "Republican"){
                 preparty <- "REP"
                 party1 <- "REP1"
+                party2 <- "REP2"
             }
             else if (input$party == "Total"){
                 preparty <- "TOT"
                 party1 <- "TOTAL1"
+                party2 <- "TOTAL2"
             }
             else{
                 preparty <- "MAR"
                 party1 <- "MARGIN1"
+                party2 <- "MARGIN2"
             }
             party_sh <- paste0(preparty,"_SH")
             party1n <- "TOT1_N"
@@ -2738,11 +2753,21 @@ shinyServer(
             else{
                 xx$Votes <- xx[[party1n]]
             }
-            gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
+            if (input$xdxplot2){
+                gg <- ggplot(xx, aes_string(x=party1, y=party_sh))
+            }
+            else{
+                gg <- ggplot(xx, aes_string(x=party1, y=party2))
+            }
             gg <- gg + geom_point(data=xx, alpha=as.numeric(input$xalpha2),
                                   aes_string(color="Party",size="Votes"))
             if (input$party == "Margin"){
-                gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
+                if (input$xdxplot2){
+                    gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
+                }
+                else{
+                    gg <- gg + geom_abline(intercept=0, slope=1, color=input$ncolor2, linetype="dashed")
+                }
             }
             if (input$party == "Margin" | input$units == "Count"){
                 gg <- gg + geom_vline(xintercept=0, color=input$ncolor2)
@@ -2817,21 +2842,41 @@ shinyServer(
             xx$PREPEND[xx$POS == 2] <- "  "
             xx$LABEL <- paste0(xx$PREPEND,xx$LABEL)
             xx$LABEL[xx$POS == 0] <- ""
-            if (input$party == "Democrat"){
-                gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM_SH, label = xx$LABEL,
-                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
-            }
-            else if (input$party == "Republican"){
-                gg <- gg + annotate("text", x = xx$REP1, y =xx$REP_SH, label = xx$LABEL,
-                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
-            }
-            else if (input$party == "Total"){
-                gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT_SH, label = xx$LABEL,
-                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+            if (input$xdxplot2){
+                if (input$party == "Democrat"){
+                    gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM_SH, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else if (input$party == "Republican"){
+                    gg <- gg + annotate("text", x = xx$REP1, y =xx$REP_SH, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else if (input$party == "Total"){
+                    gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT_SH, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else{
+                    gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MAR_SH, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
             }
             else{
-                gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MAR_SH, label = xx$LABEL,
-                                    color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                if (input$party == "Democrat"){
+                    gg <- gg + annotate("text", x = xx$DEM1, y =xx$DEM2, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else if (input$party == "Republican"){
+                    gg <- gg + annotate("text", x = xx$REP1, y =xx$REP2, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else if (input$party == "Total"){
+                    gg <- gg + annotate("text", x = xx$TOTAL1, y =xx$TOT2, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
+                else{
+                    gg <- gg + annotate("text", x = xx$MARGIN1, y =xx$MARGIN2, label = xx$LABEL,
+                                        color=xx$Color, hjust = 0, vjust = xx$VJUST)
+                }
             }
             xx <- NULL
             yy <- NULL
