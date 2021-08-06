@@ -45,9 +45,14 @@ shinyServer(
         ## Only the following ElectionWare (EW) counties work currently
         ## due to changes in precinct names from 2018 to 2020.
         az_ew_counties <- c(
-            "Pima","Yuma")
+            "Apache","Cochise","Gila","Graham","Greenlee","La Paz",
+            "Mohave","Navajo","Pima","Pinal","Santa Cruz","Yuma")
         az_ew_files <- c(
-            "6981.Pima_.Detail.txt","6979.Yuma_.Detail.txt")
+            "6967.Apache.Detail.txt","6970.Cochise.Detail.txt",
+            "6972.Gila_.Detail.txt","6887.Graham.Detail.txt",
+            "6841.Greenlee.Detail.txt","6957.La Paz.Detail.txt",
+            "6969.Mohave.Detail.txt","6955.Navajo.Detail.txt","6981.Pima_.Detail.txt",
+            "6956.Pinal_.Detail.txt","6971.Santa Cruz.Detail.txt","6979.Yuma_.Detail.txt")
         createAZ_2018_Senate <- function(){ # currently just loads Maricopa
             xx <- read_delim(paste0(input_dir,"AZ/2018/6989.Maricopa.Detail.txt"),'\t',
                              col_names = TRUE, col_types = "cccdddddcdddddddddd")
@@ -69,13 +74,13 @@ shinyServer(
             #COUNTY   AREA           `DEM_SINEMA,KYRSTEN` `GRN_GREEN,ANGELA` NON_WRITEIN `REP_MCSALLY,MARTHA` TOTAL
             #Maricopa 0001 ACACIA                    1209                 84           8                  891     0
 
-            start <- c( 8,12,102,112,168)
-            end   <- c(11,17,104,167,205)
-            nms   <- c("AREA","Votes","Party","Contest","Candidate")
+            start <- c( 8,12,102,112,168,206)
+            end   <- c(11,17,104,167,205,234)
+            nms   <- c("AREA","Votes","Party","Contest","Candidate","AreaName")
             cc <- az_ew_files
             for (i in 1:length(cc)){
                 filename <- paste0(input_dir,"AZ/2018/",cc[i])
-                dd <- read_fwf(filename, fwf_positions(start, end, nms), col_types = "ciccc")
+                dd <- read_fwf(filename, fwf_positions(start, end, nms), col_types = "cicccc")
                 if (az_ew_counties[i] == "Pima"){
                     office <- "U.S. SENATOR" #UPDATE
                 }
@@ -93,6 +98,17 @@ shinyServer(
                 dd$COUNTY <- az_ew_counties[i]
                 #dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
                 #dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                dd$AREA[dd$COUNTY == "Apache"] <- dd$AreaName[dd$COUNTY == "Apache"]
+                dd$AREA[dd$COUNTY == "Cochise"] <- dd$AreaName[dd$COUNTY == "Cochise"]
+                dd$AREA[dd$COUNTY == "Cochise"] <- dd$AreaName[dd$COUNTY == "Cochise"]
+                dd$AREA[dd$COUNTY == "Gila"] <- dd$AreaName[dd$COUNTY == "Gila"]
+                dd$AREA[dd$COUNTY == "Graham"] <- dd$AreaName[dd$COUNTY == "Graham"]
+                dd$AREA[dd$COUNTY == "Greenlee"] <- dd$AreaName[dd$COUNTY == "Greenlee"]
+                dd$AREA[dd$COUNTY == "La Paz"] <- dd$AreaName[dd$COUNTY == "La Paz"]
+                dd$AREA[dd$COUNTY == "Mohave"] <- dd$AreaName[dd$COUNTY == "Mohave"]
+                dd$AREA[dd$COUNTY == "Navajo"] <- dd$AreaName[dd$COUNTY == "Navajo"]
+                dd$AREA[dd$COUNTY == "Pinal"] <- dd$AreaName[dd$COUNTY == "Pinal"]
+                dd$AREA[dd$COUNTY == "Santa Cruz"] <- dd$AreaName[dd$COUNTY == "Santa Cruz"]
                 dd <- dd[,c("COUNTY","AREA","Candidate","Party","Votes")]
                 dd$AREA[dd$COUNTY == "Pima"] <- gsub("^0","",dd$AREA[dd$COUNTY == "Pima"])
                 dd$AREA[dd$COUNTY == "Yuma"] <- gsub("^0","",dd$AREA[dd$COUNTY == "Yuma"])
