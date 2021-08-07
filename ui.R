@@ -196,6 +196,18 @@ shinyUI(pageWithSidebar(
                          plotOutput("areaPlot2")
                      )
             ),
+            tabPanel("Area Plot2s",
+                     sidebarPanel(
+                         width = 2,
+                         numericInput("aplot2_start","Starting index",1,min = 1,step = 9),
+                         numericInput("aplot2_cols","Number of columns",3,min = 1),
+                         numericInput("aplot2_rows","Number of rows",3,min = 1)
+                     ),
+                     mainPanel(
+                         width = 9,
+                         plotOutput("areaPlot2s")
+                     )
+            ),
             tabPanel("Area Plot2b",
                      sidebarPanel(
                          width = 3,

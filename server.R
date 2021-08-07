@@ -2447,19 +2447,20 @@ shinyServer(
             }
             return(dd)
         }
-        getlabels <- function(type){
+        getlabels <- function(type, xcounty, xtype){
             tloc <- input$state2
             if (tloc == ""){
                 tloc <- "U.S."
             }
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                tloc <- paste0(input$xcounty," County, ",tloc)
+            if (xcounty != "" & xcounty != "(all)"){
+                tloc <- paste0(xcounty," County, ",tloc)
             }
             if (input$dist != ""){
                 tloc <- paste0("District ",input$dist,", ",tloc)
             }
             tloc <- paste0(tloc,":")
-            tshift <- "Shift in"
+            tshift <- "Shift"
+            tshiftin <- "Shift in"
             if (input$units == "Percent"){
                 tunits <- "Vote Share"
             }
@@ -2473,7 +2474,7 @@ shinyServer(
                 if (input$plusnote != ""){
                     plusnote <- input$plusnote
                 }
-                else if (input$xcounty == "" | input$xcounty == "(all)"){
+                else if (xcounty == "" | xcounty == "(all)"){
                     plusnote <- "(positive direction is more Democratic)"
                 }
                 else{
@@ -2488,8 +2489,13 @@ shinyServer(
             racex <- input$races[1]
             racey <- input$races[2]
             if (input$xdxplot2){
-                title <- paste(tloc,tshift, input$party, tunits, "from",
-                               racex, "to", racey, tnote)
+                if (xtype >= 2){
+                    title <- paste(tloc,tshiftin, input$party, tunits)
+                }
+                else{
+                    title <- paste(tloc,tshiftin, input$party, tunits, "from",
+                                   racex, "to", racey, tnote)
+                }
             }
             else{
                 title <- paste(tloc, input$party, tunits, "for",
@@ -2504,7 +2510,12 @@ shinyServer(
             }
             else{
                 if (input$xdxplot2){
-                    ylabel <- paste(tshift, input$party, tunits, "for", racey)
+                    if (xtype >= 2){
+                        ylabel <- paste(tshift, "for", racey)
+                    }
+                    else{
+                        ylabel <- paste(tshiftin, input$party, tunits, "for", racey)
+                    }
                 }
                 else{
                     ylabel <- paste(input$party, tunits, "for", racey)
@@ -2634,7 +2645,7 @@ shinyServer(
             zz$Candidate <- factor(zz$Candidate, levels = names(yy)[4:NCOL(yy)])
             xsortdir <- "Ascending"
             if (input$xsortdesc) xsortdir <- "Desc"
-            if (xtype == 2){
+            if (xtype >= 2){
                 title <- paste0(xcounty," County, ",input$races[1])
             }
             else{
@@ -2701,7 +2712,7 @@ shinyServer(
         output$cvtPlots <- renderPlot({
             xx <- getdata()
             cc <- getCounties()
-            gcc <<- cc
+            gcc <<- cc #DEBUG-RM
             nn <- input$cvt_cols * input$cvt_rows
             ist <- input$cvt_start
             imx <- min(nn, (1+nrow(cc)-ist))
@@ -2711,8 +2722,13 @@ shinyServer(
             plot_grid(plotlist = pp, ncol = input$cvt_cols)
         #})
         }, height = 600, width = 1000)
-        output$areaPlot2 <- renderPlot({
-            xx <- getdata12()
+        doAreaPlot2 <- function(xx, xcounty, xtype){
+            if (xcounty != "" & xcounty != "(all)"){
+                xx <- xx[xx$COUNTY == xcounty,]
+            }
+            else{
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            }
             if (!input$displaytotal){
                 xx <- xx[xx$AREA != "TOTAL",]
             }
@@ -2809,7 +2825,7 @@ shinyServer(
                 gg <- gg + scale_size_continuous(range = vrange_n,
                                                  trans = input$vtrans)
             }
-            labels <- getlabels("plot")
+            labels <- getlabels("plot", xcounty, xtype)
             gg <- gg + ggtitle(labels[1])
             gg <- gg + xlab(labels[2])
             gg <- gg + ylab(labels[3])
@@ -2932,9 +2948,32 @@ shinyServer(
                 gg <- gg + coord_cartesian(ylim = c(yy[1], yy[2]))
             }
             return(gg)
+        }
+        output$areaPlot2 <- renderPlot({
+            xx <- getdata12()
+            doAreaPlot2(xx, input$xcounty, 1)
+        }, height = 600, width = 1000)
+        output$areaPlot2s <- renderPlot({
+            xx <- getdata12()
+            cc <- getCounties()
+            gcc <<- cc #DEBUG-RM
+            nn <- input$aplot2_cols * input$aplot2_rows
+            ist <- input$aplot2_start
+            imx <- min(nn, (1+nrow(cc)-ist))
+            pp <- NULL
+            for (i in 1:nn) pp[[i]] <- ggplot() + theme_void()
+            for (i in 1:imx) pp[[i]] <- doAreaPlot2(xx, cc[(ist+i-1),"COUNTY"], 2)
+            plot_grid(plotlist = pp, ncol = input$aplot2_cols)
         }, height = 600, width = 1000)
         output$areaPlot2b <- renderPlot({
             xx <- getdata12()
+            # Move filtering to after getdata12()
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                xx <- xx[xx$COUNTY == input$xcounty,]
+            }
+            else{
+                xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+            }
             if (!input$displaytotal){
                 xx <- xx[xx$AREA != "TOTAL",]
             }
@@ -3056,7 +3095,7 @@ shinyServer(
                 gg <- gg + scale_size_continuous(range = vrange_n,
                                                  trans = input$vtrans2b)
             }
-            labels <- getlabels("plot2b")
+            labels <- getlabels("plot2b", input$xcounty, 1)
             gg <- gg + ggtitle(labels[1])
             gg <- gg + xlab(labels[2])
             gg <- gg + ylab(labels[3])
@@ -3253,6 +3292,13 @@ shinyServer(
         })
         getAreas2 <- function(){
             dd <- getdata12()
+            # Move filtering to after getdata12()
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                dd <- dd[dd$COUNTY == input$xcounty,]
+            }
+            else{
+                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+            }
             ddd <<- dd #DEBUG-RM
             dd <- dd[(is.na(dd$TOT1_N) | dd$TOT1_N >= input$minvotes) |
                      (is.na(dd$TOT2_N) | dd$TOT2_N >= input$minvotes),]
@@ -3287,7 +3333,7 @@ shinyServer(
             for (i in 3:NCOL(dd)){
                 dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
             }
-            cat(paste0(getlabels("text")[1],"\n\n"))
+            cat(paste0(getlabels("text", input$xcounty, 1)[1],"\n\n"))
             print(dd)
         })
         output$getcsv <- downloadHandler(
@@ -3669,12 +3715,13 @@ shinyServer(
                 yy$AREA <- gsub(" WARDS "," WARD ",yy$AREA)
             }
             dd <- as.data.frame(merge(xx, yy, by = c("COUNTY","AREA"), all = TRUE))
-            if (input$xcounty != "" & input$xcounty != "(all)"){
-                dd <- dd[dd$COUNTY == input$xcounty,]
-            }
-            else{
-                dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
-            }
+            # Move filtering to after getdata12()
+            # if (input$xcounty != "" & input$xcounty != "(all)"){
+            #     dd <- dd[dd$COUNTY == input$xcounty,]
+            # }
+            # else{
+            #     dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+            # }
             if (input$areamod != ""){
                 ch1 <- substr(input$areamod,1,1)
                 pat <- substring(input$areamod,2)
