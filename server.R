@@ -1962,6 +1962,43 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"NC_2020_Governor.csv"))
             write_delim(xx, paste0(data_dir,"NC_2020_Governor.csv"), append = TRUE, col_names = TRUE)
         }
+        createOH_2018_Governor <- function(){
+            catmsg("##### START createOH_2018_Governor #####")
+            xx <- read_excel(paste0(input_dir,"OH/2018/","2018-11-06_statewideprecinct_miami.xlsx"),
+                             sheet = "Statewide Offices", skip = 3)
+            xx <- xx[,c(1,2,7,10,11,14,13,9,12,15)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Cordray","DeWine","Irvine","GadellNewton","Ayres","Duncan","Turner")
+            xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","WI1","WI2","WI3")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"OH_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createOH_2018_Senate <- function(){
+            catmsg("##### START createOH_2018_Senate #####")
+            xx <- read_excel(paste0(input_dir,"OH/2018/","2018-11-06_statewideprecinct_miami.xlsx"),
+                             sheet = "U.S. Congress", skip = 3)
+            xx <- xx[,c(1,2,7,9,11,10)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Brown","Renacci","Faris")
+            xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","WI1")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"OH_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createOH_2020_President <- function(){
+            catmsg("##### START createOH_2020_President #####")
+            xx <- read_excel(paste0(input_dir,"OH/2020/","statewideresultsbyprecinct.xlsx"),
+                             sheet = "President and Vice President", skip = 3)
+            xx <- xx[,c(1,2,7,9,17,15,12,10,11,13,14,16,18)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Boddie","Carroll","Hoefling","Hunter","Simmons","Wells")
+            xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+            #xx$AREA <- gsub("^[0-9]+","",xx$AREA) #limit to Perry 2020
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","WI1","WI2","WI3","WI4","WI5","WI6")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"OH_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createSC_2016_President <- function(){
             #input_dir <- "input/"
             #data_dir  <- "data/"
@@ -3513,6 +3550,15 @@ shinyServer(
                     else if (races[i] == "NC_2020_Governor"){
                         createNC_2020_Governor()
                     }
+                    else if (races[i] == "OH_2018_Governor"){
+                        createOH_2018_Governor()
+                    }
+                    else if (races[i] == "OH_2018_Senate"){
+                        createOH_2018_Senate()
+                    }
+                    else if (races[i] == "OH_2020_President"){
+                        createOH_2020_President()
+                    }
                     else if (races[i] == "SC_2016_President"){
                         createSC_2016_President()
                     }
@@ -3937,6 +3983,9 @@ shinyServer(
             }
             else if (input$state2 == "NC"){
                 files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
+            }
+            else if (input$state2 == "OH"){
+                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate")
             }
             else if (input$state2 == "SC"){
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
