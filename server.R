@@ -1513,6 +1513,50 @@ shinyServer(
             write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2020_House.csv"))
             write_delim(xx, paste0(data_dir,"ME_2020_House.csv"), append = TRUE, col_names = TRUE)
         }
+        createMN_2018_Senate <- function(){
+            catmsg("##### START createMN_2018_Senate #####")
+            xx <- read_excel(paste0(input_dir,"MN/2018/","2018-general-federal-state-results-by-precinct-official.xlsx"),
+                             sheet = "Precinct-Results", skip = 0)
+            xx <- xx[,c(5,2,30,26,25,27:29)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Klobuchar","Newberger","Schuller","Overby","Writein")
+            xx <- xx[xx$COUNTY != "No Data",]
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LMN","GRN","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"MN_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"MN_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createMN_2018_Senate2 <- function(){
+            catmsg("##### START createMN_2018_Senate #####")
+            xx <- read_excel(paste0(input_dir,"MN/2018/","2018-general-federal-state-results-by-precinct-official.xlsx"),
+                             sheet = "Precinct-Results", skip = 0)
+            xx <- xx[,c(5,2,36,32,31,33:35)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Smith","Housley","Wellington","Trooien","Writein")
+            xx <- xx[xx$COUNTY != "No Data",]
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LMN","IND","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"MN_2018_Senate2.csv"))
+            write_delim(xx, paste0(data_dir,"MN_2018_Senate2.csv"), append = TRUE, col_names = TRUE)
+        }
+        createMN_2020_President <- function(){
+            catmsg("##### START createMN_2020_President #####")
+            xx <- read_excel(paste0(input_dir,"MN/2020/","2020-general-federal-state-results-by-precinct-official.xlsx"),
+                             sheet = "Precinct-Results", skip = 0)
+            xx <- xx[,c(5,2,37,28,27,35,30,29,31:34,36)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","DeLaFuente","West","Pierce","Riva","Kennedy","Writein")
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","IA","IND1","IND2","SAL","SWP","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"MN_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"MN_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createMN_2020_Senate <- function(){
+            catmsg("##### START createMN_2020_Senate #####")
+            xx <- read_excel(paste0(input_dir,"MN/2020/","2020-general-federal-state-results-by-precinct-official.xlsx"),
+                             sheet = "Precinct-Results", skip = 0)
+            xx <- xx[,c(5,2,43,41,40,38,39,42)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Smith","Lewis","OConnor","Steinberg","Writein")
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LMN","GLC","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"MN_2020_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"MN_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createMT_2018_Senate <- function(){
             xx <- read_excel(paste0(input_dir,"MT/2018/2018-GeneralPrecinct-by-Precinct_Votes.xlsx"), sheet = "Sheet1", skip = 6)
             office <- "UNITED STATES SENATOR" #UPDATE
@@ -3541,6 +3585,18 @@ shinyServer(
                     else if (races[i] == "ME_2020_House"){
                         createME_2020_House()
                     }
+                    else if (races[i] == "MN_2018_Senate"){
+                        createMN_2018_Senate()
+                    }
+                    else if (races[i] == "MN_2018_Senate2"){
+                        createMN_2018_Senate2()
+                    }
+                    else if (races[i] == "MN_2020_President"){
+                        createMN_2020_President()
+                    }
+                    else if (races[i] == "MN_2020_Senate"){
+                        createMN_2020_Senate()
+                    }
                     else if (races[i] == "MT_2018_Senate"){
                         createMT_2018_Senate()
                     }
@@ -3992,6 +4048,9 @@ shinyServer(
             }
             else if (input$state2 == "ME"){
                 files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House","ME_2018_Governor","ME_2018_Senate","ME_2014_Senate")
+            }
+            else if (input$state2 == "MN"){
+                files <- c("MN_2020_President","MN_2020_Senate","MN_2018_Senate","MN_2018_Senate2")
             }
             else if (input$state2 == "MT"){
                 files <- c("MT_2020_President","MT_2020_Senate","MT_2018_Senate")
