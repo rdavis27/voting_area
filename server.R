@@ -2055,6 +2055,21 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"OH_2020_President.csv"), append = TRUE, col_names = TRUE)
         }
+        createOH_2020_Registered <- function(){
+            catmsg("##### START createOH_2020_Registered #####")
+            xx <- read_excel(paste0(input_dir,"OH/2020/","statewideresultsbyprecinct.xlsx"),
+                             sheet = "President and Vice President", skip = 3)
+            xx <- xx[,c(1,2,6,6,6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","DemReg","RepReg")
+            xx$DemReg <- xx$DemReg - 1
+            xx$RepReg <- 1
+            xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+            #xx$AREA <- gsub("^[0-9]+","",xx$AREA) #limit to Perry 2020
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2020_Registered.csv"))
+            write_delim(xx, paste0(data_dir,"OH_2020_Registered.csv"), append = TRUE, col_names = TRUE)
+        }
         createSC_2016_President <- function(){
             #input_dir <- "input/"
             #data_dir  <- "data/"
@@ -2552,8 +2567,14 @@ shinyServer(
                 tloc <- paste0("District ",input$dist,", ",tloc)
             }
             tloc <- paste0(tloc,":")
-            tshift <- "Shift"
-            tshiftin <- "Shift in"
+            if (input$units == "Percent ratio"){
+                tshiftfor <- "Percent of"
+                tshiftin <- "Percent of"
+            }
+            else{
+                tshiftfor <- "Shift for"
+                tshiftin <- "Shift in"
+            }
             if (input$units == "Percent"){
                 tunits <- "Vote Share"
             }
@@ -2582,12 +2603,23 @@ shinyServer(
             racex <- input$races[1]
             racey <- input$races[2]
             if (input$xdxplot2){
-                if (xtype >= 2){
-                    title <- paste(tloc,tshiftin, input$party, tunits)
+                if (input$units == "Percent ratio"){
+                    if (xtype >= 2){
+                        title <- paste(tloc,"Voter Turnout")
+                    }
+                    else{
+                        title <- paste(tloc,"Voter Turnout by", input$party,
+                                       "Vote", tnote)
+                    }
                 }
                 else{
-                    title <- paste(tloc,tshiftin, input$party, tunits, "from",
-                                   racex, "to", racey, tnote)
+                    if (xtype >= 2){
+                        title <- paste(tloc,tshiftin, input$party, tunits)
+                    }
+                    else{
+                        title <- paste(tloc,tshiftin, input$party, tunits, "from",
+                                       racex, "to", racey, tnote)
+                    }
                 }
             }
             else{
@@ -2604,7 +2636,7 @@ shinyServer(
             else{
                 if (input$xdxplot2){
                     if (xtype >= 2){
-                        ylabel <- paste(tshift, "for", racey)
+                        ylabel <- paste(tshiftfor, racey)
                     }
                     else{
                         ylabel <- paste(tshiftin, input$party, tunits, "for", racey)
@@ -2886,7 +2918,7 @@ shinyServer(
             }
             gg <- gg + geom_point(data=xx, alpha=as.numeric(input$xalpha2),
                                   aes_string(color="Party",size="Votes"))
-            if (input$party == "Margin"){
+            if (input$party == "Margin" & input$units != "Percent ratio"){
                 if (input$xdxplot2){
                     gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
                 }
@@ -3630,6 +3662,9 @@ shinyServer(
                     else if (races[i] == "OH_2020_President"){
                         createOH_2020_President()
                     }
+                    else if (races[i] == "OH_2020_Registered"){
+                        createOH_2020_Registered()
+                    }
                     else if (races[i] == "SC_2016_President"){
                         createSC_2016_President()
                     }
@@ -3905,8 +3940,17 @@ shinyServer(
             else if (input$units == "Percent ratio"){
                 dd$DEM_SH <- 100 * dd$DEM1 / dd$DEM2
                 dd$REP_SH <- 100 * dd$REP1 / dd$REP2
-                dd$MAR_SH <- 100 * dd$MARGIN1 / dd$MARGIN2
+                dd$MAR_SH <- 100 * dd$TOTAL1 / dd$TOTAL2
                 dd$TOT_SH <- 100 * dd$TOTAL1 / dd$TOTAL2
+                #assume percent for x-axis
+                dd$DEM1 <- 100 * dd$DEM1 / dd$TOTAL1
+                dd$REP1 <- 100 * dd$REP1 / dd$TOTAL1
+                dd$MARGIN1 <- 100 * dd$MARGIN1 / dd$TOTAL1
+                # dd$DEM2 <- 100 * dd$DEM2 / dd$TOTAL2
+                # dd$REP2 <- 100 * dd$REP2 / dd$TOTAL2
+                # dd$MARGIN2 <- 100 * dd$MARGIN2 / dd$TOTAL2
+                dd$TOTAL1 <- dd$DEM1 + dd$REP1
+                # dd$TOTAL2 <- dd$DEM2 + dd$REP2
             }
             names(dd)[3:4] <- namesxx[4:5] # reset names
             names(dd)[7:8] <- namesyy[4:5]
@@ -4059,7 +4103,7 @@ shinyServer(
                 files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
             }
             else if (input$state2 == "OH"){
-                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President")
+                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2020_Registered")
             }
             else if (input$state2 == "SC"){
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
