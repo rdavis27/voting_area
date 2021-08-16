@@ -368,6 +368,177 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
             write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
         }
+        createCO_2020_President <- function(){
+            xx <- read_excel(paste0(input_dir,"CO/2020/2020GEPrecinctLevelResultsPosted.xlsx"),
+                             sheet = "Sheet1", skip = 0)
+            names(xx) <- c("State","Year","ElectionType","COUNTY","AREA",
+                           "Office","Name","Party","Votes","YesVotes","NoVotes")
+            office <- "President/Vice President" #UPDATE
+            xx <- xx[xx$Office == office,]
+            xx <- xx[,c("COUNTY","AREA","Name","Party","Votes")]
+            xx$Name <- gsub("De La Fuente","DeLaFuente",xx$Name)
+            xx$Name <- gsub("Jacob-Fambro","JacobFambro",xx$Name)
+            xx$Name <- gsub("La Riva","LaRiva",xx$Name)
+            xx1 <<- xx #DEBUG-RM
+            # lapply(xx$Name, function(x){
+            #     name1 <- trimws(head(strsplit(x,split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
+            #     tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
+            # })
+            xx1b <<- xx #DEBUG-RM
+            for (j in 1:NROW(xx)){
+                #name1 <- trimws(head(strsplit(xx$Name[j],split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
+                #xx$Name[j] <- tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
+                if (grepl("^Democratic", xx$Party[j])){
+                    xx$Name[j] <- "DEM_Biden"
+                }
+                else if (grepl("^Republican", xx$Party[j])){
+                    xx$Name[j] <- "REP_Trump"
+                }
+                else if (grepl("^Libertarian", xx$Party[j])){
+                    xx$Name[j] <- "LIB_Jorgensen"
+                }
+                else if (grepl("^Green", xx$Party[j])){
+                    xx$Name[j] <- "GRN_Hawkins"
+                }
+                else{
+                    xx$Name[j] <- paste0("IND_Other")
+                }
+            }
+            xx1c <<- xx #DEBUG-RM
+            xx <- xx[,-4] # delete Party
+            xx1d <<- xx #DEBUG-RM
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Name) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Name,Votes)
+            xx$TOTAL <- 0
+            xx2 <<- xx #DEBUG-RM
+            
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            if ("LIB" %in% partyxx){
+                ilib <- which(partyxx == "LIB")
+                ii <- c(ii, ilib)
+            }
+            if ("GRN" %in% partyxx){
+                igrn <- which(partyxx == "GRN")
+                ii <- c(ii, igrn)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep & j != ilib & j != igrn){
+                    ii <- c(ii, j)
+                }
+            }
+            xx <- xx[,ii]
+            xx3 <<- xx #DEBUG-RM
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CO_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"CO_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createCO_2018_Governor <- function(){
+            xx <- read_excel(paste0(input_dir,"CO/2018/2018GEPrecinctLevelResults.xlsx"),
+                             sheet = "Sheet1", skip = 0)
+            names(xx) <- c("State","Year","ElectionType","COUNTY","AREA",
+                           "Office","Name","Party","Votes","YesVotes","NoVotes")
+            office <- "Governor" #UPDATE
+            xx <- xx[xx$Office == office,]
+            xx <- xx[,c("COUNTY","AREA","Name","Party","Votes")]
+            xx$Name <- gsub("De La Fuente","DeLaFuente",xx$Name)
+            xx$Name <- gsub("Jacob-Fambro","JacobFambro",xx$Name)
+            xx$Name <- gsub("La Riva","LaRiva",xx$Name)
+            xx1 <<- xx #DEBUG-RM
+            # lapply(xx$Name, function(x){
+            #     name1 <- trimws(head(strsplit(x,split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
+            #     tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
+            # })
+            xx1b <<- xx #DEBUG-RM
+            for (j in 1:NROW(xx)){
+                #name1 <- trimws(head(strsplit(xx$Name[j],split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
+                #xx$Name[j] <- tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
+                if (grepl("^Democratic", xx$Party[j])){
+                    xx$Name[j] <- "DEM_Polis"
+                }
+                else if (grepl("^Republican", xx$Party[j])){
+                    xx$Name[j] <- "REP_Stapleton"
+                }
+                else if (grepl("^Libertarian", xx$Party[j])){
+                    xx$Name[j] <- "LIB_Helker"
+                }
+                else if (grepl("^Unity Party", xx$Party[j])){ #Unity Party of Colorado
+                    xx$Name[j] <- "UPC_Hammons"
+                }
+                else{
+                    xx$Name[j] <- paste0("IND_Other")
+                }
+            }
+            xx1c <<- xx #DEBUG-RM
+            xx <- xx[,-4] # delete Party
+            xx1d <<- xx #DEBUG-RM
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Name) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Name,Votes)
+            xx$TOTAL <- 0
+            xx2 <<- xx #DEBUG-RM
+            
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            if ("LIB" %in% partyxx){
+                ilib <- which(partyxx == "LIB")
+                ii <- c(ii, ilib)
+            }
+            if ("UPC" %in% partyxx){
+                iupc <- which(partyxx == "UPC")
+                ii <- c(ii, iupc)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep & j != ilib & j != iupc){
+                    ii <- c(ii, j)
+                }
+            }
+            xx <- xx[,ii]
+            xx3 <<- xx #DEBUG-RM
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CO_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"CO_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        
         createFL_2020_County_Codes <- function(){
             files <- list.files(paste0(input_dir,"FL/2020-general-election-rev/"),
                                 "*_PctResults20201103.txt")
@@ -3539,6 +3710,12 @@ shinyServer(
                     else if (races[i] == "AZ_2020_Senate_Prov"){
                         createAZ_2020_Senate("Provisional Ballots")
                     }
+                    else if (races[i] == "CO_2018_Governor"){
+                        createCO_2018_Governor()
+                    }
+                    else if (races[i] == "CO_2020_President"){
+                        createCO_2020_President()
+                    }
                     else if (races[i] == "FL_2016_President"){
                         createFL_2016_President()
                     }
@@ -4083,6 +4260,9 @@ shinyServer(
                 files <- c("AZ_2020_President","AZ_2020_President_Early","AZ_2020_President_Polls","AZ_2020_President_Prov",
                            "AZ_2020_Senate","AZ_2020_Senate_Early","AZ_2020_Senate_Polls","AZ_2020_Senate_Prov",
                            "AZ_2018_Senate")
+            }
+            else if (input$state2 == "CO"){
+                files <- c("CO_2020_President","CO_2018_Governor")
             }
             else if (input$state2 == "FL"){
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_Registered","FL_2016_President")
