@@ -379,12 +379,6 @@ shinyServer(
             xx$Name <- gsub("De La Fuente","DeLaFuente",xx$Name)
             xx$Name <- gsub("Jacob-Fambro","JacobFambro",xx$Name)
             xx$Name <- gsub("La Riva","LaRiva",xx$Name)
-            xx1 <<- xx #DEBUG-RM
-            # lapply(xx$Name, function(x){
-            #     name1 <- trimws(head(strsplit(x,split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
-            #     tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
-            # })
-            xx1b <<- xx #DEBUG-RM
             for (j in 1:NROW(xx)){
                 #name1 <- trimws(head(strsplit(xx$Name[j],split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
                 #xx$Name[j] <- tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
@@ -404,17 +398,14 @@ shinyServer(
                     xx$Name[j] <- paste0("IND_Other")
                 }
             }
-            xx1c <<- xx #DEBUG-RM
             xx <- xx[,-4] # delete Party
-            xx1d <<- xx #DEBUG-RM
             # check for matches first???
             xx <- xx %>%
                 group_by(COUNTY,AREA,Name) %>%
                 summarize(Votes=sum(Votes))
             xx <- xx %>% spread(Name,Votes)
             xx$TOTAL <- 0
-            xx2 <<- xx #DEBUG-RM
-            
+
             namesxx <- names(xx)
             partyxx <- namesxx
             for (j in 3:(NCOL(xx)-1)){
@@ -446,12 +437,25 @@ shinyServer(
                 }
             }
             xx <- xx[,ii]
-            xx3 <<- xx #DEBUG-RM
             namesxx <- namesxx[ii]
             partyxx <- partyxx[ii]
             names(xx) <- namesxx
             write(paste(partyxx, collapse = " "), paste0(data_dir,"CO_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"CO_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createCO_2020_Registered <- function(){
+            xx <- read_excel(paste0(input_dir,"CO/2020/2020GEPrecinctLevelTurnoutPosted.xlsx"),
+                             sheet = "Sheet1", skip = 0)
+            names(xx) <- c("State","Year","ElectionType","COUNTY","AREA",
+                           "Active","Inactive","Voters","Ballots","Turnout")
+            xx <- xx[,c("COUNTY","AREA","Voters","Active","Inactive")]
+            names(xx) <- c("COUNTY","AREA","TOTAL","DemReg","RepReg")
+            xx$COUNTY <- str_to_title(xx$COUNTY)
+            xx$DemReg <- xx$TOTAL - 1
+            xx$RepReg <- 1
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CO_2020_Registered.csv"))
+            write_delim(xx, paste0(data_dir,"CO_2020_Registered.csv"), append = TRUE, col_names = TRUE)
         }
         createCO_2018_Governor <- function(){
             xx <- read_excel(paste0(input_dir,"CO/2018/2018GEPrecinctLevelResults.xlsx"),
@@ -464,12 +468,6 @@ shinyServer(
             xx$Name <- gsub("De La Fuente","DeLaFuente",xx$Name)
             xx$Name <- gsub("Jacob-Fambro","JacobFambro",xx$Name)
             xx$Name <- gsub("La Riva","LaRiva",xx$Name)
-            xx1 <<- xx #DEBUG-RM
-            # lapply(xx$Name, function(x){
-            #     name1 <- trimws(head(strsplit(x,split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
-            #     tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
-            # })
-            xx1b <<- xx #DEBUG-RM
             for (j in 1:NROW(xx)){
                 #name1 <- trimws(head(strsplit(xx$Name[j],split="/")[[1]],1)) #Joseph R. Biden / Kamala D. Harris
                 #xx$Name[j] <- tail(strsplit(name1,split=" ")[[length(name1)]],1) #use last name
@@ -489,17 +487,14 @@ shinyServer(
                     xx$Name[j] <- paste0("IND_Other")
                 }
             }
-            xx1c <<- xx #DEBUG-RM
             xx <- xx[,-4] # delete Party
-            xx1d <<- xx #DEBUG-RM
             # check for matches first???
             xx <- xx %>%
                 group_by(COUNTY,AREA,Name) %>%
                 summarize(Votes=sum(Votes))
             xx <- xx %>% spread(Name,Votes)
             xx$TOTAL <- 0
-            xx2 <<- xx #DEBUG-RM
-            
+
             namesxx <- names(xx)
             partyxx <- namesxx
             for (j in 3:(NCOL(xx)-1)){
@@ -531,7 +526,6 @@ shinyServer(
                 }
             }
             xx <- xx[,ii]
-            xx3 <<- xx #DEBUG-RM
             namesxx <- namesxx[ii]
             partyxx <- partyxx[ii]
             names(xx) <- namesxx
@@ -3716,6 +3710,9 @@ shinyServer(
                     else if (races[i] == "CO_2020_President"){
                         createCO_2020_President()
                     }
+                    else if (races[i] == "CO_2020_Registered"){
+                        createCO_2020_Registered()
+                    }
                     else if (races[i] == "FL_2016_President"){
                         createFL_2016_President()
                     }
@@ -4262,7 +4259,7 @@ shinyServer(
                            "AZ_2018_Senate")
             }
             else if (input$state2 == "CO"){
-                files <- c("CO_2020_President","CO_2018_Governor")
+                files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
             }
             else if (input$state2 == "FL"){
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_Registered","FL_2016_President")
