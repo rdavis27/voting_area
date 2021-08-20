@@ -368,6 +368,88 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
             write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
         }
+        createCA_2018_Governor <- function(){
+            catmsg("##### START createCA_2018_Governor #####")
+            cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
+            xx <- read_delim(paste0(input_dir,"CA/2018/",
+                                    "state_g18_sov_data_by_g18_svprec.csv"),',')
+            xx <- xx[,c(1,4,19,48,49)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Newsom","Cox")
+            xx <- xx[!grepl("_TOT$", xx$AREA),]
+            xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
+            xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx <- xx %>%
+                group_by(COUNTY,AREA) %>%
+                summarize(TOTAL=sum(TOTAL),
+                          Newsom=sum(Newsom),
+                          Cox=sum(Cox))            
+            xx$COUNTY <- cc$county_name[xx$COUNTY]
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createCA_2018_Governor2 <- function(){
+            catmsg("##### START createCA_2018_Governor2 #####")
+            cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
+            xx <- read_delim(paste0(input_dir,"CA/2018/",
+                                    "state_g18_sov_data_by_g18_svprec.csv"),',')
+            xx <- xx[,c(1,4,19,48,49)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Newsom","Cox")
+            xx <- xx[!grepl("_TOT$", xx$AREA),]
+            xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
+            xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            xx$COUNTY <- cc$county_name[xx$COUNTY]
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2018_Governor2.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2018_Governor2.csv"), append = TRUE, col_names = TRUE)
+        }
+        createCA_2020_President <- function(){
+            catmsg("##### START createCA_2020_President #####")
+            cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
+            xx <- read_delim(paste0(input_dir,"CA/2020/",
+                                    "state_g20_sov_data_by_g20_svprec.csv"),',')
+            xx <- xx[,c(1,4,19,42,46,44,43,41,45)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","DeLaFuente","LaRiva")
+            xx <- xx[!grepl("_TOT$", xx$AREA),]
+            xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
+            xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx <- xx %>%
+                group_by(COUNTY,AREA) %>%
+                summarize(TOTAL=sum(TOTAL),
+                          Biden=sum(Biden),
+                          Trump=sum(Trump),
+                          Jorgensen=sum(Jorgensen),
+                          Hawkins=sum(Hawkins),
+                          DeLaFuente=sum(DeLaFuente),
+                          LaRiva=sum(LaRiva))            
+            xx$COUNTY <- cc$county_name[xx$COUNTY]
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","AIP","PAF")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createCA_2020_President2 <- function(){
+            catmsg("##### START createCA_2020_President2 #####")
+            cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
+            xx <- read_delim(paste0(input_dir,"CA/2020/",
+                                    "state_g20_sov_data_by_g20_svprec.csv"),',')
+            xx <- xx[,c(1,4,19,42,46,44,43,41,45)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","DeLaFuente","LaRiva")
+            xx <- xx[!grepl("_TOT$", xx$AREA),]
+            xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
+            xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            xx$COUNTY <- cc$county_name[xx$COUNTY]
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","AIP","PAF")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2020_President2.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2020_President2.csv"), append = TRUE, col_names = TRUE)
+        }
         createCO_2020_President <- function(){
             xx <- read_excel(paste0(input_dir,"CO/2020/2020GEPrecinctLevelResultsPosted.xlsx"),
                              sheet = "Sheet1", skip = 0)
@@ -3704,6 +3786,18 @@ shinyServer(
                     else if (races[i] == "AZ_2020_Senate_Prov"){
                         createAZ_2020_Senate("Provisional Ballots")
                     }
+                    else if (races[i] == "CA_2018_Governor"){
+                        createCA_2018_Governor()
+                    }
+                    else if (races[i] == "CA_2018_Governor2"){
+                        createCA_2018_Governor2()
+                    }
+                    else if (races[i] == "CA_2020_President"){
+                        createCA_2020_President()
+                    }
+                    else if (races[i] == "CA_2020_President2"){
+                        createCA_2020_President2()
+                    }
                     else if (races[i] == "CO_2018_Governor"){
                         createCO_2018_Governor()
                     }
@@ -3923,7 +4017,7 @@ shinyServer(
             tryCatch(
                 expr = {
                     xxparty <- read_delim(filenamex, ' ', col_names = FALSE, n_max = 1)
-                    xx0 <<- read_delim(filenamex, ' ', skip = 1) #make xx0 available after tryCatch
+                    xx0 <<- read_delim(filenamex, ' ', skip = 1, guess_max = 10000) #make xx0 available after tryCatch
                 },
                 error = function(e){
                     message('Caught an error!')
@@ -4048,6 +4142,9 @@ shinyServer(
             # else{
             #     dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
             # }
+            if (input$areafilter != ""){
+                dd <- dd[grepl(input$areafilter, dd$AREA),]
+            }
             if (input$areamod != ""){
                 ch1 <- substr(input$areamod,1,1)
                 pat <- substring(input$areamod,2)
@@ -4257,6 +4354,9 @@ shinyServer(
                 files <- c("AZ_2020_President","AZ_2020_President_Early","AZ_2020_President_Polls","AZ_2020_President_Prov",
                            "AZ_2020_Senate","AZ_2020_Senate_Early","AZ_2020_Senate_Polls","AZ_2020_Senate_Prov",
                            "AZ_2018_Senate")
+            }
+            else if (input$state2 == "CA"){
+                files <- c("CA_2020_President","CA_2020_President2","CA_2018_Governor","CA_2018_Governor2")
             }
             else if (input$state2 == "CO"){
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")

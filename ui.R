@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
     sidebarPanel(
         width = 2,
         selectInput("state2", "STATE",
-                    choices = c("AZ","CO","FL","IA","ME","MN","MT","NC","OH","SC","TX","WI"),
+                    choices = c("AZ","CA","CO","FL","IA","ME","MN","MT","NC","OH","SC","TX","WI"),
                     selected = "WI",
                     multiple = FALSE),
         selectInput("races", "RACE",
@@ -19,7 +19,10 @@ shinyUI(pageWithSidebar(
                     selected = "",
                     multiple = FALSE),
         #textInput("xarea", "AREA", value = ""),
-        textInput("areamod", "AREA modify", value = "#-.$"),
+        splitLayout(
+            textInput("areamod", "AREA modify", value = "#-.$"),
+            textInput("areafilter", "filter", value = "")
+        ),
         checkboxInput("showother","Show Other Areas",value = TRUE),
         splitLayout(
             numericInput("minvotes","Min Votes",30,min = 0),
