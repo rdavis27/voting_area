@@ -86,11 +86,11 @@ shinyUI(pageWithSidebar(
                     textInput("areaxscale", "X From,To,Step,Tick", value = ""),
                     textInput("areayscale", "Y From,To,Step,Tick", value = ""),
                     splitLayout(
-                        textInput("xlimit","Limit",value = "-9,-3,3,9"),
-                        textInput("xalpha","Alpha",value = "0.7")
+                        textInput("xlimit","Limit",value = "-5,5"),
+                        textInput("xalpha","Alpha",value = "0.3")
                     ),
-                    textInput("areaColor","Color",value = "red3,orange,green3,violet,blue3"),
-                    textInput("xparty","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
+                    textInput("areaColor","Color",value = "red3,green3,blue3"),
+                    textInput("xparty","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
                     checkboxInput("area_x0vote","Exclude 0 votes",value = TRUE),
                     splitLayout(
                         numericInput("areaWidth", "Plot Width", 800),
@@ -178,13 +178,13 @@ shinyUI(pageWithSidebar(
                          textInput("xscale2", "X From,To,Step,Tick", value = ""),
                          textInput("yscale2", "Y From,To,Step,Tick", value = ""),
                          splitLayout(
-                             textInput("xlimit2","Limit",value = "-9,-3,3,9"),
+                             textInput("xlimit2","Limit",value = "-5,5"),
                              textInput("xalpha2","Alpha",value = "0.7")
                          ),
-                         textInput("xcolor2","Color (points)",value = "red3,orange,green3,violet,blue3"),
-                         textInput("lcolor2","Color (labels)",value = "red3,orange,green3,violet,blue3"),
+                         textInput("xcolor2","Color (points)",value = "red3,green3,blue3"),
+                         textInput("lcolor2","Color (labels)",value = "red3,green3,blue3"),
                          textInput("ncolor2","Color (lines)",value = "black"),
-                         textInput("xparty2","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
+                         textInput("xparty2","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
                          textInput("vrange","Vote Point Range",value = "1,4"),
                          textInput("vtrans","Vote Transform",value = "#log10"),
                          textInput("vbreaks","Vote Breaks", value = ""),
@@ -225,13 +225,13 @@ shinyUI(pageWithSidebar(
                          textInput("xscale2b", "X From,To,Step,Tick", value = ""),
                          textInput("yscale2b", "Y From,To,Step,Tick", value = ""),
                          splitLayout(
-                             textInput("xlimit2b","Limit",value = "-9,-3,3,9"),
+                             textInput("xlimit2b","Limit",value = "-5,5"),
                              textInput("xalpha2b","Alpha",value = "0.7")
                          ),
                          textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
                          textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
                          textInput("ncolor2b","Color (lines)",value = "darkgray"),
-                         textInput("xparty2b","Party",value = "1_Solid R,2_Leans R,3_Toss-Up,4_Leans D,5_Solid D"),
+                         textInput("xparty2b","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
                          textInput("vlimitb","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
                          textInput("vshapeb","Vote Shape",value = "1,16,17,15"),
                          textInput("vrange2b","Vote Point Range",value = "1,4"),

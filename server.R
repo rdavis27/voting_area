@@ -378,34 +378,47 @@ shinyServer(
             xx <- xx[!grepl("_TOT$", xx$AREA),]
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
-            xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
-            xx <- xx %>%
-                group_by(COUNTY,AREA) %>%
-                summarize(TOTAL=sum(TOTAL),
-                          Newsom=sum(Newsom),
-                          Cox=sum(Cox))            
+            # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            # xx <- xx %>%
+            #     group_by(COUNTY,AREA) %>%
+            #     summarize(TOTAL=sum(TOTAL),
+            #               Newsom=sum(Newsom),
+            #               Cox=sum(Cox))            
             xx$COUNTY <- cc$county_name[xx$COUNTY]
             #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2018_Governor.csv"))
             write_delim(xx, paste0(data_dir,"CA_2018_Governor.csv"), append = TRUE, col_names = TRUE)
         }
-        createCA_2018_Governor2 <- function(){
-            catmsg("##### START createCA_2018_Governor2 #####")
+        createCA_2018_House <- function(){
+            catmsg("##### START createCA_2018_House #####")
             cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
             xx <- read_delim(paste0(input_dir,"CA/2018/",
                                     "state_g18_sov_data_by_g18_svprec.csv"),',')
-            xx <- xx[,c(1,4,19,48,49)]
-            names(xx) <- c("COUNTY","AREA","TOTAL","Newsom","Cox")
+            xx <- xx[,c("COUNTY","SVPREC","TOTVOTE","CNGDEM01","CNGREP01",
+                        "CNGDEM02","CNGREP02","CNGIND01","CNGGRN01")]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Dem","Rep",
+                           "Dem2","Rep2","Ind","Grn")
             xx <- xx[!grepl("_TOT$", xx$AREA),]
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            # xx <- xx %>%
+            #     group_by(COUNTY,AREA) %>%
+            #     summarize(TOTAL=sum(TOTAL),
+            #               Dem=sum(Dem),
+            #               Rep=sum(Rep),
+            #               Dem2=sum(Dem2),
+            #               Rep2=sum(Rep2),
+            #               Ind=sum(Ind),
+            #               Grn=sum(Grn))            
             xx$COUNTY <- cc$county_name[xx$COUNTY]
             #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
-            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2018_Governor2.csv"))
-            write_delim(xx, paste0(data_dir,"CA_2018_Governor2.csv"), append = TRUE, col_names = TRUE)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","DEM2","REP2","IND","GRN")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2018_House.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2018_House.csv"), append = TRUE, col_names = TRUE)
         }
         createCA_2020_President <- function(){
             catmsg("##### START createCA_2020_President #####")
@@ -417,38 +430,47 @@ shinyServer(
             xx <- xx[!grepl("_TOT$", xx$AREA),]
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
-            xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
-            xx <- xx %>%
-                group_by(COUNTY,AREA) %>%
-                summarize(TOTAL=sum(TOTAL),
-                          Biden=sum(Biden),
-                          Trump=sum(Trump),
-                          Jorgensen=sum(Jorgensen),
-                          Hawkins=sum(Hawkins),
-                          DeLaFuente=sum(DeLaFuente),
-                          LaRiva=sum(LaRiva))            
+            # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            # xx <- xx %>%
+            #     group_by(COUNTY,AREA) %>%
+            #     summarize(TOTAL=sum(TOTAL),
+            #               Biden=sum(Biden),
+            #               Trump=sum(Trump),
+            #               Jorgensen=sum(Jorgensen),
+            #               Hawkins=sum(Hawkins),
+            #               DeLaFuente=sum(DeLaFuente),
+            #               LaRiva=sum(LaRiva))            
             xx$COUNTY <- cc$county_name[xx$COUNTY]
             #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","AIP","PAF")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"CA_2020_President.csv"), append = TRUE, col_names = TRUE)
         }
-        createCA_2020_President2 <- function(){
-            catmsg("##### START createCA_2020_President2 #####")
+        createCA_2020_House <- function(){
+            catmsg("##### START createCA_2020_House #####")
             cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
             xx <- read_delim(paste0(input_dir,"CA/2020/",
                                     "state_g20_sov_data_by_g20_svprec.csv"),',')
-            xx <- xx[,c(1,4,19,42,46,44,43,41,45)]
-            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","DeLaFuente","LaRiva")
+            xx <- xx[,c("COUNTY","SVPREC","TOTVOTE",
+                        "CNGDEM01","CNGREP01","CNGDEM02")]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Dem","Rep","Dem2")
             xx <- xx[!grepl("_TOT$", xx$AREA),]
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            # xx <- xx %>%
+            #     group_by(COUNTY,AREA) %>%
+            #     summarize(TOTAL=sum(TOTAL),
+            #               Dem=sum(Dem),
+            #               Rep=sum(Rep),
+            #               Dem2=sum(Dem2))            
             xx$COUNTY <- cc$county_name[xx$COUNTY]
             #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
-            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","AIP","PAF")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2020_President2.csv"))
-            write_delim(xx, paste0(data_dir,"CA_2020_President2.csv"), append = TRUE, col_names = TRUE)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","DEM2")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2020_House.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2020_House.csv"), append = TRUE, col_names = TRUE)
         }
         createCO_2020_President <- function(){
             xx <- read_excel(paste0(input_dir,"CO/2020/2020GEPrecinctLevelResultsPosted.xlsx"),
@@ -2808,12 +2830,19 @@ shinyServer(
                 tloc <- "U.S."
             }
             if (xcounty != "" & xcounty != "(all)"){
-                tloc <- paste0(xcounty," County, ",tloc)
+                if (substring(xcounty,1,1) == "-"){
+                    tloc <- substring(xcounty,2)
+                }
+                else{
+                    tloc <- paste0(xcounty," County, ",tloc)
+                }
             }
             if (input$dist != ""){
                 tloc <- paste0("District ",input$dist,", ",tloc)
             }
-            tloc <- paste0(tloc,":")
+            if (tloc != ""){
+                tloc <- paste0(tloc,":")
+            }
             if (input$units == "Percent ratio"){
                 tshiftfor <- "Percent of"
                 tshiftin <- "Percent of"
@@ -3335,8 +3364,11 @@ shinyServer(
             pp <- NULL
             for (i in 1:nn) pp[[i]] <- ggplot() + theme_void()
             for (i in 1:imx) pp[[i]] <- doAreaPlot2(xx, cc[(ist+i-1),"COUNTY"], 2)
-            plot_grid(plotlist = pp, ncol = input$aplot2_cols)
-        }, height = 600, width = 1000)
+            pp <- plot_grid(plotlist = pp, ncol = input$aplot2_cols)
+            labels <- getlabels("plot", "-", 1)
+            title <- ggdraw() + draw_label(labels[1], fontface='bold')
+            plot_grid(title, pp, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
+        }, height = 660, width = 1000)
         output$areaPlot2b <- renderPlot({
             xx <- getdata12()
             # Move filtering to after getdata12()
@@ -3789,17 +3821,17 @@ shinyServer(
                     else if (races[i] == "CA_2018_Governor"){
                         createCA_2018_Governor()
                     }
-                    else if (races[i] == "CA_2018_Governor2"){
-                        createCA_2018_Governor2()
-                    }
                     else if (races[i] == "CA_2020_President"){
                         createCA_2020_President()
                     }
-                    else if (races[i] == "CA_2020_President2"){
-                        createCA_2020_President2()
+                    else if (races[i] == "CA_2020_House"){
+                        createCA_2020_House()
                     }
                     else if (races[i] == "CO_2018_Governor"){
                         createCO_2018_Governor()
+                    }
+                    else if (races[i] == "CA_2018_House"){
+                        createCA_2018_House()
                     }
                     else if (races[i] == "CO_2020_President"){
                         createCO_2020_President()
@@ -4356,7 +4388,7 @@ shinyServer(
                            "AZ_2018_Senate")
             }
             else if (input$state2 == "CA"){
-                files <- c("CA_2020_President","CA_2020_President2","CA_2018_Governor","CA_2018_Governor2")
+                files <- c("CA_2020_President","CA_2020_House","CA_2018_Governor","CA_2018_House")
             }
             else if (input$state2 == "CO"){
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
