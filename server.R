@@ -379,7 +379,7 @@ shinyServer(
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
             # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
             # xx <- xx %>%
             #     group_by(COUNTY,AREA) %>%
             #     summarize(TOTAL=sum(TOTAL),
@@ -404,7 +404,7 @@ shinyServer(
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
             # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
             # xx <- xx %>%
             #     group_by(COUNTY,AREA) %>%
             #     summarize(TOTAL=sum(TOTAL),
@@ -431,7 +431,7 @@ shinyServer(
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
             # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
             # xx <- xx %>%
             #     group_by(COUNTY,AREA) %>%
             #     summarize(TOTAL=sum(TOTAL),
@@ -459,7 +459,7 @@ shinyServer(
             xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
             xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
             # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
-            # xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
             # xx <- xx %>%
             #     group_by(COUNTY,AREA) %>%
             #     summarize(TOTAL=sum(TOTAL),
@@ -3124,6 +3124,7 @@ shinyServer(
         #})
         }, height = 600, width = 1000)
         doAreaPlot2 <- function(xx, xcounty, xtype){
+            zzxx <<- xx #DEBUG-RM
             if (xcounty != "" & xcounty != "(all)"){
                 xx <- xx[xx$COUNTY == xcounty,]
             }
@@ -3131,7 +3132,7 @@ shinyServer(
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
             if (!input$displaytotal){
-                xx <- xx[xx$AREA != "TOTAL",]
+                xx <- xx[xx$AREA != "COUNTY",]
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
@@ -3205,10 +3206,12 @@ shinyServer(
             if (input$party == "Margin" | input$units == "Count"){
                 gg <- gg + geom_vline(xintercept=0, color=input$ncolor2)
             }
-            if (input$party == "Margin" &
-                    min(xx$MAR_SH, na.rm = TRUE) <= 0 &
-                    max(xx$MAR_SH, na.rm = TRUE) >= 0){
-                gg <- gg + geom_hline(yintercept=0, color=input$ncolor2)
+            if (input$party == "Margin"){
+                if (NROW(xx) == 1 |
+                    (min(xx$MAR_SH, na.rm = TRUE) <= 0 &
+                     max(xx$MAR_SH, na.rm = TRUE) >= 0)){
+                    gg <- gg + geom_hline(yintercept=0, color=input$ncolor2)
+                }
             }
             vcolor <- unlist(strsplit(input$xcolor2, ","))
             vcolor <- vcolor[isParty]
@@ -4117,6 +4120,57 @@ shinyServer(
             dd <- rbind(dd,ddtot)
             return(dd)
         }
+        modarea <- function(dd){
+            # Move area modification to function called by getdata() & getdata2()
+            # if (input$xcounty != "" & input$xcounty != "(all)"){
+            #     dd <- dd[dd$COUNTY == input$xcounty,]
+            # }
+            # else{
+            #     dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
+            # }
+            if (input$areamod != ""){
+                dogroup <- FALSE
+                for (i in 1:nchar(input$areamod)){
+                    ch1 <- substr(input$areamod,i,i)
+                    if (ch1 == "*"){
+                        if (input$state2 == "CA"){
+                            dd$AREA <- gsub("^[0]+","",dd$AREA)
+                        }
+                    }
+                    else if (ch1 == ">"){
+                        if (input$state2 == "CA"){
+                            dogroup <- TRUE
+                            dd$AREA <- gsub("[A-Z]+$","",dd$AREA)
+                        }
+                        else if (input$state2 == "FL"){
+                            dogroup <- TRUE
+                            dd$AREA[dd$COUNTY == "Miami-Dade"] <-
+                                gsub(".$","",dd$AREA[dd$COUNTY == "Miami-Dade"])
+                        }
+                    }
+                    else if (ch1 == "="){
+                        dogroup <- TRUE
+                        dd$AREA <- "TOTAL"
+                    }
+                    else if (ch1 == "-"){
+                        dogroup <- TRUE
+                        pat <- substring(input$areamod,i+1)
+                        dd$AREA <- gsub(pat,"",dd$AREA)
+                        break
+                    }
+                    else if (ch1 == "#"){
+                        break
+                    }
+                }
+                if (dogroup){
+                    dd <- dd %>%
+                        group_by(COUNTY,AREA) %>%
+                        summarize(across(where(is.numeric), sum))
+                    dd <- as.data.frame(dd)
+                }
+            }
+            dd
+        }
         getdata <- reactive({
             races <- input$races
             nraces <- length(races)
@@ -4124,6 +4178,8 @@ shinyServer(
             if (nraces >= 1){
                 dd <- getrace(races[1])
             }
+            dd <- modarea(dd)
+            #zzdd1 <<- dd #DEBUG-RM
             dd
         })
         getdata2 <- reactive({
@@ -4133,6 +4189,8 @@ shinyServer(
             if (nraces >= 2){
                 dd <- getrace(races[2])
                 }
+            dd <- modarea(dd)
+            #zzdd2 <<- dd #DEBUG-RM
             dd
         })
         getdata12 <- reactive({
@@ -4167,34 +4225,6 @@ shinyServer(
                 yy$AREA <- gsub(" WARDS "," WARD ",yy$AREA)
             }
             dd <- as.data.frame(merge(xx, yy, by = c("COUNTY","AREA"), all = TRUE))
-            # Move filtering to after getdata12()
-            # if (input$xcounty != "" & input$xcounty != "(all)"){
-            #     dd <- dd[dd$COUNTY == input$xcounty,]
-            # }
-            # else{
-            #     dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
-            # }
-            if (input$areafilter != ""){
-                dd <- dd[grepl(input$areafilter, dd$AREA),]
-            }
-            if (input$areamod != ""){
-                ch1 <- substr(input$areamod,1,1)
-                pat <- substring(input$areamod,2)
-                if (ch1 == "-"){
-                    dd$AREA <- gsub(pat,"",dd$AREA)
-                    dd <- dd %>%
-                        group_by(COUNTY,AREA) %>%
-                        summarize(DEM1=sum(DEM1, na.rm = TRUE),
-                                  REP1=sum(REP1, na.rm = TRUE),
-                                  MARGIN1=sum(MARGIN1, na.rm = TRUE),
-                                  TOTAL1=sum(TOTAL1, na.rm = TRUE),
-                                  DEM2=sum(DEM2, na.rm = TRUE),
-                                  REP2=sum(REP2, na.rm = TRUE),
-                                  MARGIN2=sum(MARGIN2, na.rm = TRUE),
-                                  TOTAL2=sum(TOTAL2, na.rm = TRUE))
-                    dd <- as.data.frame(dd)
-                }
-            }
             if (input$showother){
                 ee <- dd[is.na(dd$MARGIN1) | is.na(dd$MARGIN2),]
                 if (NROW(ee) > 0){
@@ -4213,6 +4243,9 @@ shinyServer(
                     ee <- as.data.frame(ee)
                     dd <- rbind(dd, ee)
                 }
+            }
+            if (input$areafilter != ""){
+                dd <- dd[grepl(input$areafilter, dd$AREA),]
             }
             dd$DEM_SH <- dd$DEM2 - dd$DEM1
             dd$REP_SH <- dd$REP2 - dd$REP1

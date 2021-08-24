@@ -20,7 +20,7 @@ shinyUI(pageWithSidebar(
                     multiple = FALSE),
         #textInput("xarea", "AREA", value = ""),
         splitLayout(
-            textInput("areamod", "AREA modify", value = "#-.$"),
+            textInput("areamod", "AREA modify", value = "#=TOTAL>MERGE"),
             textInput("areafilter", "filter", value = "")
         ),
         checkboxInput("showother","Show Other Areas",value = TRUE),
@@ -87,7 +87,7 @@ shinyUI(pageWithSidebar(
                     textInput("areayscale", "Y From,To,Step,Tick", value = ""),
                     splitLayout(
                         textInput("xlimit","Limit",value = "-5,5"),
-                        textInput("xalpha","Alpha",value = "0.3")
+                        textInput("xalpha","Alpha",value = "0.5")
                     ),
                     textInput("areaColor","Color",value = "red3,green3,blue3"),
                     textInput("xparty","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
@@ -179,7 +179,7 @@ shinyUI(pageWithSidebar(
                          textInput("yscale2", "Y From,To,Step,Tick", value = ""),
                          splitLayout(
                              textInput("xlimit2","Limit",value = "-5,5"),
-                             textInput("xalpha2","Alpha",value = "0.7")
+                             textInput("xalpha2","Alpha",value = "0.5")
                          ),
                          textInput("xcolor2","Color (points)",value = "red3,green3,blue3"),
                          textInput("lcolor2","Color (labels)",value = "red3,green3,blue3"),
@@ -226,7 +226,7 @@ shinyUI(pageWithSidebar(
                          textInput("yscale2b", "Y From,To,Step,Tick", value = ""),
                          splitLayout(
                              textInput("xlimit2b","Limit",value = "-5,5"),
-                             textInput("xalpha2b","Alpha",value = "0.7")
+                             textInput("xalpha2b","Alpha",value = "0.5")
                          ),
                          textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
                          textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
