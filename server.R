@@ -368,6 +368,33 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,fileout))
             write_delim(xx, paste0(data_dir,fileout), append = TRUE, col_names = TRUE)
         }
+        createCA_2016_President <- function(){
+            catmsg("##### START createCA_2016_President #####")
+            cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
+            xx <- read_delim(paste0(input_dir,"CA/2016/",
+                                    "state_g16_sov_data_by_g16_svprec.csv"),',')
+            xx <- xx[,c("COUNTY","SVPREC","TOTVOTE","PRSDEM01","PRSREP01",
+                        "PRSLIB01","PRSGRN01","PRSPAF01")]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","LaRiva")
+            xx <- xx[!grepl("_TOT$", xx$AREA),]
+            xx <- xx[!grepl("^CNTYTOT$", xx$AREA),]
+            xx <- xx[!grepl("^SOVTOT$", xx$AREA),]
+            # xx$AREA <- gsub("A[ ]*$","",xx$AREA)
+            xx$AREA <- gsub("^[ ]*[0]+","",xx$AREA)
+            # xx <- xx %>%
+            #     group_by(COUNTY,AREA) %>%
+            #     summarize(TOTAL=sum(TOTAL),
+            #               Clinton=sum(Clinton),
+            #               Trump=sum(Trump),
+            #               Johnson=sum(Johnson),
+            #               Stein=sum(Stein),
+             #               LaRiva=sum(LaRiva))            
+            xx$COUNTY <- cc$county_name[xx$COUNTY]
+            #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","PAF")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"CA_2016_President.csv"))
+            write_delim(xx, paste0(data_dir,"CA_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createCA_2018_Governor <- function(){
             catmsg("##### START createCA_2018_Governor #####")
             cc <- read_delim(paste0(input_dir,"CA/CA_county-list.csv"),',')
@@ -2708,18 +2735,6 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
             write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
         }
-        createWI_2020_President <- function(){
-            catmsg("##### START createWI_2020_President #####")
-            xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report PRESIDENT OF THE UNITED STATES by State Representive District - After Recount.xlsx"),
-                              sheet = "Sheet1")
-            xx <- xx0[,c(1,3,4,7:19)]
-            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Blankenship","Jorgensen","Carroll","WRI1","WRI2","WRI3","WRI4","WRI5","WRI6","WRI7","SCATTERING")
-            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
-            partyxx <- names(xx)
-            partyxx[4:5] <- c("DEM","REP")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2020_President.csv"))
-            write_delim(xx, paste0(data_dir,"WI_2020_President.csv"), append = TRUE, col_names = TRUE)
-        }
         createWI_2016_President_Original <- function(){
             catmsg("##### START createWI_2016_President_Original #####")
             xx0 <- read_excel(paste0(input_dir,"WI/2016/","Ward by Ward Original and Recount President of the United States.xlsx"),
@@ -2766,6 +2781,62 @@ shinyServer(
             partyxx[4:19] <- c("DEM","REP","CON","LIB","WGR","IND1","IND2","IND3","IND4","IND5","IND6","IND7","IND8","IND9","IND10","IND11")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2016_President.csv"))
             write_delim(xx, paste0(data_dir,"WI_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createWI_2018_Governor <- function(){
+            catmsg("##### START createWI_2018_Governor #####")
+            xx0 <- read_excel(paste0(input_dir,"WI/2018/","Ward by Ward Report-Gen Election-Statewide Constitution Offices.xlsx"),
+                              sheet = "Sheet2", skip = 10)
+            xx <- xx0[,c(1,2,3,5,4,6:18)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Evers","Walker","Anderson",
+                           "White","Turnbull","Enz","Cason","Boucher","Grimek",
+                           "William","Hoffman","Turtenwald","Gehler","Davis",
+                           "SCATTERING")
+            # xx <- xx[xx$AREA != "County Totals",]
+            # xx <- xx[xx$AREA != "County Totals:",]
+            # xx <- xx[xx$AREA != "Office Totals",]
+            # xx <- xx[xx$AREA != "Office Totals:",]
+            xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
+            xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
+            grepl
+            
+            zxx <<- xx #DEBUG-RM
+            for (i in 1:NROW(xx)){
+                if (!is.na(xx$COUNTY[i])){
+                    lastCounty <- xx$COUNTY[i]
+                }
+                else{
+                    xx$COUNTY[i] <- lastCounty
+                }
+            }
+            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"WI_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createWI_2018_Senate <- function(){
+            catmsg("##### START createWI_2018_Senate #####")
+            xx0 <- read_excel(paste0(input_dir,"WI/2018/","US Senator_WardByWard_withDistricts 2018 General_0.xlsx"),
+                              sheet = "Sheet1")
+            xx <- xx0[,c(1,3,4,8,7,9:11)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Baldwin","Vukmir","Walters","Schiess","SCATTERING")
+            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"WI_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createWI_2020_President <- function(){
+            catmsg("##### START createWI_2020_President #####")
+            xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report PRESIDENT OF THE UNITED STATES by State Representive District - After Recount.xlsx"),
+                              sheet = "Sheet1")
+            xx <- xx0[,c(1,3,4,7:19)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Blankenship","Jorgensen","Carroll","WRI1","WRI2","WRI3","WRI4","WRI5","WRI6","WRI7","SCATTERING")
+            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"WI_2020_President.csv"), append = TRUE, col_names = TRUE)
         }
         addScales <- function(gg, xscale, yscale){
             xx <- NULL
@@ -3821,6 +3892,9 @@ shinyServer(
                     else if (races[i] == "AZ_2020_Senate_Prov"){
                         createAZ_2020_Senate("Provisional Ballots")
                     }
+                    else if (races[i] == "CA_2016_President"){
+                        createCA_2016_President()
+                    }
                     else if (races[i] == "CA_2018_Governor"){
                         createCA_2018_Governor()
                     }
@@ -3835,6 +3909,9 @@ shinyServer(
                     }
                     else if (races[i] == "CA_2018_House"){
                         createCA_2018_House()
+                    }
+                    else if (races[i] == "CA_2016_President"){
+                        createCA_2016_President()
                     }
                     else if (races[i] == "CO_2020_President"){
                         createCO_2020_President()
@@ -4001,16 +4078,22 @@ shinyServer(
                     else if (races[i] == "TX_2020_Senate"){
                         createTX_2020_Senate()
                     }
-                    else if (races[i] == "WI_2020_President"){
-                        createWI_2020_President()
-                    }
                     else if (races[i] == "WI_2016_President"){
                         createWI_2016_President()
                     }
                     else if (races[i] == "WI_2016_President_Recount"){
                         createWI_2016_President_Recount()
                     }
-                   else{
+                    else if (races[i] == "WI_2018_Governor"){
+                        createWI_2018_Governor()
+                    }
+                    else if (races[i] == "WI_2018_Senate"){
+                        createWI_2018_Senate()
+                    }
+                    else if (races[i] == "WI_2020_President"){
+                        createWI_2020_President()
+                    }
+                    else{
                         catmsg(paste0("Unknown race: ",races[i]))
                     }
                 }
@@ -4421,7 +4504,7 @@ shinyServer(
                            "AZ_2018_Senate")
             }
             else if (input$state2 == "CA"){
-                files <- c("CA_2020_President","CA_2020_House","CA_2018_Governor","CA_2018_House")
+                files <- c("CA_2020_President","CA_2020_House","CA_2018_Governor","CA_2018_House","CA_2016_President")
             }
             else if (input$state2 == "CO"){
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
@@ -4454,7 +4537,7 @@ shinyServer(
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2016_President","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2018_Governor","WI_2018_Senate","WI_2016_President","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
         })
