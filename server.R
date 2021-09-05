@@ -2609,12 +2609,140 @@ shinyServer(
             write(paste(partyzz, collapse = " "), paste0(data_dir,"SC_2020_Registered.csv"))
             write_delim(zz, paste0(data_dir,"SC_2020_Registered.csv"), append = TRUE, col_names = TRUE)
         }
+        # TEXAS PRECINCT DATA DOWNLOADED IN SEPTEMBER 2021
         createTX_2016_President <- function(){
             catmsg("##### START createTX_2016_President #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
             xx <- read_csv(paste0(input_dir,"TX/2016/","president.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","ClintonD_16G_President","TrumpR_16G_President",
+            #                "JohnsonL_16G_President","SteinG_16G_President","Write-InW_16G_President")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(8,9,10,3:7)] #was c(7,8,9,2:6)
+            names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","Writein")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_AG <- function(){
+            catmsg("##### START createTX_2018_AG #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","attorney gen.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","PaxtonR_18G_Attorney Gen","NelsonD_18G_Attorney Gen",
+            #                "HarrisL_18G_Attorney Gen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(6,7,8,4,3,5)] #was c(5,6,7,3,2,4)
+            names(xx) <- c("COUNTY","AREA","TOTAL","Nelson","Paxton","Harris")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_AG.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_Governor <- function(){
+            catmsg("##### START createTX_2018_Governor #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","governor.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","AbbottR_18G_Governor","ValdezD_18G_Governor",
+            #                "TippettsL_18G_Governor")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(6,7,8,4,3,5)] # was c(5,6,7,3,2,4)
+            names(xx) <- c("COUNTY","AREA","TOTAL","Valdez","Abbott","Tippetts")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2018_Senate <- function(){
+            catmsg("##### START createTX_2018_Senate #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2018/","u.s. sen.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","CruzR_18G_U.S. Sen","O'RourkeD_18G_U.S. Sen",
+            #                "DikemanL_18G_U.S. Sen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(6,7,8,4,3,5)] # was c(5,6,7,3,2,4)
+            names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Cruz","Dikeman")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_President <- function(){
+            catmsg("##### START createTX_2020_President #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2020/","president.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","BidenD_20G_President","TrumpR_20G_President",
+            #                "JorgensenL_20G_President","HawkinsG_20G_President","Write-InW_20G_President")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(8,9,10,3:7)] # was c(7,8,9,2:6)
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_Senate <- function(){
+            catmsg("##### START createTX_2020_Senate #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2020/","u.s. sen.csv"))
+            # names(xx) <- c("CNTYVTD","NEW***VTDKEY","CornynR_20G_U.S. Sen","HegarD_20G_U.S. Sen",
+            #                "McKennonL_20G_U.S. Sen","CollinsG_20G_U.S. Sen")
+            xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+            for (i in 1:NROW(xx)){
+                xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+            }
+            xx$AREA <- xx$CNTYVTD
+            xx$TOTAL <- 0
+            xx <- xx[,c(7,8,9,4,3,5,6)] #was c(6,7,8,3,2,4,5)
+            names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins")
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        # TEXAS PRECINCT DATA DOWNLOADED IN JUNE 2021
+        createTX_2016_President_210604 <- function(){
+            catmsg("##### START createTX_2016_President_210604 #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            xx <- read_csv(paste0(input_dir,"TX/2016/2106/","president.csv"))
             # names(xx) <- c("CNTYVTD","ClintonD_16G_President","TrumpR_16G_President",
             #                "JohnsonL_16G_President","SteinG_16G_President","Write-InW_16G_President")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2627,15 +2755,15 @@ shinyServer(
             xx <- xx[,c(7,8,9,2:6)]
             names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","Writein")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2016_President.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President_210604.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2016_President_210604.csv"), append = TRUE, col_names = TRUE)
         }
-        createTX_2018_AG <- function(){
-            catmsg("##### START createTX_2018_AG #####")
+        createTX_2018_AG_210605 <- function(){
+            catmsg("##### START createTX_2018_AG_210605 #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
-            xx <- read_csv(paste0(input_dir,"TX/2018/","attorney gen.csv"))
+            xx <- read_csv(paste0(input_dir,"TX/2018/2106/","attorney gen.csv"))
             # names(xx) <- c("CNTYVTD","PaxtonR_18G_Attorney Gen","NelsonD_18G_Attorney Gen",
             #                "HarrisL_18G_Attorney Gen")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2648,15 +2776,15 @@ shinyServer(
             xx <- xx[,c(5,6,7,3,2,4)]
             names(xx) <- c("COUNTY","AREA","TOTAL","Nelson","Paxton","Harris")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2018_AG.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG_210605.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_AG_210605.csv"), append = TRUE, col_names = TRUE)
         }
-        createTX_2018_Governor <- function(){
-            catmsg("##### START createTX_2018_Governor #####")
+        createTX_2018_Governor_210605 <- function(){
+            catmsg("##### START createTX_2018_Governor_210605 #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
-            xx <- read_csv(paste0(input_dir,"TX/2018/","governor.csv"))
+            xx <- read_csv(paste0(input_dir,"TX/2018/2106/","governor.csv"))
             # names(xx) <- c("CNTYVTD","AbbottR_18G_Governor","ValdezD_18G_Governor",
             #                "TippettsL_18G_Governor")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2669,15 +2797,15 @@ shinyServer(
             xx <- xx[,c(5,6,7,3,2,4)]
             names(xx) <- c("COUNTY","AREA","TOTAL","Valdez","Abbott","Tippetts")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2018_Governor.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor_210605.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Governor_210605.csv"), append = TRUE, col_names = TRUE)
         }
-        createTX_2018_Senate <- function(){
-            catmsg("##### START createTX_2018_Senate #####")
+        createTX_2018_Senate_210605 <- function(){
+            catmsg("##### START createTX_2018_Senate_210605 #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
-            xx <- read_csv(paste0(input_dir,"TX/2018/","u.s. sen.csv"))
+            xx <- read_csv(paste0(input_dir,"TX/2018/2106/","u.s. sen.csv"))
             # names(xx) <- c("CNTYVTD","CruzR_18G_U.S. Sen","O'RourkeD_18G_U.S. Sen",
             #                "DikemanL_18G_U.S. Sen")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2690,15 +2818,15 @@ shinyServer(
             xx <- xx[,c(5,6,7,3,2,4)]
             names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Cruz","Dikeman")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate_210605.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2018_Senate_210605.csv"), append = TRUE, col_names = TRUE)
         }
-        createTX_2020_President <- function(){
-            catmsg("##### START createTX_2020_President #####")
+        createTX_2020_President_210602 <- function(){
+            catmsg("##### START createTX_2020_President_210602 #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
-            xx <- read_csv(paste0(input_dir,"TX/2020/","president.csv"))
+            xx <- read_csv(paste0(input_dir,"TX/2020/2106/","president.csv"))
             # names(xx) <- c("CNTYVTD","BidenD_20G_President","TrumpR_20G_President",
             #                "JorgensenL_20G_President","HawkinsG_20G_President","Write-InW_20G_President")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2711,15 +2839,15 @@ shinyServer(
             xx <- xx[,c(7,8,9,2:6)]
             names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2020_President.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President_210602.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_President_210602.csv"), append = TRUE, col_names = TRUE)
         }
-        createTX_2020_Senate <- function(){
-            catmsg("##### START createTX_2020_Senate #####")
+        createTX_2020_Senate_210603 <- function(){
+            catmsg("##### START createTX_2020_Senate_210603 #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
             names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
             cctx <- cc[cc$StateCode == "48",]
-            xx <- read_csv(paste0(input_dir,"TX/2020/","u.s. sen.csv"))
+            xx <- read_csv(paste0(input_dir,"TX/2020/2106/","u.s. sen.csv"))
             # names(xx) <- c("CNTYVTD","CornynR_20G_U.S. Sen","HegarD_20G_U.S. Sen",
             #                "McKennonL_20G_U.S. Sen","CollinsG_20G_U.S. Sen")
             xx$COUNTY <- substring(xx$CNTYVTD,1,3)
@@ -2732,9 +2860,10 @@ shinyServer(
             xx <- xx[,c(6,7,8,3,2,4,5)]
             names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins")
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
-            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
-            write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate_210603.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_Senate_210603.csv"), append = TRUE, col_names = TRUE)
         }
+        # WISCONSIN PRECINCT DATA
         createWI_2016_President_Original <- function(){
             catmsg("##### START createWI_2016_President_Original #####")
             xx0 <- read_excel(paste0(input_dir,"WI/2016/","Ward by Ward Original and Recount President of the United States.xlsx"),
@@ -2794,12 +2923,9 @@ shinyServer(
             # xx <- xx[xx$AREA != "County Totals",]
             # xx <- xx[xx$AREA != "County Totals:",]
             # xx <- xx[xx$AREA != "Office Totals",]
-            # xx <- xx[xx$AREA != "Office Totals:",]
+            xx <- xx[xx$AREA != "Office Totals:",]
             xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
             xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
-            grepl
-            
-            zxx <<- xx #DEBUG-RM
             for (i in 1:NROW(xx)){
                 if (!is.na(xx$COUNTY[i])){
                     lastCounty <- xx$COUNTY[i]
@@ -3203,7 +3329,7 @@ shinyServer(
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
             if (!input$displaytotal){
-                xx <- xx[xx$AREA != "COUNTY",]
+                xx <- xx[xx$AREA != "TOTAL",] #DEBUG-CHECK - was COUNTY
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
@@ -3278,7 +3404,7 @@ shinyServer(
                 gg <- gg + geom_vline(xintercept=0, color=input$ncolor2)
             }
             if (input$party == "Margin"){
-                if (NROW(xx) == 1 |
+                if (NROW(xx) == 1 | input$forcex |
                     (min(xx$MAR_SH, na.rm = TRUE) <= 0 &
                      max(xx$MAR_SH, na.rm = TRUE) >= 0)){
                     gg <- gg + geom_hline(yintercept=0, color=input$ncolor2)
@@ -3441,8 +3567,8 @@ shinyServer(
             pp <- plot_grid(plotlist = pp, ncol = input$aplot2_cols)
             labels <- getlabels("plot", "-", 1)
             title <- ggdraw() + draw_label(labels[1], fontface='bold')
-            plot_grid(title, pp, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
-        }, height = 660, width = 1000)
+            plot_grid(title, pp, ncol=1, rel_heights=c(0.1, 1)) # DEBUG-TEST - change 2nd rel_height from 1 to 8 for 24 rows
+        }, height = 660, width = 1000) # DEBUG-TEST - change height from 660 to 4860 for 24 rows
         output$areaPlot2b <- renderPlot({
             xx <- getdata12()
             # Move filtering to after getdata12()
@@ -4078,6 +4204,24 @@ shinyServer(
                     else if (races[i] == "TX_2020_Senate"){
                         createTX_2020_Senate()
                     }
+                    else if (races[i] == "TX_2016_President_210604"){
+                        createTX_2016_President_210604()
+                    }
+                    else if (races[i] == "TX_2018_AG_210605"){
+                        createTX_2018_AG_210605()
+                    }
+                    else if (races[i] == "TX_2018_Governor_210605"){
+                        createTX_2018_Governor_210605()
+                    }
+                    else if (races[i] == "TX_2018_Senate_210605"){
+                        createTX_2018_Senate_210605()
+                    }
+                    else if (races[i] == "TX_2020_President_210602"){
+                        createTX_2020_President_210602()
+                    }
+                    else if (races[i] == "TX_2020_Senate_210603"){
+                        createTX_2020_Senate_210603()
+                    }
                     else if (races[i] == "WI_2016_President"){
                         createWI_2016_President()
                     }
@@ -4534,7 +4678,8 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President")
+                files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President",
+                           "TX_2020_President_210602","TX_2020_Senate_210603","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2016_President_210604")
             }
             else if (input$state2 == "WI"){
                 files <- c("WI_2020_President","WI_2018_Governor","WI_2018_Senate","WI_2016_President","WI_2016_President_Recount")
