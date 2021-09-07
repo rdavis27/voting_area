@@ -1,11 +1,11 @@
 # INSTRUCTIONS TO RUN THIS SCRIPT
 # 1. Download all-geocodes-v2020.xlsx from https://www2.census.gov/programs-surveys/popest/geographies/2020/ .
 # 2. Download president.csv from https://data.capitol.texas.gov/dataset/2020_general
-# by clicking Explore button to the right of "President Vice-President"
-# and selecting "Go to resource".
+#    by clicking Explore button to the right of "President Vice-President"
+#    and selecting "Go to resource".
 # 3. Download 'u.s. sen.csv' from https://data.capitol.texas.gov/dataset/2018_general
-# by clicking Explore button to the right of "U.S. Senator"
-# and selecting "Go to resource".
+#    by clicking Explore button to the right of "U.S. Senator"
+#    and selecting "Go to resource".
 # 4. Put all files in the working directory.
 # 5. Change any variables after the library calls as described if desired.
 # 6. Run or source this script.
