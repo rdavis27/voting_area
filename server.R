@@ -3932,6 +3932,8 @@ shinyServer(
         }
         output$myTextAreas2 <- renderPrint({
             dd <- getAreas2()
+            dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
+                                       t(colSums(dd[,c(-1,-2)],na.rm = TRUE)))) #DEBUG-TEST
             # Format decimal numbers into character strings
             dp <- 2
             for (i in 3:NCOL(dd)){
