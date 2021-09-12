@@ -388,7 +388,7 @@ shinyServer(
             #               Trump=sum(Trump),
             #               Johnson=sum(Johnson),
             #               Stein=sum(Stein),
-             #               LaRiva=sum(LaRiva))            
+            #               LaRiva=sum(LaRiva))            
             xx$COUNTY <- cc$county_name[xx$COUNTY]
             #xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","PAF")
@@ -1664,8 +1664,8 @@ shinyServer(
         createIA_2020_Senate <- function(){
             cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
             zz <- NULL
-            for (i in 1:length(cc)){
             #for (i in 1:1){
+            for (i in 1:length(cc)){
                 dd <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "3", skip = 1, n_max = 0) # read names
                 xx <- read_excel(paste0(input_dir,"IA/2020/",cc[i],".xlsx"), sheet = "3", skip = 2)
                 yy <- data.frame(xx[,1])
@@ -2952,6 +2952,33 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2018_Senate.csv"))
             write_delim(xx, paste0(data_dir,"WI_2018_Senate.csv"), append = TRUE, col_names = TRUE)
         }
+        createWI_2018_SupremeCourt <- function(){
+            catmsg("##### START createWI_2018_SupremeCourt #####")
+            xx0 <- read_excel(paste0(input_dir,"WI/2018/","Ward Report-4.3.18 Spring Election-Supreme Court.xlsx"),
+                              sheet = "Ward by Ward Report", skip = 10)
+            xx <- xx0[,c(1,2,3,5,4,6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Dallet","Screnock",
+                           "SCATTERING")
+            # xx <- xx[xx$AREA != "County Totals",]
+            # xx <- xx[xx$AREA != "County Totals:",]
+            # xx <- xx[xx$AREA != "Office Totals",]
+            xx <- xx[xx$AREA != "Office Totals:",]
+            xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
+            xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
+            for (i in 1:NROW(xx)){
+                if (!is.na(xx$COUNTY[i])){
+                    lastCounty <- xx$COUNTY[i]
+                }
+                else{
+                    xx$COUNTY[i] <- lastCounty
+                }
+            }
+            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2018_SupremeCourt.csv"))
+            write_delim(xx, paste0(data_dir,"WI_2018_SupremeCourt.csv"), append = TRUE, col_names = TRUE)
+        }
         createWI_2020_President <- function(){
             catmsg("##### START createWI_2020_President #####")
             xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report PRESIDENT OF THE UNITED STATES by State Representive District - After Recount.xlsx"),
@@ -2963,6 +2990,33 @@ shinyServer(
             partyxx[4:5] <- c("DEM","REP")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"WI_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createWI_2020_SupremeCourt <- function(){
+            catmsg("##### START createWI_2020_SupremeCourt #####")
+            xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report_Supreme Court.xlsx"),
+                              sheet = "Ward by Ward Report", skip = 10)
+            xx <- xx0[,c(1,2,3,4:6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Karofsky","Kelly",
+                           "SCATTERING")
+            # xx <- xx[xx$AREA != "County Totals",]
+            # xx <- xx[xx$AREA != "County Totals:",]
+            # xx <- xx[xx$AREA != "Office Totals",]
+            xx <- xx[xx$AREA != "Office Totals:",]
+            xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
+            xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
+            for (i in 1:NROW(xx)){
+                if (!is.na(xx$COUNTY[i])){
+                    lastCounty <- xx$COUNTY[i]
+                }
+                else{
+                    xx$COUNTY[i] <- lastCounty
+                }
+            }
+            xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2020_SupremeCourt.csv"))
+            write_delim(xx, paste0(data_dir,"WI_2020_SupremeCourt.csv"), append = TRUE, col_names = TRUE)
         }
         addScales <- function(gg, xscale, yscale){
             xx <- NULL
@@ -3324,17 +3378,16 @@ shinyServer(
             zzxx <<- xx #DEBUG-RM
             if (xcounty != "" & xcounty != "(all)"){
                 xx <- xx[xx$COUNTY == xcounty,]
-            }
-            else{
+            }else{
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
             if (!input$displaytotal){
-                xx <- xx[xx$AREA != "TOTAL",] #DEBUG-CHECK - was COUNTY
+                xx <- xx[xx$AREA != "COUNTY",] #DEBUG-CHECK - was COUNTY, fails with TOTAL
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
                      (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes),]
-            row.names(xx) <- seq(1:NROW(xx))
+            row.names(xx) <- seq(1:NROW(xx)) #DEBUG-TEST NROW(xx) == 0
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
             if (input$party == "Democrat"){
                 preparty <- "DEM"
@@ -4236,8 +4289,14 @@ shinyServer(
                     else if (races[i] == "WI_2018_Senate"){
                         createWI_2018_Senate()
                     }
+                    else if (races[i] == "WI_2018_SupremeCourt"){
+                        createWI_2018_SupremeCourt()
+                    }
                     else if (races[i] == "WI_2020_President"){
                         createWI_2020_President()
+                    }
+                    else if (races[i] == "WI_2020_SupremeCourt"){
+                        createWI_2020_SupremeCourt()
                     }
                     else{
                         catmsg(paste0("Unknown race: ",races[i]))
@@ -4684,7 +4743,7 @@ shinyServer(
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2016_President_210604")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2018_Governor","WI_2018_Senate","WI_2016_President","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2016_President","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
         })
