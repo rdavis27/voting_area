@@ -3903,7 +3903,8 @@ shinyServer(
         })
         getAreas <- function(){
             dd <- getdata()
-            dd <- dd[dd$AREA != "TOTAL",] #remove TOTAL
+            ee <- dd[dd$AREA != "TOTAL",] #remove TOTAL
+            if (NROW(ee) > 0) dd <- ee
             dd <- dd[is.na(dd$TOTAL) | dd$TOTAL >= input$minvotes,]
             row.names(dd) <- seq(1:NROW(dd))
             #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
@@ -3985,8 +3986,12 @@ shinyServer(
         }
         output$myTextAreas2 <- renderPrint({
             dd <- getAreas2()
-            dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
-                                       t(colSums(dd[,c(-1,-2)],na.rm = TRUE)))) #DEBUG-TEST
+            if (input$xcounty != "" & input$xcounty != "(all)"){
+                if (input$units == "Count"){
+                    dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
+                                               t(colSums(dd[,c(-1,-2)],na.rm = TRUE)))) #DEBUG-TEST
+                }
+            }
             # Format decimal numbers into character strings
             dp <- 2
             for (i in 3:NCOL(dd)){
@@ -4438,7 +4443,7 @@ shinyServer(
                     }
                     else if (ch1 == "="){
                         dogroup <- TRUE
-                        dd$AREA <- "TOTAL"
+                        dd$AREA <- "COUNTY" #DEBUG-TEST - was TOTAL
                     }
                     else if (ch1 == "-"){
                         dogroup <- TRUE
