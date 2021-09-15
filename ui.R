@@ -166,7 +166,7 @@ shinyUI(pageWithSidebar(
                      sidebarPanel(
                          width = 3,
                          checkboxInput("xdxplot2","x/dx plot (else x/y)",value = TRUE),
-                         checkboxInput("showall2","Show all labels,",value = TRUE),
+                         checkboxInput("showall2","Show all labels",value = TRUE),
                          checkboxInput("sizefor2","Size for race 2",value = TRUE),
                          selectInput("label2", "Label type",
                                      choices = c("Index","County","CountyID","Area","CNTYVTD"),

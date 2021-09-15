@@ -3382,7 +3382,7 @@ shinyServer(
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
             if (!input$displaytotal){
-                xx <- xx[xx$AREA != "COUNTY",] #DEBUG-CHECK - was COUNTY, fails with TOTAL
+                xx <- xx[xx$AREA != "TOTAL",] #DEBUG-CHECK - was COUNTY
             }
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
