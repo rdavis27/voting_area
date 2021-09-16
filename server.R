@@ -3607,9 +3607,16 @@ shinyServer(
             xx <- getdata12()
             doAreaPlot2(xx, input$xcounty, 1)
         }, height = 600, width = 1000)
-        output$areaPlot2s <- renderPlot({
+        output$areaPlot2s <- renderImage({
             xx <- getdata12()
-            cc <- getCounties()
+            counties <- input$aplot2_counties
+            if (substr(counties,1,1) %in% c("","#")){
+                cc <- getCounties()
+            }
+            else{
+                COUNTY <- unlist(strsplit(counties, ","))
+                cc <- data.frame(COUNTY)
+            }
             gcc <<- cc #DEBUG-RM
             nn <- input$aplot2_cols * input$aplot2_rows
             ist <- input$aplot2_start
@@ -3620,8 +3627,30 @@ shinyServer(
             pp <- plot_grid(plotlist = pp, ncol = input$aplot2_cols)
             labels <- getlabels("plot", "-", 1)
             title <- ggdraw() + draw_label(labels[1], fontface='bold')
-            plot_grid(title, pp, ncol=1, rel_heights=c(0.1, 1)) # DEBUG-TEST - change 2nd rel_height from 1 to 8 for 24 rows
-        }, height = 660, width = 1000) # DEBUG-TEST - change height from 660 to 4860 for 24 rows
+            #pp2 <- plot_grid(title, pp, ncol=1, rel_heights=c(0.1, 1)) # DEBUG-TEST - change 2nd rel_height from 1 to 8 for 24 rows
+            pp2 <- plot_grid(title, pp, ncol=1, rel_heights=c(0.3, input$aplot2_rows)) # DEBUG-TEST - change 2nd rel_height from 1 to 8 for 24 rows
+            filename <- "tmp_areaPlot2s.png"
+            # Possibly add option to save files
+            # filename <- paste0("png/voting_area_",input$races[1],"_",input$races[2],"_",
+            #                    input$sortcounty,"_",input$sortcountydir,
+            #                    input$aplot2_cols,"_",input$aplot2_rows)
+            #height <- (input$aplot2_rows * 200) + 60
+            height <- (input$aplot2_rows * 600 / input$aplot2_cols) + 60
+            if (nn == 1){
+                png(filename, width = input$aplot2_width, height = input$aplot2_height)
+                pp2 <- doAreaPlot2(xx, input$xcounty, 2)
+                print(pp2)
+            }else{
+                png(filename, width = 1000, height = height)
+                print(pp2)
+            }
+            dev.off()
+            list(src = filename,
+                 contentType = 'image/png',
+                 #width = 400,
+                 #height = 300,
+                 alt = "This is alternate text")
+        }, deleteFile = TRUE)
         output$areaPlot2b <- renderPlot({
             xx <- getdata12()
             # Move filtering to after getdata12()

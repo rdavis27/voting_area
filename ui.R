@@ -205,11 +205,15 @@ shinyUI(pageWithSidebar(
                          width = 2,
                          numericInput("aplot2_start","Starting index",1,min = 1,step = 9),
                          numericInput("aplot2_cols","Number of columns",3,min = 1),
-                         numericInput("aplot2_rows","Number of rows",3,min = 1)
+                         numericInput("aplot2_rows","Number of rows",3,min = 1),
+                         textInput("aplot2_counties", "Counties", value =
+                                       "#Cameron,Hidalgo,Maverick,Starr,Zapata,Brooks,Jim Hogg,Kenedy,Willacy"),
+                         numericInput("aplot2_height", "Height (pixels)", value = 600),
+                         numericInput("aplot2_width", "Width (pixels)", value = 1000)
                      ),
                      mainPanel(
                          width = 9,
-                         plotOutput("areaPlot2s")
+                         imageOutput("areaPlot2s")
                      )
             ),
             tabPanel("Area Plot2b",
@@ -229,8 +233,8 @@ shinyUI(pageWithSidebar(
                              textInput("xlimit2b","Limit",value = "-5,5"),
                              textInput("xalpha2b","Alpha",value = "0.5")
                          ),
-                         textInput("xcolor2b","Color (points)",value = "red3,orange,green3,purple,blue3"),
-                         textInput("lcolor2b","Color (labels)",value = "red3,orange,green3,purple,blue3"),
+                         textInput("xcolor2b","Color (points)",value = "red3,green3,blue3"),
+                         textInput("lcolor2b","Color (labels)",value = "red3,green3,blue3"),
                          textInput("ncolor2b","Color (lines)",value = "darkgray"),
                          textInput("xparty2b","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
                          textInput("vlimitb","Vote Limit (1000s)",value = "0.1,0.5,1,2"),
