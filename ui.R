@@ -208,8 +208,7 @@ shinyUI(pageWithSidebar(
                          numericInput("aplot2_rows","Number of rows",3,min = 1),
                          textInput("aplot2_counties", "Counties", value =
                                        "#Cameron,Hidalgo,Maverick,Starr,Zapata,Brooks,Jim Hogg,Kenedy,Willacy"),
-                         numericInput("aplot2_height", "Height (pixels)", value = 600),
-                         numericInput("aplot2_width", "Width (pixels)", value = 1000)
+                         numericInput("aplot2_factor", "Factor (percent)", value = 125)
                      ),
                      mainPanel(
                          width = 9,

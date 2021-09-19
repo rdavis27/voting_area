@@ -3140,8 +3140,12 @@ shinyServer(
                     }
                 }
                 else{
-                    if (xtype >= 2){
+                    if (xtype == 2){
                         title <- paste(tloc,tshiftin, input$party, tunits)
+                    }
+                    else if (xtype >= 3){
+                        title <- paste(tloc,tshiftin, input$party, "-",
+                                       substring(racex,4), "to", substring(racey,4))
                     }
                     else{
                         title <- paste(tloc,tshiftin, input$party, tunits, "from",
@@ -3637,13 +3641,11 @@ shinyServer(
             #height <- (input$aplot2_rows * 200) + 60
             height <- (input$aplot2_rows * 600 / input$aplot2_cols) + 60
             if (nn == 1){
-                png(filename, width = input$aplot2_width, height = input$aplot2_height)
-                pp2 <- doAreaPlot2(xx, input$xcounty, 2)
-                print(pp2)
-            }else{
-                png(filename, width = 1000, height = height)
-                print(pp2)
+                pp2 <- doAreaPlot2(xx, input$xcounty, 3)
             }
+            factor <- input$aplot2_factor
+            png(filename, width = 10 * factor, height = height * factor / 100)
+            print(pp2)
             dev.off()
             list(src = filename,
                  contentType = 'image/png',
