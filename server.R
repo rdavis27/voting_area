@@ -1256,6 +1256,60 @@ shinyServer(
             dd <- data.frame(cc)
             write_delim(dd, paste0(data_dir,"IA_Counties.csv"), append = FALSE, col_names = TRUE)
         }
+        createIA_2016_President <- function(){
+            cc <- unlist(read_delim(paste0(data_dir,"IA_Counties.csv")," "))
+            zzcc <<- cc #DEBUG-RM
+            zz <- NULL
+            for (i in 1:length(cc)){
+                #for (i in 1:1){
+                xx <- read_excel(paste0(input_dir,"IA/2016/",cc[i],".xlsx"), sheet = "Sheet1", skip = 0)
+                xx <- xx[xx$RaceTitle == "President and Vice President",]
+                candidates <- xx$CandidateName
+                xx <- xx[,which(grepl(" Total$",names(xx)))]
+                xx <- xx[,-NCOL(xx)] #delete Grand Total
+                zzxx <<- xx #DEBUG-RM
+                areas <- names(xx)
+                yy <- data.frame(t(xx))
+                  for (j in 1:NCOL(yy)){
+                    namelist <- unlist(strsplit(candidates[j]," "))
+                    names(yy)[j] <- trimws(namelist[length(namelist)])
+                }
+                yy$COUNTY <- cc[i]
+                yy$AREA <- areas
+                zzyy <<- yy #DEBUG-RM
+                for (j in (1:(NROW(yy)-1))){
+                    yy$AREA[j] <- gsub(paste0("^",cc[i],"-"),"",yy$AREA[j])
+                    yy$AREA[j] <- gsub(" Total$","",yy$AREA[j])
+                }
+                #yy$TOTAL <- unlist(xx[,NCOL(xx)])
+                yy$TOTAL <- 0
+                idem <- which(names(yy) == "Kaine") #Clinton DEM
+                irep <- which(names(yy) == "Pence") #Trump REP
+                ind1 <- which(names(yy) == "Bradley") #Castle CON
+                ind2 <- which(names(yy) == "Baraka") #Stein GRN
+                ind3 <- which(names(yy) == "Elworth") #Vacek LMN
+                ind4 <- which(names(yy) == "Weld") #Johnson LIB
+                ind5 <- which(names(yy) == "Stolba") #Kahn NIP
+                ind6 <- which(names(yy) == "Steinberg") #DeLaFuente NBP1
+                ind7 <- which(names(yy) == "Johnson") #McMullin NBP2
+                ind8 <- which(names(yy) == "Banks") #LaRiva PSL
+                iwri <- which(names(yy) == "Write-in") #Writein WRI
+                yy <- yy[,c(NCOL(yy)-2,NCOL(yy)-1,NCOL(yy),idem,irep,ind1,ind2,ind3,ind4,ind5,ind6,ind7,ind8,iwri)]
+                zzyy1 <<- yy #DEBUG-RM
+                names(yy) <- c("COUNTY","AREA","TOTAL","Clinton","Trump",
+                               "Castle","Stein","Vacek","Johnson","Kahn",
+                               "DeLaFuente","McMullin","LaRiva","Writein")
+                # yy <- yy[yy$AREA != "Total:",] #delete Total
+                zz <- rbind(zz,yy)
+                # zz <- yy
+                # print(zz)
+                # zzzz <<- zz #DEBUG-RM
+            }
+            partyzz <- names(zz)
+            partyzz[4:5] <- c("DEM","REP")
+            write(paste(partyzz, collapse = " "), paste0(data_dir,"IA_2016_President.csv"))
+            write_delim(zz, paste0(data_dir,"IA_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createIA_2018_Governor <- function(){
             #input_dir <- "input/"
             #data_dir  <- "data/"
@@ -1727,6 +1781,20 @@ shinyServer(
             xx3 <<- xx #DEBUG-RM
             write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2014_Senate.csv"))
             write_delim(xx, paste0(data_dir,"ME_2014_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createME_2016_President <- function(){
+            xx <- read_excel(paste0(input_dir,"ME/2016/president.xlsx"), sheet = "Sheet1", skip = 1)
+            names(xx) <- c("COUNTY","AREA","Clinton","Johnson","Stein","Trump","Castle","Fox","Kotlikoff","McMullin","BLANK","TBC")
+            xx$COUNTY[grepl(" UOCAVA", xx$AREA)] <- "STATE"
+            xx$AREA[grepl(" UOCAVA", xx$AREA)] <- "UOCAVA"
+            xx <- xx[!grepl(" Total", xx$AREA) & (xx$AREA != "") & !is.na(xx$AREA),]
+            xx <- xx[,c(1,2,12,3,6,4,5,7,8,9,10)] # delete Blank
+            xx <- xx[!is.na(xx$COUNTY),]
+            names(xx)[3] <- "TOTAL"
+            namesxx <- names(xx)
+            namesxx[4:5] <- c("DEM","REP")
+            write(paste(namesxx, collapse = " "), paste0(data_dir,"ME_2016_President.csv"))
+            write_delim(xx, paste0(data_dir,"ME_2016_President.csv"), append = TRUE, col_names = TRUE)
         }
         createME_2018_Governor <- function(){
             xx <- read_excel(paste0(input_dir,"ME/2018/governor11-6-18.xlsx"), sheet = "Gov", skip = 3)
@@ -3452,6 +3520,8 @@ shinyServer(
             if (input$party == "Margin" & input$units != "Percent ratio"){
                 if (input$xdxplot2){
                     gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
+                    gg <- gg + geom_abline(intercept=100, slope=-1, color=input$ncolor2, linetype="dotted")
+                    gg <- gg + geom_abline(intercept=-100, slope=-1, color=input$ncolor2, linetype="dotted")
                 }
                 else{
                     gg <- gg + geom_abline(intercept=0, slope=1, color=input$ncolor2, linetype="dashed")
@@ -4162,6 +4232,10 @@ shinyServer(
                     else if (races[i] == "FL_2020_Registered"){
                         createFL_2020_Registered()
                     }
+                    else if (races[i] == "IA_2016_President"){
+                        #createIA_2020_Counties()
+                        createIA_2016_President()
+                    }
                     else if (races[i] == "IA_2018_Governor"){
                         createIA_2018_Governor()
                     }
@@ -4198,6 +4272,9 @@ shinyServer(
                     }
                     else if (races[i] == "ME_2014_Senate"){
                         createME_2014_Senate()
+                    }
+                    else if (races[i] == "ME_2016_President"){
+                        createME_2016_President()
                     }
                     else if (races[i] == "ME_2018_Governor"){
                         createME_2018_Governor()
@@ -4754,10 +4831,10 @@ shinyServer(
                 files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_Registered","FL_2016_President")
             }
             else if (input$state2 == "IA"){
-                files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4")
+                files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4","IA_2016_President")
             }
             else if (input$state2 == "ME"){
-                files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House","ME_2018_Governor","ME_2018_Senate","ME_2014_Senate")
+                files <- c("ME_2020_President","ME_2020_Senate","ME_2020_House","ME_2018_Governor","ME_2018_Senate","ME_2016_President","ME_2014_Senate")
             }
             else if (input$state2 == "MN"){
                 files <- c("MN_2020_President","MN_2020_Senate","MN_2018_Senate","MN_2018_Senate2")
