@@ -2440,6 +2440,87 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"NV_2016_President.csv"))
             write_delim(xx, paste0(data_dir,"NV_2016_President.csv"), append = TRUE, col_names = TRUE)
         }
+        createNV_2018_Senate <- function(){
+            xx <- read_excel(paste0(input_dir,"NV/2018/Precinct Results 2018 General Election.xlsx"),
+                             sheet = "2018 Statewide General Election", skip = 3,
+                             guess_max = 10000)
+            office <- "United States Senator" #UPDATE
+            xx <- xx[xx$Contest == office,]
+            xx <- xx[,c("Jurisdiction","Precinct","Selection","Votes")]
+            names(xx) <- c("COUNTY","AREA","Candidate","Votes")
+            xx$AREA <- gsub("^Precinct ","",xx$AREA,ignore.case = TRUE) #fix multiple counties
+            xx$AREA[xx$COUNTY == "Douglas"] <-
+                gsub("[0-9] - ","",xx$AREA[xx$COUNTY == "Douglas"]) #fix Douglas County
+            xx$AREA[xx$COUNTY == "Humboldt"] <-
+                gsub(" - [A-Za-z]+$","",xx$AREA[xx$COUNTY == "Humboldt"]) #fix Humboldt County
+            xx$AREA[xx$COUNTY == "Washoe"] <-
+                gsub("00$","",xx$AREA[xx$COUNTY == "Washoe"]) #fix Washoe County
+            xx$AREA[xx$COUNTY == "Lyon"] <-
+                gsub("^[0-9]+_","",xx$AREA[xx$COUNTY == "Lyon"]) #fix Lyon County
+            xx$AREA[xx$COUNTY == "Lyon"] <-
+                gsub(" - IN CITY$","",xx$AREA[xx$COUNTY == "Lyon"]
+                     ,ignore.case = TRUE) #fix Lyon County
+            xx$AREA[xx$COUNTY == "Lyon"] <-
+                gsub(" - OUT OF CITY$","",xx$AREA[xx$COUNTY == "Lyon"],
+                     ignore.case = TRUE) #fix Lyon County
+            # xx$Votes[xx$Votes == "*"] <- "1"
+            # xx$Votes <- as.numeric(xx$Votes)
+            for (j in 1:NROW(xx)){
+                if (grepl("^ROSEN", xx$Candidate[j])){
+                    xx$Candidate[j] <- "DEM_Rosen"
+                }
+                else if (grepl("^Heller", xx$Candidate[j])){
+                    xx$Candidate[j] <- "REP_Heller"
+                }
+                else if (grepl("^BAKARI", xx$Candidate[j])){
+                    xx$Candidate[j] <- "IAP_Bakari"
+                }
+                else if (grepl("^HAGAN", xx$Candidate[j])){
+                    xx$Candidate[j] <- "LPN_Hagan"
+                }
+                else if (grepl("^MICHAELS", xx$Candidate[j])){
+                    xx$Candidate[j] <- "NPP_Michaels"
+                }
+                else{
+                    xx$Candidate[j] <- "NP_Other"
+                }
+            }
+            # check for matches first???
+            xx <- xx %>%
+                group_by(COUNTY,AREA,Candidate) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread(Candidate,Votes)
+            xx$TOTAL <- 0
+            
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 3:(NCOL(xx)-1)){
+                partyxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,NCOL(xx))
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            for (j in 3:(NCOL(xx)-1)){
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+            }
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"NV_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"NV_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
         createNV_2020_President <- function(){
             xx <- read_excel(paste0(input_dir,"NV/2020/2020 General Election Precinct-Level Results.xlsx"),
                              sheet = "Abstract of Vote By Election Ne", skip = 2,
@@ -4465,6 +4546,9 @@ shinyServer(
                     else if (races[i] == "NV_2016_President"){
                         createNV_2016_President()
                     }
+                    else if (races[i] == "NV_2018_Senate"){
+                        createNV_2018_Senate()
+                    }
                     else if (races[i] == "NV_2020_President"){
                         createNV_2020_President()
                     }
@@ -4991,7 +5075,7 @@ shinyServer(
                 files <- c("NC_2020_President","NC_2020_Senate","NC_2020_Governor","NC_2018_House")
             }
             else if (input$state2 == "NV"){
-                files <- c("NV_2020_President","NV_2016_President")
+                files <- c("NV_2020_President","NV_2018_Senate","NV_2016_President")
             }
             else if (input$state2 == "OH"){
                 files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2020_Registered")
