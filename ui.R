@@ -177,7 +177,10 @@ shinyUI(pageWithSidebar(
                          textInput("pos3_2", "Position below", value = ""),
                          textInput("xscale2", "X From,To,Step,Tick", value = ""),
                          textInput("yscale2", "Y From,To,Step,Tick", value = ""),
-                         checkboxInput("forcex","Force x-axis",value = TRUE),
+                         splitLayout(
+                             checkboxInput("minmax","Min/Max",value = TRUE),
+                             checkboxInput("forcex","X-axis",value = TRUE)
+                         ),
                          splitLayout(
                              textInput("xlimit2","Limit",value = "-5,5"),
                              textInput("xalpha2","Alpha",value = "0.5")

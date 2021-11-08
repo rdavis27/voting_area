@@ -3739,8 +3739,10 @@ shinyServer(
             if (input$party == "Margin" & input$units != "Percent ratio"){
                 if (input$xdxplot2){
                     gg <- gg + geom_abline(intercept=0, slope=-1, color=input$ncolor2, linetype="dashed")
-                    gg <- gg + geom_abline(intercept=100, slope=-1, color=input$ncolor2, linetype="dotted")
-                    gg <- gg + geom_abline(intercept=-100, slope=-1, color=input$ncolor2, linetype="dotted")
+                    if (input$minmax){
+                        gg <- gg + geom_abline(intercept=100, slope=-1, color=input$ncolor2, linetype="dotted")
+                        gg <- gg + geom_abline(intercept=-100, slope=-1, color=input$ncolor2, linetype="dotted")
+                    }
                 }
                 else{
                     gg <- gg + geom_abline(intercept=0, slope=1, color=input$ncolor2, linetype="dashed")

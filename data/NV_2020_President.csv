@@ -1434,7 +1434,6 @@ Storey 7 0 0 0 0 0 0
 Storey 8 0 0 0 0 0 0
 Storey 88 0 0 0 0 0 0
 Storey 9 0 0 0 0 0 0
-Washoe " 9543" 0 0 0 0 0 0
 Washoe 1000 0 396 160 0 11 6
 Washoe 1002 0 501 308 2 13 9
 Washoe 1003 0 880 396 1 20 25
@@ -1981,6 +1980,7 @@ Washoe 9538 0 0 0 0 0 0
 Washoe 9540 0 0 0 0 0 0
 Washoe 9541 0 0 0 0 0 0
 Washoe 9542 0 0 0 0 0 0
+Washoe 9543 0 0 0 0 0 0
 Washoe 9546 0 0 0 0 0 0
 Washoe 9547 0 0 0 0 0 0
 Washoe 9548 0 0 0 0 0 0
@@ -1997,9 +1997,9 @@ Washoe 9559 0 0 0 0 0 0
 Washoe 9560 0 0 0 0 0 0
 Washoe 9561 0 0 0 0 0 0
 Washoe 9562 0 0 0 0 0 0
-Washoe "FIXED RES" 0 5 9 0 0 0
 Washoe FOC 0 0 0 0 0 0
 Washoe PROVISIONAL 0 10 9 0 0 1
+Washoe RES 0 5 9 0 0 0
 Washoe RESIDENT 0 23 40 0 1 0
 "White Pine" 1 0 110 389 4 6 8
 "White Pine" 10 0 26 150 0 1 0
