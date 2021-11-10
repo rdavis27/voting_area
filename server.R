@@ -9,6 +9,7 @@ library(htmltools)
 library(xlsx)
 library(RcppRoll)
 library(cowplot)
+library(jsonlite)
 
 areaWidth <- 900
 areaHeight <- 600
@@ -3150,6 +3151,30 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate_210603.csv"))
             write_delim(xx, paste0(data_dir,"TX_2020_Senate_210603.csv"), append = TRUE, col_names = TRUE)
         }
+        createVA_2021_Governor <- function(){
+            catmsg("##### START createVA_2021_Governor #####")
+            cc <- read_csv(paste0(data_dir,"VA_COUNTIES.csv"), col_names = TRUE)
+            ee <- NULL
+            for (i in 1:(dim(cc)[1])){
+                jjname <- paste0("https://results.elections.virginia.gov/vaelections/2021%20November%20General/Json/Locality/",cc$COUNTY[i],"/Governor.json")
+                jj <- jsonlite::fromJSON(jjname)
+                pp <- jj$Precincts
+                for (j in 1:length(pp$PrecinctName)){
+                    nn <- as.data.frame(pp$Candidates[j])
+                    dem <- nn$Votes[nn$PoliticalParty == "Democratic"]
+                    rep <- nn$Votes[nn$PoliticalParty == "Republican"]
+                    lib <- nn$Votes[nn$PoliticalParty == "Liberation"]
+                    wri <- nn$Votes[nn$PoliticalParty == "Write-In"]
+                    tot <- dem + rep + lib + wri
+                    dd <- data.frame(cc$COUNTY[i], pp$PrecinctName[j],tot,dem,rep,lib,wri)
+                    names(dd) <- c("COUNTY","AREA","TOTAL","McAuliffe","Youngkin","Blanding","WriteIn")
+                    ee <- rbind(ee, dd)
+                }
+            }
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","WRI")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2021_Governor.csv"))
+            write_delim(ee, paste0(data_dir,"VA_2021_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
         # WISCONSIN PRECINCT DATA
         createWI_2016_President_Original <- function(){
             catmsg("##### START createWI_2016_President_Original #####")
@@ -4620,6 +4645,9 @@ shinyServer(
                     else if (races[i] == "TX_2020_Senate_210603"){
                         createTX_2020_Senate_210603()
                     }
+                    else if (races[i] == "VA_2021_Governor"){
+                        createVA_2021_Governor()
+                    }
                     else if (races[i] == "WI_2016_President"){
                         createWI_2016_President()
                     }
@@ -5088,6 +5116,9 @@ shinyServer(
             else if (input$state2 == "TX"){
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2016_President_210604")
+            }
+            else if (input$state2 == "VA"){
+                files <- c("VA_2021_Governor")
             }
             else if (input$state2 == "WI"){
                 files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2016_President","WI_2016_President_Recount")
