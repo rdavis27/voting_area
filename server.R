@@ -3151,6 +3151,75 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate_210603.csv"))
             write_delim(xx, paste0(data_dir,"TX_2020_Senate_210603.csv"), append = TRUE, col_names = TRUE)
         }
+        createVA_2016_President <- function(){
+            catmsg("##### START createVA_2016_President #####")
+            xx <- read_csv(paste0(input_dir,"VA/2016/Virginia_Elections_Database__2016_President_General_Election_including_precincts.csv"), col_names = FALSE, skip = 2)
+            # names(xx) <- c("County/City","Ward","Pct",
+            #                "Hillary R. Clinton","Donald J. Trump",
+            #                "Gary Johnson","Evan McMullin","Jill Stein",
+            #                "All Others","Total Votes Cast")
+            names(xx) <- c("COUNTY","WARD","AREA","Clinton","Trump","Johnson","McMullin","Stein","Other","TOTAL")
+            xx <- xx[,c(1,3,10,4:9)]
+            xx <- xx[xx$COUNTY != "TOTALS",]
+            xx$COUNTY <- str_to_title(xx$COUNTY)
+            xx$AREA <- gsub("^[0]+","",xx$AREA)
+            xx$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",xx$AREA)
+            xx$AREA <- str_to_title(xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","IND","GRN","OTH")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2016_President.csv"))
+            write_delim(xx, paste0(data_dir,"VA_2016_President.csv"), append = TRUE, col_names = TRUE)
+        }
+        createVA_2017_Governor <- function(){
+            catmsg("##### START createVA_2017_Governor #####")
+            xx <- read_csv(paste0(input_dir,"VA/2017/Virginia_Elections_Database__2017_Governor_General_Election_including_precincts.csv"), col_names = FALSE, skip = 2)
+            # names(xx) <- c("County/City","Ward","Pct",
+            #                "Ralph Shearer Northam","Edward Walter Gillespie",
+            #                "Clifford Daniel Hyra","All Others","Total Votes Cast")
+            names(xx) <- c("COUNTY","WARD","AREA","Northam","Gillespie","Hyra","Other","TOTAL")
+            xx <- xx[,c(1,3,8,4:7)]
+            xx <- xx[xx$COUNTY != "TOTALS",]
+            xx$COUNTY <- str_to_title(xx$COUNTY)
+            xx$AREA <- gsub("^[0]+","",xx$AREA)
+            xx$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",xx$AREA)
+            xx$AREA <- str_to_title(xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2017_Governor.csv"))
+            write_delim(xx, paste0(data_dir,"VA_2017_Governor.csv"), append = TRUE, col_names = TRUE)
+        }
+        createVA_2018_Senate <- function(){
+            catmsg("##### START createVA_2018_Senate #####")
+            xx <- read_csv(paste0(input_dir,"VA/2018/Virginia_Elections_Database__2018_U_S_Senate_General_Election_including_precincts.csv"), col_names = FALSE, skip = 2)
+            # names(xx) <- c("County/City","Ward","Pct",
+            #                "Timothy Michael Kaine","Corey Alan Stewart",
+            #                "Matthew Joseph Waters","All Others","Total Votes Cast")
+            names(xx) <- c("COUNTY","WARD","AREA","Kaine","Stewart","Waters","Other","TOTAL")
+            xx <- xx[,c(1,3,8,4:7)]
+            xx <- xx[xx$COUNTY != "TOTALS",]
+            xx$COUNTY <- str_to_title(xx$COUNTY)
+            xx$AREA <- gsub("^[0]+","",xx$AREA)
+            xx$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",xx$AREA)
+            xx$AREA <- str_to_title(xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2018_Senate.csv"))
+            write_delim(xx, paste0(data_dir,"VA_2018_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createVA_2020_President <- function(){
+            catmsg("##### START createVA_2020_President #####")
+            xx <- read_csv(paste0(input_dir,"VA/2020/Virginia_Elections_Database__2020_President_General_Election_including_precincts.csv"), col_names = FALSE, skip = 2)
+            # names(xx) <- c("County/City","Ward","Pct",
+            #                "Joseph Robinette Biden, Jr","Donald J. Trump",
+            #                "Jo Jorgensen","All Others","Total Votes Cast")
+            names(xx) <- c("COUNTY","WARD","AREA","Biden","Trump","Jorgensen","Other","TOTAL")
+            xx <- xx[,c(1,3,8,4:7)]
+            xx <- xx[xx$COUNTY != "TOTALS",]
+            xx$COUNTY <- str_to_title(xx$COUNTY)
+            xx$AREA <- gsub("^[0]+","",xx$AREA)
+            xx$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",xx$AREA)
+            xx$AREA <- str_to_title(xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2020_President.csv"))
+            write_delim(xx, paste0(data_dir,"VA_2020_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createVA_2021_Governor <- function(){
             catmsg("##### START createVA_2021_Governor #####")
             cc <- read_csv(paste0(data_dir,"VA_COUNTIES.csv"), col_names = TRUE)
@@ -3171,6 +3240,12 @@ shinyServer(
                     ee <- rbind(ee, dd)
                 }
             }
+            ee$COUNTY <- gsub("_"," ",ee$COUNTY)
+            ee$COUNTY <- str_to_title(ee$COUNTY)
+            #ee$AREA <- gsub("^[#]+ ","",ee$AREA) #comment to force into Other
+            ee$AREA <- gsub("^[0]+","",ee$AREA)
+            ee$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",ee$AREA)
+            ee$AREA <- str_to_title(ee$AREA)
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","WRI")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"VA_2021_Governor.csv"))
             write_delim(ee, paste0(data_dir,"VA_2021_Governor.csv"), append = TRUE, col_names = TRUE)
@@ -3397,7 +3472,7 @@ shinyServer(
                     tloc <- substring(xcounty,2)
                 }
                 else{
-                    tloc <- paste0(xcounty," County, ",tloc)
+                    tloc <- paste0(xcounty,input$areaname,", ",tloc)
                 }
             }
             if (input$dist != ""){
@@ -3546,7 +3621,7 @@ shinyServer(
             xx$PREPEND[xx$POS == 2] <- "  "
             xx$LABEL <- paste0(xx$PREPEND,xx$LABEL)
             xx$LABEL[xx$POS == 0] <- ""
-            title <- paste0(input$xcounty," County, ",input$races[1]," - Total Votes and Vote Margin by Area")
+            title <- paste0(input$xcounty,input$areaname,", ",input$races[1]," - Total Votes and Vote Margin by Area")
             xlabel <- "Total Votes"
             ylabel <- "Vote Margin"
             
@@ -3614,10 +3689,10 @@ shinyServer(
             xsortdir <- "Ascending"
             if (input$xsortdesc) xsortdir <- "Desc"
             if (xtype >= 2){
-                title <- paste0(xcounty," County, ",input$races[1])
+                title <- paste0(xcounty,input$areaname,", ",input$races[1])
             }
             else{
-                title <- paste0(xcounty," County, ",input$races[1]," - Cumulative Vote Tally, ordered by ",names(zz)[input$xsortcol],", ",xsortdir)
+                title <- paste0(xcounty,input$areaname,", ",input$races[1]," - Cumulative Vote Tally, ordered by ",names(zz)[input$xsortcol],", ",xsortdir)
             }
             xlabel <- "Votes"
             ylabel <- "Percent of Votes"
@@ -3689,6 +3764,7 @@ shinyServer(
             for (i in 1:imx) pp[[i]] <- doCvtPlot(xx, cc[(ist+i-1),"COUNTY"], 2)
             plot_grid(plotlist = pp, ncol = input$cvt_cols)
         #})
+        #}, height = 9000, width = 1000) #45 rows
         }, height = 600, width = 1000)
         doAreaPlot2 <- function(xx, xcounty, xtype){
             zzxx <<- xx #DEBUG-RM
@@ -4645,6 +4721,18 @@ shinyServer(
                     else if (races[i] == "TX_2020_Senate_210603"){
                         createTX_2020_Senate_210603()
                     }
+                    else if (races[i] == "VA_2016_President"){
+                        createVA_2016_President()
+                    }
+                    else if (races[i] == "VA_2017_Governor"){
+                        createVA_2017_Governor()
+                    }
+                    else if (races[i] == "VA_2018_Senate"){
+                        createVA_2018_Senate()
+                    }
+                    else if (races[i] == "VA_2020_President"){
+                        createVA_2020_President()
+                    }
                     else if (races[i] == "VA_2021_Governor"){
                         createVA_2021_Governor()
                     }
@@ -5118,7 +5206,7 @@ shinyServer(
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2016_President_210604")
             }
             else if (input$state2 == "VA"){
-                files <- c("VA_2021_Governor")
+                files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
                 files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2016_President","WI_2016_President_Recount")
