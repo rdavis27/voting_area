@@ -26,8 +26,9 @@ shinyUI(pageWithSidebar(
         checkboxInput("showother","Show Other Areas",value = TRUE),
         splitLayout(
             numericInput("minvotes","Min Votes",30,min = 0),
-            textInput("dist", "DIST", value = "")
+            numericInput("minvotes2","Min Votes2",0,min = 0)
         ),
+        selectInput("dist", "DISTRICT", choices = c(""), selected = ""),
         selectInput("units", "Units",
                     choices = c("Count","Percent","Percent ratio"),
                     selected = "Percent",

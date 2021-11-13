@@ -999,6 +999,84 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2018_Senate.csv"))
             write_delim(xx, paste0(data_dir,"FL_2018_Senate.csv"), append = TRUE, col_names = TRUE)
         }
+        createFL_2018_House <- function(){
+            cc <- c(
+                "ALA","BAK","BAY","BRA","BRE","BRO","CAL","CHA","CIT","CLA",
+                "CLL","CLM","DAD","DES","DIX","DUV","ESC","FLA","FRA","GAD",
+                "GIL","GLA","GUL","HAM","HAR","HEN","HER","HIG","HIL","HOL",
+                "IND","JAC","JEF","LAF","LAK","LEE","LEO","LEV","LIB","MAD",
+                "MAN","MON","MRN","MRT","NAS","OKA","OKE","ORA","OSC","PAL",
+                "PAS","PIN","POL","PUT","SAN","SAR","SEM","STJ","STL","SUM",
+                "SUW","TAY","UNI","VOL","WAK","WAL","WAS")
+            zz <- NULL
+            for (i in 1:length(cc)){
+                xx <- read_delim(paste0(input_dir,"FL/precinctlevelelectionresults2018gen/",
+                                        cc[i],"_PctResults20181106.txt"), '\t', quote = "",
+                                 col_names = FALSE, col_types = "ccdccccddddccdccddd")
+                names(xx) <- c("Code","County","ElectNo","ElectDate","ElectName",
+                               "AreaId","AreaLoc","RegAll","RegRep","RegDem",
+                               "RegOth","Contest","Dist","ConCode","Candidate",
+                               "Party","RegId","CandNo","Votes")
+                xx <- xx[xx$Contest == "Representative in Congress",]
+                if (NROW(xx) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," County had no Representative in Congress"))
+                    next
+                }
+                xx <- xx[,c("Dist","County","AreaId","Candidate","Party","Votes")]
+                for (j in 1:NROW(xx)){
+                    if (!is.na(xx$Party[j])){
+                        xx$Candidate[j] <- xx$Party[j]
+                    }
+                    else{
+                        xx$Candidate[j] <- tail(strsplit(xx$Candidate[j],split=" ")[[1]],1) #use last name
+                    }
+                }
+                xx <- xx[,-5] # delete Party
+                xx <- xx %>%
+                    group_by(Dist,County,AreaId,Candidate) %>%
+                    summarize(Votes=sum(Votes))
+                xx <- xx %>% spread(Candidate,Votes)
+                xx$TOTAL <- 0
+                yy <- xx[,c("Dist","County","AreaId","TOTAL")]
+                yy$DEM <- 0
+                yy$REP <- 0
+                yy$NPA <- 0
+                yy$WriteinVotes <- 0
+                yy$OverVotes    <- 0
+                yy$UnderVotes   <- 0
+                if ("DEM" %in% names(xx)){
+                    yy$DEM <- xx$DEM
+                    yy$DEM[is.na(yy$DEM)] <- 0
+                }
+                if ("REP" %in% names(xx)){
+                    yy$REP <- xx$REP
+                    yy$REP[is.na(yy$REP)] <- 0
+                }
+                if ("NPA" %in% names(xx)){
+                    yy$NPA <- xx$NPA
+                    yy$NPA[is.na(yy$NPA)] <- 0
+                }
+                if ("WriteinVotes" %in% names(xx)){
+                    yy$WriteinVotes <- xx$WriteinVotes
+                    yy$WriteinVotes[is.na(yy$WriteinVotes)] <- 0
+                }
+                if ("OverVotes" %in% names(xx)){
+                    yy$OverVotes <- xx$OverVotes
+                    yy$OverVotes[is.na(yy$OverVotes)] <- 0
+                }
+                if ("UnderVotes" %in% names(xx)){
+                    yy$UnderVotes <- xx$UnderVotes
+                    yy$UnderVotes[is.na(yy$UnderVotes)] <- 0
+                }
+                yy$TOTAL <- yy$DEM + yy$REP + yy$NPA + yy$WriteinVotes
+                zz <- rbind(zz,yy)
+            }
+            names(zz) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","NPA","WRITEIN","OVERVOTES","UNDERVOTES")
+            zz$DIST <- gsub("District ","",zz$DIST)
+            zz$DIST <- gsub("^ ","",zz$DIST)
+            write(paste(names(zz), collapse = " "), paste0(data_dir,"FL_2018_House.csv"))
+            write_delim(zz, paste0(data_dir,"FL_2018_House.csv"), append = TRUE, col_names = TRUE)
+        }
         createFL_2020_President <- function(){
             cc <- fl_county_codes
             xx <- NULL
@@ -3779,6 +3857,8 @@ shinyServer(
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
                      (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes),]
+            xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes2) &
+                     (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes2),]
             row.names(xx) <- seq(1:NROW(xx)) #DEBUG-TEST NROW(xx) == 0
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
             if (input$party == "Democrat"){
@@ -4060,6 +4140,8 @@ shinyServer(
             names(xx)[3:10] <- c("DEM1","REP1","MARGIN1","TOTAL1","DEM2","REP2","MARGIN2","TOTAL2")
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes) |
                      (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes),]
+            xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes2) &
+                     (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes2),]
             row.names(xx) <- seq(1:NROW(xx))
             xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
             if (input$party == "Democrat"){
@@ -4537,6 +4619,9 @@ shinyServer(
                     else if (races[i] == "FL_2018_Senate"){
                         createFL_2018_Senate()
                     }
+                    else if (races[i] == "FL_2018_House"){
+                        createFL_2018_House()
+                    }
                     else if (races[i] == "FL_2020_President"){
                         createFL_2020_President()
                         #createFL_2020_Counties()
@@ -4814,8 +4899,15 @@ shinyServer(
                 }
             )    
             if (names(xx0)[1] == "DIST"){
-                if (input$dist != ""){
-                    xx0 <- xx0[xx0$DIST == input$dist,]
+                if (sum(!is.na(xx0$DIST)) > 0){
+                    if (input$dist != ""){
+                        xx0 <- xx0[xx0$DIST == input$dist,]
+                    }
+                    else{
+                        sudist <- sort(unique(xx0$DIST))
+                        updateSelectInput(session, "dist", NULL,
+                                          choices = c("", sudist), selected = "")
+                    }
                 }
                 xx0 <- xx0[,-1]
                 xxparty <- xxparty[,-1]
@@ -4868,7 +4960,7 @@ shinyServer(
             dd <- rbind(dd,ddtot)
             return(dd)
         }
-        modarea <- function(dd){
+        modarea <- function(dd, yr){
             # Move area modification to function called by getdata() & getdata2()
             # if (input$xcounty != "" & input$xcounty != "(all)"){
             #     dd <- dd[dd$COUNTY == input$xcounty,]
@@ -4890,10 +4982,12 @@ shinyServer(
                             dogroup <- TRUE
                             dd$AREA <- gsub("[A-Z]+$","",dd$AREA)
                         }
-                        else if (input$state2 == "FL"){
+                        else if (input$state2 == "FL" & yr >= 2020){
                             dogroup <- TRUE
                             dd$AREA[dd$COUNTY == "Miami-Dade"] <-
                                 gsub(".$","",dd$AREA[dd$COUNTY == "Miami-Dade"])
+                            dd$AREA[dd$COUNTY == "Miami-Dade"] <-
+                                gsub("^[0]+","",dd$AREA[dd$COUNTY == "Miami-Dade"])
                         }
                     }
                     else if (ch1 == "="){
@@ -4925,8 +5019,9 @@ shinyServer(
             dd <- NULL
             if (nraces >= 1){
                 dd <- getrace(races[1])
+                yr <- as.numeric(substr(races[1],4,7))
             }
-            dd <- modarea(dd)
+            dd <- modarea(dd, yr)
             #zzdd1 <<- dd #DEBUG-RM
             dd
         })
@@ -4936,8 +5031,9 @@ shinyServer(
             dd <- NULL
             if (nraces >= 2){
                 dd <- getrace(races[2])
-                }
-            dd <- modarea(dd)
+                yr <- as.numeric(substr(races[2],4,7))
+            }
+            dd <- modarea(dd, yr)
             #zzdd2 <<- dd #DEBUG-RM
             dd
         })
@@ -5175,7 +5271,7 @@ shinyServer(
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
             }
             else if (input$state2 == "FL"){
-                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_Registered","FL_2016_President")
+                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_House","FL_2018_Registered","FL_2016_President")
             }
             else if (input$state2 == "IA"){
                 files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4","IA_2016_President")
@@ -5212,6 +5308,7 @@ shinyServer(
                 files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2016_President","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
+            updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")
         })
         observeEvent(input$races,{
             getCounties()
