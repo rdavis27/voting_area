@@ -3060,6 +3060,89 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate.csv"))
             write_delim(xx, paste0(data_dir,"TX_2018_Senate.csv"), append = TRUE, col_names = TRUE)
         }
+        createTX_2018_House <- function(){
+            catmsg("##### START createTX_2018_House #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            yy <- NULL
+            for (i in 1:36){
+                xx <- read_csv(paste0(input_dir,"TX/2018/","u.s. rep ",i,".csv"))
+                # names(xx) <- c("CNTYVTD","NEW***VTDKEY",
+                #                "DoggettD_20G_U.S. Rep 35",
+                #                "Garcia SharonR_20G_U.S. Rep 35",
+                #                "LoeweL_20G_U.S. Rep 35",
+                #                "MataI_20G_U.S. Rep 35")
+                xx$DIST <- i
+                xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+                for (i in 1:NROW(xx)){
+                    xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                    xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+                }
+                xx$AREA <- xx$CNTYVTD
+                xx$TOTAL <- 0
+                itot <- NCOL(xx)
+                idem <- irep <- ilib <- ioth1 <- ioth2 <- noth <- 0
+                for (j in 3:(itot-4)){
+                    if(grepl("D_18G_", names(xx)[j])){
+                        idem <- j
+                    }
+                    else if(grepl("R_18G_", names(xx)[j])){
+                        irep <- j
+                    }
+                    else if(grepl("L_18G_", names(xx)[j])){
+                        ilib <- j
+                    }
+                    else if(grepl("[GIW]_18G_", names(xx)[j])){
+                        if (noth == 0){
+                            ioth1 <- j
+                            noth <- 1
+                        }
+                        else if (noth == 1){
+                            ioth2 <- j
+                            noth <- 2
+                        }
+                        else{
+                            print(paste0("### WARNING: INGORING ",names(xx)[j]))
+                        }
+                    }
+                }
+                j <- NCOL(xx)
+                if (idem == 0){
+                    j <- j+1
+                    idem <- j
+                    xx$DEM0 <- 0
+                }
+                if (irep == 0){
+                    j <- j+1
+                    irep <- j
+                    xx$REP0 <- 0
+                }
+                if (ilib == 0){
+                    j <- j+1
+                    ilib <- j
+                    xx$LIB0 <- 0
+                }
+                if (ioth1 == 0){
+                    j <- j+1
+                    ioth1 <- j
+                    xx$OTH10 <- 0
+                }
+                if (ioth2 == 0){
+                    j <- j+1
+                    ioth2 <- j
+                    xx$OTH20 <- 0
+                }
+                xx <- xx[,c((itot-3):itot,idem,irep,ilib,ioth1,ioth2)]
+                names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH1","OTH2")
+                zzxx <<- xx #DEBUG-RM
+                yy <- yy <- rbind(yy, xx)
+                zzyy <<- yy #DEBUG-RM
+            }
+            partyyy <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH1","OTH2")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2018_House.csv"))
+            write_delim(yy, paste0(data_dir,"TX_2018_House.csv"), append = TRUE, col_names = TRUE)
+        }
         createTX_2020_President <- function(){
             catmsg("##### START createTX_2020_President #####")
             cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
@@ -3101,6 +3184,77 @@ shinyServer(
             partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
             write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_House <- function(){
+            catmsg("##### START createTX_2020_House #####")
+            cc <- read_excel(paste0(input_dir,"all-geocodes-v2020.xlsx"), sheet = "all-geocodes-v2019", skip = 4)
+            names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+            cctx <- cc[cc$StateCode == "48",]
+            yy <- NULL
+            for (i in 1:36){
+                xx <- read_csv(paste0(input_dir,"TX/2020/","u.s. rep ",i,".csv"))
+                # names(xx) <- c("CNTYVTD","NEW***VTDKEY",
+                #                "DoggettD_20G_U.S. Rep 35",
+                #                "Garcia SharonR_20G_U.S. Rep 35",
+                #                "LoeweL_20G_U.S. Rep 35",
+                #                "MataI_20G_U.S. Rep 35")
+                xx$DIST <- i
+                xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+                for (i in 1:NROW(xx)){
+                    xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+                    xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+                }
+                xx$AREA <- xx$CNTYVTD
+                xx$TOTAL <- 0
+                idem <- irep <- ilib <- ioth <- ioth1 <- ioth2 <- noth <- 0
+                for (j in 3:(NCOL(xx)-4)){
+                    if(grepl("D_20G_", names(xx)[j])){
+                        idem <- j
+                    }
+                    else if(grepl("R_20G_", names(xx)[j])){
+                        irep <- j
+                    }
+                    else if(grepl("L_20G_", names(xx)[j])){
+                        ilib <- j
+                    }
+                    else if(grepl("[GIW]_20G_", names(xx)[j])){
+                        if (noth == 0){
+                            ioth1 <- j
+                            noth <- 1
+                        }
+                        else if (noth == 1){
+                            ioth2 <- j
+                            noth <- 2
+                        }
+                        else{
+                            print(paste0("### WARNING: INGORING ",names(xx)[j]))
+                        }
+                    }
+                }
+                if (ilib == 0){
+                    xx <- xx[,c((NCOL(xx)-3):(NCOL(xx)),idem,irep)]
+                    xx$LIB <- 0
+                    xx$OTH1 <- 0
+                    xx$OTH2 <- 0
+                }
+                else if (ioth1 == 0){
+                    xx <- xx[,c((NCOL(xx)-3):(NCOL(xx)),idem,irep,ilib)]
+                    xx$OTH1 <- 0
+                    xx$OTH2 <- 0
+                }
+                else if (ioth2 == 0){
+                    xx <- xx[,c((NCOL(xx)-3):(NCOL(xx)),idem,irep,ilib,ioth1)]
+                    xx$OTH2 <- 0
+                }
+                else{
+                    xx <- xx[,c((NCOL(xx)-3):(NCOL(xx)),idem,irep,ilib,ioth1,ioth2)]
+                }
+                names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH1","OTH2")
+                yy <- yy <- rbind(yy, xx)
+            }
+            partyyy <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH1","OTH2")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2020_House.csv"))
+            write_delim(yy, paste0(data_dir,"TX_2020_House.csv"), append = TRUE, col_names = TRUE)
         }
         # TEXAS PRECINCT DATA DOWNLOADED IN JUNE 2021
         createTX_2016_President_210604 <- function(){
@@ -4782,11 +4936,17 @@ shinyServer(
                     else if (races[i] == "TX_2018_Senate"){
                         createTX_2018_Senate()
                     }
+                    else if (races[i] == "TX_2018_House"){
+                        createTX_2018_House()
+                    }
                     else if (races[i] == "TX_2020_President"){
                         createTX_2020_President()
                     }
                     else if (races[i] == "TX_2020_Senate"){
                         createTX_2020_Senate()
+                    }
+                    else if (races[i] == "TX_2020_House"){
+                        createTX_2020_House()
                     }
                     else if (races[i] == "TX_2016_President_210604"){
                         createTX_2016_President_210604()
@@ -5298,7 +5458,7 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2020_President","TX_2020_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2016_President",
+                files <- c("TX_2020_President","TX_2020_Senate","TX_2020_House","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2016_President_210604")
             }
             else if (input$state2 == "VA"){
