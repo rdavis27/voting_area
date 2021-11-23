@@ -3546,6 +3546,64 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2018_SupremeCourt.csv"))
             write_delim(xx, paste0(data_dir,"WI_2018_SupremeCourt.csv"), append = TRUE, col_names = TRUE)
         }
+        createWI_2018_House <- function(){
+            catmsg("##### START createWI_2018_House #####")
+            yy <- NULL
+            for (i in 1:8){
+                sheetn <- paste0("Sheet",i+1)
+                skipn <- 9
+                if (i == 1) skipn <- 10
+                xx0 <- read_excel(paste0(input_dir,"WI/2018/","Ward by Ward Report-Gen Election-Congress_0.xlsx"),
+                                  sheet = sheetn, skip = skipn)
+                names(xx0)[1:2] <- c("COUNTY","AREA")
+                xx0 <- xx0[!grepl("Office Totals",xx0$COUNTY,ignore.case = TRUE),]
+                xx0 <- xx0[xx0$AREA != "Office Totals:",]
+                xx0 <- xx0[!grepl("County Totals",xx0$AREA,ignore.case = TRUE),]
+                if (NCOL(xx0) == 6){
+                    names(xx0) <- c("COUNTY","AREA","TOTAL","DEM","REP","OTH")
+                    xx0$IND2 <- 0
+                    xx0$LAST <- xx0$OTH
+                    xx0$OTH <- 0
+                }
+                else if (NCOL(xx0) == 7){
+                    names(xx0) <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","OTH")
+                    xx0$LAST <- xx0$OTH
+                    xx0$OTH <- 0
+                }
+                else if (NCOL(xx0) == 8){
+                    if (is.na(xx0[1,8])) xx0 <- xx0[-8]
+                    names(xx0) <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","OTH")
+                    xx0$LAST <- xx0$OTH
+                    xx0$OTH <- 0
+                }
+                else{ # NCOL(xx0) == 8
+                    if (is.na(xx0[1,8])) xx0 <- xx0[-8]
+                    names(xx0) <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2","OTH")
+                }
+                xx0$DIST <- i
+                if (i == 2){
+                    xx <- xx0[,c(9,1,2,3:8)]
+                }
+                else{
+                    xx <- xx0[,c(9,1,2,3,5,4,6:8)]
+                }
+                names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2","OTH")
+                for (i in 1:NROW(xx)){
+                    if (!is.na(xx$COUNTY[i])){
+                        lastCounty <- xx$COUNTY[i]
+                    }
+                    else{
+                        xx$COUNTY[i] <- lastCounty
+                    }
+                }
+                xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+                yy <- yy <- rbind(yy, xx)
+            }
+            partyyy <- names(yy)
+            #partyyy[4:5] <- c("DEM","REP")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"WI_2018_House.csv"))
+            write_delim(yy, paste0(data_dir,"WI_2018_House.csv"), append = TRUE, col_names = TRUE)
+        }
         createWI_2020_President <- function(){
             catmsg("##### START createWI_2020_President #####")
             xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report PRESIDENT OF THE UNITED STATES by State Representive District - After Recount.xlsx"),
@@ -3584,6 +3642,43 @@ shinyServer(
             partyxx[4:5] <- c("DEM","REP")
             write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2020_SupremeCourt.csv"))
             write_delim(xx, paste0(data_dir,"WI_2020_SupremeCourt.csv"), append = TRUE, col_names = TRUE)
+        }
+        createWI_2020_House <- function(){
+            catmsg("##### START createWI_2020_House #####")
+            yy <- NULL
+            for (i in 1:8){
+                sheetn <- paste0("Sheet",i+1)
+                skipn <- 9
+                if (i == 1) skipn <- 10
+                xx0 <- read_excel(paste0(input_dir,"WI/2020/","Ward by Ward Report - Representative in Congress.xlsx"),
+                                  sheet = sheetn, skip = skipn)
+                names(xx0)[1:2] <- c("COUNTY","AREA")
+                xx0 <- xx0[!grepl("Office Totals",xx0$COUNTY,ignore.case = TRUE),]
+                xx0 <- xx0[xx0$AREA != "Office Totals:",]
+                xx0 <- xx0[!grepl("County Totals",xx0$AREA,ignore.case = TRUE),]
+                if (NCOL(xx0) == 6){
+                    names(xx0) <- c("COUNTY","AREA","TOTAL","DEM","REP","OTH")
+                    xx0$LAST <- xx0$OTH
+                    xx0$OTH <- 0
+                }
+                xx0$DIST <- i
+                xx <- xx0[,c(8,1,2,3:7)]
+                names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","IND","OTH")
+                for (i in 1:NROW(xx)){
+                    if (!is.na(xx$COUNTY[i])){
+                        lastCounty <- xx$COUNTY[i]
+                    }
+                    else{
+                        xx$COUNTY[i] <- lastCounty
+                    }
+                }
+                xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+                yy <- yy <- rbind(yy, xx)
+            }
+            partyyy <- names(yy)
+            #partyyy[4:5] <- c("DEM","REP")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"WI_2020_House.csv"))
+            write_delim(yy, paste0(data_dir,"WI_2020_House.csv"), append = TRUE, col_names = TRUE)
         }
         addScales <- function(gg, xscale, yscale){
             xx <- NULL
@@ -4607,6 +4702,50 @@ shinyServer(
             cat(paste0(getlabels("text", input$xcounty, 1)[1],"\n\n"))
             print(dd)
         })
+        output$heatmap <- renderPlot({
+            dd <- getdataN()
+            nr <- NROW(dd)
+            if (nr < 100){
+                for (i in 1:NROW(dd)){
+                    dd$COUNTY[i] <- sprintf("%02d-%s", i, dd$COUNTY[i])
+                }
+            }
+            else{
+                for (i in 1:NROW(dd)){
+                    dd$COUNTY[i] <- sprintf("%03d-%s", i, dd$COUNTY[i])
+                }
+            }
+            dd[,2:NCOL(dd)] <- scale(dd[,2:NCOL(dd)])
+            ee <- dd %>%
+                gather("RACE", "VALUE", -COUNTY)
+            gg <- ggplot(ee, aes(x = RACE, y = COUNTY, fill = VALUE))
+            gg <- gg + geom_tile()
+            gg <- gg + scale_fill_gradient(low="red", high="green")
+            minlimit <- input$minlimit
+            maxlimit <- input$maxlimit
+            if (minlimit >= maxlimit){
+                # abslimit <- max(abs(min(ee$VALUE)),abs(max(ee$VALUE)))
+                # minlimit <- -abslimit
+                # maxlimit <- abslimit
+                minlimit <- min(ee$VALUE)
+                maxlimit <- max(ee$VALUE)
+            }
+            if (input$midcolor == ""){
+                gg <- gg + scale_fill_gradient(low = input$lowcolor, high = input$highcolor,
+                                               limits = c(minlimit, maxlimit))
+            }
+            else{
+                gg <- gg + scale_fill_gradient2(low = input$lowcolor, mid = input$midcolor,
+                                                high = input$highcolor, midpoint = 0,
+                                                limits = c(minlimit, maxlimit))
+            }
+            gg
+        }, width = 800, height = 1600)
+        output$myTextAreasN <- renderPrint({
+            dd <- getdataN()
+            #print(dd)
+            return(dd)
+        })
         output$getcsv <- downloadHandler(
             filename = function(){
                 paste0(input$races[1],"_",input$xcounty,"_",input$units,".csv")
@@ -4950,11 +5089,17 @@ shinyServer(
                     else if (races[i] == "WI_2018_SupremeCourt"){
                         createWI_2018_SupremeCourt()
                     }
+                    else if (races[i] == "WI_2018_House"){
+                        createWI_2018_House()
+                    }
                     else if (races[i] == "WI_2020_President"){
                         createWI_2020_President()
                     }
                     else if (races[i] == "WI_2020_SupremeCourt"){
                         createWI_2020_SupremeCourt()
+                    }
+                    else if (races[i] == "WI_2020_House"){
+                        createWI_2020_House()
                     }
                     else{
                         catmsg(paste0("Unknown race: ",races[i]))
@@ -5251,6 +5396,76 @@ shinyServer(
             row.names(dd) <- seq(1:NROW(dd))
             dd
         })
+        getdataN <- reactive({
+            races <- input$races
+            nraces <- length(races)
+            if (nraces < 2){
+                cat("ERROR: Select two or more races\n")
+                return(NULL)
+            }
+            for (i in 1:nraces){
+                xx <- getrace(races[i])
+                names(xx)[3:5] <- c("TOTAL","DEM","REP")
+                if (input$bycounty){
+                    xx <- xx %>%
+                        group_by(COUNTY) %>%
+                        summarize(TOTAL=sum(TOTAL), DEM=sum(DEM), REP=sum(REP))
+                }
+                racen <- paste0("RACE",i)
+                xx[[racen]] <- xx$DEM - xx$REP
+                if (input$units != "Count"){
+                    xx[[racen]] <- 100 * xx[[racen]] / xx$TOTAL
+                }
+                if (input$bycounty){
+                    xx <- xx[,c(1,NCOL(xx)),]
+                }
+                else{
+                    xx <- xx[,c(1,2,NCOL(xx)),]
+                }
+                if (i == 1){
+                    dd <- xx
+                }
+                else{
+                    if (input$bycounty){
+                        dd <- as.data.frame(merge(dd, xx, by = c("COUNTY"), all = TRUE))
+                    }
+                    else{
+                        dd <- as.data.frame(merge(dd, xx, by = c("COUNTY","AREA"), all = TRUE))
+                    }
+                }
+            }
+            xsortcolN <- input$xsortcolN
+            if (xsortcolN < 0){
+                xsortcolN <- xsortcolN + NCOL(dd) + 1
+            }
+            normalizeN <- input$normalizeN
+            if (normalizeN < 0){
+                normalizeN <- normalizeN + NCOL(dd) + 1
+            }
+            if (normalizeN > 1){
+                ddnorm <- dd[,normalizeN]
+                for (i in 2:NCOL(dd)){
+                    dd[,i] <- dd[,i] - ddnorm
+                }
+            }
+            if (xsortcolN != 0){
+                if (!input$xsortdescN){
+                    dd <- dd[order(dd[xsortcolN]),]
+                }
+                else{
+                    if (class(dd[xsortcolN]) == "numeric"){
+                        dd <- dd[order(-dd[xsortcolN]),]
+                    }
+                    else{
+                        dd <- dd[order(dd[xsortcolN]),]
+                        dd <- dd %>% arrange(desc(row_number()))
+                    }
+                }
+            }
+            if (normalizeN > 1) dd <- dd[-normalizeN]
+            zznn <<- dd #DEBUG-RM
+            dd
+        })
         observeEvent(input$mapsave,{
             eventid <- "Map"
             parmid <- c("maplimitset", "maplimits",
@@ -5419,7 +5634,7 @@ shinyServer(
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2016_President","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
             updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")

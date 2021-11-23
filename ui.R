@@ -257,6 +257,35 @@ shinyUI(pageWithSidebar(
                          plotOutput("areaPlot2b")
                      )
             ),
+            tabPanel("AreasN",
+                     sidebarPanel(
+                         width = 2,
+                         downloadButton("getcsvN","Get CSV"),
+                         downloadButton("getexcelN","Get Excel"),
+                         checkboxInput("bycounty", "By County", value = TRUE),
+                         numericInput("xsortcolN", "Sort AreasN", -1),
+                         checkboxInput("xsortdescN","Desc",value = FALSE),
+                         numericInput("normalizeN", "NormalizeN", 2)
+                     ),
+                     mainPanel(
+                         width = 10,
+                         verbatimTextOutput("myTextAreasN")
+                     )
+            ),
+            tabPanel("Heatmap",
+                     sidebarPanel(
+                         width = 2,
+                         textInput("lowcolor", "Low Color", "red"),
+                         textInput("midcolor", "Mid Color", ""),
+                         textInput("highcolor", "High Color", "green"),
+                         numericInput("minlimit", "Min Limit", 0),
+                         numericInput("maxlimit", "Max Limit", 0)
+                     ),
+                     mainPanel(
+                         width = 10,
+                         plotOutput("heatmap")
+                     )
+            ),
             tabPanel("Usage",
                      htmlOutput(outputId = "myUsage")
             )
