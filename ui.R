@@ -257,33 +257,45 @@ shinyUI(pageWithSidebar(
                          plotOutput("areaPlot2b")
                      )
             ),
-            tabPanel("AreasN",
+            tabPanel("CompareN",
                      sidebarPanel(
                          width = 2,
                          downloadButton("getcsvN","Get CSV"),
                          downloadButton("getexcelN","Get Excel"),
-                         checkboxInput("bycounty", "By County", value = TRUE),
+                         checkboxInput("bycounty", "By County", value = FALSE),
+                         checkboxInput("scalecols", "Scale Columns", value = FALSE),
                          numericInput("xsortcolN", "Sort AreasN", -1),
                          checkboxInput("xsortdescN","Desc",value = FALSE),
-                         numericInput("normalizeN", "NormalizeN", 2)
+                         numericInput("normalizeN", "NormalizeN", 0),
+                         textInput("xcolor_n", "Colors (plotN)", "red2,blue2,green2,red3,blue3,green3"),
+                         textInput("xshape_n", "Shapes (plotN)", "16,17,15,1,2,0"),
+                         textInput("hm_colors", "Colors", "red,green"),
+                         textInput("hm_limits", "Limits", "0,0"),
+                         textInput("racefmt", "Race Format", "34_19_16"),
+                         numericInput("hm_width", "Width", 800),
+                         numericInput("hm_height", "Height", 800)
                      ),
                      mainPanel(
-                         width = 10,
-                         verbatimTextOutput("myTextAreasN")
-                     )
-            ),
-            tabPanel("Heatmap",
-                     sidebarPanel(
-                         width = 2,
-                         textInput("lowcolor", "Low Color", "red"),
-                         textInput("midcolor", "Mid Color", ""),
-                         textInput("highcolor", "High Color", "green"),
-                         numericInput("minlimit", "Min Limit", 0),
-                         numericInput("maxlimit", "Max Limit", 0)
-                     ),
-                     mainPanel(
-                         width = 10,
-                         plotOutput("heatmap")
+                         tabsetPanel(id = "hm_tabs",
+                            tabPanel("AreasN",
+                                mainPanel(
+                                    width = 10,
+                                    verbatimTextOutput("myTextAreasN")
+                                )
+                            ),
+                            tabPanel("Heatmap",
+                                mainPanel(
+                                    width = 10,
+                                    imageOutput("heatmap")
+                                )
+                            ),
+                            tabPanel("PlotN",
+                                mainPanel(
+                                    width = 10,
+                                    imageOutput("plotn")
+                                )
+                            )
+                         )
                      )
             ),
             tabPanel("Usage",

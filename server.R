@@ -3791,7 +3791,10 @@ shinyServer(
             }
             racex <- input$races[1]
             racey <- input$races[2]
-            if (input$xdxplot2){
+            if (type == "plotn"){
+                title <- paste0(tloc," Margin Vote Share by Race (",input$units,")")
+            } 
+            else if (input$xdxplot2){
                 if (input$units == "Percent ratio"){
                     if (xtype >= 2){
                         title <- paste(tloc,"Voter Turnout")
@@ -4702,7 +4705,7 @@ shinyServer(
             cat(paste0(getlabels("text", input$xcounty, 1)[1],"\n\n"))
             print(dd)
         })
-        output$heatmap <- renderPlot({
+        output$heatmap <- renderImage({
             dd <- getdataN()
             nr <- NROW(dd)
             if (nr < 100){
@@ -4715,14 +4718,38 @@ shinyServer(
                     dd$COUNTY[i] <- sprintf("%03d-%s", i, dd$COUNTY[i])
                 }
             }
+            if (names(dd)[2] == "AREA"){
+                dd <- dd[-1]
+                names(dd)[1] <- "COUNTY"
+            }
             dd[,2:NCOL(dd)] <- scale(dd[,2:NCOL(dd)])
             ee <- dd %>%
                 gather("RACE", "VALUE", -COUNTY)
+            #ee$COUNTY <- as.numeric(as.factor(ee$COUNTY))
+            ee$COUNTY <- as.factor(ee$COUNTY)
+            ee$RACE <- as.factor(ee$RACE)
+            zzdd <<- ee #DEBUG-RM
+            
+            outfile <- tempfile(fileext='.png')
+            # Generate the PNG
+            png(outfile, width=input$hm_width, height=input$hm_height)
+
             gg <- ggplot(ee, aes(x = RACE, y = COUNTY, fill = VALUE))
             gg <- gg + geom_tile()
             gg <- gg + scale_fill_gradient(low="red", high="green")
-            minlimit <- input$minlimit
-            maxlimit <- input$maxlimit
+            #gg <- ggplot(ee, aes(x = COUNTY, y = VALUE, fill = RACE))
+            #gg <- gg + geom_line()
+            #gg <- gg + scale_fill_gradient(low="red", high="green")
+            #gg <- ggplot(ee, aes(x = COUNTY, y = VALUE))
+            ###gg <- ggplot(ee, aes(y = COUNTY, x = VALUE))
+            #gg <- gg + geom_point(aes_string(color="Candidate",shape="Candidate"), size=3, alpha=as.numeric(input$xalpha))
+            #gg <- gg + geom_line(aes_string(color="RACE"), size=2, alpha=as.numeric(input$xalpha))
+            ###gg <- gg + geom_point(aes_string(color="RACE", shape="RACE"), size=2)
+            #   gg <- gg + geom_line(aes_string(color="RACE"), size=2)
+            #gg <- gg + geom_line()
+            vlimits <- as.numeric(unlist(strsplit(input$hm_limits,",")))
+            minlimit <- vlimits[1]
+            maxlimit <- vlimits[2]
             if (minlimit >= maxlimit){
                 # abslimit <- max(abs(min(ee$VALUE)),abs(max(ee$VALUE)))
                 # minlimit <- -abslimit
@@ -4730,17 +4757,111 @@ shinyServer(
                 minlimit <- min(ee$VALUE)
                 maxlimit <- max(ee$VALUE)
             }
-            if (input$midcolor == ""){
-                gg <- gg + scale_fill_gradient(low = input$lowcolor, high = input$highcolor,
+            vcolors <- unlist(strsplit(input$hm_colors,","))
+            if (length(vcolors) < 3){
+                gg <- gg + scale_fill_gradient(low = vcolors[1], high = vcolors[2],
                                                limits = c(minlimit, maxlimit))
             }
             else{
-                gg <- gg + scale_fill_gradient2(low = input$lowcolor, mid = input$midcolor,
-                                                high = input$highcolor, midpoint = 0,
+                gg <- gg + scale_fill_gradient2(low = vcolors[1], mid = vcolors[2],
+                                                high = vcolors[3], midpoint = 0,
                                                 limits = c(minlimit, maxlimit))
             }
-            gg
-        }, width = 800, height = 1600)
+            print(gg)
+            dev.off()
+            # Return a list containing the filename
+            list(src = outfile,
+                 contentType = 'image/png',
+                 #width = 400,
+                 #height = 300,
+                 alt = "This is alternate text")
+        }, deleteFile = TRUE)
+        output$plotn <- renderImage({
+            dd <- getdataN()
+            nr <- NROW(dd)
+            if (nr < 100){
+                for (i in 1:NROW(dd)){
+                    dd$COUNTY[i] <- sprintf("%02d-%s", i, dd$COUNTY[i])
+                }
+            }
+            else{
+                for (i in 1:NROW(dd)){
+                    dd$COUNTY[i] <- sprintf("%03d-%s", i, dd$COUNTY[i])
+                }
+            }
+            xlabel <- "County"
+            ylabel <- "Margin Vote Share"
+            if (names(dd)[2] == "AREA"){
+                dd <- dd[-1]
+                names(dd)[1] <- "COUNTY"
+                xlabel <- "Precinct"
+                if (input$state2 == "WI"){
+                    xlabel <- "Voting Area"
+                }
+            }
+            if (input$scalecols){
+                dd[,2:NCOL(dd)] <- scale(dd[,2:NCOL(dd)])
+                ylabel <- "Scaled Margin Vote Share"
+            }
+            ylabel <- paste0(ylabel,"\nSources: see http://econdataus.com/voting_area.htm")
+            title <- getlabels("plotn",input$xcounty,1)
+            ee <- dd %>%
+                gather("RACE", "VALUE", -COUNTY)
+            #ee$COUNTY <- as.numeric(as.factor(ee$COUNTY))
+            ee$COUNTY <- factor(ee$COUNTY, levels = unique(ee$COUNTY))
+            ee$RACE <- factor(ee$RACE, levels = unique(ee$RACE))
+            zzee <<- ee #DEBUG-RM
+            
+            outfile <- tempfile(fileext='.png')
+            # Generate the PNG
+            png(outfile, width=input$hm_width, height=input$hm_height)
+            
+            gg <- ggplot(ee, aes(x = COUNTY, y = VALUE, group = RACE))
+            gg <- gg + geom_point(aes_string(color="RACE", shape="RACE"), size=3)
+            #gg <- gg + geom_point(aes_string(color="RACE", shape="RACE"))
+            gg <- gg + geom_line(aes(color=RACE))
+            gg <- gg + geom_hline(yintercept=0, color=input$ncolor2)
+            gg <- gg + coord_flip()
+            gg <- gg + ggtitle(title)
+            gg <- gg + xlab(xlabel) + ylab(ylabel)
+            vcolor <- unlist(strsplit(input$xcolor_n, ","))
+            #vcolor <- vcolor[isParty]
+            if (length(vcolor) > 0){
+                gg <- gg + scale_color_manual(values = vcolor) # Line Graph
+            }
+            vshape <- as.numeric(unlist(strsplit(input$xshape_n, ",")))
+            if (length(vshape) > 1){
+                gg <- gg + scale_shape_manual(values = vshape) # Line Graph
+            }
+            vlimits <- as.numeric(unlist(strsplit(input$hm_limits,",")))
+            minlimit <- vlimits[1]
+            maxlimit <- vlimits[2]
+            if (minlimit >= maxlimit){
+                # abslimit <- max(abs(min(ee$VALUE)),abs(max(ee$VALUE)))
+                # minlimit <- -abslimit
+                # maxlimit <- abslimit
+                minlimit <- min(ee$VALUE)
+                maxlimit <- max(ee$VALUE)
+            }
+            # vcolors <- unlist(strsplit(input$hm_colors,","))
+            # if (length(vcolors) < 3){
+            #     gg <- gg + scale_fill_gradient(low = vcolors[1], high = vcolors[2],
+            #                                    limits = c(minlimit, maxlimit))
+            # }
+            # else{
+            #     gg <- gg + scale_fill_gradient2(low = vcolors[1], mid = vcolors[2],
+            #                                     high = vcolors[3], midpoint = 0,
+            #                                     limits = c(minlimit, maxlimit))
+            # }
+            print(gg)
+            dev.off()
+            # Return a list containing the filename
+            list(src = outfile,
+                 contentType = 'image/png',
+                 #width = 400,
+                 #height = 300,
+                 alt = "This is alternate text")
+        }, deleteFile = TRUE)
         output$myTextAreasN <- renderPrint({
             dd <- getdataN()
             #print(dd)
@@ -5405,13 +5526,38 @@ shinyServer(
             }
             for (i in 1:nraces){
                 xx <- getrace(races[i])
+                if (input$xcounty != "" & input$xcounty != "(all)"){
+                    xx <- xx[xx$COUNTY == input$xcounty,]
+                }
+                else{
+                    xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
+                }
                 names(xx)[3:5] <- c("TOTAL","DEM","REP")
                 if (input$bycounty){
                     xx <- xx %>%
                         group_by(COUNTY) %>%
                         summarize(TOTAL=sum(TOTAL), DEM=sum(DEM), REP=sum(REP))
                 }
-                racen <- paste0("RACE",i)
+                rf <- input$racefmt
+                racei <- races[i]
+                rsplit <- strsplit(racei, "_")
+                if (length(unlist(rsplit)) > 1){
+                    from <- as.numeric(substr(rf,1,1))
+                    to   <- as.numeric(substr(rf,2,2))
+                    racen <- substr(unlist(rsplit)[2],from,to)
+                }
+                if (length(unlist(rsplit)) > 2){
+                    sep  <- substr(rf,3,3)
+                    from <- as.numeric(substr(rf,4,4))
+                    to   <- as.numeric(substr(rf,5,5))
+                    racen <- paste0(racen,sep,substr(unlist(rsplit)[3],from,to))
+                }
+                if (length(unlist(rsplit)) > 3){
+                    sep  <- substr(rf,6,6)
+                    from <- as.numeric(substr(rf,7,7))
+                    to   <- as.numeric(substr(rf,8,8))
+                    racen <- paste0(racen,sep,substr(unlist(rsplit)[4],from,to))
+                }
                 xx[[racen]] <- xx$DEM - xx$REP
                 if (input$units != "Count"){
                     xx[[racen]] <- 100 * xx[[racen]] / xx$TOTAL
