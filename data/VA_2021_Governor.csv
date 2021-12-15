@@ -1458,10 +1458,10 @@ COUNTY AREA TOTAL McAuliffe Youngkin Blanding WriteIn
 "Henry County" "# Ab - Central Absentee Precinct" 784 452 324 8 0
 "Henry County" "# Ev - Central Absentee Precinct" 1334 610 718 5 1
 "Henry County" "# Ev - Central Absentee Precinct" 2873 981 1886 6 0
-"Henry County" "# Pe - Central Absentee Precinct" 0 0 0 0 0
-"Henry County" "# Pe - Central Absentee Precinct" 0 0 0 0 0
-"Henry County" "## Provisional" 0 0 0 0 0
-"Henry County" "## Provisional" 0 0 0 0 0
+"Henry County" "# Pe - Central Absentee Precinct" 15 11 4 0 0
+"Henry County" "# Pe - Central Absentee Precinct" 43 25 18 0 0
+"Henry County" "## Provisional" 7 4 3 0 0
+"Henry County" "## Provisional" 20 14 6 0 0
 "Henry County" "101 - Bassett Number Two" 290 113 177 0 0
 "Henry County" "102 - Gunville" 652 72 578 2 0
 "Henry County" "103 - Scott's Tanyard" 1073 144 924 4 1
@@ -1556,15 +1556,15 @@ COUNTY AREA TOTAL McAuliffe Youngkin Blanding WriteIn
 "James City County" "503 - Roberts C" 254 155 94 5 0
 "James City County" "504 - Roberts D" 0 0 0 0 0
 "James City County" "504 - Roberts D" 1236 529 694 13 0
-"King & Queen County" "# Ab - Central Absentee Precinct" 202 126 74 2 0
-"King & Queen County" "# Ev - Central Absentee Precinct" 579 227 351 1 0
-"King & Queen County" "# Pe - Central Absentee Precinct" 13 7 6 0 0
-"King & Queen County" "## Provisional" 3 2 1 0 0
-"King & Queen County" "101 - Owenton" 509 236 270 3 0
-"King & Queen County" "201 - Clarks" 525 129 395 1 0
-"King & Queen County" "301 - Shacklefords" 506 163 338 4 1
-"King & Queen County" "401 - Courthouse" 472 159 307 6 0
-"King & Queen County" "501 - Oldmill" 452 81 370 1 0
+"King And Queen County" "# Ab - Central Absentee Precinct" 202 126 74 2 0
+"King And Queen County" "# Ev - Central Absentee Precinct" 579 227 351 1 0
+"King And Queen County" "# Pe - Central Absentee Precinct" 13 7 6 0 0
+"King And Queen County" "## Provisional" 3 2 1 0 0
+"King And Queen County" "101 - Owenton" 509 236 270 3 0
+"King And Queen County" "201 - Clarks" 525 129 395 1 0
+"King And Queen County" "301 - Shacklefords" 506 163 338 4 1
+"King And Queen County" "401 - Courthouse" 472 159 307 6 0
+"King And Queen County" "501 - Oldmill" 452 81 370 1 0
 "King George County" "# Ab - Central Absentee Precinct" 669 453 199 16 1
 "King George County" "# Ev - Central Absentee Precinct" 3963 1375 2566 18 4
 "King George County" "# Pe - Central Absentee Precinct" 12 3 9 0 0

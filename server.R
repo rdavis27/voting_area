@@ -3422,6 +3422,7 @@ shinyServer(
             }
             ee$COUNTY <- gsub("_"," ",ee$COUNTY)
             ee$COUNTY <- str_to_title(ee$COUNTY)
+            ee$COUNTY <- gsub("King & Queen County","King And Queen County",ee$COUNTY) # match prior races
             #ee$AREA <- gsub("^[#]+ ","",ee$AREA) #comment to force into Other
             ee$AREA <- gsub("^[0]+","",ee$AREA)
             ee$AREA <- gsub(" \\([A-Za-z0-9 ]+\\)$","",ee$AREA)
@@ -3792,7 +3793,17 @@ shinyServer(
             racex <- input$races[1]
             racey <- input$races[2]
             if (type == "plotn"){
-                title <- paste0(tloc," Margin Vote Share by Race (",input$units,")")
+                if (xcounty == "" | xcounty == "(all)"){
+                    xarea <- "County"
+                }
+                else if (input$state2 == "WI"){
+                    xarea <- "Voting Area"
+                }
+                else{
+                    xarea <- "Precinct"
+                }
+                title <- paste0(tloc," Margin Vote Share by Race and ",xarea,
+                                " (",input$units,")")
             } 
             else if (input$xdxplot2){
                 if (input$units == "Percent ratio"){
@@ -4779,18 +4790,8 @@ shinyServer(
         output$plotn <- renderImage({
             dd <- getdataN()
             nr <- NROW(dd)
-            if (nr < 100){
-                for (i in 1:NROW(dd)){
-                    dd$COUNTY[i] <- sprintf("%02d-%s", i, dd$COUNTY[i])
-                }
-            }
-            else{
-                for (i in 1:NROW(dd)){
-                    dd$COUNTY[i] <- sprintf("%03d-%s", i, dd$COUNTY[i])
-                }
-            }
             xlabel <- "County"
-            ylabel <- "Margin Vote Share"
+            ylabel <- paste("Margin Vote Share",input$units)
             if (names(dd)[2] == "AREA"){
                 dd <- dd[-1]
                 names(dd)[1] <- "COUNTY"
@@ -4801,7 +4802,7 @@ shinyServer(
             }
             if (input$scalecols){
                 dd[,2:NCOL(dd)] <- scale(dd[,2:NCOL(dd)])
-                ylabel <- "Scaled Margin Vote Share"
+                ylabel <- paste("Scaled Margin Vote Share",input$units)
             }
             ylabel <- paste0(ylabel,"\nSources: see http://econdataus.com/voting_area.htm")
             title <- getlabels("plotn",input$xcounty,1)
@@ -5558,7 +5559,12 @@ shinyServer(
                     to   <- as.numeric(substr(rf,8,8))
                     racen <- paste0(racen,sep,substr(unlist(rsplit)[4],from,to))
                 }
-                xx[[racen]] <- xx$DEM - xx$REP
+                if (input$party == "Total"){
+                    xx[[racen]] <- xx$TOTAL
+                }
+                else{
+                    xx[[racen]] <- xx$DEM - xx$REP
+                }
                 if (input$units != "Count"){
                     xx[[racen]] <- 100 * xx[[racen]] / xx$TOTAL
                 }
