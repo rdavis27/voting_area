@@ -1253,6 +1253,44 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_House_CD27.csv"))
             write_delim(xx, paste0(data_dir,"FL_2020_House_CD27.csv"), append = TRUE, col_names = TRUE)
         }
+        createFL_2016_Registered <- function(){
+            txt <- "text"
+            num <- "numeric"
+            xx <- read_excel(paste0(input_dir,"FL/bookclosing/2016general_precinct.xlsx"),
+                             sheet = "RegistrationByPrecinct", skip = 8, col_names = TRUE,
+                             col_types = c(txt,txt,txt,num,num,num,num))
+            xxr <<- xx #DEBUG-RM
+            #names(xx) <- c("BookClosingDate","CountyCode","PrecinctNum","REP","DEM","OTH","TOTAL")
+            names(xx) <- c("BookClosingDate","CODE","AreaId","Republican","Democrat","Other","TOTAL")
+            xx$COUNTY <- xx$CODE
+            for (i in 1:(NROW(xx)-1)){
+                if (xx$COUNTY[i] != "Total"){
+                    xx$COUNTY[i] <- fl_counties[which(fl_county_codes == xx$CODE[i])]
+                }
+                if (xx$CODE[i] %in% c("HEN","HER","OKE","PUT")){
+                    xx$AREA[i] <- sub("^0+", "", xx$AreaId[i])
+                }
+                else if (xx$CODE[i] %in% c("ALA","DIX","HAR")){
+                    xx$AREA[i] <- str_pad(xx$AreaId[i],2,side = "left",pad = "0")
+                }
+                else if (xx$CODE[i] == "PAS"){
+                    xx$AREA[i] <- str_pad(xx$AreaId[i],3,side = "left",pad = "0")
+                }
+                else if (xx$CODE[i] == "DAD"){
+                    xx$AREA[i] <- str_pad(paste0(xx$AreaId[i],"0"),4,side = "left",pad = "0")
+                }
+                else{
+                    xx$AREA[i] <- xx$AreaId[i]
+                }
+            }
+            #xx$COUNTY <- fl_counties[which(fl_county_codes == xx$CODE)]
+            xx <- xx[,c("COUNTY","AREA","TOTAL","Democrat","Republican","Other")]
+            xxr2 <<- xx #DEBUG-RM
+            partyxx <- names(xx)
+            partyxx[4:5] <- c("DEM","REP")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2016_Registered.csv"))
+            write_delim(xx, paste0(data_dir,"FL_2016_Registered.csv"), append = TRUE, col_names = TRUE)
+        }
         createFL_2018_Registered <- function(){
             txt <- "text"
             num <- "numeric"
@@ -5008,6 +5046,9 @@ shinyServer(
                     else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
                     }
+                    else if (races[i] == "FL_2016_Registered"){
+                        createFL_2016_Registered()
+                    }
                     else if (races[i] == "FL_2018_Registered"){
                         createFL_2018_Registered()
                     }
@@ -5767,7 +5808,7 @@ shinyServer(
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
             }
             else if (input$state2 == "FL"){
-                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_House","FL_2018_Registered","FL_2016_President")
+                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_House","FL_2018_Registered","FL_2016_President","FL_2016_Registered")
             }
             else if (input$state2 == "IA"){
                 files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4","IA_2016_President")
