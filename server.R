@@ -3381,6 +3381,170 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate_210603.csv"))
             write_delim(xx, paste0(data_dir,"TX_2020_Senate_210603.csv"), append = TRUE, col_names = TRUE)
         }
+        # TEXAS PRECINCT DATA OBTAINED FROM TEXAS SOS IN FEBRUARY 2022
+        read_narrow <- function(
+                inputfile, inputsheet="", inputskip=0,
+                xcounty, xrace, xcand, xvotes, xarea,
+                ycounty, yrace, ycand, yparty, yarea_prefix, zcounty){
+            xx <- read_excel(inputfile, sheet = inputsheet, skip = inputskip)
+            #xx <- xx[xx[[xcounty]] == ycounty,]
+            xx <- xx[xx[[xrace]] == yrace,]
+            xx[[xarea]] <- paste0(yarea_prefix, xx[[xarea]])
+            xx$Votes <- 0
+            for (i in 1:length(xvotes)){
+                xx$Votes <- xx$Votes + as.numeric(xx[[xvotes[i]]])
+            }
+            if (NROW(xx) == 0){
+                catmsg(paste0("====> WARNING: ",ycounty," COUNTY had no ",yrace))
+                next
+            }
+            xx$Party <- yparty[length(yparty)]
+            for (i in 1:(length(yparty)-1)){
+                xx$Party[grep(ycand[i], xx[[xcand]])] <- yparty[i]
+            }
+            xx <- xx[,c(xcounty, xarea, "Party", "Votes")]
+            xx <- xx %>%
+                group_by_at(c(xcounty,xarea,"Party")) %>%
+                summarize(Votes=sum(Votes))
+            xx <- xx %>% spread_("Party","Votes")
+            xx[[xcounty]] <- zcounty
+            xx$TOTAL <- 0
+            xx <- xx[c(xcounty,xarea,"TOTAL",yparty)]
+            names(xx) <- c("COUNTY","AREA","TOTAL",ycand)
+            return(xx)
+        }
+        createTX_2020_President_SOS <- function(){
+            catmsg("##### START createTX_2020_President_SOS #####")
+            
+            # Process HARRIS County
+            xx <- read_narrow(
+                inputfile = paste0(input_dir,"TXsos/2020/HARRIS_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-SOS_TotalDetail.xlsx"),
+                inputsheet = "Sheet1",
+                inputskip = 0,
+                xcounty = "political_subdivision",
+                xarea = "precinct _number",
+                xrace = "race_name",
+                xcand = "candidate_name",
+                xvotes = c("early_votes...10","election_votes...11"),
+                ycounty = "Harris County",
+                yarea_prefix = "201",
+                yrace = "President and Vice President",
+                ycand  = c("Biden","Trump","Jorgensen","Hawkins","Writein"),
+                yparty = c("DEM",  "REP",  "LIB",      "GRN",    "WRI"),
+                zcounty = "Harris"
+            )
+            yy <- as.data.frame(xx)
+
+            # Process MAVERICK County
+            sosfile <- paste0(input_dir,"TXsos/MAVERICK_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-PCT. BY PCT. REPORT GENERAL ELECTION 2020.xlsx")
+            email <- read_excel(sosfile, sheet = "EARLY VOTING BY MAIL", skip = 0)
+            epers <- read_excel(sosfile, sheet = "EARLY VOTING IN PERSON", skip = 0)
+            eday  <- read_excel(sosfile, sheet = "ELECTION DAY", skip = 0)
+            area <- paste0("32300", names(eday)[3:16])
+            rep <- as.numeric(email[2,3:16]) + as.numeric(epers[2,3:16]) + as.numeric(eday[2,3:16])
+            dem <- as.numeric(email[3,3:16]) + as.numeric(epers[3,3:16]) + as.numeric(eday[3,3:16])
+            lib <- as.numeric(email[4,3:16]) + as.numeric(epers[4,3:16]) + as.numeric(eday[4,3:16])
+            grn <- as.numeric(email[5,3:16]) + as.numeric(epers[5,3:16]) + as.numeric(eday[5,3:16])
+            wri <- as.numeric(email[6,3:16]) + as.numeric(epers[6,3:16]) + as.numeric(eday[6,3:16])
+            xx <- data.frame(area,dem,rep,lib,grn,wri)
+            xx$COUNTY <- "Maverick"
+            xx$TOTAL <- 0
+            xx <- xx[,c(7,1,8,2:6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
+            zzxx <<- xx #DEBUG-RM
+            zzyy <<- yy #DEBUG-RM
+            yy <- rbind(yy,xx)
+            zyy2 <<- yy #DEBUG-RM
+            partyyy <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2020_President_SOS.csv"))
+            write_delim(yy, paste0(data_dir,"TX_2020_President_SOS.csv"), append = TRUE, col_names = TRUE)
+        }
+        createTX_2020_Senate_SOS <- function(){
+            catmsg("##### START createTX_2020_Senate_SOS #####")
+
+            # Process HARRIS County
+            xx <- read_narrow(
+                inputfile = paste0(input_dir,"TXsos/2020/HARRIS_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-SOS_TotalDetail.xlsx"),
+                inputsheet = "Sheet1",
+                inputskip = 0,
+                xcounty = "political_subdivision",
+                xarea = "precinct _number",
+                xrace = "race_name",
+                xcand = "candidate_name",
+                xvotes = c("early_votes...10","election_votes...11"),
+                ycounty = "Harris County",
+                yarea_prefix = "201",
+                yrace = "United States Senator", #UPDATE
+                ycand  = c("Hegar","Cornyn","McKennon","Collins","Writein"), #UPDATE
+                yparty = c("DEM",  "REP",   "LIB",     "GRN",    "WRI"), #UPDATE
+                zcounty = "Harris"
+            )
+            yy <- as.data.frame(xx)
+
+            # Process MAVERICK County
+            sosfile <- paste0(input_dir,"TXsos/MAVERICK_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-PCT. BY PCT. REPORT GENERAL ELECTION 2020.xlsx")
+            email <- read_excel(sosfile, sheet = "EARLY VOTING BY MAIL", skip = 0)
+            epers <- read_excel(sosfile, sheet = "EARLY VOTING IN PERSON", skip = 0)
+            eday  <- read_excel(sosfile, sheet = "ELECTION DAY", skip = 0)
+            area <- paste0("32300", names(eday)[3:16])
+            rep <- as.numeric(email[8,3:16])  + as.numeric(epers[8,3:16])  + as.numeric(eday[8,3:16])
+            dem <- as.numeric(email[9,3:16])  + as.numeric(epers[9,3:16])  + as.numeric(eday[9,3:16])
+            lib <- as.numeric(email[10,3:16]) + as.numeric(epers[10,3:16]) + as.numeric(eday[10,3:16])
+            grn <- as.numeric(email[11,3:16]) + as.numeric(epers[11,3:16]) + as.numeric(eday[11,3:16])
+            wri <- as.numeric(email[12,3:16]) + as.numeric(epers[12,3:16]) + as.numeric(eday[12,3:16])
+            xx <- data.frame(area,dem,rep,lib,grn,wri)
+            xx$COUNTY <- "Maverick"
+            xx$TOTAL <- 0
+            xx <- xx[,c(7,1,8,2:6)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins","Writein")
+            
+            yy <- rbind(yy,xx)
+            zyy2 <<- yy #DEBUG-RM
+            partyyy <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+            write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2020_Senate_SOS.csv"))
+            write_delim(yy, paste0(data_dir,"TX_2020_Senate_SOS.csv"), append = TRUE, col_names = TRUE)
+        }
+        read_narrow_house <- function(yrace, ycand, yparty){
+            xx <- read_narrow(
+                inputfile = paste0(input_dir,"TXsos/2020/HARRIS_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-SOS_TotalDetail.xlsx"),
+                inputsheet = "Sheet1",
+                inputskip = 0,
+                xcounty = "political_subdivision",
+                xarea = "precinct _number",
+                xrace = "race_name",
+                xcand = "candidate_name",
+                xvotes = c("early_votes...10","election_votes...11"),
+                ycounty = "Harris County",
+                yarea_prefix = "201",
+                yrace = yrace,
+                ycand  = ycand,
+                yparty = yparty,
+                zcounty = "Harris"
+            )
+        }
+        createTX_2020_House_SOS <- function(){
+            catmsg("##### START createTX_2020_House_SOS #####")
+            sosfile <- paste0(input_dir,"TXsos/MAVERICK_COUNTY-2020_NOVEMBER_3RD_GENERAL_ELECTION_1132020-PCT. BY PCT. REPORT GENERAL ELECTION 2020.xlsx")
+            email <- read_excel(sosfile, sheet = "EARLY VOTING BY MAIL", skip = 0)
+            epers <- read_excel(sosfile, sheet = "EARLY VOTING IN PERSON", skip = 0)
+            eday  <- read_excel(sosfile, sheet = "ELECTION DAY", skip = 0)
+            zemail <<- email
+            zepers <<- epers
+            zeday  <<- eday
+            area <- paste0("32300", names(eday)[3:16])
+            rep <- as.numeric(email[14,3:16]) + as.numeric(epers[14,3:16]) + as.numeric(eday[14,3:16])
+            dem <- as.numeric(email[15,3:16]) + as.numeric(epers[15,3:16]) + as.numeric(eday[15,3:16])
+            lib <- as.numeric(email[16,3:16]) + as.numeric(epers[16,3:16]) + as.numeric(eday[16,3:16])
+            xx <- data.frame(area,dem,rep,lib)
+            xx$DIST <- 23
+            xx$COUNTY <- "Maverick"
+            xx$TOTAL <- 0
+            xx <- xx[,c(5,6,1,7,2:4)]
+            names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            partyxx <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_House_SOS.csv"))
+            write_delim(xx, paste0(data_dir,"TX_2020_House_SOS.csv"), append = TRUE, col_names = TRUE)
+        }
         createVA_2016_President <- function(){
             catmsg("##### START createVA_2016_President #####")
             xx <- read_csv(paste0(input_dir,"VA/2016/Virginia_Elections_Database__2016_President_General_Election_including_precincts.csv"), col_names = FALSE, skip = 2)
@@ -5237,6 +5401,15 @@ shinyServer(
                     else if (races[i] == "TX_2020_Senate_210603"){
                         createTX_2020_Senate_210603()
                     }
+                    else if (races[i] == "TX_2020_President_SOS"){
+                        createTX_2020_President_SOS()
+                    }
+                    else if (races[i] == "TX_2020_Senate_SOS"){
+                        createTX_2020_Senate_SOS()
+                    }
+                    else if (races[i] == "TX_2020_House_SOS"){
+                        createTX_2020_House_SOS()
+                    }
                     else if (races[i] == "VA_2016_President"){
                         createVA_2016_President()
                     }
@@ -5836,7 +6009,8 @@ shinyServer(
             }
             else if (input$state2 == "TX"){
                 files <- c("TX_2020_President","TX_2020_Senate","TX_2020_House","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
-                           "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605","TX_2018_Senate_210605","TX_2018_House_210624","TX_2016_President_210604")
+                           "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605",
+                           "TX_2018_Senate_210605","TX_2018_House_210624","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")
             }
             else if (input$state2 == "VA"){
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
