@@ -5788,11 +5788,26 @@ shinyServer(
                     to   <- as.numeric(substr(rf,8,8))
                     racen <- paste0(racen,sep,substr(unlist(rsplit)[4],from,to))
                 }
-                if (input$party == "Total"){
+                if (input$partyn == "Margin"){
+                    xx[[racen]] <- xx$DEM - xx$REP
+                }
+                else if (input$partyn == "Total"){
                     xx[[racen]] <- xx$TOTAL
                 }
+                else if (input$partyn == "Dem"){
+                    xx[[racen]] <- xx$DEM
+                }
+                else if (input$partyn == "Dem+"){
+                    xx[[racen]] <- xx$TOTAL - xx$REP
+                }
+                else if (input$partyn == "Rep"){
+                    xx[[racen]] <- xx$REP
+                }
+                else if (input$partyn == "Rep+"){
+                    xx[[racen]] <- xx$TOTAL - xx$DEM
+                }
                 else{
-                    xx[[racen]] <- xx$DEM - xx$REP
+                    xx[[racen]] <- xx$TOTAL - xx$DEM - xx$REP
                 }
                 if (input$units != "Count"){
                     xx[[racen]] <- 100 * xx[[racen]] / xx$TOTAL
@@ -5824,9 +5839,9 @@ shinyServer(
                 normalizeN <- normalizeN + NCOL(dd) + 1
             }
             if (normalizeN > 1){
-                ddnorm <- dd[,normalizeN]
-                for (i in 2:NCOL(dd)){
-                    dd[,i] <- dd[,i] - ddnorm
+                ddnorm <- as.numeric(dd[,normalizeN])
+                for (i in 3:NCOL(dd)){
+                    dd[,i] <- as.numeric(dd[,i]) - ddnorm
                 }
             }
             if (xsortcolN != 0){
