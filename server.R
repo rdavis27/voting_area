@@ -4380,6 +4380,9 @@ shinyServer(
                 gg <- gg + scale_size_continuous(range = vrange_n,
                                                  trans = input$vtrans)
             }
+            else{
+                gg <- gg + scale_size_continuous(range = vrange_n)
+            }
             labels <- getlabels("plot", xcounty, xtype)
             gg <- gg + ggtitle(labels[1])
             gg <- gg + xlab(labels[2])
@@ -4681,6 +4684,9 @@ shinyServer(
             else if (input$vtrans2b != "" & substr(input$vtrans2b,1,1) != "#"){
                 gg <- gg + scale_size_continuous(range = vrange_n,
                                                  trans = input$vtrans2b)
+            }
+            else{
+                gg <- gg + scale_size_continuous(range = vrange_n)
             }
             labels <- getlabels("plot2b", input$xcounty, 1)
             gg <- gg + ggtitle(labels[1])
@@ -5077,10 +5083,16 @@ shinyServer(
                  #height = 300,
                  alt = "This is alternate text")
         }, deleteFile = TRUE)
+        # output$myTextAreasN <- renderPrint({
+        #     dd <- getdataN()
+        #     #print(dd)
+        #     return(dd)
+        # })
         output$myTextAreasN <- renderPrint({
-            dd <- getdataN()
-            #print(dd)
-            return(dd)
+            xx <- getAreas2()
+            xx$PCHNG <- 100 * (xx$TOTAL2-xx$TOTAL1) / xx$TOTAL1
+            #print(xx)
+            return(xx)
         })
         output$getcsv <- downloadHandler(
             filename = function(){
