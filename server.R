@@ -10,6 +10,9 @@ library(xlsx)
 library(RcppRoll)
 library(cowplot)
 library(jsonlite)
+library(leaflet)
+library(sf)
+library(rgeos)
 
 areaWidth <- 900
 areaHeight <- 600
@@ -28,6 +31,47 @@ shinyServer(
             cat(file = filerr, append = TRUE, line)
             cat(file = stderr(), line)
         }
+        states <- c("Alabama","Alaska","Arizona","Arkansas","California",
+                    "Colorado","Connecticut","Delaware","District of Columbia","Florida",
+                    "Georgia","Hawaii","Idaho","Illinois","Indiana",
+                    "Iowa","Kansas","Kentucky","Louisiana","Maine",
+                    "Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
+                    "Missouri","Montana","Nebraska","Nevada","New Hampshire",
+                    "New Jersey","New Mexico","New York","North Carolina","North Dakota",
+                    "Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island",
+                    "South Carolina","South Dakota","Tennessee","Texas","Utah",
+                    "Vermont","Virginia","Washington","West Virginia","Wisconsin",
+                    "Wyoming")
+        stabbr <- c("AL","AK","AZ","AR","CA",
+                    "CO","CT","DE","DC","FL",
+                    "GA","HI","ID","IL","IN",
+                    "IA","KS","KY","LA","ME",
+                    "MD","MA","MI","MN","MS",
+                    "MO","MT","NE","NV","NH",
+                    "NJ","NM","NY","NC","ND",
+                    "OH","OK","OR","PA","RI",
+                    "SC","SD","TN","TX","UT",
+                    "VT","VA","WA","WV","WI","WY")
+        statid <- c(  1 ,  2 ,  4 ,  5 ,  6 ,
+                      8 ,  9 , 10 , 11 , 12 ,
+                      13 , 15 , 16 , 17 , 18 ,
+                      19 , 20 , 21 , 22 , 23 ,
+                      24 , 25 , 26 , 27 , 28 ,
+                      29 , 30 , 31 , 32 , 33 ,
+                      34 , 35 , 36 , 37 , 38 ,
+                      39 , 40 , 41 , 42 , 44 ,
+                      45 , 46 , 47 , 48 , 49 ,
+                      50 , 51 , 53 , 54 , 55 , 56 , 11 )
+        statsd <- c("01","02","04","05","06",
+                    "08","09","10","11","12",
+                    "13","15","16","17","18",
+                    "19","20","21","22","23",
+                    "24","25","26","27","28",
+                    "29","30","31","32","33",
+                    "34","35","36","37","38",
+                    "39","40","41","42","44",
+                    "45","46","47","48","49",
+                    "50","51","53","54","55","56","11")
         ## All ElectionWare (EW) counties and filenames
         # az_ew_counties <- c(
         #     "Apache","Cochise",
@@ -2706,6 +2750,18 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"NV_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"NV_2020_President.csv"), append = TRUE, col_names = TRUE)
         }
+        createOH_2004_President <- function(){
+            catmsg("##### START createOH_2004_President #####")
+            xx <- read_excel(paste0(input_dir,"OH/2004/","precincts.xls"),
+                             sheet = "Election Results", skip = 1)
+            xx <- xx[,c(2,4,12,13,14,15,16)]
+            names(xx) <- c("COUNTY","AREA","TOTAL","Kerry","Bush","Badnarik","Peroutka")
+            xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+            xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+            partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","CON")
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2004_President.csv"))
+            write_delim(xx, paste0(data_dir,"OH_2004_President.csv"), append = TRUE, col_names = TRUE)
+        }
         createOH_2016_President <- function(){
             catmsg("##### START createOH_2016_President #####")
             xx <- read_excel(paste0(input_dir,"OH/2016/","precinct.xlsx"),
@@ -5094,6 +5150,253 @@ shinyServer(
             #print(xx)
             return(xx)
         })
+        getIndicators <- function(pp, ccin, varfrom, varto, ind){
+            pvarto <- paste0("p",varto)
+            pp$p1 <- 0
+            pp$p1[as.numeric(pp[[varfrom]]) >= 1] <- 1
+            pp$p2 <- 0
+            pp$p2[as.numeric(pp[[varfrom]]) >= input$minprevotes2] <- 1
+            pp$n0 <- 0
+            pp$n1 <- 0
+            pp$n2 <- 0
+            pp$n3 <- 0
+            pp$n4 <- 0
+            pp$n5 <- 0
+            pp$n6 <- 0
+            pp$n7 <- 0
+            pp$n8 <- 0
+            pp$n9 <- 0
+            if (ind == "2BL"){
+                pp$nn <- as.integer(substr(pp[[varfrom]],2,2))
+                pp$n0[pp$nn == 0 & pp$p2 > 0] <- 1
+                pp$n1[pp$nn == 1 & pp$p2 > 0] <- 1
+                pp$n2[pp$nn == 2 & pp$p2 > 0] <- 1
+                pp$n3[pp$nn == 3 & pp$p2 > 0] <- 1
+                pp$n4[pp$nn == 4 & pp$p2 > 0] <- 1
+                pp$n5[pp$nn == 5 & pp$p2 > 0] <- 1
+                pp$n6[pp$nn == 6 & pp$p2 > 0] <- 1
+                pp$n7[pp$nn == 7 & pp$p2 > 0] <- 1
+                pp$n8[pp$nn == 8 & pp$p2 > 0] <- 1
+                pp$n9[pp$nn == 9 & pp$p2 > 0] <- 1
+                cc <- pp %>%
+                    group_by(COUNTY) %>%
+                    summarize(p0=length(AREA), p1=sum(p1), p2=sum(p2),
+                              n0=sum(n0), n1=sum(n1), n2=sum(n2), n3=sum(n3), n4=sum(n4),
+                              n5=sum(n5), n6=sum(n6), n7=sum(n7), n8=sum(n8), n9=sum(n9))
+                #rr <- c(0.120, 0.114, 0.109, 0.104, 0.100, 0.097, 0.093, 0.090, 0.088, 0.085)
+                #values from https://www.statistics.gov.hk/wsc/CPS021-P2-S.pdf
+                rr <- c(0.1197,0.1139,0.1088,0.1043,0.1003,0.0967,0.0934,0.0904,0.0876,0.0850)
+                cc[[varto]] <-
+                    (cc$n0 - cc$p2*rr[1])^2 / (cc$p2*rr[1]) +
+                    (cc$n1 - cc$p2*rr[2])^2 / (cc$p2*rr[2]) +
+                    (cc$n2 - cc$p2*rr[3])^2 / (cc$p2*rr[3]) +
+                    (cc$n3 - cc$p2*rr[4])^2 / (cc$p2*rr[4]) +
+                    (cc$n4 - cc$p2*rr[5])^2 / (cc$p2*rr[5]) +
+                    (cc$n5 - cc$p2*rr[6])^2 / (cc$p2*rr[6]) +
+                    (cc$n6 - cc$p2*rr[7])^2 / (cc$p2*rr[7]) +
+                    (cc$n7 - cc$p2*rr[8])^2 / (cc$p2*rr[8]) +
+                    (cc$n8 - cc$p2*rr[9])^2 / (cc$p2*rr[9]) +
+                    (cc$n9 - cc$p2*rr[10])^2 / (cc$p2*rr[10])
+                cc[[pvarto]] <- cc$p2
+            }
+            else if (ind == "LastC"){
+                pp$nn <- pp[[varfrom]] %% 10
+                pp$n0[pp$nn == 0 & pp$p2 > 0] <- 1
+                pp$n1[pp$nn == 1 & pp$p2 > 0] <- 1
+                pp$n2[pp$nn == 2 & pp$p2 > 0] <- 1
+                pp$n3[pp$nn == 3 & pp$p2 > 0] <- 1
+                pp$n4[pp$nn == 4 & pp$p2 > 0] <- 1
+                pp$n5[pp$nn == 5 & pp$p2 > 0] <- 1
+                pp$n6[pp$nn == 6 & pp$p2 > 0] <- 1
+                pp$n7[pp$nn == 7 & pp$p2 > 0] <- 1
+                pp$n8[pp$nn == 8 & pp$p2 > 0] <- 1
+                pp$n9[pp$nn == 9 & pp$p2 > 0] <- 1
+                cc <- pp %>%
+                    group_by(COUNTY) %>%
+                    summarize(p0 = length(AREA), p1 = sum(p1), p2 = sum(p2), nn = mean(nn),
+                              n0=sum(n0), n1=sum(n1), n2=sum(n2), n3=sum(n3), n4=sum(n4),
+                              n5=sum(n5), n6=sum(n6), n7=sum(n7), n8=sum(n8), n9=sum(n9))
+                    cc[[varto]] <- cc$nn
+                    cc[[pvarto]] <- cc$p2
+            }
+            if (input$showpcts2){
+                cc$ntot <- cc$n0 + cc$n1 + cc$n2 + cc$n3 + cc$n4 + cc$n5 + cc$n6 + cc$n7 + cc$n8 + cc$n9
+                cc$n0 <- 100 * cc$n0 / cc$ntot
+                cc$n1 <- 100 * cc$n1 / cc$ntot
+                cc$n2 <- 100 * cc$n2 / cc$ntot
+                cc$n3 <- 100 * cc$n3 / cc$ntot
+                cc$n4 <- 100 * cc$n4 / cc$ntot
+                cc$n5 <- 100 * cc$n5 / cc$ntot
+                cc$n6 <- 100 * cc$n6 / cc$ntot
+                cc$n7 <- 100 * cc$n7 / cc$ntot
+                cc$n8 <- 100 * cc$n8 / cc$ntot
+                cc$n9 <- 100 * cc$n9 / cc$ntot
+            }
+            if (is.null(ccin)){
+                cc$NOUT <- 0
+                cc$NOUT[cc[[varto]] < input$minlimit2 | cc[[varto]] > input$maxlimit2] <- 1
+                cc <- cc[c("COUNTY", "p0", "p1", "NOUT", pvarto, varto,
+                           "n0", "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9")]
+                return(cc)
+            }
+            cc <- cc[c("COUNTY", pvarto, varto)]
+            cc$NOUT2 <- 0
+            cc$NOUT2[cc[[varto]] < input$minlimit2 | cc[[varto]] > input$maxlimit2] <- 1
+            cc <- merge(x = ccin, y = cc, by = "COUNTY", all = TRUE)
+            cc$NOUT <- cc$NOUT + cc$NOUT2
+            cc <- cc[, names(cc) != "NOUT2"]
+            return(cc)
+        }
+        observeEvent(input$indicator2,{
+            ind <- input$indicator2
+            if (ind == "2BL"){
+                updateNumericInput(session = session, "minlimit2", value = 0)
+                updateNumericInput(session = session, "maxlimit2", value = 16.9)
+            }
+            else if (ind == "LastC"){
+                updateNumericInput(session = session, "minlimit2", value = 3.5)
+                updateNumericInput(session = session, "maxlimit2", value = 5.5)
+            }
+        })
+        output$myIndicator <- renderPrint({
+            dp <- input$decimals2
+            pp <- getdata()
+            # if (input$bigsmall2 > 0){
+            #     pp$COUNTY <- "Big"
+            #     pp$COUNTY[pp$TOTAL < input$bigsmall2] <- "Small"
+            # }
+            namedem <- names(pp)[4]
+            namerep <- names(pp)[5]
+            names(pp)[4] <- "DEM"
+            names(pp)[5] <- "REP"
+            cc <- NULL
+            for (iv in input$indvar2){
+                cc <- getIndicators(pp, cc, iv, iv, input$indicator2)
+                cc[[iv]] <- format(round(cc[[iv]], dp), big.mark=",", scientific=FALSE)
+            }
+            if (!input$showcounts2){
+                cc <- subset(cc, select=-c(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9))
+            }
+            else if (input$showpcts2){
+                cc$n0 <- format(round(cc$n0, dp), big.mark=",", scientific=FALSE)
+                cc$n1 <- format(round(cc$n1, dp), big.mark=",", scientific=FALSE)
+                cc$n2 <- format(round(cc$n2, dp), big.mark=",", scientific=FALSE)
+                cc$n3 <- format(round(cc$n3, dp), big.mark=",", scientific=FALSE)
+                cc$n4 <- format(round(cc$n4, dp), big.mark=",", scientific=FALSE)
+                cc$n5 <- format(round(cc$n5, dp), big.mark=",", scientific=FALSE)
+                cc$n6 <- format(round(cc$n6, dp), big.mark=",", scientific=FALSE)
+                cc$n7 <- format(round(cc$n7, dp), big.mark=",", scientific=FALSE)
+                cc$n8 <- format(round(cc$n8, dp), big.mark=",", scientific=FALSE)
+                cc$n9 <- format(round(cc$n9, dp), big.mark=",", scientific=FALSE)
+            }
+            nr0 <- NROW(cc)
+            cat(paste0(nr0," Counties\n"))
+            cc <- cc[cc$p1 >= input$minprecints2,]
+            nr1 <- NROW(cc)
+            cat(paste0(nr1," Counties with more than ",input$minprecints2," precincts with 1 or more votes\n"))
+            cc <- cc[cc$NOUT > 0,]
+            nr2 <- NROW(cc)
+            cat(paste0(nr2," Counties with 1 or more values out of limits\n"))
+            nout <- sum(cc$NOUT)
+            nall <- nr1 * length(input$indvar2)
+            pout <- 100 * nout / nall
+            pout <- format(round(pout, dp), big.mark=",", scientific=FALSE)
+            cat(paste0(nout," of ",nall," = ",pout," percent of values out of limits\n\n"))
+            return(as.data.frame(cc))
+        })
+        output$myIndPlot <- renderPlot({
+            pp <- getdata()
+            namedem <- names(pp)[4]
+            namerep <- names(pp)[5]
+            names(pp)[4] <- "DEM"
+            names(pp)[5] <- "REP"
+            cc <- NULL
+            for (iv in input$indvar2){
+                cc <- getIndicators(pp, cc, iv, iv, input$indicator2)
+            }
+            cc <- cc[cc$p1 >= input$minprecints2,]
+            cc <- cc[cc$NOUT > 0,]
+            ylabel <- "COUNT"
+            if (input$showpcts2){
+                ylabel <- "PERCENT"
+            }
+            title <- paste0(str_to_title(ylabel),"s of ",input$indicator2," Digits"," in ",
+                            input$races[1]," ",str_to_title(input$indvar2),
+                            " Votes (>= ",input$minprecints2," Areas with >= ",
+                            input$minprevotes2," Votes, Limits = ",
+                            input$minlimit2,",",input$maxlimit2,")")
+            ee <- cc %>%
+                gather("DIGIT", "COUNT", c("n0","n1","n2","n3","n4","n5","n6","n7","n8","n9"))
+            gg <- ggplot(ee, aes(x = DIGIT, y = COUNT, group = COUNTY))
+            gg <- gg + geom_point(aes_string(color="COUNTY", shape="COUNTY"), size=3)
+            gg <- gg + geom_line(aes(color=COUNTY))
+            gg <- gg + ggtitle(title) + ylab(ylabel)
+            return(gg)
+        })
+        output$myLeaflet <- renderLeaflet({
+            #dd <- getdata() # COUNTY,DEM1,REP1,MARGIN1,TOTAL1,DEM2,REP2,MARGIN2,TOTAL2,
+            # DEM_SH,REP_SH,MAR_SH,TOT_SH,DEM1_N,REP1_N,MAR1_N,TOT1_N,TOT2_N
+            dp <- input$decimals2
+            pp <- getdata()
+            namedem <- names(pp)[4]
+            namerep <- names(pp)[5]
+            names(pp)[4] <- "DEM"
+            names(pp)[5] <- "REP"
+            cc <- NULL
+            for (iv in input$indvar2){
+                cc <- getIndicators(pp, cc, iv, iv, input$indicator2)
+            }
+            mapvar <- input$indvar2[1]
+            dd <- cc
+            ee <- dd[!is.na(dd[[mapvar]]),]
+            if (input$maplimitset2 == "Auto set to min,max"){
+                minlimit <- floor(min(ee[[mapvar]]))
+                maxlimit <- ceiling(max(ee[[mapvar]]))
+                maplimits <- paste0(minlimit,",",maxlimit)
+                updateTextInput(session, "maplimits2", value = maplimits)
+            }
+            else if (input$maplimitset2 == "Auto set balanced"){
+                minlimit <- floor(min(ee[[mapvar]]))
+                maxlimit <- ceiling(max(ee[[mapvar]]))
+                abslimit <- max(abs(minlimit), abs(maxlimit))
+                stepsize <- ceiling(abslimit/5)
+                abslimit <- ceiling(abslimit/stepsize) * stepsize
+                maplimits <- paste0("-",abslimit,",",abslimit,",",stepsize)
+                updateTextInput(session, "maplimits2", value = maplimits)
+            }
+            limits <- unlist(strsplit(input$maplimits2, ","))
+            if (length(limits) <= 2){
+                pal <- colorNumeric(input$mapcolors2, dd[[mapvar]])
+            }
+            else if (length(limits) == 3){
+                bins <- seq.int(limits[1], limits[2], limits[3])
+                pal <- colorBin(input$mapcolors2, domain = dd[[mapvar]], bins = bins)
+            }
+            else{
+                bins <- limits
+                pal <- colorBin(input$mapcolors2, domain = dd[[mapvar]], bins = bins)
+            }
+            
+            istate <- which(stabbr %in% input$state2)
+            counties <- rgdal::readOGR("gz_2010_us_050_00_20m.json")
+            counties <- counties[counties$STATE == statsd[istate],]
+            cc <- st_as_sf(counties)
+            cc$NAME   <- toupper(cc$NAME)
+            dd$COUNTY <- toupper(dd$COUNTY)
+            ee <- cc %>% left_join(dd, by = c("NAME" = "COUNTY"))
+            ee$var <- ee[[input$indvar2[1]]]
+
+            mm <- leaflet(ee) %>%
+                addTiles() %>%
+                addPolygons(stroke = FALSE, smoothFactor = 0.3, fillOpacity = 0.5,
+                            fillColor = ~pal(var),
+                            label = ~paste0(NAME,": ",formatC(var, big.mark = ",")," (",p1,")")) %>%
+                addLegend(pal = pal, values = ~(var), opacity = 1.0)
+            print(mm)
+        })
+        
+        
+        
         output$getcsv <- downloadHandler(
             filename = function(){
                 paste0(input$races[1],"_",input$xcounty,"_",input$units,".csv")
@@ -5331,6 +5634,9 @@ shinyServer(
                     }
                     else if (races[i] == "NV_2020_President"){
                         createNV_2020_President()
+                    }
+                    else if (races[i] == "OH_2004_President"){
+                        createOH_2004_President()
                     }
                     else if (races[i] == "OH_2016_President"){
                         createOH_2016_President()
@@ -6029,7 +6335,7 @@ shinyServer(
                 files <- c("NV_2020_President","NV_2018_Senate","NV_2016_President")
             }
             else if (input$state2 == "OH"){
-                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2016_Senate","OH_2020_Registered")
+                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2016_Senate","OH_2020_Registered","OH_2004_President")
             }
             else if (input$state2 == "SC"){
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
