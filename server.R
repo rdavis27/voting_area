@@ -5199,6 +5199,27 @@ shinyServer(
                     (cc$n9 - cc$p2*rr[10])^2 / (cc$p2*rr[10])
                 cc[[pvarto]] <- cc$p2
             }
+            else if (ind == "C05s"){
+                pp$nn <- pp[[varfrom]] %% 10
+                pp$n0[pp$nn == 0 & pp$p2 > 0] <- 1
+                pp$n1[pp$nn == 1 & pp$p2 > 0] <- 1
+                pp$n2[pp$nn == 2 & pp$p2 > 0] <- 1
+                pp$n3[pp$nn == 3 & pp$p2 > 0] <- 1
+                pp$n4[pp$nn == 4 & pp$p2 > 0] <- 1
+                pp$n5[pp$nn == 5 & pp$p2 > 0] <- 1
+                pp$n6[pp$nn == 6 & pp$p2 > 0] <- 1
+                pp$n7[pp$nn == 7 & pp$p2 > 0] <- 1
+                pp$n8[pp$nn == 8 & pp$p2 > 0] <- 1
+                pp$n9[pp$nn == 9 & pp$p2 > 0] <- 1
+                cc <- pp %>%
+                    group_by(COUNTY) %>%
+                    summarize(p0 = length(AREA), p1 = sum(p1), p2 = sum(p2),
+                              nn = (sum(n0) + sum(n5)) / length(AREA),
+                              n0=sum(n0), n1=sum(n1), n2=sum(n2), n3=sum(n3), n4=sum(n4),
+                              n5=sum(n5), n6=sum(n6), n7=sum(n7), n8=sum(n8), n9=sum(n9))
+                    cc[[varto]] <- cc$nn
+                    cc[[pvarto]] <- cc$p2
+            }
             else if (ind == "LastC"){
                 pp$nn <- pp[[varfrom]] %% 10
                 pp$n0[pp$nn == 0 & pp$p2 > 0] <- 1
@@ -5216,8 +5237,8 @@ shinyServer(
                     summarize(p0 = length(AREA), p1 = sum(p1), p2 = sum(p2), nn = mean(nn),
                               n0=sum(n0), n1=sum(n1), n2=sum(n2), n3=sum(n3), n4=sum(n4),
                               n5=sum(n5), n6=sum(n6), n7=sum(n7), n8=sum(n8), n9=sum(n9))
-                    cc[[varto]] <- cc$nn
-                    cc[[pvarto]] <- cc$p2
+                cc[[varto]] <- cc$nn
+                cc[[pvarto]] <- cc$p2
             }
             if (input$showpcts2){
                 cc$ntot <- cc$n0 + cc$n1 + cc$n2 + cc$n3 + cc$n4 + cc$n5 + cc$n6 + cc$n7 + cc$n8 + cc$n9
@@ -5253,6 +5274,10 @@ shinyServer(
                 updateNumericInput(session = session, "minlimit2", value = 0)
                 updateNumericInput(session = session, "maxlimit2", value = 16.9)
             }
+            else if (ind == "C05s"){
+                updateNumericInput(session = session, "minlimit2", value = 0.1)
+                updateNumericInput(session = session, "maxlimit2", value = 0.3)
+            }
             else if (ind == "LastC"){
                 updateNumericInput(session = session, "minlimit2", value = 3.5)
                 updateNumericInput(session = session, "maxlimit2", value = 5.5)
@@ -5261,10 +5286,10 @@ shinyServer(
         output$myIndicator <- renderPrint({
             dp <- input$decimals2
             pp <- getdata()
-            # if (input$bigsmall2 > 0){
-            #     pp$COUNTY <- "Big"
-            #     pp$COUNTY[pp$TOTAL < input$bigsmall2] <- "Small"
-            # }
+            if (input$bigsmall2 > 0){
+                pp$COUNTY <- "Big"
+                pp$COUNTY[pp$TOTAL < input$bigsmall2] <- "Small"
+            }
             namedem <- names(pp)[4]
             namerep <- names(pp)[5]
             names(pp)[4] <- "DEM"

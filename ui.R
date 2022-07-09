@@ -306,7 +306,7 @@ shinyUI(pageWithSidebar(
                      sidebarPanel(
                          width = 2,
                          selectInput("indicator2", "Indicator",
-                                     choices = c("2BL","LastC"),
+                                     choices = c("2BL","C05s","LastC"),
                                      selected = "2BL",
                                      multiple = FALSE),
                          selectInput("indvar2", "Variable(s)",
@@ -325,7 +325,7 @@ shinyUI(pageWithSidebar(
                                      multiple = FALSE),
                          textInput("maplimits2", NULL, value = "-100,100"),
                          textInput("mapcolors2", "Map Colors", value = "RdBu"),
-                         #numericInput("bigsmall2","Big/Small",0,min = 0),
+                         numericInput("bigsmall2","Big/Small",0,min = 0),
                          numericInput("decimals2","Decimals",1,min = 0),
                          checkboxInput("showpcts2","Show Percents",value = FALSE),
                          checkboxInput("showcounts2","Show Counts",value = FALSE)
