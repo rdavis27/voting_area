@@ -5976,12 +5976,22 @@ shinyServer(
             for (j in 3:NCOL(xx)){
                 xx[is.na(xx[,j]),j] <- 0
             }
+            if (input$totall_cand){
+                xx$TOTAL <- 0
+                for (j in 4:NCOL(xx)){
+                    xx$TOTAL <- xx$TOTAL + xx[,j]
+                }
+            }
             if (input$incl_cand != ""){
                 vincl_cand <- as.numeric(unlist(strsplit(input$incl_cand, ","))) + 3
-                xx$TOTAL <- 0
+                if (!input$totall_cand){
+                    xx$TOTAL <- 0
+                }
                 for (i in 1:length(vincl_cand)){
                     if (vincl_cand[i] <= NCOL(xx)){
-                        xx$TOTAL <- xx$TOTAL + xx[,vincl_cand[i]]
+                        if (!input$totall_cand){
+                            xx$TOTAL <- xx$TOTAL + xx[,vincl_cand[i]]
+                        }
                     }
                     else{
                         vincl_cand <- vincl_cand[1:(i-1)]
@@ -5990,7 +6000,6 @@ shinyServer(
                 }
                 xx <- xx[,c(1,2,3,vincl_cand)]
             }
-
             dd <- xx
             ddtot <- data.frame(COUNTY="",AREA="TOTAL",t(colSums(dd[,c(-1,-2)])))
             gdd <<- dd

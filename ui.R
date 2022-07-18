@@ -54,6 +54,7 @@ shinyUI(pageWithSidebar(
                     multiple = FALSE),
         numericInput("cleanlevel", "Clean Level", 2, min = 0),
         textInput("incl_cand", "Include candidates", value = "1,2,3,4,5"),
+        checkboxInput("totall_cand","Total all candidates",value = TRUE),
         textInput("skip_rows", "Skip rows", value = ""),
         textInput("areaname", "Area name", value = " County"),
         checkboxInput("displaytotal","Display TOTAL",value = FALSE),
