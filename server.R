@@ -1193,6 +1193,85 @@ shinyServer(
             write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_President.csv"))
             write_delim(xx, paste0(data_dir,"FL_2020_President.csv"), append = TRUE, col_names = TRUE)
         }
+        # Add turnout to file for Election Forensics
+        createFL_2020_President0EF <- function(){
+            cc <- fl_county_codes
+            xx <- NULL
+            for (i in 1:length(cc)){
+                dd <- read_delim(paste0(input_dir,"FL/2020-general-election-rev/",
+                                        cc[i],"_PctResults20201103.txt"), '\t', quote = "",
+                                 col_names = FALSE, col_types = "ccdccccddddccdccddd")
+                names(dd) <- c("Code","COUNTY","ElectNo","ElectDate","ElectName",
+                               "AreaId","AREA","RegAll","RegRep","RegDem",
+                               "RegOth","Contest","DIST","ConCode","Candidate",
+                               "Party","RegId","CandNo","Votes")
+                office <- "President of the United States" #UPDATE
+                dd <- dd[dd$Contest == office,]
+                if (NROW(dd) == 0){
+                    catmsg(paste0("====> WARNING: ",cc[i]," COUNTY had no ",office))
+                    next
+                }
+                #dd$AREA[is.na(dd$AREA)] <- dd$AreaId[is.na(dd$AREA)]
+                #dd$AREA[dd$AREA == ""] <- dd$AreaId[dd$AREA == ""]
+                dd$AREA <- dd$AreaId
+                dd <- dd[,c("DIST","COUNTY","AREA","RegAll","Candidate","Party","Votes")] #EF
+                for (j in 1:NROW(dd)){
+                    dd$Candidate[j] <- head(strsplit(dd$Candidate[j],split="/")[[1]],1) #Biden / Harris
+                    dd$Candidate[j] <- gsub(" ","",trimws(dd$Candidate[j]))
+                    if (!is.na(dd$Party[j])){
+                        dd$Candidate[j] <- paste0(dd$Candidate[j],"_",dd$Party[j])
+                    }
+                }
+                dd <- dd[,-6] # delete Party #EF
+                # check for matches first???
+                dd <- dd %>%
+                    group_by(DIST,COUNTY,AREA,RegAll,Candidate) %>% #EF
+                    summarize(Votes=sum(Votes))
+                dd <- dd %>% spread(Candidate,Votes)
+                dd$TOTAL <- 0
+                # for (j in 4:(NCOL(dd)-1)){
+                #     dd$TOTAL <- dd$TOTAL + dd[,j]
+                # }
+                xx <- rbind(xx,dd)
+            }
+            namesxx <- names(xx)
+            partyxx <- namesxx
+            for (j in 5:(NCOL(xx)-1)){ #EF
+                partyxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+                namesxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last name
+            }
+            ii <- c(1,2,3,4,NCOL(xx)) #EF
+            idem <- 0
+            irep <- 0
+            if ("DEM" %in% partyxx){
+                idem <- which(partyxx == "DEM")
+                ii <- c(ii, idem)
+            }
+            if ("REP" %in% partyxx){
+                irep <- which(partyxx == "REP")
+                ii <- c(ii, irep)
+            }
+            nc <- NCOL(xx)
+            for (j in 5:(NCOL(xx)-1)){ #EF
+                if (j != idem & j != irep){
+                    ii <- c(ii, j)
+                }
+                #EF - uncomment next 3 lines
+                if (names(xx)[j] != "OverVotes" & names(xx)[j] != "UnderVotes"){
+                    xx[,nc] <- xx[,nc] + xx[,j]
+                    # for (k in 1:NROW(xx)){
+                    #     xx[k,nc] <- xx[k,nc] + xx[k,j]
+                    # }
+                }
+            }
+            zxx <<- xx
+            xx <- xx[,ii]
+            namesxx <- namesxx[ii]
+            partyxx <- partyxx[ii]
+            names(xx) <- namesxx
+            write(paste(partyxx, collapse = " "), paste0(data_dir,"FL_2020_President0EF.csv"))
+            write_delim(xx, paste0(data_dir,"FL_2020_President0EF.csv"), append = TRUE, col_names = TRUE)
+        }
         createFL_2020_House <- function(){
             cc <- c(
                 "ALA","BAK","BAY","BRA","BRE","BRO","CAL","CHA","CIT","CLA",
@@ -5255,7 +5334,12 @@ shinyServer(
             }
             if (is.null(ccin)){
                 cc$NOUT <- 0
-                cc$NOUT[cc[[varto]] < input$minlimit2 | cc[[varto]] > input$maxlimit2] <- 1
+                if (input$inclcounty2){
+                    cc$NOUT[cc$COUNTY == input$xcounty] <- 1
+                }
+                else{
+                    cc$NOUT[cc[[varto]] < input$minlimit2 | cc[[varto]] > input$maxlimit2] <- 1
+                }
                 cc <- cc[c("COUNTY", "p0", "p1", "NOUT", pvarto, varto,
                            "n0", "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9")]
                 return(cc)
@@ -5286,6 +5370,7 @@ shinyServer(
         output$myIndicator <- renderPrint({
             dp <- input$decimals2
             pp <- getdata()
+            zpp <<- pp #DEBUG-RM
             if (input$bigsmall2 > 0){
                 pp$COUNTY <- "Big"
                 pp$COUNTY[pp$TOTAL < input$bigsmall2] <- "Small"

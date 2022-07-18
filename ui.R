@@ -327,6 +327,7 @@ shinyUI(pageWithSidebar(
                          textInput("mapcolors2", "Map Colors", value = "RdBu"),
                          numericInput("bigsmall2","Big/Small",0,min = 0),
                          numericInput("decimals2","Decimals",1,min = 0),
+                         checkboxInput("inclcounty2","Use County",value = FALSE),
                          checkboxInput("showpcts2","Show Percents",value = FALSE),
                          checkboxInput("showcounts2","Show Counts",value = FALSE)
                      ),
