@@ -4030,3 +4030,80 @@ createWI_2020_House <- function(){
     write(paste(partyyy, collapse = " "), paste0(data_dir,"WI_2020_House.csv"))
     write_delim(yy, paste0(data_dir,"WI_2020_House.csv"), append = TRUE, col_names = TRUE)
 }
+# Match using party instead of name if multiple races in state
+createfilep <- function(xx,col,office,party,filename){
+    names(xx) <- c("COUNTY","AREA","Office","DIST","TOTAL","Party","Name","Votes")
+    xx <- xx[xx$Office == office,]
+    xx$Party[is.na(xx$Party)] <- "(NA)"
+    # Check District and TOTAL, if necessary
+    xx$Name <- "Other"
+    for (i in 1:NROW(xx)){
+        for (j in 1:length(party)){
+            if (party[j] == xx$Party[i]){
+                xx$Name[i] <- str_to_title(party[j])
+                break
+            }
+        }
+    }
+    xx$Party[xx$Name == "Other"] <- "OTHER"
+    xx <- xx[,c("DIST","COUNTY","AREA","Name","Votes")]
+    # check for matches first???
+    xx <- xx %>%
+        group_by(DIST,COUNTY,AREA,Name) %>%
+        summarize(Votes=sum(Votes))
+    xx$Votes[is.na(xx$Votes)] <- 0
+    xx <- xx %>% spread(Name,Votes)
+    for (i in 4:NCOL(xx)){
+        xx[,i][is.na(xx[,i])] <- 0
+    }
+    xx$TOTAL <- 0
+
+    namesxx <- names(xx)
+    partyxx <- toupper(namesxx)
+    ii <- c(1,2,3,NCOL(xx))
+    idem <- 0
+    irep <- 0
+    if ("DEM" %in% partyxx){
+        idem <- which(partyxx == "DEM")
+        ii <- c(ii, idem)
+    }
+    if ("REP" %in% partyxx){
+        irep <- which(partyxx == "REP")
+        ii <- c(ii, irep)
+    }
+    for (j in 4:(NCOL(xx)-1)){
+        if (j != idem & j != irep){
+            ii <- c(ii, j)
+        }
+    }
+    xx <- xx[,ii]
+    namesxx <- namesxx[ii]
+    partyxx <- partyxx[ii]
+    names(xx) <- namesxx
+    write(paste(partyxx, collapse = " "), paste0(data_dir,filename))
+    write_delim(xx, paste0(data_dir,filename), append = TRUE, col_names = TRUE)
+}
+createWI_2020_State_Senate <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Senate"
+    party <- c("DEM","REP","IND","SCATTERING","")
+    filename <- "WI_2020_State_Senate.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createWI_2020_State_Assembly <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Assembly"
+    party <- c("DEM","REP","IND","CON","SCATTERING","")
+    filename <- "WI_2020_State_Assembly.csv"
+    createfilep(xx,columns,office,party,filename)
+}

@@ -95,7 +95,7 @@ shinyUI(pageWithSidebar(
                     ),
                     textInput("areaColor","Color",value = "red3,green3,blue3"),
                     textInput("xparty","Party",value = "1_Solid R,2_Toss-Up,3_Solid D"),
-                    checkboxInput("area_x0vote","Exclude 0 votes",value = TRUE),
+                    checkboxInput("area_x0vote","Exclude 0 votes",value = FALSE),
                     splitLayout(
                         numericInput("areaWidth", "Plot Width", 800),
                         numericInput("areaHeight", "Plot Height", 600)
@@ -118,7 +118,7 @@ shinyUI(pageWithSidebar(
                          textInput("xcolor","Color",value = "blue3,red3,orange,green3,violet"),
                          textInput("xshape","Shape",value = "3,8,0,1,2,15,16,17"),
                          numericInput("cvt_window","Rolling window",0,min = 0),
-                         checkboxInput("cvt_x0vote","Exclude 0 votes",value = TRUE),
+                         checkboxInput("cvt_x0vote","Exclude 0 votes",value = FALSE),
                          checkboxInput("votes1000","Votes in 1000s",value = TRUE),
                          checkboxInput("plotbyarea","Plot by Area",value = TRUE),
                          splitLayout(

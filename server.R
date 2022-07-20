@@ -1022,7 +1022,7 @@ shinyServer(
             dd <- dd[is.na(dd$TOTAL) | dd$TOTAL >= input$minvotes,]
             row.names(dd) <- seq(1:NROW(dd))
             #TODO - USING CHECKBOX FROM CVT INPUT PANEL, MOVE TO MAIN INPUT PANEL
-            if (input$cvt_x0vote){
+            if (input$area_x0vote){
                 dd <- dd[dd[4] > 0 & dd[5] > 0,] # delete if DEM or REP votes == 0 
             }
             if (input$xcounty != "" & input$xcounty != "(all)"){
@@ -1926,6 +1926,12 @@ shinyServer(
                     else if (races[i] == "WI_2020_House"){
                         createWI_2020_House()
                     }
+                    else if (races[i] == "WI_2020_State_Senate"){
+                        createWI_2020_State_Senate()
+                    }
+                    else if (races[i] == "WI_2020_State_Assembly"){
+                        createWI_2020_State_Assembly()
+                    }
                     else{
                         catmsg(paste0("Unknown race: ",races[i]))
                     }
@@ -2199,8 +2205,9 @@ shinyServer(
             dd$MAR1_N <- dd$MARGIN1
             dd$TOT1_N <- dd$TOTAL1
             dd$TOT2_N <- dd$TOTAL2
+            ddnt <- dd[dd$AREA != "TOTAL",] #fix Area2 TOTALs
             dd <- rbind(dd, data.frame(COUNTY="TOTAL",AREA="TOTAL",
-                                       t(colSums(dd[,c(-1,-2)],na.rm = TRUE))))
+                                       t(colSums(ddnt[,c(-1,-2)],na.rm = TRUE))))
             
             if (input$units == "Percent"){
                 dd$DEM1 <- 100 * dd$DEM1 / dd$TOTAL1
@@ -2520,7 +2527,7 @@ shinyServer(
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2020_State_Senate","WI_2020_State_Assembly","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
             updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")
