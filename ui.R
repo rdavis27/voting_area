@@ -57,6 +57,7 @@ shinyUI(pageWithSidebar(
         checkboxInput("totall_cand","Total all candidates",value = TRUE),
         textInput("skip_rows", "Skip rows", value = ""),
         textInput("areaname", "Area name", value = " County"),
+        checkboxInput("toupper","To Uppercase",value = TRUE),
         checkboxInput("displaytotal","Display TOTAL",value = FALSE),
         checkboxInput("createfiles","Create Data Files",value = FALSE)
     ),

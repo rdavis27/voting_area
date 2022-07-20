@@ -1899,6 +1899,9 @@ shinyServer(
                     else if (races[i] == "WI_2016_President"){
                         createWI_2016_President()
                     }
+                    else if (races[i] == "WI_2016_President0"){
+                        createWI_2016_President0()
+                    }
                     else if (races[i] == "WI_2016_President_Recount"){
                         createWI_2016_President_Recount()
                     }
@@ -2148,6 +2151,12 @@ shinyServer(
             yy <- yy[,c(1,2,4,5,NCOL(yy),3),]
             gxx <<- xx
             gyy <<- yy
+            if (input$toupper){
+                xx$COUNTY <- toupper(xx$COUNTY)
+                yy$COUNTY <- toupper(yy$COUNTY)
+                xx$AREA   <- toupper(xx$AREA)
+                yy$AREA   <- toupper(yy$AREA)
+            }
             if (input$cleanlevel > 0){
                 #xx$COUNTY <- toupper(xx$COUNTY)
                 #yy$COUNTY <- toupper(yy$COUNTY)
@@ -2511,7 +2520,7 @@ shinyServer(
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
             updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")

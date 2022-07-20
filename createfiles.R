@@ -3731,7 +3731,7 @@ createWI_2016_President_Recount <- function(){
     write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2016_President_Recount.csv"))
     write_delim(xx, paste0(data_dir,"WI_2016_President_Recount.csv"), append = TRUE, col_names = TRUE)
 }
-createWI_2016_President <- function(){
+createWI_2016_President0 <- function(){
     catmsg("##### START createWI_2016_President #####")
     xx <- read_excel(paste0(input_dir,"WI/2016/","Ward by Ward Report-President_0.xlsx"),
                      sheet = "Ward by Ward Report", skip = 10)
@@ -3879,6 +3879,80 @@ createWI_2018_House <- function(){
     #partyyy[4:5] <- c("DEM","REP")
     write(paste(partyyy, collapse = " "), paste0(data_dir,"WI_2018_House.csv"))
     write_delim(yy, paste0(data_dir,"WI_2018_House.csv"), append = TRUE, col_names = TRUE)
+}
+# Assumes DEM and REP listed 1st and 2nd in match, party, and lname
+createfile <- function(xx,col,office,match,party,lname,filename){
+    names(xx) <- c("COUNTY","AREA","Office","District","TOTAL","Party","Name","Votes")
+    xx <- xx[xx$Office == office,]
+    # Check District and TOTAL, if necessary
+    for (i in 1:NROW(xx)){
+        for (j in 1:length(match)){
+            if (grepl(match[j],xx$Name[i])){
+                xx$Name[i] <- paste0(party[j],"_",lname[j])
+                break
+            }
+        }
+    }
+    xx <- xx[,c("COUNTY","AREA","Name","Votes")]
+    # check for matches first???
+    xx <- xx %>%
+        group_by(COUNTY,AREA,Name) %>%
+        summarize(Votes=sum(Votes))
+    xx <- xx %>% spread(Name,Votes)
+    xx$TOTAL <- 0
+    
+    namesxx <- names(xx)
+    partyxx <- namesxx
+    for (j in 3:(NCOL(xx)-1)){
+        partyxx[j] <- head(strsplit(namesxx[j],split="_")[[1]],1) #last segment
+        namesxx[j] <- tail(strsplit(namesxx[j],split="_")[[1]],1) #last name
+    }
+    ii <- c(1,2,NCOL(xx))
+    idem <- 0
+    irep <- 0
+    if ("DEM" %in% partyxx){
+        idem <- which(partyxx == "DEM")
+        ii <- c(ii, idem)
+    }
+    if ("REP" %in% partyxx){
+        irep <- which(partyxx == "REP")
+        ii <- c(ii, irep)
+    }
+    for (j in 3:(NCOL(xx)-1)){
+        if (j != idem & j != irep){
+            ii <- c(ii, j)
+        }
+    }
+    xx <- xx[,ii]
+    namesxx <- namesxx[ii]
+    partyxx <- partyxx[ii]
+    names(xx) <- namesxx
+    write(paste(partyxx, collapse = " "), paste0(data_dir,filename))
+    write_delim(xx, paste0(data_dir,filename), append = TRUE, col_names = TRUE)
+}
+createWI_2016_President <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2016/","20161108__wi__general__ward.txt"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "President"
+    match <- c("Hillary Clinton","Donald J. Trump","Darrell L. Castle","Gary Johnson",
+               "Jill Stein","Monica Moorehead","Rocky Roque De La Fuente","Cherunda Fox",
+               "Evan McMullin","Michael A. Maturen","Marshall Schoenke","Chris Keniston",
+               "Laurence Kotlikoff","Tom Hoefling","Joseph Maldonado","Emidio Soltysik",
+               "Scattering")
+    party <- c("DEM","REP","CON","LIB",
+               "WGR","IND","IND","IND",
+               "IND","IND","IND","IND",
+               "IND","IND","IND","IND","")
+    lname <- c("Clinton","Trump","Castle","Johnson",
+               "Stein","Moorehead","DeLaFuente","Fox",
+               "McMullin","Maturen","Schoenke","Keniston",
+               "Kotlikoff","Hoefling","Maldonado","Soltysik","Scattering")
+    filename <- "WI_2016_President.csv"
+    createfile(xx,columns,"President",match,party,lname,filename)
 }
 createWI_2020_President <- function(){
     catmsg("##### START createWI_2020_President #####")
