@@ -1,0 +1,4250 @@
+DIST COUNTY AREA TOTAL DEM REP LIB OTHER
+DIST COUNTY AREA TOTAL Dem Rep Lib Other
+1 Bowie 10 0 250 1154 0 0
+1 Bowie 11 0 250 410 0 0
+1 Bowie 12 0 237 549 0 0
+1 Bowie 13 0 17 22 0 0
+1 Bowie 14 0 575 314 0 0
+1 Bowie 15 0 46 349 0 0
+1 Bowie 16 0 87 903 0 0
+1 Bowie 17 0 153 1052 0 0
+1 Bowie 18 0 287 322 0 0
+1 Bowie 19 0 34 583 0 0
+1 Bowie 1A 0 478 81 0 0
+1 Bowie 1B 0 444 205 0 0
+1 Bowie 20 0 145 273 0 0
+1 Bowie 21 0 37 135 0 0
+1 Bowie 22 0 40 226 0 0
+1 Bowie 24 0 39 372 0 0
+1 Bowie 25 0 146 701 0 0
+1 Bowie 27 0 21 462 0 0
+1 Bowie 28 0 37 528 0 0
+1 Bowie 29 0 28 230 0 0
+1 Bowie 2A 0 496 151 0 0
+1 Bowie 2B 0 150 76 0 0
+1 Bowie 2C 0 517 83 0 0
+1 Bowie 2D 0 16 12 0 0
+1 Bowie 30 0 177 806 0 0
+1 Bowie 3A 0 352 610 0 0
+1 Bowie 3B 0 276 230 0 0
+1 Bowie 4A 0 302 237 0 0
+1 Bowie 4B 0 414 709 0 0
+1 Bowie 4C 0 193 137 0 0
+1 Bowie 4D 0 11 21 0 0
+1 Bowie 4E 0 0 0 0 0
+1 Bowie 5A 0 57 87 0 0
+1 Bowie 5B 0 1 0 0 0
+1 Bowie 5C 0 705 511 0 0
+1 Bowie 6A 0 438 1144 0 0
+1 Bowie 6B 0 367 220 0 0
+1 Bowie 7 0 884 469 0 0
+1 Bowie 8A 0 292 196 0 0
+1 Bowie 8B 0 531 525 0 0
+1 Bowie 8C 0 155 732 0 0
+1 Bowie 9 0 643 1284 0 0
+1 Camp 1001 0 320 917 0 0
+1 Camp 2002 0 265 1199 0 0
+1 Camp 3003 0 426 578 0 0
+1 Camp 4004 0 282 947 0 0
+1 Cass "Precinct 1" 0 0 0 0 2130
+1 Cass "Precinct 11" 0 0 0 0 467
+1 Cass "Precinct 12" 0 0 0 0 619
+1 Cass "Precinct 13T" 0 0 0 0 993
+1 Cass "Precinct 14" 0 0 0 0 1503
+1 Cass "Precinct 15" 0 0 0 0 426
+1 Cass "Precinct 16" 0 0 0 0 359
+1 Cass "Precinct 17" 0 0 0 0 2274
+1 Cass "Precinct 18" 0 0 0 0 394
+1 Cass "Precinct 19" 0 0 0 0 341
+1 Cass "Precinct 2" 0 0 0 0 307
+1 Cass "Precinct 20E" 0 0 0 0 165
+1 Cass "Precinct 21" 0 0 0 0 209
+1 Cass "Precinct 4" 0 0 0 0 300
+1 Cass "Precinct 5" 0 0 0 0 587
+1 Cass "Precinct 6" 0 0 0 0 383
+1 Cass "Precinct 7" 0 0 0 0 1333
+1 Cass "Precinct 9" 0 0 0 0 719
+1 Franklin 101 0 128 671 0 0
+1 Franklin 102 0 34 358 0 0
+1 Franklin 201 0 47 380 0 0
+1 Franklin 202 0 140 472 0 0
+1 Franklin 301 0 75 492 0 0
+1 Franklin 302 0 87 497 0 0
+1 Franklin 401 0 142 739 0 0
+1 Franklin 402 0 84 480 0 0
+1 Gregg 01~01 0 1 1 0 0
+1 Gregg 01~02 0 45 187 0 0
+1 Gregg 01~03 0 44 132 0 0
+1 Gregg 01~04 0 86 109 0 0
+1 Gregg 01~05 0 165 395 0 0
+1 Gregg 02~01 0 430 1202 0 0
+1 Gregg 02~02 0 1 17 0 0
+1 Gregg 02~03 0 107 272 0 0
+1 Gregg 02~04 0 193 470 0 0
+1 Gregg 03~01 0 2 8 0 0
+1 Gregg 03~02 0 675 1718 0 0
+1 Gregg 03~04 0 2 5 0 0
+1 Gregg 04~01 0 1 1 0 0
+1 Gregg 04~02 0 78 181 0 0
+1 Gregg 04~03 0 447 1791 0 0
+1 Gregg 04~04 0 0 0 0 0
+1 Gregg 05~01 0 268 1268 0 0
+1 Gregg 05~02 0 207 662 0 0
+1 Gregg 05~03 0 7 50 0 0
+1 Gregg 05~04 0 81 73 0 0
+1 Gregg 05~06 0 4 66 0 0
+1 Gregg 06~03 0 268 1536 0 0
+1 Gregg 07~01 0 398 1920 0 0
+1 Gregg 07~02 0 6 6 0 0
+1 Gregg 08~02 0 52 59 0 0
+1 Gregg 08~03 0 118 364 0 0
+1 Gregg 08~04 0 35 130 0 0
+1 Gregg 08~05 0 265 973 0 0
+1 Gregg 08~06 0 290 641 0 0
+1 Gregg 08~07 0 46 102 0 0
+1 Gregg 09~01 0 117 185 0 0
+1 Gregg 09~02 0 87 65 0 0
+1 Gregg 09~03 0 252 492 0 0
+1 Gregg 09~04 0 368 1364 0 0
+1 Gregg 10~01 0 486 845 0 0
+1 Gregg 10~03 0 360 648 0 0
+1 Gregg 10~06 0 24 85 0 0
+1 Gregg 10~07 0 57 93 0 0
+1 Gregg 10~08 0 0 1 0 0
+1 Gregg 10~09 0 0 3 0 0
+1 Gregg 10~10 0 0 0 0 0
+1 Gregg 11~06 0 473 1393 0 0
+1 Gregg 11~08 0 155 620 0 0
+1 Gregg 11~09 0 65 153 0 0
+1 Gregg 12~04 0 19 76 0 0
+1 Gregg 12~05 0 16 80 0 0
+1 Gregg 12~07 0 307 2534 0 0
+1 Gregg 12~08 0 38 179 0 0
+1 Gregg 13~01 0 14 92 0 0
+1 Gregg 13~02 0 348 806 0 0
+1 Gregg 13~03 0 20 114 0 0
+1 Gregg 13~04 0 26 242 0 0
+1 Gregg 13~06 0 20 235 0 0
+1 Gregg 14~03 0 45 232 0 0
+1 Gregg 14~04 0 19 67 0 0
+1 Gregg 14~05 0 393 2396 0 0
+1 Gregg 15~01 0 147 288 0 0
+1 Gregg 15~02 0 12 28 0 0
+1 Gregg 15~03 0 98 271 0 0
+1 Gregg 15~04 0 3 1 0 0
+1 Gregg 16~01 0 40 319 0 0
+1 Gregg 16~02 0 394 1843 0 0
+1 Gregg 16~03 0 21 165 0 0
+1 Gregg 16~04 0 14 10 0 0
+1 Gregg 17~01 0 15 85 0 0
+1 Gregg 17~02 0 230 174 0 0
+1 Gregg 17~04 0 0 2 0 0
+1 Gregg 17~05 0 2 18 0 0
+1 Gregg 18~01 0 1 2 0 0
+1 Gregg 18~02 0 91 49 0 0
+1 Gregg 18~03 0 1 4 0 0
+1 Gregg 18~04 0 312 821 0 0
+1 Gregg 18~05 0 221 72 0 0
+1 Gregg 18~06 0 74 8 0 0
+1 Gregg 18~07 0 425 171 0 0
+1 Gregg 19~01 0 290 48 0 0
+1 Gregg 19~03 0 264 82 0 0
+1 Gregg 19~04 0 0 0 0 0
+1 Gregg 19~05 0 950 151 0 0
+1 Gregg 19~06 0 121 41 0 0
+1 Gregg 19~07 0 3 0 0 0
+1 Gregg 20~01 0 112 63 0 0
+1 Gregg 20~04 0 27 17 0 0
+1 Gregg 20~05 0 97 52 0 0
+1 Gregg 20~06 0 56 42 0 0
+1 Gregg 20~07 0 81 56 0 0
+1 Gregg 20~08 0 683 181 0 0
+1 Gregg 20~09 0 29 36 0 0
+1 Gregg 21~01 0 148 124 0 0
+1 Gregg 21~02 0 124 102 0 0
+1 Gregg 21~03 0 97 85 0 0
+1 Gregg 21~05 0 7 7 0 0
+1 Gregg 21~06 0 54 27 0 0
+1 Gregg 21~07 0 620 158 0 0
+1 Gregg 21~10 0 0 0 0 0
+1 Harrison "Precinct 1" 0 0 0 0 1466
+1 Harrison "Precinct 10" 0 0 0 0 780
+1 Harrison "Precinct 11" 0 0 0 0 344
+1 Harrison "Precinct 12" 0 0 0 0 3640
+1 Harrison "Precinct 13" 0 0 0 0 1114
+1 Harrison "Precinct 14" 0 0 0 0 973
+1 Harrison "Precinct 15" 0 0 0 0 826
+1 Harrison "Precinct 16" 0 0 0 0 450
+1 Harrison "Precinct 17" 0 0 0 0 1048
+1 Harrison "Precinct 18" 0 0 0 0 595
+1 Harrison "Precinct 19" 0 0 0 0 2407
+1 Harrison "Precinct 2" 0 0 0 0 1064
+1 Harrison "Precinct 20" 0 0 0 0 1678
+1 Harrison "Precinct 21" 0 0 0 0 522
+1 Harrison "Precinct 22" 0 0 0 0 978
+1 Harrison "Precinct 23" 0 0 0 0 438
+1 Harrison "Precinct 24" 0 0 0 0 434
+1 Harrison "Precinct 25" 0 0 0 0 2663
+1 Harrison "Precinct 26" 0 0 0 0 375
+1 Harrison "Precinct 3" 0 0 0 0 950
+1 Harrison "Precinct 4" 0 0 0 0 1085
+1 Harrison "Precinct 5" 0 0 0 0 675
+1 Harrison "Precinct 6" 0 0 0 0 1134
+1 Harrison "Precinct 7" 0 0 0 0 627
+1 Harrison "Precinct 8" 0 0 0 0 1801
+1 Harrison "Precinct 9" 0 0 0 0 1028
+1 Lamar "PRECINCT 1A3B" 0 337 1260 0 0
+1 Lamar "PRECINCT 1A5A" 0 334 477 0 0
+1 Lamar "PRECINCT 1C" 0 29 240 0 0
+1 Lamar "PRECINCT 1E" 0 73 471 0 0
+1 Lamar "PRECINCT 1F" 0 79 864 0 0
+1 Lamar "PRECINCT 1H" 0 40 412 0 0
+1 Lamar "PRECINCT 1I" 0 18 224 0 0
+1 Lamar "PRECINCT 2A1A" 0 404 203 0 0
+1 Lamar "PRECINCT 2C3A" 0 725 794 0 0
+1 Lamar "PRECINCT 2D" 0 81 356 0 0
+1 Lamar "PRECINCT 2E" 0 58 360 0 0
+1 Lamar "PRECINCT 2F" 0 18 134 0 0
+1 Lamar "PRECINCT 2G" 0 70 414 0 0
+1 Lamar "PRECINCT 3C7G" 0 564 1284 0 0
+1 Lamar "PRECINCT 3D" 0 53 514 0 0
+1 Lamar "PRECINCT 3E" 0 60 822 0 0
+1 Lamar "PRECINCT 3F" 0 47 383 0 0
+1 Lamar "PRECINCT 3G" 0 51 347 0 0
+1 Lamar "PRECINCT 3H3C" 0 126 336 0 0
+1 Lamar "PRECINCT 3I" 0 108 823 0 0
+1 Lamar "PRECINCT 4A6E" 0 253 713 0 0
+1 Lamar "PRECINCT 4B" 0 131 883 0 0
+1 Lamar "PRECINCT 4D" 0 63 896 0 0
+1 Lamar "PRECINCT 4E" 0 118 927 0 0
+1 Lamar "PRECINCT 4F" 0 167 1070 0 0
+1 Lamar "PRECINCT 4G" 0 178 1203 0 0
+1 Marion 1.0 0 121 296 0 0
+1 Marion 10.0 0 91 189 0 0
+1 Marion 2.0 0 140 649 0 0
+1 Marion 3.0 0 81 334 0 0
+1 Marion 4.0 0 115 239 0 0
+1 Marion 5.0 0 109 421 0 0
+1 Marion 6.0 0 182 394 0 0
+1 Marion 7.0 0 237 235 0 0
+1 Marion 8.0 0 140 483 0 0
+1 Marion 9.0 0 57 213 0 0
+1 Morris "Precinct 101" 0 272 103 0 0
+1 Morris "Precinct 102" 0 157 98 0 0
+1 Morris "Precinct 103" 0 152 335 0 0
+1 Morris "Precinct 202" 0 130 598 0 0
+1 Morris "Precinct 203" 0 174 416 0 0
+1 Morris "Precinct 302" 0 203 497 0 0
+1 Morris "Precinct 303" 0 132 637 0 0
+1 Morris "Precinct 401" 0 374 1054 0 0
+1 Panola 1 0 0 0 0 1323
+1 Panola 10 0 0 0 0 232
+1 Panola 12 0 0 0 0 303
+1 Panola 13 0 0 0 0 226
+1 Panola 14 0 0 0 0 327
+1 Panola 18 0 0 0 0 1478
+1 Panola 19 0 0 0 0 251
+1 Panola 2 0 0 0 0 1499
+1 Panola 20 0 0 0 0 251
+1 Panola 22 0 0 0 0 235
+1 Panola 26 0 0 0 0 131
+1 Panola 27 0 0 0 0 675
+1 Panola 28 0 0 0 0 1466
+1 Panola 29 0 0 0 0 245
+1 Panola 3 0 0 0 0 954
+1 Panola 5 0 0 0 0 350
+1 Panola 7 0 0 0 0 531
+1 Panola 8 0 0 0 0 172
+1 Panola 9 0 0 0 0 499
+1 "Red River" PCT 0 1176 4423 0 0
+1 Rusk "PCT 111" 0 104 543 0 0
+1 Rusk "PCT 112" 0 225 1085 0 0
+1 Rusk "PCT 113" 0 385 1668 0 0
+1 Rusk "PCT 114" 0 198 870 0 0
+1 Rusk "PCT 201" 0 154 480 0 0
+1 Rusk "PCT 212" 0 94 533 0 0
+1 Rusk "PCT 213" 0 230 1160 0 0
+1 Rusk "PCT 214" 0 395 1410 0 0
+1 Rusk "PCT 215" 0 391 1201 0 0
+1 Rusk "PCT 302" 0 296 356 0 0
+1 Rusk "PCT 303" 0 418 485 0 0
+1 Rusk "PCT 314" 0 99 684 0 0
+1 Rusk "PCT 315" 0 60 563 0 0
+1 Rusk "PCT 316" 0 34 300 0 0
+1 Rusk "PCT 317" 0 162 252 0 0
+1 Rusk "PCT 318" 0 144 620 0 0
+1 Rusk "PCT 319" 0 96 157 0 0
+1 Rusk "PCT 404" 0 197 1003 0 0
+1 Rusk "PCT 405" 0 164 721 0 0
+1 Rusk "PCT 416" 0 105 535 0 0
+1 Rusk "PCT 417" 0 205 771 0 0
+1 Rusk "PCT 418" 0 247 1273 0 0
+1 Smith 1 0 149 101 0 0
+1 Smith 10 0 976 1048 0 0
+1 Smith 11 0 745 219 0 0
+1 Smith 12 0 795 143 0 0
+1 Smith 13 0 818 48 0 0
+1 Smith 14 0 409 820 0 0
+1 Smith 15 0 453 3171 0 0
+1 Smith 16 0 613 123 0 0
+1 Smith 17 0 77 640 0 0
+1 Smith 18 0 641 65 0 0
+1 Smith 19 0 501 3035 0 0
+1 Smith 2 0 296 110 0 0
+1 Smith 20 0 194 114 0 0
+1 Smith 21 0 302 885 0 0
+1 Smith 22 0 124 71 0 0
+1 Smith 23 0 490 1138 0 0
+1 Smith 25 0 369 1216 0 0
+1 Smith 26 0 326 1634 0 0
+1 Smith 27 0 456 813 0 0
+1 Smith 28 0 495 2345 0 0
+1 Smith 29 0 326 1073 0 0
+1 Smith 3 0 493 1253 0 0
+1 Smith 30 0 539 2784 0 0
+1 Smith 31 0 477 2492 0 0
+1 Smith 32 0 433 1733 0 0
+1 Smith 34 0 568 189 0 0
+1 Smith 35 0 926 761 0 0
+1 Smith 36 0 1238 412 0 0
+1 Smith 37 0 260 1133 0 0
+1 Smith 38 0 614 1241 0 0
+1 Smith 39 0 158 80 0 0
+1 Smith 4 0 478 571 0 0
+1 Smith 40 0 611 3189 0 0
+1 Smith 41 0 457 2618 0 0
+1 Smith 42 0 570 2474 0 0
+1 Smith 43 0 200 464 0 0
+1 Smith 44 0 941 1608 0 0
+1 Smith 45 0 92 900 0 0
+1 Smith 46 0 198 549 0 0
+1 Smith 47 0 101 190 0 0
+1 Smith 48 0 110 164 0 0
+1 Smith 49 0 80 68 0 0
+1 Smith 5 0 436 2801 0 0
+1 Smith 50 0 439 1389 0 0
+1 Smith 52 0 261 1369 0 0
+1 Smith 54 0 612 1644 0 0
+1 Smith 55 0 1253 2220 0 0
+1 Smith 56 0 625 1780 0 0
+1 Smith 58 0 591 1924 0 0
+1 Smith 59 0 630 2009 0 0
+1 Smith 6 0 105 588 0 0
+1 Smith 60 0 177 182 0 0
+1 Smith 61 0 604 784 0 0
+1 Smith 63 0 39 12 0 0
+1 Smith 64 0 45 55 0 0
+1 Smith 65 0 51 48 0 0
+1 Smith 66 0 195 234 0 0
+1 Smith 7 0 313 957 0 0
+1 Smith 70 0 110 231 0 0
+1 Smith 71 0 676 2648 0 0
+1 Smith 72 0 55 91 0 0
+1 Smith 73 0 187 202 0 0
+1 Smith 74 0 68 328 0 0
+1 Smith 75 0 294 2147 0 0
+1 Smith 76 0 217 126 0 0
+1 Smith 77 0 119 120 0 0
+1 Smith 78 0 22 79 0 0
+1 Smith 79 0 570 2133 0 0
+1 Smith 8 0 207 791 0 0
+1 Smith 80 0 2 11 0 0
+1 Smith 81 0 92 68 0 0
+1 Smith 82 0 23 35 0 0
+1 Smith 9 0 117 63 0 0
+1 Titus 1 0 230 81 0 0
+1 Titus 10 0 73 582 0 0
+1 Titus 11 0 24 94 0 0
+1 Titus 12 0 27 168 0 0
+1 Titus 14 0 374 623 0 0
+1 Titus 15 0 81 441 0 0
+1 Titus 16 0 361 1244 0 0
+1 Titus 17 0 164 113 0 0
+1 Titus 18 0 30 110 0 0
+1 Titus 19 0 157 304 0 0
+1 Titus 2 0 124 273 0 0
+1 Titus 20 0 259 638 0 0
+1 Titus 3 0 82 359 0 0
+1 Titus 4 0 86 422 0 0
+1 Titus 5 0 21 197 0 0
+1 Titus 6 0 113 722 0 0
+1 Titus 7 0 133 643 0 0
+1 Titus 8 0 299 282 0 0
+1 Titus 9 0 63 215 0 0
+1 Upshur 1 0 210 1352 0 0
+1 Upshur 10 0 163 1462 0 0
+1 Upshur 11 0 92 392 0 0
+1 Upshur 12 0 78 658 0 0
+1 Upshur 13 0 133 513 0 0
+1 Upshur 14 0 50 319 0 0
+1 Upshur 15 0 102 1252 0 0
+1 Upshur 16 0 216 808 0 0
+1 Upshur 17 0 361 1020 0 0
+1 Upshur 18 0 124 264 0 0
+1 Upshur 19 0 3 4 0 0
+1 Upshur 2 0 120 1577 0 0
+1 Upshur 20 0 8 101 0 0
+1 Upshur 21 0 0 0 0 0
+1 Upshur 3 0 129 924 0 0
+1 Upshur 4 0 134 716 0 0
+1 Upshur 5 0 101 402 0 0
+1 Upshur 6 0 143 896 0 0
+1 Upshur 7 0 243 1417 0 0
+1 Upshur 8 0 108 549 0 0
+1 Upshur 9 0 222 1098 0 0
+1 Wood 1~1 0 0 0 0 2163
+1 Wood 1~2 0 0 0 0 1920
+1 Wood 1~3 0 0 0 0 1613
+1 Wood 1~4 0 0 0 0 541
+1 Wood 2~1 0 0 0 0 348
+1 Wood 2~2 0 0 0 0 2667
+1 Wood 2~3 0 0 0 0 2138
+1 Wood 3~1 0 0 0 0 890
+1 Wood 3~2 0 0 0 0 2450
+1 Wood 3~3 0 0 0 0 2399
+1 Wood 4~1 0 0 0 0 572
+1 Wood 4~2 0 0 0 0 1875
+1 Wood 4~3 0 0 0 0 2139
+1 Wood 4~4 0 0 0 0 471
+4 Chambers Federal 0 0 0 0 0
+4 Chambers "Precinct 1 - Wallisville - A" 0 65 386 9 0
+4 Chambers "Precinct 10 - Goss Library - A" 0 499 3253 99 0
+4 Chambers "Precinct 11 - Cedar Bayou Annex - A" 0 2 30 0 0
+4 Chambers "Precinct 11 - Cedar Bayou Annex - B" 0 350 1103 43 0
+4 Chambers "Precinct 12 - Stowell - A" 0 0 3 0 0
+4 Chambers "Precinct 12 - Stowell - B" 0 186 428 13 0
+4 Chambers "Precinct 12 - Stowell - C" 0 0 5 0 0
+4 Chambers "Precinct 12 - Stowell - D" 0 45 250 1 0
+4 Chambers "Precinct 14 - Anahuac Airport - A" 0 41 263 7 0
+4 Chambers "Precinct 14 - Anahuac Airport - B" 0 2 12 0 0
+4 Chambers "Precinct 14 - Anahuac Airport - C" 0 0 8 0 0
+4 Chambers "Precinct 15 - Baytown-Kilgore - A" 0 38 72 1 0
+4 Chambers "Precinct 15 - Baytown-Kilgore - B" 0 438 681 37 0
+4 Chambers "Precinct 15 - Baytown-Kilgore - C" 0 134 241 13 0
+4 Chambers "Precinct 2 - Hankamer - A" 0 123 261 12 0
+4 Chambers "Precinct 2 - Hankamer - B" 0 8 73 1 0
+4 Chambers "Precinct 3 - Pine Island - A" 0 103 179 8 0
+4 Chambers "Precinct 3 - Pine Island - B" 0 1 11 0 0
+4 Chambers "Precinct 4 - Mont Belvieu - A" 0 325 2516 81 0
+4 Chambers "Precinct 5 - Beach City - A" 0 207 1611 46 0
+4 Chambers "Precinct 5 - Beach City - B" 0 0 0 0 0
+4 Chambers "Precinct 6 - Anahuac - A" 0 224 620 26 0
+4 Chambers "Precinct 6 - Anahuac - B" 0 22 206 2 0
+4 Chambers "Precinct 6 - Anahuac - C" 0 60 272 10 0
+4 Chambers "Precinct 7 - Winnie - A" 0 55 354 9 0
+4 Chambers "Precinct 7 - Winnie - B" 0 125 735 16 0
+4 Chambers "Precinct 7 - Winnie - C" 0 19 152 4 0
+4 Chambers "Precinct 8 - Cove - A" 0 433 3012 78 0
+4 Chambers "Precinct 8 - Cove - B" 0 0 0 0 0
+4 Chambers "Precinct 9 - Oak Island - A" 0 27 224 4 0
+4 Galveston 103 0 148 827 23 0
+4 Galveston 104 0 122 613 8 0
+4 Harris 1008 0 201 753 17 0
+4 Harris 103 0 2124 2048 112 0
+4 Harris 199 0 800 2103 81 0
+4 Harris 340 0 875 1974 99 0
+4 Harris 351 0 1038 2769 77 0
+4 Harris 357 0 802 1836 76 0
+4 Harris 452 0 1334 2176 102 0
+4 Harris 459 0 808 2166 77 0
+4 Harris 469 0 607 1819 56 0
+4 Harris 502 0 357 1474 40 0
+4 Harris 531 0 401 1235 26 0
+4 Harris 546 0 392 1591 38 0
+4 Harris 563 0 692 1758 46 0
+4 Harris 590 0 449 1201 47 0
+4 Harris 604 0 397 2149 58 0
+4 Harris 612 0 690 1804 64 0
+4 Harris 635 0 692 1634 90 0
+4 Harris 636 0 452 3321 107 0
+4 Harris 658 0 818 1084 75 0
+4 Harris 659 0 1294 2558 98 0
+4 Harris 670 0 624 1934 52 0
+4 Harris 674 0 1105 2300 95 0
+4 Harris 700 0 176 967 17 0
+4 Harris 735 0 238 295 17 0
+4 Harris 758 0 934 2522 67 0
+4 Harris 760 0 359 1247 41 0
+4 Harris 955 0 2097 4207 109 0
+4 Harris 97 0 942 2882 113 0
+4 Harris 98 0 386 1913 68 0
+4 Harris 988 0 9 68 1 0
+4 Jefferson 1 0 0 0 0 952
+4 Jefferson 10 0 0 0 0 329
+4 Jefferson 100 0 0 0 0 2137
+4 Jefferson 101 0 0 0 0 0
+4 Jefferson 102 0 0 0 0 118
+4 Jefferson 103 0 0 0 0 22
+4 Jefferson 104 0 0 0 0 55
+4 Jefferson 105 0 0 0 0 137
+4 Jefferson 106 0 0 0 0 22
+4 Jefferson 107 0 0 0 0 1
+4 Jefferson 108 0 0 0 0 356
+4 Jefferson 109 0 0 0 0 181
+4 Jefferson 11 0 0 0 0 206
+4 Jefferson 110 0 0 0 0 87
+4 Jefferson 12 0 0 0 0 264
+4 Jefferson 13 0 0 0 0 197
+4 Jefferson 14 0 0 0 0 749
+4 Jefferson 15 0 0 0 0 668
+4 Jefferson 16 0 0 0 0 223
+4 Jefferson 17 0 0 0 0 1749
+4 Jefferson 18 0 0 0 0 849
+4 Jefferson 19 0 0 0 0 798
+4 Jefferson 2 0 0 0 0 576
+4 Jefferson 20 0 0 0 0 604
+4 Jefferson 21 0 0 0 0 162
+4 Jefferson 22 0 0 0 0 2769
+4 Jefferson 23 0 0 0 0 1440
+4 Jefferson 24 0 0 0 0 371
+4 Jefferson 25 0 0 0 0 1600
+4 Jefferson 26 0 0 0 0 1927
+4 Jefferson 27 0 0 0 0 876
+4 Jefferson 28 0 0 0 0 583
+4 Jefferson 29 0 0 0 0 1461
+4 Jefferson 3 0 0 0 0 1042
+4 Jefferson 30 0 0 0 0 831
+4 Jefferson 31 0 0 0 0 908
+4 Jefferson 32 0 0 0 0 157
+4 Jefferson 33 0 0 0 0 1419
+4 Jefferson 34 0 0 0 0 1016
+4 Jefferson 35 0 0 0 0 671
+4 Jefferson 36 0 0 0 0 1050
+4 Jefferson 37 0 0 0 0 1694
+4 Jefferson 38 0 0 0 0 1510
+4 Jefferson 39 0 0 0 0 1076
+4 Jefferson 4 0 0 0 0 1083
+4 Jefferson 40 0 0 0 0 2044
+4 Jefferson 41 0 0 0 0 106
+4 Jefferson 42 0 0 0 0 1655
+4 Jefferson 43 0 0 0 0 1536
+4 Jefferson 44 0 0 0 0 435
+4 Jefferson 45 0 0 0 0 662
+4 Jefferson 46 0 0 0 0 591
+4 Jefferson 47 0 0 0 0 751
+4 Jefferson 48 0 0 0 0 449
+4 Jefferson 49 0 0 0 0 233
+4 Jefferson 5 0 0 0 0 1012
+4 Jefferson 50 0 0 0 0 1236
+4 Jefferson 51 0 0 0 0 209
+4 Jefferson 52 0 0 0 0 257
+4 Jefferson 53 0 0 0 0 729
+4 Jefferson 54 0 0 0 0 267
+4 Jefferson 55 0 0 0 0 207
+4 Jefferson 56 0 0 0 0 2306
+4 Jefferson 57 0 0 0 0 404
+4 Jefferson 58 0 0 0 0 38
+4 Jefferson 59 0 0 0 0 552
+4 Jefferson 6 0 0 0 0 705
+4 Jefferson 60 0 0 0 0 2063
+4 Jefferson 61 0 0 0 0 1027
+4 Jefferson 62 0 0 0 0 1894
+4 Jefferson 63 0 0 0 0 748
+4 Jefferson 64 0 0 0 0 475
+4 Jefferson 65 0 0 0 0 1349
+4 Jefferson 66 0 0 0 0 1009
+4 Jefferson 67 0 0 0 0 1255
+4 Jefferson 68 0 0 0 0 1615
+4 Jefferson 69 0 0 0 0 2156
+4 Jefferson 7 0 0 0 0 874
+4 Jefferson 70 0 0 0 0 1349
+4 Jefferson 71 0 0 0 0 65
+4 Jefferson 72 0 0 0 0 1619
+4 Jefferson 73 0 0 0 0 1746
+4 Jefferson 74 0 0 0 0 1938
+4 Jefferson 75 0 0 0 0 422
+4 Jefferson 76 0 0 0 0 443
+4 Jefferson 77 0 0 0 0 721
+4 Jefferson 78 0 0 0 0 1177
+4 Jefferson 79 0 0 0 0 1483
+4 Jefferson 8 0 0 0 0 368
+4 Jefferson 80 0 0 0 0 7
+4 Jefferson 81 0 0 0 0 406
+4 Jefferson 82 0 0 0 0 1431
+4 Jefferson 83 0 0 0 0 832
+4 Jefferson 84 0 0 0 0 664
+4 Jefferson 85 0 0 0 0 815
+4 Jefferson 86 0 0 0 0 804
+4 Jefferson 87 0 0 0 0 659
+4 Jefferson 88 0 0 0 0 737
+4 Jefferson 89 0 0 0 0 240
+4 Jefferson 9 0 0 0 0 2687
+4 Jefferson 90 0 0 0 0 120
+4 Jefferson 91 0 0 0 0 557
+4 Jefferson 92 0 0 0 0 892
+4 Jefferson 93 0 0 0 0 374
+4 Jefferson 94 0 0 0 0 1528
+4 Jefferson 95 0 0 0 0 374
+4 Jefferson 96 0 0 0 0 247
+4 Jefferson 97 0 0 0 0 0
+4 Jefferson 98 0 0 0 0 389
+4 Jefferson 99 0 0 0 0 403
+4 Montgomery "Precinct 02" 0 0 0 0 1893
+4 Montgomery "Precinct 03" 0 0 0 0 4578
+4 Montgomery "Precinct 04" 0 0 0 0 1267
+4 Montgomery "Precinct 06" 0 0 0 0 2947
+4 Montgomery "Precinct 07" 0 0 0 0 1420
+4 Montgomery "Precinct 09" 0 0 0 0 1446
+4 Montgomery "Precinct 10" 0 0 0 0 1299
+4 Montgomery "Precinct 100" 0 0 0 0 3412
+4 Montgomery "Precinct 11" 0 0 0 0 1418
+4 Montgomery "Precinct 12" 0 0 0 0 1268
+4 Montgomery "Precinct 13" 0 0 0 0 4313
+4 Montgomery "Precinct 14" 0 0 0 0 2909
+4 Montgomery "Precinct 15" 0 0 0 0 3793
+4 Montgomery "Precinct 16" 0 0 0 0 2564
+4 Montgomery "Precinct 18" 0 0 0 0 3500
+4 Montgomery "Precinct 20" 0 0 0 0 1311
+4 Montgomery "Precinct 21" 0 0 0 0 2545
+4 Montgomery "Precinct 24" 0 0 0 0 2264
+4 Montgomery "Precinct 25" 0 0 0 0 2170
+4 Montgomery "Precinct 26" 0 0 0 0 1482
+4 Montgomery "Precinct 27" 0 0 0 0 3003
+4 Montgomery "Precinct 28" 0 0 0 0 2330
+4 Montgomery "Precinct 29" 0 0 0 0 3788
+4 Montgomery "Precinct 30" 0 0 0 0 2186
+4 Montgomery "Precinct 31" 0 0 0 0 3607
+4 Montgomery "Precinct 32" 0 0 0 0 2033
+4 Montgomery "Precinct 33" 0 0 0 0 2500
+4 Montgomery "Precinct 34" 0 0 0 0 2013
+4 Montgomery "Precinct 35" 0 0 0 0 3514
+4 Montgomery "Precinct 36" 0 0 0 0 2097
+4 Montgomery "Precinct 37" 0 0 0 0 1956
+4 Montgomery "Precinct 39" 0 0 0 0 3832
+4 Montgomery "Precinct 40" 0 0 0 0 4696
+4 Montgomery "Precinct 41" 0 0 0 0 2487
+4 Montgomery "Precinct 42" 0 0 0 0 535
+4 Montgomery "Precinct 43" 0 0 0 0 4387
+4 Montgomery "Precinct 44" 0 0 0 0 1617
+4 Montgomery "Precinct 45" 0 0 0 0 2134
+4 Montgomery "Precinct 46" 0 0 0 0 4503
+4 Montgomery "Precinct 47" 0 0 0 0 2884
+4 Montgomery "Precinct 48" 0 0 0 0 1854
+4 Montgomery "Precinct 49" 0 0 0 0 1750
+4 Montgomery "Precinct 51" 0 0 0 0 1372
+4 Montgomery "Precinct 52" 0 0 0 0 2229
+4 Montgomery "Precinct 53" 0 0 0 0 3187
+4 Montgomery "Precinct 54" 0 0 0 0 880
+4 Montgomery "Precinct 55" 0 0 0 0 852
+4 Montgomery "Precinct 56" 0 0 0 0 2304
+4 Montgomery "Precinct 58" 0 0 0 0 1983
+4 Montgomery "Precinct 59" 0 0 0 0 1291
+4 Montgomery "Precinct 60" 0 0 0 0 1265
+4 Montgomery "Precinct 61" 0 0 0 0 3732
+4 Montgomery "Precinct 62" 0 0 0 0 2062
+4 Montgomery "Precinct 64" 0 0 0 0 1221
+4 Montgomery "Precinct 65" 0 0 0 0 3949
+4 Montgomery "Precinct 66" 0 0 0 0 2808
+4 Montgomery "Precinct 67" 0 0 0 0 2063
+4 Montgomery "Precinct 68" 0 0 0 0 3572
+4 Montgomery "Precinct 69" 0 0 0 0 3254
+4 Montgomery "Precinct 70" 0 0 0 0 2210
+4 Montgomery "Precinct 71" 0 0 0 0 3499
+4 Montgomery "Precinct 73" 0 0 0 0 1336
+4 Montgomery "Precinct 74" 0 0 0 0 1752
+4 Montgomery "Precinct 75" 0 0 0 0 3083
+4 Montgomery "Precinct 76" 0 0 0 0 4113
+4 Montgomery "Precinct 78" 0 0 0 0 3964
+4 Montgomery "Precinct 79" 0 0 0 0 1571
+4 Montgomery "Precinct 80" 0 0 0 0 4050
+4 Montgomery "Precinct 81" 0 0 0 0 3209
+4 Montgomery "Precinct 82" 0 0 0 0 4289
+4 Montgomery "Precinct 84" 0 0 0 0 2852
+4 Montgomery "Precinct 86" 0 0 0 0 1806
+4 Montgomery "Precinct 87" 0 0 0 0 3003
+4 Montgomery "Precinct 88" 0 0 0 0 3209
+4 Montgomery "Precinct 89" 0 0 0 0 3575
+4 Montgomery "Precinct 90" 0 0 0 0 5087
+4 Montgomery "Precinct 91" 0 0 0 0 1497
+4 Montgomery "Precinct 92" 0 0 0 0 3565
+4 Montgomery "Precinct 93" 0 0 0 0 2771
+4 Montgomery "Precinct 94" 0 0 0 0 1167
+4 Montgomery "Precinct 95" 0 0 0 0 2752
+4 Montgomery "Precinct 96" 0 0 0 0 4152
+4 Montgomery "Precinct 97" 0 0 0 0 2686
+4 Montgomery "Precinct 98" 0 0 0 0 3738
+4 Montgomery "Precinct 99" 0 0 0 0 3011
+6 Harris 1 0 1930 0 529 0
+6 Harris 10 0 818 0 127 0
+6 Harris 100 0 572 0 175 0
+6 Harris 101 0 285 0 51 0
+6 Harris 102 0 632 0 120 0
+6 Harris 105 0 996 0 186 0
+6 Harris 106 0 84 0 31 0
+6 Harris 107 0 897 0 104 0
+6 Harris 11 0 839 0 132 0
+6 Harris 115 0 795 0 76 0
+6 Harris 118 0 2027 0 795 0
+6 Harris 12 0 245 0 82 0
+6 Harris 13 0 871 0 510 0
+6 Harris 134 0 753 0 166 0
+6 Harris 141 0 237 0 109 0
+6 Harris 142 0 390 0 61 0
+6 Harris 150 0 789 0 41 0
+6 Harris 152 0 1166 0 163 0
+6 Harris 153 0 771 0 133 0
+6 Harris 154 0 1088 0 144 0
+6 Harris 162 0 531 0 96 0
+6 Harris 163 0 1206 0 209 0
+6 Harris 166 0 754 0 233 0
+6 Harris 167 0 7 0 2 0
+6 Harris 170 0 661 0 225 0
+6 Harris 171 0 645 0 53 0
+6 Harris 172 0 323 0 48 0
+6 Harris 181 0 975 0 159 0
+6 Harris 184 0 466 0 76 0
+6 Harris 185 0 928 0 156 0
+6 Harris 187 0 112 0 13 0
+6 Harris 188 0 636 0 137 0
+6 Harris 190 0 684 0 156 0
+6 Harris 191 0 494 0 118 0
+6 Harris 196 0 210 0 24 0
+6 Harris 2 0 1081 0 343 0
+6 Harris 203 0 413 0 51 0
+6 Harris 206 0 1761 0 413 0
+6 Harris 207 0 654 0 142 0
+6 Harris 208 0 988 0 158 0
+6 Harris 211 0 1310 0 273 0
+6 Harris 212 0 548 0 58 0
+6 Harris 218 0 1486 0 223 0
+6 Harris 221 0 1237 0 267 0
+6 Harris 226 0 1124 0 144 0
+6 Harris 23 0 213 0 26 0
+6 Harris 231 0 1036 0 162 0
+6 Harris 241 0 887 0 190 0
+6 Harris 248 0 672 0 137 0
+6 Harris 249 0 862 0 499 0
+6 Harris 254 0 650 0 90 0
+6 Harris 257 0 1530 0 225 0
+6 Harris 26 0 1119 0 192 0
+6 Harris 261 0 557 0 107 0
+6 Harris 266 0 873 0 214 0
+6 Harris 267 0 581 0 138 0
+6 Harris 27 0 1775 0 296 0
+6 Harris 275 0 739 0 110 0
+6 Harris 277 0 723 0 184 0
+6 Harris 278 0 1184 0 267 0
+6 Harris 279 0 729 0 378 0
+6 Harris 280 0 687 0 97 0
+6 Harris 285 0 1393 0 130 0
+6 Harris 289 0 683 0 159 0
+6 Harris 29 0 937 0 190 0
+6 Harris 301 0 878 0 215 0
+6 Harris 302 0 1161 0 457 0
+6 Harris 308 0 704 0 120 0
+6 Harris 320 0 613 0 134 0
+6 Harris 321 0 974 0 167 0
+6 Harris 325 0 1004 0 146 0
+6 Harris 326 0 344 0 68 0
+6 Harris 328 0 611 0 127 0
+6 Harris 329 0 748 0 139 0
+6 Harris 339 0 977 0 141 0
+6 Harris 341 0 596 0 83 0
+6 Harris 343 0 1075 0 118 0
+6 Harris 344 0 558 0 43 0
+6 Harris 358 0 1198 0 121 0
+6 Harris 36 0 1257 0 175 0
+6 Harris 371 0 253 0 10 0
+6 Harris 373 0 58 0 12 0
+6 Harris 374 0 299 0 49 0
+6 Harris 375 0 994 0 204 0
+6 Harris 379 0 1087 0 99 0
+6 Harris 381 0 1820 0 348 0
+6 Harris 394 0 294 0 93 0
+6 Harris 397 0 311 0 67 0
+6 Harris 404 0 993 0 328 0
+6 Harris 408 0 633 0 107 0
+6 Harris 409 0 642 0 140 0
+6 Harris 411 0 914 0 165 0
+6 Harris 417 0 1104 0 316 0
+6 Harris 418 0 1629 0 342 0
+6 Harris 423 0 546 0 71 0
+6 Harris 44 0 951 0 157 0
+6 Harris 45 0 4049 0 548 0
+6 Harris 46 0 1171 0 116 0
+6 Harris 475 0 919 0 279 0
+6 Harris 497 0 1094 0 82 0
+6 Harris 526 0 358 0 53 0
+6 Harris 527 0 166 0 50 0
+6 Harris 530 0 476 0 66 0
+6 Harris 533 0 346 0 130 0
+6 Harris 535 0 156 0 31 0
+6 Harris 536 0 2844 0 616 0
+6 Harris 543 0 741 0 137 0
+6 Harris 544 0 117 0 13 0
+6 Harris 560 0 454 0 52 0
+6 Harris 571 0 687 0 111 0
+6 Harris 579 0 464 0 62 0
+6 Harris 591 0 909 0 130 0
+6 Harris 595 0 905 0 101 0
+6 Harris 605 0 2119 0 320 0
+6 Harris 608 0 219 0 47 0
+6 Harris 61 0 770 0 127 0
+6 Harris 62 0 894 0 126 0
+6 Harris 637 0 1413 0 232 0
+6 Harris 64 0 962 0 118 0
+6 Harris 65 0 833 0 118 0
+6 Harris 653 0 277 0 36 0
+6 Harris 66 0 480 0 62 0
+6 Harris 664 0 1210 0 148 0
+6 Harris 67 0 1345 0 157 0
+6 Harris 677 0 575 0 79 0
+6 Harris 681 0 69 0 23 0
+6 Harris 683 0 121 0 16 0
+6 Harris 69 0 524 0 71 0
+6 Harris 702 0 236 0 30 0
+6 Harris 708 0 205 0 53 0
+6 Harris 714 0 106 0 24 0
+6 Harris 719 0 583 0 200 0
+6 Harris 72 0 1071 0 189 0
+6 Harris 733 0 131 0 21 0
+6 Harris 736 0 13 0 1 0
+6 Harris 740 0 324 0 127 0
+6 Harris 741 0 1115 0 167 0
+6 Harris 743 0 74 0 14 0
+6 Harris 749 0 147 0 25 0
+6 Harris 755 0 2573 0 603 0
+6 Harris 763 0 535 0 82 0
+6 Harris 766 0 193 0 25 0
+6 Harris 77 0 4 0 0 0
+6 Harris 770 0 152 0 30 0
+6 Harris 774 0 288 0 48 0
+6 Harris 775 0 55 0 5 0
+6 Harris 777 0 232 0 47 0
+6 Harris 778 0 0 0 0 0
+6 Harris 779 0 309 0 57 0
+6 Harris 78 0 750 0 139 0
+6 Harris 780 0 232 0 57 0
+6 Harris 786 0 505 0 88 0
+6 Harris 787 0 217 0 43 0
+6 Harris 79 0 1180 0 142 0
+6 Harris 791 0 14 0 0 0
+6 Harris 792 0 880 0 127 0
+6 Harris 794 0 995 0 110 0
+6 Harris 795 0 504 0 97 0
+6 Harris 797 0 0 0 0 0
+6 Harris 798 0 315 0 67 0
+6 Harris 801 0 146 0 22 0
+6 Harris 81 0 862 0 138 0
+6 Harris 810 0 53 0 8 0
+6 Harris 811 0 128 0 7 0
+6 Harris 812 0 1 0 0 0
+6 Harris 816 0 19 0 2 0
+6 Harris 821 0 495 0 51 0
+6 Harris 824 0 1395 0 196 0
+6 Harris 827 0 354 0 73 0
+6 Harris 83 0 2057 0 506 0
+6 Harris 831 0 9 0 0 0
+6 Harris 832 0 151 0 25 0
+6 Harris 833 0 11 0 1 0
+6 Harris 835 0 135 0 22 0
+6 Harris 838 0 0 0 0 0
+6 Harris 842 0 1459 0 337 0
+6 Harris 843 0 851 0 100 0
+6 Harris 844 0 4 0 0 0
+6 Harris 846 0 111 0 18 0
+6 Harris 849 0 1119 0 206 0
+6 Harris 850 0 123 0 24 0
+6 Harris 852 0 0 0 0 0
+6 Harris 857 0 0 0 0 0
+6 Harris 860 0 0 0 0 0
+6 Harris 864 0 1133 0 157 0
+6 Harris 871 0 4 0 1 0
+6 Harris 872 0 14 0 7 0
+6 Harris 889 0 120 0 22 0
+6 Harris 9 0 1182 0 257 0
+6 Harris 908 0 1 0 0 0
+6 Harris 909 0 12 0 3 0
+6 Harris 910 0 84 0 20 0
+6 Harris 914 0 41 0 8 0
+6 Harris 917 0 28 0 1 0
+6 Harris 921 0 39 0 5 0
+6 Harris 924 0 0 0 0 0
+6 Harris 925 0 0 0 0 0
+6 Harris 928 0 6 0 0 0
+6 Harris 93 0 1400 0 251 0
+6 Harris 930 0 286 0 28 0
+6 Harris 934 0 21 0 3 0
+6 Harris 936 0 44 0 6 0
+6 Harris 937 0 0 0 0 0
+6 Harris 94 0 255 0 31 0
+6 Harris 940 0 12 0 0 0
+6 Harris 945 0 10 0 1 0
+6 Harris 946 0 6 0 3 0
+6 Harris 950 0 0 0 0 0
+6 Harris 953 0 4 0 0 0
+6 Harris 954 0 0 0 0 0
+6 Harris 957 0 339 0 40 0
+6 Harris 958 0 605 0 80 0
+6 Harris 959 0 0 0 0 0
+6 Harris 96 0 1350 0 159 0
+6 Harris 970 0 341 0 24 0
+6 Harris 972 0 0 0 0 0
+6 Harris 978 0 0 0 0 0
+6 Harris 989 0 0 0 0 0
+6 Harris 99 0 672 0 247 0
+6 Harris 996 0 323 0 136 0
+6 Harris 999 0 0 0 0 0
+11 Galveston 105 0 68 75 14 0
+11 Galveston 105.1 0 222 216 17 0
+11 Galveston 142 0 720 821 34 0
+11 Galveston 144 0 521 1138 50 0
+11 Galveston 146 0 809 1213 51 0
+11 Galveston 148 0 992 1451 67 0
+11 Galveston 150 0 616 931 38 0
+11 Galveston 151 0 536 1650 70 0
+11 Galveston 152 0 1053 2503 103 0
+11 Galveston 159 0 895 1742 60 0
+11 Galveston 165 0 1151 2887 107 0
+11 Galveston 165.1 0 0 0 0 0
+11 Galveston 166 0 621 1517 77 0
+11 Galveston "166 - BS9" 0 3 6 0 0
+11 Galveston 167 0 1163 3022 114 0
+11 Galveston "167 - BS5" 0 0 0 0 0
+11 Galveston 168 0 0 2 0 0
+11 Galveston 169 0 0 1 0 0
+11 Galveston 170 0 636 1503 60 0
+11 Galveston 172 0 90 280 3 0
+11 Galveston 192 0 162 286 8 0
+11 Galveston 193 0 605 1355 52 0
+11 Galveston 197 0 188 400 23 0
+11 Galveston 218 0 1203 1017 52 0
+11 Galveston 219 0 932 1038 56 0
+11 Galveston 220 0 1627 2834 133 0
+11 Galveston 221 0 460 1215 29 0
+11 Galveston 223 0 1102 998 62 0
+11 Galveston 224 0 1121 1123 58 0
+11 Galveston 225 0 489 1860 37 0
+11 Galveston 226 0 538 1242 31 0
+11 Galveston 227 0 426 1840 46 0
+11 Galveston 228 0 386 2040 46 0
+11 Galveston 232 0 645 647 35 0
+11 Galveston 232.1 0 0 0 0 0
+11 Galveston 232.2 0 0 0 0 0
+11 Galveston 232.3 0 52 280 7 0
+11 Galveston 258 0 282 1426 31 0
+11 Galveston 263 0 1790 4162 158 0
+11 Galveston 274 0 158 458 7 0
+11 Galveston 275 0 89 197 2 0
+11 Galveston 276 0 702 969 44 0
+11 Galveston 277 0 321 1510 37 0
+11 Galveston 278 0 344 1719 26 0
+11 Galveston 279 0 143 760 19 0
+11 Galveston 280 0 391 532 18 0
+11 Galveston 280.1 0 0 0 0 0
+11 Galveston 281 0 39 101 5 0
+11 Galveston 283 0 900 1537 66 0
+11 Galveston 301 0 498 381 35 0
+11 Galveston 306 0 1888 1321 114 0
+11 Galveston 306.1 0 0 0 0 0
+11 Galveston 309 0 31 51 1 0
+11 Galveston 311 0 488 123 15 0
+11 Galveston 312 0 6 1 0 0
+11 Galveston 314 0 1690 636 59 0
+11 Galveston 315 0 1541 834 86 0
+11 Galveston 316 0 926 459 46 0
+11 Galveston 330 0 999 526 41 0
+11 Galveston 330.1 0 1 2 0 0
+11 Galveston 331 0 1211 305 26 0
+11 Galveston 331.1 0 131 104 4 0
+11 Galveston 334 0 636 178 14 0
+11 Galveston 336 0 2350 327 46 0
+11 Galveston 338 0 1491 888 60 0
+11 Galveston 340 0 315 54 11 0
+11 Galveston 341 0 374 441 38 0
+11 Galveston 343 0 677 487 36 0
+11 Galveston 345 0 395 76 10 0
+11 Galveston 347 0 606 239 28 0
+11 Galveston 389 0 254 154 7 0
+11 Galveston 391 0 47 41 3 0
+11 Galveston 394 0 10 8 0 0
+11 Galveston 398 0 166 124 7 0
+11 Galveston 399 0 87 80 3 0
+11 Galveston 401 0 0 0 0 0
+11 Galveston 439 0 764 1630 70 0
+11 Galveston 439.1 0 5 15 0 0
+11 Galveston 453 0 1262 2457 108 0
+11 Galveston 454 0 1175 2008 91 0
+11 Galveston 455 0 489 907 31 0
+11 Galveston 456 0 546 2139 60 0
+11 Galveston 457 0 813 2660 100 0
+11 Galveston 460 0 786 3130 96 0
+11 Galveston 461 0 630 2279 78 0
+11 Galveston 462 0 956 3208 89 0
+11 Galveston 464 0 656 1642 57 0
+11 Galveston 471 0 725 1107 52 0
+11 Galveston 482 0 21 131 0 0
+11 Galveston 487 0 1540 3409 134 0
+11 Galveston 488 0 964 2013 75 0
+11 Galveston 490 0 1124 2384 111 0
+11 Harris 174 0 1057 1680 54 0
+11 Harris 242 0 489 421 21 0
+11 Harris 290 0 337 888 34 0
+11 Harris 306 0 552 934 19 0
+11 Harris 307 0 848 1475 59 0
+11 Harris 333 0 845 1837 79 0
+11 Harris 346 0 0 1 0 0
+11 Harris 347 0 1052 1332 46 0
+11 Harris 348 0 434 730 20 0
+11 Harris 349 0 383 520 31 0
+11 Harris 352 0 886 2234 76 0
+11 Harris 377 0 564 1673 62 0
+11 Harris 378 0 470 725 48 0
+11 Harris 391 0 667 796 40 0
+11 Harris 393 0 476 375 41 0
+11 Harris 415 0 580 1167 41 0
+11 Harris 416 0 1504 1216 99 0
+11 Harris 419 0 780 957 33 0
+11 Harris 420 0 692 3010 70 0
+11 Harris 470 0 242 661 20 0
+11 Harris 471 0 404 1333 39 0
+11 Harris 473 0 513 840 34 0
+11 Harris 474 0 852 1346 67 0
+11 Harris 476 0 817 751 42 0
+11 Harris 51 0 310 892 31 0
+11 Harris 534 0 803 1879 53 0
+11 Harris 537 0 773 1947 33 0
+11 Harris 545 0 1676 1685 55 0
+11 Harris 561 0 727 1188 49 0
+11 Harris 568 0 1152 1565 64 0
+11 Harris 654 0 1799 1904 77 0
+11 Harris 655 0 1484 1672 88 0
+11 Harris 662 0 708 2406 49 0
+11 Harris 665 0 421 1573 39 0
+11 Harris 673 0 431 1658 51 0
+11 Harris 679 0 896 1769 50 0
+11 Harris 682 0 888 2291 72 0
+11 Harris 692 0 696 1564 60 0
+11 Harris 695 0 395 646 35 0
+11 Harris 696 0 498 759 34 0
+11 Harris 699 0 729 1046 46 0
+11 Harris 703 0 475 1037 36 0
+11 Harris 704 0 522 1908 42 0
+11 Harris 715 0 521 420 29 0
+11 Harris 716 0 550 1249 51 0
+11 Harris 718 0 1510 2417 78 0
+11 Harris 721 0 921 1257 52 0
+11 Harris 724 0 388 574 21 0
+11 Harris 728 0 265 315 15 0
+11 Harris 732 0 626 799 50 0
+11 Harris 742 0 1053 1661 50 0
+11 Harris 744 0 705 848 41 0
+11 Harris 745 0 798 988 55 0
+11 Harris 746 0 259 209 10 0
+11 Harris 748 0 543 404 52 0
+11 Harris 750 0 242 251 19 0
+11 Harris 752 0 335 655 17 0
+11 Harris 76 0 777 742 22 0
+11 Harris 762 0 1293 1128 40 0
+11 Harris 782 0 685 950 47 0
+11 Harris 793 0 734 769 32 0
+11 Harris 84 0 239 652 31 0
+11 Harris 845 0 83 123 1 0
+11 Harris 88 0 221 483 19 0
+11 Harris 90 0 874 2185 72 0
+11 Harris 907 0 106 14 2 0
+11 Harris 91 0 619 794 53 0
+11 Harris 92 0 693 1097 37 0
+11 Harris 920 0 26 39 0 0
+11 Harris 941 0 360 253 22 0
+12 Denton 1006 0 1667 2562 0 0
+12 Denton 1007 0 1404 2161 0 0
+12 Denton 1013 0 833 1188 0 0
+12 Denton 1014 0 144 52 0 0
+12 Denton 1015 0 817 1266 0 0
+12 Denton 1016 0 952 1682 0 0
+12 Denton 1017 0 374 652 0 0
+12 Denton 1018 0 1512 2259 0 0
+12 Denton 1019 0 867 1155 0 0
+12 Denton 1020 0 980 2362 0 0
+12 Denton 1021 0 796 1804 0 0
+12 Denton 1022 0 931 1762 0 0
+12 Denton 1023 0 938 2011 0 0
+12 Denton 1024 0 389 1332 0 0
+12 Denton 1025 0 1370 2643 0 0
+12 Denton 1026 0 1363 1266 0 0
+12 Denton 1027 0 736 702 0 0
+12 Denton 1028 0 1081 993 0 0
+12 Denton 1029 0 1170 1589 0 0
+12 Denton 1030 0 1205 2348 0 0
+12 Denton 1031 0 778 1394 0 0
+12 Denton 1032 0 1584 2577 0 0
+12 Denton 1033 0 1780 2055 0 0
+12 Denton 1034 0 1562 2256 0 0
+12 Denton 1035 0 759 1633 0 0
+12 Denton 1036 0 1168 3082 0 0
+12 Denton 1037 0 156 541 0 0
+12 Denton 1038 0 132 113 0 0
+12 Denton 1039 0 50 73 0 0
+12 Denton 1040 0 704 1522 0 0
+12 Denton 1045 0 173 1056 0 0
+12 Denton 1046 0 1310 1965 0 0
+12 Denton 1047 0 164 323 0 0
+12 Denton 1048 0 154 458 0 0
+12 Denton 1049 0 300 350 0 0
+12 Denton 1050 0 774 1357 0 0
+12 Denton 1051 0 583 1122 0 0
+12 Denton 1052 0 1299 1783 0 0
+12 Denton 1054 0 1276 910 0 0
+12 Denton 1055 0 549 627 0 0
+12 Denton 1056 0 581 805 0 0
+12 Denton 1057 0 378 386 0 0
+12 Denton 2000 0 1735 627 0 0
+12 Denton 2001 0 1572 711 0 0
+12 Denton 2002 0 1967 1118 0 0
+12 Denton 2003 0 788 699 0 0
+12 Denton 2004 0 1393 1137 0 0
+12 Denton 2005 0 1352 1822 0 0
+12 Denton 2006 0 1211 1399 0 0
+12 Denton 2007 0 1876 1383 0 0
+12 Denton 2008 0 1395 1292 0 0
+12 Denton 2009 0 803 947 0 0
+12 Denton 2010 0 1445 1688 0 0
+12 Denton 2011 0 1160 1252 0 0
+12 Denton 2012 0 547 1099 0 0
+12 Denton 2013 0 523 844 0 0
+12 Denton 2014 0 843 1311 0 0
+12 Denton 2015 0 1461 1734 0 0
+12 Denton 2016 0 1352 1415 0 0
+12 Denton 2017 0 1289 2698 0 0
+12 Denton 2018 0 1852 1525 0 0
+12 Denton 2019 0 0 0 0 0
+12 Denton 2020 0 1091 2356 0 0
+12 Denton 2021 0 1367 1611 0 0
+12 Denton 2022 0 808 1442 0 0
+12 Denton 2023 0 1251 1595 0 0
+12 Denton 2024 0 664 908 0 0
+12 Denton 2025 0 640 951 0 0
+12 Denton 2026 0 996 1755 0 0
+12 Denton 2027 0 1257 2375 0 0
+12 Denton 2028 0 1405 1430 0 0
+12 Denton 2029 0 950 953 0 0
+12 Denton 2030 0 1855 1943 0 0
+12 Denton 2031 0 1372 1560 0 0
+12 Denton 2032 0 848 1080 0 0
+12 Denton 2033 0 1410 1083 0 0
+12 Denton 2034 0 1238 997 0 0
+12 Denton 2035 0 1333 1413 0 0
+12 Denton 2036 0 287 354 0 0
+12 Denton 2096 0 0 0 0 0
+12 Denton 2097 0 0 0 0 0
+12 Denton 2098 0 0 0 0 0
+12 Denton 2099 0 0 0 0 0
+12 Denton 3000 0 981 1955 0 0
+12 Denton 3001 0 792 2031 0 0
+12 Denton 3002 0 1054 2528 0 0
+12 Denton 3003 0 709 1525 0 0
+12 Denton 3004 0 659 1819 0 0
+12 Denton 3005 0 419 1215 0 0
+12 Denton 3006 0 1180 1836 0 0
+12 Denton 3007 0 1497 1610 0 0
+12 Denton 3008 0 796 1422 0 0
+12 Denton 3009 0 721 1166 0 0
+12 Denton 3010 0 1437 1690 0 0
+12 Denton 3011 0 1547 1408 0 0
+12 Denton 3012 0 557 792 0 0
+12 Denton 3013 0 838 1042 0 0
+12 Denton 3014 0 713 858 0 0
+12 Denton 3015 0 872 776 0 0
+12 Denton 3016 0 830 563 0 0
+12 Denton 3017 0 1573 752 0 0
+12 Denton 3018 0 459 454 0 0
+12 Denton 3019 0 1939 1399 0 0
+12 Denton 3020 0 378 217 0 0
+12 Denton 3021 0 1619 1876 0 0
+12 Denton 3022 0 49 117 0 0
+12 Denton 3023 0 163 193 0 0
+12 Denton 3024 0 1059 1790 0 0
+12 Denton 3025 0 1134 2164 0 0
+12 Denton 3026 0 698 1327 0 0
+12 Denton 3027 0 1207 2226 0 0
+12 Denton 3028 0 1147 2177 0 0
+12 Denton 3029 0 674 1216 0 0
+12 Denton 3030 0 664 1324 0 0
+12 Denton 3031 0 815 1870 0 0
+12 Denton 3032 0 922 460 0 0
+12 Denton 3033 0 740 1344 0 0
+12 Denton 3098 0 0 0 0 0
+12 Denton 3099 0 0 0 0 0
+12 Denton 4002 0 493 2491 0 0
+12 Denton 4003 0 795 3226 0 0
+12 Denton 4014 0 891 197 0 0
+12 Denton 4015 0 329 181 0 0
+12 Denton 4016 0 0 1 0 0
+12 Denton 4017 0 579 2987 0 0
+12 Denton 4018 0 443 1402 0 0
+12 Denton 4019 0 40 147 0 0
+12 Denton 4020 0 145 651 0 0
+12 Denton 4021 0 256 1195 0 0
+12 Denton 4022 0 423 1635 0 0
+12 Denton 4023 0 739 2222 0 0
+12 Denton 4024 0 742 1730 0 0
+12 Denton 4025 0 1095 1713 0 0
+12 Denton 4026 0 481 834 0 0
+12 Denton 4027 0 1179 2116 0 0
+12 Denton 4028 0 870 2746 0 0
+12 Denton 4029 0 282 849 0 0
+12 Denton 4030 0 104 289 0 0
+12 Denton 4031 0 804 2676 0 0
+12 Denton 4032 0 1038 3118 0 0
+12 Denton 4033 0 691 1739 0 0
+12 Denton 4034 0 1142 2504 0 0
+12 Denton 4035 0 1461 4237 0 0
+12 Denton 4036 0 461 2263 0 0
+12 Denton 4043 0 635 1958 0 0
+12 Denton 4044 0 729 2333 0 0
+12 Denton 4046 0 770 2167 0 0
+12 Denton 4047 0 483 1172 0 0
+12 Denton 4048 0 1173 2762 0 0
+12 Denton 4049 0 264 1295 0 0
+12 Tarrant "1009 - 004" 0 366 635 0 0
+12 Tarrant "1009 - L05" 0 0 0 0 0
+12 Tarrant "1009 - L06" 0 0 0 0 0
+12 Tarrant "1015 - 009" 0 444 263 0 0
+12 Tarrant "1015 - L05" 0 0 0 0 0
+12 Tarrant "1015 - L06" 0 0 0 0 0
+12 Tarrant "1094 - 025" 0 683 417 0 0
+12 Tarrant "1094 - L05" 0 0 0 0 0
+12 Tarrant "1094 - L06" 0 0 0 0 0
+12 Tarrant "1120 - 009" 0 1418 149 0 0
+12 Tarrant "1120 - L05" 0 0 0 0 0
+12 Tarrant "1120 - L06" 0 0 0 0 0
+12 Tarrant "1472 - 009" 0 40 109 0 0
+12 Tarrant "1472 - L05" 0 0 0 0 0
+12 Tarrant "1472 - L06" 0 0 0 0 0
+12 Tarrant "1674 - 009" 0 0 0 0 0
+12 Tarrant "1674 - L05" 0 0 0 0 0
+12 Tarrant "1674 - L06" 0 0 0 0 0
+12 Tarrant "1676 - 025" 0 104 81 0 0
+12 Tarrant "1676 - L05" 0 0 0 0 0
+12 Tarrant "1676 - L06" 0 0 0 0 0
+12 Tarrant "1684 - 009" 0 165 164 0 0
+12 Tarrant "1684 - L05" 0 0 0 0 0
+12 Tarrant "1684 - L06" 0 0 0 0 0
+12 Tarrant "3035 - 146" 0 457 1016 0 0
+12 Tarrant "3035 - 147" 0 478 1017 0 0
+12 Tarrant "3035 - 148" 0 2 4 0 0
+12 Tarrant "3035 - 149" 0 0 0 0 0
+12 Tarrant "3035 - L05" 0 0 0 0 0
+12 Tarrant "3035 - L06" 0 0 0 0 0
+12 Tarrant "3035 - L15" 0 0 0 0 0
+12 Tarrant "3038 - 146" 0 1013 1398 0 0
+12 Tarrant "3038 - 147" 0 0 0 0 0
+12 Tarrant "3038 - L05" 0 0 0 0 0
+12 Tarrant "3038 - L06" 0 0 0 0 0
+12 Tarrant "3043 - 157" 0 629 1943 0 0
+12 Tarrant "3043 - L05" 0 0 0 0 0
+12 Tarrant "3043 - L06" 0 0 0 0 0
+12 Tarrant "3114 - 146" 0 691 1478 0 0
+12 Tarrant "3114 - L05" 0 0 0 0 0
+12 Tarrant "3114 - L06" 0 0 0 0 0
+12 Tarrant "3152 - 162" 0 0 0 0 0
+12 Tarrant "3152 - 163" 0 5 26 0 0
+12 Tarrant "3152 - L05" 0 0 0 0 0
+12 Tarrant "3152 - L06" 0 0 0 0 0
+12 Tarrant "3152 - L07" 0 0 0 0 0
+12 Tarrant "3152 - L15" 0 0 0 0 0
+12 Tarrant "3185 - 165" 0 1 1 0 0
+12 Tarrant "3185 - 166" 0 0 0 0 0
+12 Tarrant "3185 - L05" 0 1 0 0 0
+12 Tarrant "3185 - L06" 0 0 0 0 0
+12 Tarrant "3185 - L07" 0 0 0 0 0
+12 Tarrant "3185 - L15" 0 0 0 0 0
+12 Tarrant "3192 - 168" 0 150 532 0 0
+12 Tarrant "3192 - 169" 0 45 92 0 0
+12 Tarrant "3192 - L05" 0 0 0 0 0
+12 Tarrant "3192 - L06" 0 0 0 0 0
+12 Tarrant "3192 - L07" 0 0 0 0 0
+12 Tarrant "3192 - L15" 0 0 0 0 0
+12 Tarrant "3321 - 146" 0 663 1445 0 0
+12 Tarrant "3321 - L05" 0 0 0 0 0
+12 Tarrant "3321 - L06" 0 0 0 0 0
+12 Tarrant "3361 - 146" 0 783 1539 0 0
+12 Tarrant "3361 - L05" 0 0 0 0 0
+12 Tarrant "3361 - L06" 0 0 0 0 0
+12 Tarrant "3363 - 157" 0 580 1257 0 0
+12 Tarrant "3363 - 183" 0 98 486 0 0
+12 Tarrant "3363 - L05" 0 0 0 0 0
+12 Tarrant "3363 - L06" 0 0 0 0 0
+12 Tarrant "3363 - L07" 0 0 0 0 0
+12 Tarrant "3363 - L15" 0 0 0 0 0
+12 Tarrant "3384 - 146" 0 508 775 0 0
+12 Tarrant "3384 - 147" 0 0 0 0 0
+12 Tarrant "3384 - L05" 0 0 0 0 0
+12 Tarrant "3384 - L06" 0 0 0 0 0
+12 Tarrant "3396 - 146" 0 1016 1713 0 0
+12 Tarrant "3396 - L05" 0 0 0 0 0
+12 Tarrant "3396 - L06" 0 0 0 0 0
+12 Tarrant "3417 - 165" 0 275 440 0 0
+12 Tarrant "3417 - 185" 0 379 689 0 0
+12 Tarrant "3417 - L05" 0 0 0 0 0
+12 Tarrant "3417 - L06" 0 0 0 0 0
+12 Tarrant "3542 - 146" 0 463 708 0 0
+12 Tarrant "3542 - 147" 0 213 434 0 0
+12 Tarrant "3542 - 194" 0 0 0 0 0
+12 Tarrant "3542 - L05" 0 0 0 0 0
+12 Tarrant "3542 - L06" 0 0 0 0 0
+12 Tarrant "3542 - L15" 0 0 0 0 0
+12 Tarrant "3566 - 196" 0 0 0 0 0
+12 Tarrant "3566 - L05" 0 0 0 0 0
+12 Tarrant "3566 - L06" 0 0 0 0 0
+12 Tarrant "3567 - 157" 0 859 2679 0 0
+12 Tarrant "3567 - 197" 0 22 83 0 0
+12 Tarrant "3567 - L05" 0 0 0 0 0
+12 Tarrant "3567 - L06" 0 0 0 0 0
+12 Tarrant "3646 - 165" 0 916 1499 0 0
+12 Tarrant "3646 - 185" 0 0 0 0 0
+12 Tarrant "3646 - L05" 0 0 0 0 0
+12 Tarrant "3646 - L06" 0 0 0 0 0
+12 Tarrant "3700 - 157" 0 495 1026 0 0
+12 Tarrant "3700 - L05" 0 0 0 0 0
+12 Tarrant "3700 - L06" 0 0 0 0 0
+12 Tarrant "3706 - 146" 0 735 995 0 0
+12 Tarrant "3706 - 148" 0 0 0 0 0
+12 Tarrant "3706 - 210" 0 97 167 0 0
+12 Tarrant "3706 - 211" 0 0 0 0 0
+12 Tarrant "3706 - L05" 0 0 0 0 0
+12 Tarrant "3706 - L06" 0 0 1 0 0
+12 Tarrant "3706 - L15" 0 0 0 0 0
+12 Tarrant "4016 - 214" 0 553 631 0 0
+12 Tarrant "4016 - L05" 0 0 0 0 0
+12 Tarrant "4016 - L06" 0 0 0 0 0
+12 Tarrant "4018 - 217" 0 199 513 0 0
+12 Tarrant "4018 - L05" 0 0 0 0 0
+12 Tarrant "4018 - L06" 0 0 0 0 0
+12 Tarrant "4020 - 218" 0 374 613 0 0
+12 Tarrant "4020 - 219" 0 0 0 0 0
+12 Tarrant "4020 - 220" 0 0 0 0 0
+12 Tarrant "4020 - L05" 0 0 0 0 0
+12 Tarrant "4020 - L06" 0 0 0 0 0
+12 Tarrant "4044 - 217" 0 792 2039 0 0
+12 Tarrant "4044 - L05" 0 0 0 0 0
+12 Tarrant "4044 - L06" 0 0 0 0 0
+12 Tarrant "4045 - 217" 0 479 1530 0 0
+12 Tarrant "4045 - L05" 0 0 0 0 0
+12 Tarrant "4045 - L06" 0 0 0 0 0
+12 Tarrant "4046 - 222" 0 615 2519 0 0
+12 Tarrant "4046 - L05" 0 0 0 0 0
+12 Tarrant "4046 - L06" 0 0 0 0 0
+12 Tarrant "4046 - L13" 0 0 0 0 0
+12 Tarrant "4047 - 222" 0 287 1495 0 0
+12 Tarrant "4047 - 223" 0 115 524 0 0
+12 Tarrant "4047 - L05" 0 0 0 0 0
+12 Tarrant "4047 - L06" 0 0 0 0 0
+12 Tarrant "4047 - L13" 0 0 0 0 0
+12 Tarrant "4053 - 217" 0 269 570 0 0
+12 Tarrant "4053 - 220" 0 12 22 0 0
+12 Tarrant "4053 - 226" 0 0 0 0 0
+12 Tarrant "4053 - L05" 0 0 0 0 0
+12 Tarrant "4053 - L06" 0 0 0 0 0
+12 Tarrant "4065 - 220" 0 243 627 0 0
+12 Tarrant "4065 - 222" 0 363 1714 0 0
+12 Tarrant "4065 - L05" 0 0 0 0 0
+12 Tarrant "4065 - L06" 0 0 0 0 0
+12 Tarrant "4065 - L13" 0 0 0 0 0
+12 Tarrant "4086 - 226" 0 549 1438 0 0
+12 Tarrant "4086 - L05" 0 0 0 0 0
+12 Tarrant "4086 - L06" 0 0 0 0 0
+12 Tarrant "4091 - 217" 0 13 28 0 0
+12 Tarrant "4091 - 220" 0 475 1184 0 0
+12 Tarrant "4091 - 226" 0 0 2 0 0
+12 Tarrant "4091 - L05" 0 0 0 0 0
+12 Tarrant "4091 - L06" 0 0 0 0 0
+12 Tarrant "4113 - 219" 0 0 0 0 0
+12 Tarrant "4113 - 220" 0 2 1 0 0
+12 Tarrant "4113 - 226" 0 71 164 0 0
+12 Tarrant "4113 - L05" 0 0 0 0 0
+12 Tarrant "4113 - L06" 0 0 0 0 0
+12 Tarrant "4115 - 226" 0 78 438 0 0
+12 Tarrant "4115 - L05" 0 0 0 0 0
+12 Tarrant "4115 - L06" 0 0 0 0 0
+12 Tarrant "4116 - 226" 0 689 981 0 0
+12 Tarrant "4116 - L05" 0 0 0 0 0
+12 Tarrant "4116 - L06" 0 0 0 0 0
+12 Tarrant "4118 - 234" 0 473 447 0 0
+12 Tarrant "4118 - L05" 0 0 0 0 0
+12 Tarrant "4118 - L06" 0 0 0 0 0
+12 Tarrant "4121 - 235" 0 467 919 0 0
+12 Tarrant "4121 - 236" 0 106 112 0 0
+12 Tarrant "4121 - L05" 0 0 0 0 0
+12 Tarrant "4121 - L06" 0 0 0 0 0
+12 Tarrant "4125 - 226" 0 0 0 0 0
+12 Tarrant "4125 - 235" 0 0 0 0 0
+12 Tarrant "4125 - 236" 0 155 182 0 0
+12 Tarrant "4125 - L05" 0 0 0 0 0
+12 Tarrant "4125 - L06" 0 0 0 0 0
+12 Tarrant "4128 - 218" 0 628 1281 0 0
+12 Tarrant "4128 - 219" 0 0 0 0 0
+12 Tarrant "4128 - 220" 0 1 0 0 0
+12 Tarrant "4128 - L05" 0 0 0 0 0
+12 Tarrant "4128 - L06" 0 0 0 0 0
+12 Tarrant "4129 - 234" 0 302 614 0 0
+12 Tarrant "4129 - L05" 0 0 0 0 0
+12 Tarrant "4129 - L06" 0 0 0 0 0
+12 Tarrant "4135 - 234" 0 383 515 0 0
+12 Tarrant "4135 - L05" 0 0 0 0 0
+12 Tarrant "4135 - L06" 0 0 0 0 0
+12 Tarrant "4136 - 234" 0 773 766 0 0
+12 Tarrant "4136 - L05" 0 0 0 0 0
+12 Tarrant "4136 - L06" 0 0 0 0 0
+12 Tarrant "4137 - 214" 0 394 701 0 0
+12 Tarrant "4137 - L05" 0 0 0 0 0
+12 Tarrant "4137 - L06" 0 0 0 0 0
+12 Tarrant "4138 - 239" 0 167 222 0 0
+12 Tarrant "4138 - 240" 0 27 39 0 0
+12 Tarrant "4138 - 241" 0 0 0 0 0
+12 Tarrant "4138 - L05" 0 0 0 0 0
+12 Tarrant "4138 - L06" 0 0 0 0 0
+12 Tarrant "4144 - 218" 0 0 1 0 0
+12 Tarrant "4144 - 242" 0 364 791 0 0
+12 Tarrant "4144 - 243" 0 0 0 0 0
+12 Tarrant "4144 - L05" 0 0 0 0 0
+12 Tarrant "4144 - L06" 0 0 0 0 0
+12 Tarrant "4178 - 220" 0 0 0 0 0
+12 Tarrant "4178 - 226" 0 888 1336 0 0
+12 Tarrant "4178 - L05" 0 0 0 0 0
+12 Tarrant "4178 - L06" 0 0 0 0 0
+12 Tarrant "4179 - 244" 0 472 379 0 0
+12 Tarrant "4179 - 245" 0 6 4 0 0
+12 Tarrant "4179 - L05" 0 0 0 0 0
+12 Tarrant "4179 - L06" 0 0 0 0 0
+12 Tarrant "4202 - 235" 0 465 548 0 0
+12 Tarrant "4202 - L05" 0 0 0 0 0
+12 Tarrant "4202 - L06" 0 0 0 0 0
+12 Tarrant "4203 - 244" 0 762 550 0 0
+12 Tarrant "4203 - 245" 0 1 1 0 0
+12 Tarrant "4203 - L05" 0 0 0 0 0
+12 Tarrant "4203 - L06" 0 0 0 0 0
+12 Tarrant "4204 - 218" 0 856 1480 0 0
+12 Tarrant "4204 - 220" 0 0 0 0 0
+12 Tarrant "4204 - L05" 0 0 0 0 0
+12 Tarrant "4204 - L06" 0 0 0 0 0
+12 Tarrant "4222 - 217" 0 316 363 0 0
+12 Tarrant "4222 - L05" 0 0 0 0 0
+12 Tarrant "4222 - L06" 0 0 0 0 0
+12 Tarrant "4232 - 217" 0 1044 1365 0 0
+12 Tarrant "4232 - L05" 0 0 0 0 0
+12 Tarrant "4232 - L06" 0 0 0 0 0
+12 Tarrant "4242 - 220" 0 2 0 0 0
+12 Tarrant "4242 - 222" 0 39 124 0 0
+12 Tarrant "4242 - 226" 0 82 231 0 0
+12 Tarrant "4242 - L05" 0 0 0 0 0
+12 Tarrant "4242 - L06" 0 0 0 0 0
+12 Tarrant "4242 - L13" 0 0 0 0 0
+12 Tarrant "4243 - 236" 0 478 716 0 0
+12 Tarrant "4243 - L05" 0 0 0 0 0
+12 Tarrant "4243 - L06" 0 0 0 0 0
+12 Tarrant "4252 - 226" 0 327 423 0 0
+12 Tarrant "4252 - L05" 0 0 0 0 0
+12 Tarrant "4252 - L06" 0 0 0 0 0
+12 Tarrant "4259 - 220" 0 12 51 0 0
+12 Tarrant "4259 - 222" 0 165 638 0 0
+12 Tarrant "4259 - L05" 0 0 0 0 0
+12 Tarrant "4259 - L06" 0 0 0 0 0
+12 Tarrant "4259 - L13" 0 0 0 0 0
+12 Tarrant "4272 - 220" 0 107 215 0 0
+12 Tarrant "4272 - 226" 0 38 87 0 0
+12 Tarrant "4272 - L05" 0 0 0 0 0
+12 Tarrant "4272 - L06" 0 0 0 0 0
+12 Tarrant "4276 - 220" 0 631 963 0 0
+12 Tarrant "4276 - L05" 0 0 0 0 0
+12 Tarrant "4276 - L06" 0 0 0 0 0
+12 Tarrant "4284 - 222" 0 35 167 0 0
+12 Tarrant "4284 - 226" 0 0 0 0 0
+12 Tarrant "4284 - L05" 0 0 0 0 0
+12 Tarrant "4284 - L06" 0 0 0 0 0
+12 Tarrant "4284 - L13" 0 0 0 0 0
+12 Tarrant "4285 - 220" 0 258 207 0 0
+12 Tarrant "4285 - 226" 0 0 2 0 0
+12 Tarrant "4285 - L05" 0 0 0 0 0
+12 Tarrant "4285 - L06" 0 0 0 0 0
+12 Tarrant "4338 - 217" 0 1213 1678 0 0
+12 Tarrant "4338 - L05" 0 0 0 0 0
+12 Tarrant "4338 - L06" 0 0 0 0 0
+12 Tarrant "4340 - 222" 0 362 1265 0 0
+12 Tarrant "4340 - L05" 0 0 0 0 0
+12 Tarrant "4340 - L06" 0 0 0 0 0
+12 Tarrant "4340 - L13" 0 0 0 0 0
+12 Tarrant "4342 - 234" 0 649 1134 0 0
+12 Tarrant "4342 - L05" 0 0 0 0 0
+12 Tarrant "4342 - L06" 0 0 0 0 0
+12 Tarrant "4344 - 226" 0 376 798 0 0
+12 Tarrant "4344 - L05" 0 0 0 0 0
+12 Tarrant "4344 - L06" 0 0 0 0 0
+12 Tarrant "4350 - 214" 0 574 511 0 0
+12 Tarrant "4350 - L05" 0 0 0 0 0
+12 Tarrant "4350 - L06" 0 0 0 0 0
+12 Tarrant "4371 - 217" 0 239 1184 0 0
+12 Tarrant "4371 - 222" 0 0 0 0 0
+12 Tarrant "4371 - 256" 0 106 541 0 0
+12 Tarrant "4371 - L05" 0 0 0 0 0
+12 Tarrant "4371 - L06" 0 0 0 0 0
+12 Tarrant "4371 - L13" 0 0 0 0 0
+12 Tarrant "4373 - 222" 0 13 67 0 0
+12 Tarrant "4373 - 226" 0 24 52 0 0
+12 Tarrant "4373 - L05" 0 0 0 0 0
+12 Tarrant "4373 - L06" 0 0 0 0 0
+12 Tarrant "4373 - L13" 0 0 0 0 0
+12 Tarrant "4375 - 217" 0 505 1339 0 0
+12 Tarrant "4375 - 222" 0 50 190 0 0
+12 Tarrant "4375 - 226" 0 0 0 0 0
+12 Tarrant "4375 - L05" 0 0 0 0 0
+12 Tarrant "4375 - L06" 0 0 0 0 0
+12 Tarrant "4375 - L13" 0 0 0 0 0
+12 Tarrant "4395 - 222" 0 67 357 0 0
+12 Tarrant "4395 - L05" 0 0 0 0 0
+12 Tarrant "4395 - L06" 0 0 0 0 0
+12 Tarrant "4395 - L13" 0 0 0 0 0
+12 Tarrant "4400 - 220" 0 40 63 0 0
+12 Tarrant "4400 - 236" 0 37 59 0 0
+12 Tarrant "4400 - L05" 0 0 0 0 0
+12 Tarrant "4400 - L06" 0 0 0 0 0
+12 Tarrant "4429 - 217" 0 669 1037 0 0
+12 Tarrant "4429 - L05" 0 0 0 0 0
+12 Tarrant "4429 - L06" 0 0 0 0 0
+12 Tarrant "4454 - 217" 0 647 1320 0 0
+12 Tarrant "4454 - L05" 0 0 0 0 0
+12 Tarrant "4454 - L06" 0 0 0 0 0
+12 Tarrant "4456 - 244" 0 265 607 0 0
+12 Tarrant "4456 - L05" 0 0 0 0 0
+12 Tarrant "4456 - L06" 0 0 0 0 0
+12 Tarrant "4497 - 244" 0 1013 587 0 0
+12 Tarrant "4497 - 245" 0 0 0 0 0
+12 Tarrant "4497 - L05" 0 0 0 0 0
+12 Tarrant "4497 - L06" 0 0 0 0 0
+12 Tarrant "4531 - 217" 0 623 1432 0 0
+12 Tarrant "4531 - L05" 0 0 0 0 0
+12 Tarrant "4531 - L06" 0 0 0 0 0
+12 Tarrant "4532 - 217" 0 176 758 0 0
+12 Tarrant "4532 - 222" 0 0 0 0 0
+12 Tarrant "4532 - L05" 0 0 0 0 0
+12 Tarrant "4532 - L06" 0 0 0 0 0
+12 Tarrant "4532 - L13" 0 0 0 0 0
+12 Tarrant "4534 - 220" 0 1049 1737 0 0
+12 Tarrant "4534 - L05" 0 0 0 0 0
+12 Tarrant "4534 - L06" 0 0 0 0 0
+12 Tarrant "4551 - 217" 0 831 1365 0 0
+12 Tarrant "4551 - 220" 0 234 314 0 0
+12 Tarrant "4551 - L05" 0 0 0 0 0
+12 Tarrant "4551 - L06" 0 0 0 0 0
+12 Tarrant "4563 - 268" 0 0 0 0 0
+12 Tarrant "4563 - L05" 0 0 0 0 0
+12 Tarrant "4563 - L06" 0 0 0 0 0
+12 Tarrant "4592 - 272" 0 0 0 0 0
+12 Tarrant "4592 - L05" 0 0 0 0 0
+12 Tarrant "4592 - L06" 0 0 0 0 0
+12 Tarrant "4593 - 273" 0 64 76 0 0
+12 Tarrant "4593 - 274" 0 78 75 0 0
+12 Tarrant "4593 - 275" 0 0 0 0 0
+12 Tarrant "4593 - L05" 0 0 0 0 0
+12 Tarrant "4593 - L06" 0 0 0 0 0
+12 Tarrant "4595 - 276" 0 16 30 0 0
+12 Tarrant "4595 - L05" 0 0 0 0 0
+12 Tarrant "4595 - L06" 0 0 0 0 0
+12 Tarrant "4638 - 281" 0 938 1320 0 0
+12 Tarrant "4638 - L05" 0 0 0 0 0
+12 Tarrant "4638 - L06" 0 0 0 0 0
+12 Tarrant "4649 - 217" 0 701 1571 0 0
+12 Tarrant "4649 - L05" 0 0 0 0 0
+12 Tarrant "4649 - L06" 0 0 0 0 0
+12 Tarrant "4650 - 217" 0 667 1116 0 0
+12 Tarrant "4650 - 220" 0 206 225 0 0
+12 Tarrant "4650 - L05" 0 0 0 0 0
+12 Tarrant "4650 - L06" 0 0 0 0 0
+12 Tarrant "4666 - 282" 0 0 0 0 0
+12 Tarrant "4666 - L05" 0 0 0 0 0
+12 Tarrant "4666 - L06" 0 0 0 0 0
+12 Tarrant "4687 - 226" 0 0 0 0 0
+12 Tarrant "4687 - 235" 0 3 6 0 0
+12 Tarrant "4687 - 236" 0 61 29 0 0
+12 Tarrant "4687 - L05" 0 0 0 0 0
+12 Tarrant "4687 - L06" 0 0 0 0 0
+12 Tarrant "4690 - 239" 0 2 5 0 0
+12 Tarrant "4690 - L05" 0 0 0 0 0
+12 Tarrant "4690 - L06" 0 0 0 0 0
+12 Tarrant "4691 - 239" 0 5 10 0 0
+12 Tarrant "4691 - L05" 0 0 0 0 0
+12 Tarrant "4691 - L06" 0 0 0 0 0
+12 Tarrant "4692 - 273" 0 12 7 0 0
+12 Tarrant "4692 - L05" 0 0 0 0 0
+12 Tarrant "4692 - L06" 0 0 0 0 0
+12 Tarrant "4693 - 273" 0 4 2 0 0
+12 Tarrant "4693 - L05" 0 0 0 0 0
+12 Tarrant "4693 - L06" 0 0 0 0 0
+12 Tarrant "4694 - 283" 0 1349 2287 0 0
+12 Tarrant "4694 - L05" 0 0 0 0 0
+12 Tarrant "4694 - L06" 0 0 0 0 0
+12 Tarrant "4702 - 217" 0 478 744 0 0
+12 Tarrant "4702 - L05" 0 0 0 0 0
+12 Tarrant "4702 - L06" 0 0 0 0 0
+12 Tarrant "4703 - 217" 0 965 1005 0 0
+12 Tarrant "4703 - L05" 0 0 0 0 0
+12 Tarrant "4703 - L06" 0 0 0 0 0
+12 Tarrant "4707 - 217" 0 539 477 0 0
+12 Tarrant "4707 - L05" 0 0 0 0 0
+12 Tarrant "4707 - L06" 0 0 0 0 0
+12 Tarrant "4724 - 217" 0 28 141 0 0
+12 Tarrant "4724 - 256" 0 78 482 0 0
+12 Tarrant "4724 - L05" 0 0 0 0 0
+12 Tarrant "4724 - L06" 0 0 0 0 0
+13 Harris 1000 0 162 48 0 0
+13 Harris 1001 0 662 256 0 0
+13 Harris 1002 0 604 185 0 0
+13 Harris 1005 0 0 0 0 0
+13 Harris 1010 0 596 177 0 0
+13 Harris 104 0 1051 65 0 0
+13 Harris 131 0 1083 321 0 0
+13 Harris 132 0 1295 59 0 0
+13 Harris 136 0 1251 106 0 0
+13 Harris 138 0 757 79 0 0
+13 Harris 140 0 1981 406 0 0
+13 Harris 144 0 527 30 0 0
+13 Harris 145 0 731 31 0 0
+13 Harris 151 0 366 44 0 0
+13 Harris 156 0 1866 132 0 0
+13 Harris 158 0 1485 66 0 0
+13 Harris 159 0 584 173 0 0
+13 Harris 16 0 1046 696 0 0
+13 Harris 160 0 355 21 0 0
+13 Harris 161 0 551 54 0 0
+13 Harris 168 0 225 10 0 0
+13 Harris 180 0 1337 119 0 0
+13 Harris 186 0 348 74 0 0
+13 Harris 19 0 909 340 0 0
+13 Harris 193 0 586 41 0 0
+13 Harris 194 0 1449 453 0 0
+13 Harris 198 0 294 35 0 0
+13 Harris 20 0 1210 438 0 0
+13 Harris 201 0 319 34 0 0
+13 Harris 202 0 651 52 0 0
+13 Harris 205 0 933 62 0 0
+13 Harris 21 0 727 186 0 0
+13 Harris 210 0 1741 330 0 0
+13 Harris 216 0 1009 121 0 0
+13 Harris 219 0 1548 166 0 0
+13 Harris 22 0 1246 249 0 0
+13 Harris 222 0 1360 968 0 0
+13 Harris 223 0 2011 596 0 0
+13 Harris 228 0 784 58 0 0
+13 Harris 230 0 455 56 0 0
+13 Harris 235 0 768 57 0 0
+13 Harris 236 0 918 73 0 0
+13 Harris 237 0 987 56 0 0
+13 Harris 238 0 843 68 0 0
+13 Harris 239 0 911 62 0 0
+13 Harris 24 0 489 104 0 0
+13 Harris 240 0 1318 79 0 0
+13 Harris 243 0 369 13 0 0
+13 Harris 247 0 707 53 0 0
+13 Harris 25 0 432 36 0 0
+13 Harris 252 0 1133 60 0 0
+13 Harris 253 0 1007 64 0 0
+13 Harris 256 0 1279 753 0 0
+13 Harris 271 0 1618 61 0 0
+13 Harris 276 0 1222 47 0 0
+13 Harris 284 0 1377 818 0 0
+13 Harris 286 0 2150 332 0 0
+13 Harris 287 0 783 596 0 0
+13 Harris 288 0 1189 40 0 0
+13 Harris 292 0 661 162 0 0
+13 Harris 294 0 1062 46 0 0
+13 Harris 295 0 410 18 0 0
+13 Harris 296 0 514 580 0 0
+13 Harris 297 0 744 465 0 0
+13 Harris 31 0 1282 78 0 0
+13 Harris 311 0 852 846 0 0
+13 Harris 318 0 2144 232 0 0
+13 Harris 319 0 1179 145 0 0
+13 Harris 332 0 1937 432 0 0
+13 Harris 335 0 589 255 0 0
+13 Harris 336 0 3831 579 0 0
+13 Harris 337 0 521 107 0 0
+13 Harris 338 0 1673 1118 0 0
+13 Harris 345 0 875 280 0 0
+13 Harris 355 0 1142 146 0 0
+13 Harris 359 0 1220 254 0 0
+13 Harris 361 0 983 133 0 0
+13 Harris 369 0 239 67 0 0
+13 Harris 372 0 668 113 0 0
+13 Harris 384 0 1290 500 0 0
+13 Harris 389 0 504 67 0 0
+13 Harris 390 0 917 151 0 0
+13 Harris 392 0 768 34 0 0
+13 Harris 396 0 1212 65 0 0
+13 Harris 401 0 918 88 0 0
+13 Harris 402 0 1191 107 0 0
+13 Harris 406 0 277 17 0 0
+13 Harris 412 0 211 15 0 0
+13 Harris 42 0 423 31 0 0
+13 Harris 422 0 1904 122 0 0
+13 Harris 425 0 270 110 0 0
+13 Harris 426 0 405 397 0 0
+13 Harris 427 0 398 276 0 0
+13 Harris 429 0 1140 489 0 0
+13 Harris 430 0 727 235 0 0
+13 Harris 431 0 1564 554 0 0
+13 Harris 432 0 569 253 0 0
+13 Harris 433 0 224 79 0 0
+13 Harris 453 0 925 388 0 0
+13 Harris 454 0 1227 58 0 0
+13 Harris 455 0 712 74 0 0
+13 Harris 458 0 1139 133 0 0
+13 Harris 462 0 1657 845 0 0
+13 Harris 47 0 707 69 0 0
+13 Harris 48 0 478 78 0 0
+13 Harris 487 0 1332 903 0 0
+13 Harris 489 0 947 372 0 0
+13 Harris 490 0 982 477 0 0
+13 Harris 506 0 1958 464 0 0
+13 Harris 507 0 634 375 0 0
+13 Harris 508 0 1577 1097 0 0
+13 Harris 525 0 1664 517 0 0
+13 Harris 538 0 558 32 0 0
+13 Harris 540 0 1406 561 0 0
+13 Harris 541 0 2847 553 0 0
+13 Harris 542 0 1449 209 0 0
+13 Harris 554 0 748 237 0 0
+13 Harris 555 0 829 232 0 0
+13 Harris 556 0 973 419 0 0
+13 Harris 557 0 950 722 0 0
+13 Harris 559 0 2341 688 0 0
+13 Harris 562 0 296 59 0 0
+13 Harris 564 0 2016 567 0 0
+13 Harris 565 0 396 170 0 0
+13 Harris 566 0 1310 504 0 0
+13 Harris 567 0 1055 478 0 0
+13 Harris 573 0 778 47 0 0
+13 Harris 574 0 145 35 0 0
+13 Harris 580 0 466 41 0 0
+13 Harris 581 0 542 25 0 0
+13 Harris 582 0 737 90 0 0
+13 Harris 583 0 593 39 0 0
+13 Harris 584 0 457 60 0 0
+13 Harris 585 0 1075 129 0 0
+13 Harris 606 0 439 22 0 0
+13 Harris 607 0 461 67 0 0
+13 Harris 611 0 1163 98 0 0
+13 Harris 620 0 1367 1243 0 0
+13 Harris 627 0 1158 589 0 0
+13 Harris 630 0 3676 433 0 0
+13 Harris 632 0 2 0 0 0
+13 Harris 638 0 1191 157 0 0
+13 Harris 652 0 1613 426 0 0
+13 Harris 656 0 1361 114 0 0
+13 Harris 675 0 0 0 0 0
+13 Harris 68 0 1821 100 0 0
+13 Harris 686 0 70 28 0 0
+13 Harris 693 0 352 123 0 0
+13 Harris 7 0 487 30 0 0
+13 Harris 706 0 1254 778 0 0
+13 Harris 722 0 2385 273 0 0
+13 Harris 754 0 599 63 0 0
+13 Harris 781 0 1246 901 0 0
+13 Harris 784 0 499 30 0 0
+13 Harris 807 0 888 223 0 0
+13 Harris 815 0 0 0 0 0
+13 Harris 820 0 1 0 0 0
+13 Harris 822 0 751 73 0 0
+13 Harris 829 0 34 27 0 0
+13 Harris 830 0 56 21 0 0
+13 Harris 837 0 41 28 0 0
+13 Harris 85 0 973 64 0 0
+13 Harris 854 0 61 17 0 0
+13 Harris 856 0 0 0 0 0
+13 Harris 858 0 196 5 0 0
+13 Harris 863 0 285 28 0 0
+13 Harris 865 0 10 0 0 0
+13 Harris 866 0 0 0 0 0
+13 Harris 867 0 0 0 0 0
+13 Harris 869 0 167 44 0 0
+13 Harris 890 0 766 549 0 0
+13 Harris 892 0 707 271 0 0
+13 Harris 893 0 1 1 0 0
+13 Harris 900 0 5 5 0 0
+13 Harris 929 0 0 0 0 0
+13 Harris 938 0 98 29 0 0
+13 Harris 943 0 210 108 0 0
+13 Harris 947 0 381 278 0 0
+13 Harris 948 0 0 0 0 0
+13 Harris 949 0 79 68 0 0
+13 Harris 962 0 60 7 0 0
+13 Harris 969 0 404 13 0 0
+13 Harris 985 0 128 112 0 0
+13 Harris 986 0 215 47 0 0
+13 Harris 994 0 152 60 0 0
+13 Harris 995 0 1184 175 0 0
+18 Aransas 1 0 281 1326 0 0
+18 Aransas 1A 0 200 876 0 0
+18 Aransas 2 0 608 1623 0 0
+18 Aransas 3 0 685 2518 0 0
+18 Aransas 4 0 598 2355 0 0
+18 Aransas 4A 0 164 704 0 0
+18 Austin "Precinct 101" 0 155 786 0 0
+18 Austin "Precinct 102" 0 187 840 0 0
+18 Austin "Precinct 103" 0 133 1005 0 0
+18 Austin "Precinct 104" 0 89 520 0 0
+18 Austin "Precinct 205" 0 221 1218 0 0
+18 Austin "Precinct 206" 0 59 409 0 0
+18 Austin "Precinct 207 & 208" 0 91 801 0 0
+18 Austin "Precinct 209" 0 76 411 0 0
+18 Austin "Precinct 210" 0 68 489 0 0
+18 Austin "Precinct 211" 0 34 261 0 0
+18 Austin "Precinct 312" 0 31 456 0 0
+18 Austin "Precinct 313" 0 295 374 0 0
+18 Austin "Precinct 314" 0 372 1578 0 0
+18 Austin "Precinct 415" 0 236 780 0 0
+18 Austin "Precinct 416" 0 208 710 0 0
+18 Austin "Precinct 417" 0 125 320 0 0
+18 Austin "Precinct 418" 0 153 929 0 0
+18 Burleson 113 0 46 453 0 0
+18 Burleson 114 0 255 913 0 0
+18 Burleson 203 0 58 243 0 0
+18 Burleson 204 0 53 466 0 0
+18 Burleson 207 0 100 219 0 0
+18 Burleson 211 0 123 614 0 0
+18 Burleson 215 0 66 241 0 0
+18 Burleson 301 0 182 760 0 0
+18 Burleson 305 0 72 348 0 0
+18 Burleson 308 0 57 263 0 0
+18 Burleson 309 0 94 523 0 0
+18 Burleson 406 0 254 488 0 0
+18 Burleson 410 0 255 1195 0 0
+18 Calhoun 1 0 125 70 0 0
+18 Calhoun 10 0 29 60 0 0
+18 Calhoun 11 0 72 197 0 0
+18 Calhoun 12 0 190 722 0 0
+18 Calhoun 13 0 3 7 0 0
+18 Calhoun 14 0 34 58 0 0
+18 Calhoun 15 0 48 66 0 0
+18 Calhoun 16 0 206 472 0 0
+18 Calhoun 17 0 126 328 0 0
+18 Calhoun 18 0 51 183 0 0
+18 Calhoun 19 0 54 353 0 0
+18 Calhoun 2 0 185 209 0 0
+18 Calhoun 20 0 19 27 0 0
+18 Calhoun 21 0 30 70 0 0
+18 Calhoun 22 0 61 211 0 0
+18 Calhoun 23 0 24 140 0 0
+18 Calhoun 24 0 140 849 0 0
+18 Calhoun 25 0 84 633 0 0
+18 Calhoun 3 0 29 16 0 0
+18 Calhoun 4 0 90 174 0 0
+18 Calhoun 5 0 41 141 0 0
+18 Calhoun 6 0 63 290 0 0
+18 Calhoun 7 0 136 175 0 0
+18 Calhoun 8 0 123 94 0 0
+18 Calhoun 9 0 12 17 0 0
+18 DeWitt 101 0 158 869 0 0
+18 DeWitt 102 0 274 238 0 0
+18 DeWitt 201 0 44 321 0 0
+18 DeWitt 202 0 121 613 0 0
+18 DeWitt 203 0 83 599 0 0
+18 DeWitt 301 0 107 868 0 0
+18 DeWitt 302 0 115 674 0 0
+18 DeWitt 303 0 53 246 0 0
+18 DeWitt 401 0 259 1273 0 0
+18 DeWitt 402 0 67 800 0 0
+18 Fayette "01 East La Grange" 0 99 557 0 0
+18 Fayette "01 North La Grange" 0 409 1172 0 0
+18 Fayette "01 West La Grange" 0 114 453 0 0
+18 Fayette "02 Rutersville" 0 27 144 0 0
+18 Fayette "03 Ellinger" 0 44 273 0 0
+18 Fayette "04 Fayetteville" 0 97 512 0 0
+18 Fayette "05 Willow Springs" 0 12 167 0 0
+18 Fayette "06 Warrenton" 0 60 313 0 0
+18 Fayette "07 Round Top" 0 61 422 0 0
+18 Fayette "08 Carmine" 0 34 288 0 0
+18 Fayette "09 Nechanitz" 0 42 182 0 0
+18 Fayette "10 Warda" 0 67 436 0 0
+18 Fayette "11 Winchester" 0 51 309 0 0
+18 Fayette "12 Plum" 0 71 257 0 0
+18 Fayette "13 West Point" 0 98 427 0 0
+18 Fayette "14 Muldoon" 0 21 191 0 0
+18 Fayette "15 Cistern" 0 49 271 0 0
+18 Fayette "16 Flatonia" 0 246 859 0 0
+18 Fayette "17 Praha" 0 31 328 0 0
+18 Fayette "20 Hostyn" 0 87 495 0 0
+18 Fayette "21 Swiss Alp" 0 22 186 0 0
+18 Fayette "22 Ammannsville" 0 22 123 0 0
+18 Fayette "23 Holman" 0 26 166 0 0
+18 Fayette "24 Dubina" 0 19 175 0 0
+18 Fayette "25 Schulenburg" 0 348 1400 0 0
+18 Fayette "26 Mullins Prairie" 0 90 365 0 0
+18 Goliad "Precinct 11" 0 224 361 0 0
+18 Goliad "Precinct 12" 0 29 306 0 0
+18 Goliad "Precinct 21" 0 205 381 0 0
+18 Goliad "Precinct 22" 0 48 113 0 0
+18 Goliad "Precinct 31" 0 0 0 0 0
+18 Gonzales "Precinct 1" 0 377 1352 0 0
+18 Gonzales "Precinct 10" 0 64 308 0 0
+18 Gonzales "Precinct 11" 0 12 167 0 0
+18 Gonzales "Precinct 12" 0 28 103 0 0
+18 Gonzales "Precinct 13" 0 37 231 0 0
+18 Gonzales "Precinct 14" 0 7 60 0 0
+18 Gonzales "Precinct 15" 0 33 242 0 0
+18 Gonzales "Precinct 2" 0 322 700 0 0
+18 Gonzales "Precinct 3" 0 255 721 0 0
+18 Gonzales "Precinct 4" 0 148 264 0 0
+18 Gonzales "Precinct 5" 0 73 380 0 0
+18 Gonzales "Precinct 6" 0 38 273 0 0
+18 Gonzales "Precinct 7" 0 54 277 0 0
+18 Gonzales "Precinct 8" 0 44 213 0 0
+18 Gonzales "Precinct 9" 0 251 397 0 0
+18 Harris 119 0 1242 3160 0 0
+18 Harris 121 0 272 493 0 0
+18 Harris 149 0 3535 3971 0 0
+18 Harris 331 0 2099 2221 0 0
+18 Harris 49 0 1319 2337 0 0
+18 Harris 598 0 2611 1432 0 0
+18 Harris 624 0 273 633 0 0
+18 Harris 639 0 425 1372 0 0
+18 Harris 901 0 0 0 0 0
+18 Harris 919 0 0 0 0 0
+18 Jackson "Cape Carancahua - Pct. 9" 0 59 439 0 0
+18 Jackson "Chamber - Pct. 3" 0 202 1239 0 0
+18 Jackson "Courthouse Lobby - Pct. 6" 0 81 309 0 0
+18 Jackson "Francitas - Pct. 7" 0 15 84 0 0
+18 Jackson "Ganada JP2 - Pct. 2" 0 178 1286 0 0
+18 Jackson "La Ward - Pct. 4" 0 32 212 0 0
+18 Jackson "Loilta - Pct. 8" 0 43 330 0 0
+18 Jackson "Service Building - Pct. 1" 0 300 991 0 0
+18 Jackson "Vanderbilt - Pct. 5" 0 48 389 0 0
+18 Lavaca "Precinct 1" 0 85 720 0 0
+18 Lavaca "Precinct 11" 0 30 244 0 0
+18 Lavaca "Precinct 12" 0 24 260 0 0
+18 Lavaca "Precinct 15" 0 15 128 0 0
+18 Lavaca "Precinct 16" 0 27 347 0 0
+18 Lavaca "Precinct 17" 0 23 224 0 0
+18 Lavaca "Precinct 19" 0 31 297 0 0
+18 Lavaca "Precinct 2" 0 177 910 0 0
+18 Lavaca "Precinct 20" 0 17 66 0 0
+18 Lavaca "Precinct 23" 0 98 812 0 0
+18 Lavaca "Precinct 26" 0 61 127 0 0
+18 Lavaca "Precinct 27" 0 20 141 0 0
+18 Lavaca "Precinct 29" 0 96 839 0 0
+18 Lavaca "Precinct 30" 0 150 994 0 0
+18 Lavaca "Precinct 31" 0 94 754 0 0
+18 Lavaca "Precinct 32" 0 16 208 0 0
+18 Lavaca "Precinct 7" 0 34 199 0 0
+18 Lavaca "Precinct 8" 0 56 501 0 0
+18 Lavaca "Precinct 9" 0 120 918 0 0
+18 Matagorda "Precinct 10" 0 0 0 0 264
+18 Matagorda "Precinct 12" 0 0 0 0 183
+18 Matagorda "Precinct 13" 0 0 0 0 270
+18 Matagorda "Precinct 1A" 0 0 0 0 1731
+18 Matagorda "Precinct 1B" 0 0 0 0 1946
+18 Matagorda "Precinct 1C" 0 0 0 0 554
+18 Matagorda "Precinct 1D" 0 0 0 0 658
+18 Matagorda "Precinct 1E" 0 0 0 0 863
+18 Matagorda "Precinct 1F" 0 0 0 0 435
+18 Matagorda "Precinct 2" 0 0 0 0 548
+18 Matagorda "Precinct 3A" 0 0 0 0 1164
+18 Matagorda "Precinct 3B" 0 0 0 0 583
+18 Matagorda "Precinct 4" 0 0 0 0 910
+18 Matagorda "Precinct 5" 0 0 0 0 1357
+18 Matagorda "Precinct 6" 0 0 0 0 931
+18 Matagorda "Precinct 7" 0 0 0 0 149
+18 Matagorda "Precinct 8" 0 0 0 0 575
+18 Matagorda "Precinct 9" 0 0 0 0 123
+18 Refugio "1 - CO-RCMH" 0 120 145 0 0
+18 Refugio "1A - CO-RCMH" 0 0 3 0 0
+18 Refugio "1A - CO-RCMH-WO" 0 172 162 0 0
+18 Refugio "2 - CO-RCMH" 0 44 266 0 0
+18 Refugio "2 - CO-RCMH-WO" 0 88 213 0 0
+18 Refugio "2A - CO-RCMH" 0 16 134 0 0
+18 Refugio "2B - CO-RCMH" 0 5 7 0 0
+18 Refugio "2B - CO-RCMH-BA" 0 54 133 0 0
+18 Refugio "3 - CO-RCMH" 0 117 369 0 0
+18 Refugio "3A - CO-RCMH" 0 91 354 0 0
+18 Refugio "3A - CO-RCMH-WO" 0 0 2 0 0
+18 Refugio "4 - CO-RCMH" 0 159 85 0 0
+18 Refugio "4A - CO-RCMH" 0 84 156 0 0
+18 Refugio "4B - CO-RCMH" 0 46 73 0 0
+18 Victoria "PCT 1" 0 136 124 0 0
+18 Victoria "PCT 10" 0 325 697 0 0
+18 Victoria "PCT 11" 0 52 251 0 0
+18 Victoria "PCT 12" 0 153 221 0 0
+18 Victoria "PCT 13" 0 287 355 0 0
+18 Victoria "PCT 14" 0 191 649 0 0
+18 Victoria "PCT 15" 0 14 79 0 0
+18 Victoria "PCT 16" 0 45 251 0 0
+18 Victoria "PCT 17" 0 133 222 0 0
+18 Victoria "PCT 18" 0 431 2171 0 0
+18 Victoria "PCT 19" 0 589 1064 0 0
+18 Victoria "PCT 2" 0 199 352 0 0
+18 Victoria "PCT 20" 0 161 808 0 0
+18 Victoria "PCT 21" 0 587 2213 0 0
+18 Victoria "PCT 22" 0 114 1127 0 0
+18 Victoria "PCT 23" 0 157 986 0 0
+18 Victoria "PCT 24" 0 128 969 0 0
+18 Victoria "PCT 25" 0 706 1661 0 0
+18 Victoria "PCT 26" 0 139 596 0 0
+18 Victoria "PCT 27" 0 79 1202 0 0
+18 Victoria "PCT 28" 0 32 317 0 0
+18 Victoria "PCT 29" 0 406 1403 0 0
+18 Victoria "PCT 3" 0 247 480 0 0
+18 Victoria "PCT 30" 0 93 219 0 0
+18 Victoria "PCT 31" 0 163 266 0 0
+18 Victoria "PCT 32" 0 312 318 0 0
+18 Victoria "PCT 33" 0 642 2429 0 0
+18 Victoria "PCT 34" 0 321 171 0 0
+18 Victoria "PCT 35" 0 120 65 0 0
+18 Victoria "PCT 4" 0 340 296 0 0
+18 Victoria "PCT 5" 0 588 636 0 0
+18 Victoria "PCT 6" 0 81 61 0 0
+18 Victoria "PCT 7" 0 597 422 0 0
+18 Victoria "PCT 8" 0 462 577 0 0
+18 Victoria "PCT 9" 0 236 380 0 0
+18 Waller "101 - 01" 0 104 521 0 0
+18 Waller "101 - 02" 0 276 382 0 0
+18 Waller "102 - 01" 0 76 204 0 0
+18 Waller "102 - 02" 0 379 177 0 0
+18 Waller "102 - 03" 0 42 210 0 0
+18 Waller "103 - 01" 0 62 282 0 0
+18 Waller "103 - 02" 0 296 215 0 0
+18 Waller "103 - 03" 0 1 7 0 0
+18 Waller "104 - 01" 0 160 317 0 0
+18 Waller "104 - 02" 0 1 1 0 0
+18 Waller "105 - 01" 0 20 119 0 0
+18 Waller "105 - 02" 0 77 379 0 0
+18 Waller "206 - 01" 0 315 1745 0 0
+18 Waller "207 - 01" 0 314 2221 0 0
+18 Waller "208 - 01" 0 268 721 0 0
+18 Waller "208 - 02" 0 3 0 0 0
+18 Waller "309 - 02" 0 1443 51 0 0
+18 Waller "310 - 01" 0 61 148 0 0
+18 Waller "310 - 02" 0 633 89 0 0
+18 Waller "311 - 01" 0 127 318 0 0
+18 Waller "311 - 02" 0 20 77 0 0
+18 Waller "312 - 01" 0 4 22 0 0
+18 Waller "312 - 02" 0 181 1019 0 0
+18 Waller "313 - 01" 0 175 320 0 0
+18 Waller "414 - 01" 0 130 121 0 0
+18 Waller "415 - 01" 0 250 734 0 0
+18 Waller "416 - 01" 0 67 185 0 0
+18 Waller "416 - 02" 0 4 10 0 0
+18 Waller "416 - 03" 0 404 242 0 0
+18 Waller "416 - 04" 0 0 0 0 0
+18 Waller "417 - 01" 0 28 48 0 0
+18 Waller "417 - 02" 0 425 203 0 0
+18 Waller "417 - 03" 0 0 0 0 0
+18 Waller "417 - 04" 0 0 0 0 0
+18 Waller "418 - 01" 0 30 27 0 0
+18 Waller "418 - 02" 0 124 628 0 0
+18 Waller "418 - 03" 0 0 0 0 0
+18 Waller "418 - 04" 0 0 0 0 0
+18 Waller "418 - 05" 0 382 1075 0 0
+18 Waller "419 - 01" 0 174 540 0 0
+18 Waller "420 - 01" 0 335 1128 0 0
+18 Waller "420 - 02" 0 20 45 0 0
+18 Washington "Precinct 101" 0 274 636 0 0
+18 Washington "Precinct 104" 0 644 406 0 0
+18 Washington "Precinct 109" 0 123 692 0 0
+18 Washington "Precinct 115" 0 143 553 0 0
+18 Washington "Precinct 117" 0 29 16 0 0
+18 Washington "Precinct 121" 0 15 47 0 0
+18 Washington "Precinct 202" 0 52 127 0 0
+18 Washington "Precinct 203" 0 217 1184 0 0
+18 Washington "Precinct 205" 0 373 1525 0 0
+18 Washington "Precinct 208" 0 107 1036 0 0
+18 Washington "Precinct 307" 0 258 892 0 0
+18 Washington "Precinct 311" 0 138 793 0 0
+18 Washington "Precinct 312" 0 118 831 0 0
+18 Washington "Precinct 316" 0 28 151 0 0
+18 Washington "Precinct 320" 0 137 1373 0 0
+18 Washington "Precinct 406" 0 240 873 0 0
+18 Washington "Precinct 410" 0 135 803 0 0
+18 Washington "Precinct 413" 0 74 633 0 0
+18 Washington "Precinct 414" 0 72 566 0 0
+18 Washington "Precinct 418" 0 111 322 0 0
+18 Washington "Precinct 419" 0 91 308 0 0
+18 Wharton "Precinct 101" 0 550 953 0 0
+18 Wharton "Precinct 102" 0 395 1344 0 0
+18 Wharton "Precinct 103" 0 271 1070 0 0
+18 Wharton "Precinct 201" 0 234 1781 0 0
+18 Wharton "Precinct 202" 0 355 184 0 0
+18 Wharton "Precinct 203" 0 991 812 0 0
+18 Wharton "Precinct 301" 0 209 1548 0 0
+18 Wharton "Precinct 302" 0 300 1178 0 0
+18 Wharton "Precinct 303" 0 143 1366 0 0
+18 Wharton "Precinct 401" 0 579 917 0 0
+18 Wharton "Precinct 402" 0 206 678 0 0
+18 Wharton "Precinct 403" 0 148 294 0 0
+19 Atascosa 1 0 126 464 7 0
+19 Atascosa 10 0 283 559 17 0
+19 Atascosa 11 0 0 0 0 0
+19 Atascosa 12 0 256 516 8 0
+19 Atascosa 13 0 410 1233 29 0
+19 Atascosa 14 0 71 232 10 0
+19 Atascosa 15 0 429 752 30 0
+19 Atascosa 16 0 66 102 3 0
+19 Atascosa 17 0 636 514 17 0
+19 Atascosa 18 0 345 714 22 0
+19 Atascosa 19 0 73 239 8 0
+19 Atascosa 2 0 295 452 25 0
+19 Atascosa 20 0 513 2188 50 0
+19 Atascosa 21 0 0 0 0 0
+19 Atascosa 22 0 77 429 6 0
+19 Atascosa 23 0 173 257 18 0
+19 Atascosa 24 0 420 769 27 0
+19 Atascosa 3 0 302 698 17 0
+19 Atascosa 4 0 0 0 0 0
+19 Atascosa 5 0 438 623 30 0
+19 Atascosa 6 0 0 0 0 0
+19 Atascosa 7 0 314 675 23 0
+19 Atascosa 8 0 114 263 7 0
+19 Atascosa 9 0 0 0 0 0
+19 Brewster 1 0 474 888 46 0
+19 Brewster 2 0 366 390 26 0
+19 Brewster 3 0 130 149 12 0
+19 Brewster 4 0 462 563 35 0
+19 Brewster 5 0 44 31 8 0
+19 Brewster 6 0 207 256 30 0
+19 Brewster 7 0 67 33 1 0
+19 Brewster 8 0 325 173 26 0
+19 Crockett 1 0 98 239 3 0
+19 Crockett 2 0 78 324 7 0
+19 Crockett 3 0 67 360 5 0
+19 Crockett 4 0 84 210 5 0
+19 Dimmit 1 0 484 362 14 0
+19 Dimmit 2 0 529 269 19 0
+19 Dimmit 3 0 137 93 6 0
+19 Dimmit 4 0 35 29 1 0
+19 Dimmit 5 0 397 141 12 0
+19 Dimmit 6 0 286 209 9 0
+19 Dimmit 7 0 204 132 12 0
+19 Edwards 1 0 22 121 3 0
+19 Edwards 2 0 30 307 5 0
+19 Edwards 3 0 39 251 4 0
+19 Edwards 4 0 41 140 2 0
+19 Frio 1 0 0 0 0 763
+19 Frio 10 0 0 0 0 543
+19 Frio 2 0 0 0 0 447
+19 Frio 3 0 0 0 0 427
+19 Frio 4 0 0 0 0 809
+19 Frio 5 0 0 0 0 415
+19 Frio 6 0 0 0 0 398
+19 Frio 8 0 0 0 0 618
+19 Frio 9 0 0 0 0 535
+19 Maverick 1A 0 226 104 9 0
+19 Maverick 1B 0 703 497 30 0
+19 Maverick 1C 0 1247 869 76 0
+19 Maverick 2A 0 205 121 15 0
+19 Maverick 2B 0 868 580 38 0
+19 Maverick 2C 0 529 425 48 0
+19 Maverick 2D 0 32 42 0 0
+19 Maverick 3A 0 908 709 39 0
+19 Maverick 3B 0 1040 872 56 0
+19 Maverick 3C 0 113 206 9 0
+19 Maverick 4A 0 237 153 12 0
+19 Maverick 4B 0 940 719 42 0
+19 Maverick 4C 0 339 197 12 0
+19 Maverick 4D 0 566 390 30 0
+19 Medina 1A 0 164 916 20 0
+19 Medina 1B 0 180 1040 20 0
+19 Medina 1C 0 613 1623 72 0
+19 Medina 1D 0 390 1339 32 0
+19 Medina 2A 0 726 1151 76 0
+19 Medina 2B 0 465 1751 49 0
+19 Medina 2C 0 638 2058 72 0
+19 Medina 3A 0 184 543 12 0
+19 Medina 3B 0 76 329 10 0
+19 Medina 3C 0 490 1121 54 0
+19 Medina 3D 0 610 510 34 0
+19 Medina 4A 0 246 889 31 0
+19 Medina 4B 0 653 1730 53 0
+19 Medina 4C 0 376 603 33 0
+19 Pecos "Precinct #1" 0 406 793 31 0
+19 Pecos "Precinct #2" 0 410 667 18 0
+19 Pecos "Precinct #3" 0 9 150 5 0
+19 Pecos "Precinct #4" 0 65 365 7 0
+19 Pecos "Precinct #5" 0 0 42 1 0
+19 Pecos "Precinct #6" 0 0 0 0 0
+19 Real 1 0 71 437 8 0
+19 Real 2 0 75 507 8 0
+19 Real 3 0 58 260 7 0
+19 Real 4~7 0 21 219 1 0
+19 Real 6 0 39 197 5 0
+19 Reeves "BOX 1" 0 66 85 14 0
+19 Reeves "BOX 10" 0 178 260 11 0
+19 Reeves "BOX 11" 0 199 150 15 0
+19 Reeves "BOX 12" 0 170 326 12 0
+19 Reeves "BOX 2" 0 176 212 18 0
+19 Reeves "BOX 3" 0 175 301 11 0
+19 Reeves "BOX 4" 0 7 29 0 0
+19 Reeves "BOX 5" 0 78 158 9 0
+19 Reeves "BOX 6" 0 19 35 3 0
+19 Reeves "BOX 7" 0 142 301 13 0
+19 Reeves "BOX 8" 0 70 125 13 0
+19 Terrell 1 0 38 79 0 0
+19 Terrell 2 0 50 53 2 0
+19 Terrell 3 0 14 95 1 0
+19 Terrell 4 0 13 99 1 0
+19 Uvalde 1 0 431 599 28 0
+19 Uvalde 10 0 208 81 5 0
+19 Uvalde 11 0 74 265 3 0
+19 Uvalde 12 0 492 935 28 0
+19 Uvalde 13 0 816 684 48 0
+19 Uvalde 14 0 22 75 2 0
+19 Uvalde 2 0 253 555 18 0
+19 Uvalde 3 0 34 472 9 0
+19 Uvalde 4 0 46 330 9 0
+19 Uvalde 5 0 289 817 21 0
+19 Uvalde 6 0 27 175 7 0
+19 Uvalde 7 0 81 360 4 0
+19 Uvalde 8 0 472 492 32 0
+19 Uvalde 9 0 462 233 18 0
+19 "Val Verde" 10 0 531 515 30 0
+19 "Val Verde" 11 0 531 320 34 0
+19 "Val Verde" 12 0 73 83 6 0
+19 "Val Verde" 13 0 241 546 71 0
+19 "Val Verde" 20 0 14 108 2 0
+19 "Val Verde" 21 0 475 395 29 0
+19 "Val Verde" 22 0 493 483 30 0
+19 "Val Verde" 23 0 49 160 5 0
+19 "Val Verde" 24 0 302 371 27 0
+19 "Val Verde" 30 0 393 477 25 0
+19 "Val Verde" 31 0 1095 2049 107 0
+19 "Val Verde" 32 0 32 154 2 0
+19 "Val Verde" 33 0 270 950 23 0
+19 "Val Verde" 40 0 1255 1088 77 0
+19 "Val Verde" 41 0 348 393 24 0
+19 "Val Verde" 42 0 2 20 0 0
+19 "Val Verde" 43 0 3 45 0 0
+19 Zavala "Precinct 1" 0 173 116 10 0
+19 Zavala "Precinct 1A" 0 274 107 11 0
+19 Zavala "Precinct 2" 0 781 324 20 0
+19 Zavala "Precinct 3" 0 736 289 28 0
+19 Zavala "Precinct 4" 0 324 282 17 0
+19 Zavala "Precinct 4A" 0 250 139 11 0
+20 Brooks 1 0 431 111 0 0
+20 Brooks 2 0 400 175 0 0
+20 Brooks 3 0 407 159 0 0
+20 Brooks 4 0 423 163 0 0
+20 Hildalgo 10 0 871 330 0 0
+20 Hildalgo 100 0 1002 470 0 0
+20 Hildalgo 101 0 360 376 0 0
+20 Hildalgo 102 0 327 371 0 0
+20 Hildalgo 103 0 1112 733 0 0
+20 Hildalgo 105 0 1284 660 0 0
+20 Hildalgo 106 0 1972 1273 0 0
+20 Hildalgo 107 0 930 385 0 0
+20 Hildalgo 108 0 835 222 0 0
+20 Hildalgo 109 0 1128 429 0 0
+20 Hildalgo 11 0 799 219 0 0
+20 Hildalgo 12 0 107 48 0 0
+20 Hildalgo 122 0 859 390 0 0
+20 Hildalgo 124 0 533 374 0 0
+20 Hildalgo 125 0 326 175 0 0
+20 Hildalgo 128 0 808 288 0 0
+20 Hildalgo 129 0 54 53 0 0
+20 Hildalgo 13 0 1582 880 0 0
+20 Hildalgo 131 0 12 1 0 0
+20 Hildalgo 133 0 41 23 0 0
+20 Hildalgo 134 0 793 640 0 0
+20 Hildalgo 135 0 616 405 0 0
+20 Hildalgo 136 0 630 365 0 0
+20 Hildalgo 138 0 152 46 0 0
+20 Hildalgo 14 0 488 191 0 0
+20 Hildalgo 140 0 5 1 0 0
+20 Hildalgo 141 0 36 17 0 0
+20 Hildalgo 145 0 358 121 0 0
+20 Hildalgo 151 0 198 68 0 0
+20 Hildalgo 152 0 767 481 0 0
+20 Hildalgo 154 0 877 379 0 0
+20 Hildalgo 158 0 1307 702 0 0
+20 Hildalgo 160 0 139 96 0 0
+20 Hildalgo 161 0 780 437 0 0
+20 Hildalgo 162 0 42 29 0 0
+20 Hildalgo 163 0 59 24 0 0
+20 Hildalgo 164 0 718 596 0 0
+20 Hildalgo 165 0 253 208 0 0
+20 Hildalgo 166 0 204 161 0 0
+20 Hildalgo 167 0 202 188 0 0
+20 Hildalgo 168 0 128 113 0 0
+20 Hildalgo 170 0 295 122 0 0
+20 Hildalgo 18 0 98 53 0 0
+20 Hildalgo 180 0 70 24 0 0
+20 Hildalgo 182 0 300 90 0 0
+20 Hildalgo 183 0 195 93 0 0
+20 Hildalgo 185 0 0 0 0 0
+20 Hildalgo 187 0 890 459 0 0
+20 Hildalgo 188 0 711 538 0 0
+20 Hildalgo 19 0 73 48 0 0
+20 Hildalgo 193 0 207 96 0 0
+20 Hildalgo 194 0 652 492 0 0
+20 Hildalgo 195 0 275 300 0 0
+20 Hildalgo 197 0 276 107 0 0
+20 Hildalgo 198 0 230 115 0 0
+20 Hildalgo 199 0 994 688 0 0
+20 Hildalgo 20 0 339 162 0 0
+20 Hildalgo 200 0 906 622 0 0
+20 Hildalgo 201 0 479 338 0 0
+20 Hildalgo 203 0 1620 986 0 0
+20 Hildalgo 204 0 221 132 0 0
+20 Hildalgo 205 0 74 41 0 0
+20 Hildalgo 206 0 492 252 0 0
+20 Hildalgo 207 0 953 658 0 0
+20 Hildalgo 209 0 274 141 0 0
+20 Hildalgo 210 0 165 62 0 0
+20 Hildalgo 211 0 544 250 0 0
+20 Hildalgo 212 0 181 150 0 0
+20 Hildalgo 215 0 415 274 0 0
+20 Hildalgo 216 0 649 238 0 0
+20 Hildalgo 217 0 65 24 0 0
+20 Hildalgo 218 0 315 154 0 0
+20 Hildalgo 219 0 418 205 0 0
+20 Hildalgo 220 0 244 95 0 0
+20 Hildalgo 221 0 468 306 0 0
+20 Hildalgo 222 0 3 6 0 0
+20 Hildalgo 223 0 186 173 0 0
+20 Hildalgo 224 0 94 83 0 0
+20 Hildalgo 226 0 10 8 0 0
+20 Hildalgo 227 0 1130 470 0 0
+20 Hildalgo 228 0 1953 840 0 0
+20 Hildalgo 230 0 343 334 0 0
+20 Hildalgo 231 0 97 81 0 0
+20 Hildalgo 233 0 0 0 0 0
+20 Hildalgo 234 0 809 354 0 0
+20 Hildalgo 236 0 244 199 0 0
+20 Hildalgo 239 0 785 478 0 0
+20 Hildalgo 24 0 28 49 0 0
+20 Hildalgo 241 0 148 66 0 0
+20 Hildalgo 243 0 30 26 0 0
+20 Hildalgo 244 0 278 154 0 0
+20 Hildalgo 246 0 2 0 0 0
+20 Hildalgo 247 0 64 30 0 0
+20 Hildalgo 248 0 16 8 0 0
+20 Hildalgo 254 0 71 32 0 0
+20 Hildalgo 256 0 153 47 0 0
+20 Hildalgo 257 0 209 60 0 0
+20 Hildalgo 26 0 329 105 0 0
+20 Hildalgo 27 0 332 104 0 0
+20 Hildalgo 28 0 912 482 0 0
+20 Hildalgo 29 0 347 288 0 0
+20 Hildalgo 30 0 1531 721 0 0
+20 Hildalgo 31 0 620 370 0 0
+20 Hildalgo 34 0 327 171 0 0
+20 Hildalgo 37 0 327 171 0 0
+20 Hildalgo 38 0 1250 845 0 0
+20 Hildalgo 47 0 550 227 0 0
+20 Hildalgo 48 0 1134 487 0 0
+20 Hildalgo 49 0 974 388 0 0
+20 Hildalgo 50 0 882 392 0 0
+20 Hildalgo 51 0 804 202 0 0
+20 Hildalgo 52 0 1687 1133 0 0
+20 Hildalgo 53 0 2124 1084 0 0
+20 Hildalgo 54 0 611 484 0 0
+20 Hildalgo 62 0 1186 947 0 0
+20 Hildalgo 63 0 247 101 0 0
+20 Hildalgo 64 0 723 262 0 0
+20 Hildalgo 65 0 376 213 0 0
+20 Hildalgo 66 0 472 176 0 0
+20 Hildalgo 67 0 767 434 0 0
+20 Hildalgo 68 0 1124 614 0 0
+20 Hildalgo 69 0 1141 596 0 0
+20 Hildalgo 72 0 509 263 0 0
+20 Hildalgo 73 0 1039 888 0 0
+20 Hildalgo 74 0 353 239 0 0
+20 Hildalgo 75 0 17 29 0 0
+20 Hildalgo 76 0 3 13 0 0
+20 Hildalgo 78 0 770 323 0 0
+20 Hildalgo 80 0 291 96 0 0
+20 Hildalgo 81 0 1807 1151 0 0
+20 Hildalgo 82 0 4 1 0 0
+20 Hildalgo 83 0 1303 1130 0 0
+20 Hildalgo 84 0 375 236 0 0
+20 Hildalgo 86 0 235 144 0 0
+20 Hildalgo 88 0 1528 619 0 0
+20 Hildalgo 89 0 4 1 0 0
+20 Hildalgo 9 0 1265 681 0 0
+20 Hildalgo 92 0 101 42 0 0
+20 Hildalgo 93 0 61 61 0 0
+20 Hildalgo 94 0 765 316 0 0
+20 Hildalgo 95 0 1379 506 0 0
+20 Hildalgo 96 0 1043 743 0 0
+20 Hildalgo 97 0 836 433 0 0
+20 Hildalgo 98 0 1389 550 0 0
+20 Hildalgo 99 0 1733 766 0 0
+20 "Jim Wells" 1 0 4 2 0 0
+20 "Jim Wells" "1 - Co Alice" 0 149 63 0 0
+20 "Jim Wells" 10 0 24 12 0 0
+20 "Jim Wells" "10 - Co Alice" 0 692 259 0 0
+20 "Jim Wells" "10 - Co BBPBISD" 0 16 4 0 0
+20 "Jim Wells" 11 0 2 2 0 0
+20 "Jim Wells" "11 - City PISD" 0 217 72 0 0
+20 "Jim Wells" "11 - PISD" 0 85 72 0 0
+20 "Jim Wells" 12 0 67 57 0 0
+20 "Jim Wells" "12 - Co Alice" 0 604 339 0 0
+20 "Jim Wells" 13 0 5 3 0 0
+20 "Jim Wells" "13 - Co Alice" 0 164 55 0 0
+20 "Jim Wells" 14 0 45 70 0 0
+20 "Jim Wells" "14 - PISD" 0 6 5 0 0
+20 "Jim Wells" 15 0 94 116 0 0
+20 "Jim Wells" "15 - Co Alice" 0 420 222 0 0
+20 "Jim Wells" 16 0 10 7 0 0
+20 "Jim Wells" "16 - Co Alice" 0 288 94 0 0
+20 "Jim Wells" 17 0 10 0 0 0
+20 "Jim Wells" "17 - Co BBPBISD" 0 549 319 0 0
+20 "Jim Wells" 18 0 124 92 0 0
+20 "Jim Wells" "18 - SDISD" 0 3 5 0 0
+20 "Jim Wells" 19 0 49 155 0 0
+20 "Jim Wells" 2 0 104 249 0 0
+20 "Jim Wells" 20 0 4 0 0 0
+20 "Jim Wells" "20 - Co Alice" 0 285 73 0 0
+20 "Jim Wells" 22 0 570 240 0 0
+20 "Jim Wells" "22 - Co Alice" 0 30 17 0 0
+20 "Jim Wells" 3 0 191 627 0 0
+20 "Jim Wells" 4 0 1 0 0 0
+20 "Jim Wells" "4 - City PISD" 0 352 220 0 0
+20 "Jim Wells" "4 - PISD" 0 56 68 0 0
+20 "Jim Wells" 5 0 0 0 0 0
+20 "Jim Wells" "5 - Co BBPBISD" 0 98 47 0 0
+20 "Jim Wells" 6 0 144 94 0 0
+20 "Jim Wells" "6 - City SDISD" 0 149 47 0 0
+20 "Jim Wells" "6 - SDISD" 0 59 31 0 0
+20 "Jim Wells" 7 0 11 10 0 0
+20 "Jim Wells" "7 - Co Alice" 0 740 741 0 0
+20 "Jim Wells" 8 0 624 1366 0 0
+20 "Jim Wells" 9 0 71 65 0 0
+20 "Jim Wells" "9 - Co Alice" 0 136 50 0 0
+21 Atascosa 1 0 0 0 0 0
+21 Atascosa 10 0 0 0 0 0
+21 Atascosa 11 0 12 25 0 0
+21 Atascosa 12 0 0 0 0 0
+21 Atascosa 13 0 0 0 0 0
+21 Atascosa 14 0 0 0 0 0
+21 Atascosa 15 0 0 0 0 0
+21 Atascosa 16 0 0 0 0 0
+21 Atascosa 17 0 0 0 0 0
+21 Atascosa 18 0 0 0 0 0
+21 Atascosa 19 0 0 0 0 0
+21 Atascosa 2 0 0 0 0 0
+21 Atascosa 20 0 0 0 0 0
+21 Atascosa 21 0 33 142 0 0
+21 Atascosa 22 0 0 0 0 0
+21 Atascosa 23 0 0 0 0 0
+21 Atascosa 24 0 0 0 0 0
+21 Atascosa 3 0 0 0 0 0
+21 Atascosa 4 0 39 62 0 0
+21 Atascosa 5 0 0 0 0 0
+21 Atascosa 6 0 12 69 0 0
+21 Atascosa 7 0 0 0 0 0
+21 Atascosa 8 0 0 0 0 0
+21 Atascosa 9 0 22 103 0 0
+21 Bee PCT 0 4076 4874 0 0
+21 Caldwell "Precinct 100" 0 193 124 0 0
+21 Caldwell "Precinct 101" 0 305 187 0 0
+21 Caldwell "Precinct 102" 0 173 343 0 0
+21 Caldwell "Precinct 103" 0 774 730 0 0
+21 Caldwell "Precinct 104" 0 118 233 0 0
+21 Caldwell "Precinct 105" 0 50 26 0 0
+21 Caldwell "Precinct 108" 0 32 28 0 0
+21 Caldwell "Precinct 109" 0 3 27 0 0
+21 Caldwell "Precinct 110" 0 47 48 0 0
+21 Caldwell "Precinct 111" 0 354 317 0 0
+21 Caldwell "Precinct 118" 0 42 44 0 0
+21 Caldwell "Precinct 201" 0 254 384 0 0
+21 Caldwell "Precinct 202" 0 273 492 0 0
+21 Caldwell "Precinct 203" 0 211 546 0 0
+21 Caldwell "Precinct 204" 0 273 683 0 0
+21 Caldwell "Precinct 205" 0 45 180 0 0
+21 Caldwell "Precinct 206" 0 276 349 0 0
+21 Caldwell "Precinct 301" 0 404 348 0 0
+21 Caldwell "Precinct 302" 0 538 478 0 0
+21 Caldwell "Precinct 303" 0 229 294 0 0
+21 Caldwell "Precinct 305" 0 149 212 0 0
+21 Caldwell "Precinct 306" 0 113 119 0 0
+21 Caldwell "Precinct 400" 0 22 22 0 0
+21 Caldwell "Precinct 401" 0 354 132 0 0
+21 Caldwell "Precinct 402" 0 762 413 0 0
+21 Caldwell "Precinct 404" 0 586 449 0 0
+21 Caldwell "Precinct 405" 0 325 448 0 0
+21 Caldwell "Precinct 407" 0 5 3 0 0
+21 Caldwell "Precinct 408" 0 10 3 0 0
+21 Caldwell "Precinct 409" 0 10 16 0 0
+21 Caldwell "Precinct 412" 0 103 57 0 0
+21 Duval "Precinct 1" 0 826 270 0 0
+21 Duval "Precinct 2" 0 614 169 0 0
+21 Duval "Precinct 3" 0 210 56 0 0
+21 Duval "Precinct 4" 0 53 38 0 0
+21 Duval "Precinct 5" 0 162 77 0 0
+21 Duval "Precinct 6" 0 64 18 0 0
+21 Duval "Precinct 7" 0 39 49 0 0
+21 Duval "Precinct 8" 0 686 500 0 0
+21 Duval "Precinct 9" 0 430 146 0 0
+21 Guadalupe 102 0 243 531 0 0
+21 Guadalupe 103 0 165 344 0 0
+21 Guadalupe 104 0 322 315 0 0
+21 Guadalupe 105 0 553 1557 0 0
+21 Guadalupe 106 0 900 1471 0 0
+21 Guadalupe 107 0 187 702 0 0
+21 Guadalupe 108 0 201 355 0 0
+21 Guadalupe 109 0 100 318 0 0
+21 Guadalupe 110 0 84 95 0 0
+21 Guadalupe 111 0 51 47 0 0
+21 Guadalupe 115 0 43 197 0 0
+21 Guadalupe 119 0 385 1033 0 0
+21 Guadalupe 120 0 243 675 0 0
+21 Guadalupe 123 0 6 3 0 0
+21 Guadalupe 126 0 3 11 0 0
+21 Guadalupe 127 0 3 9 0 0
+21 Guadalupe 201 0 139 164 0 0
+21 Guadalupe 202 0 428 198 0 0
+21 Guadalupe 203 0 179 103 0 0
+21 Guadalupe 204 0 500 403 0 0
+21 Guadalupe 205 0 263 662 0 0
+21 Guadalupe 206 0 862 556 0 0
+21 Guadalupe 207 0 370 214 0 0
+21 Guadalupe 209 0 274 125 0 0
+21 Guadalupe 210 0 268 279 0 0
+21 Guadalupe 211 0 43 48 0 0
+21 Guadalupe 212 0 61 35 0 0
+21 Guadalupe 214 0 145 356 0 0
+21 Guadalupe 216 0 11 42 0 0
+21 Guadalupe 218 0 25 20 0 0
+21 Guadalupe 219 0 28 37 0 0
+21 Guadalupe 220 0 30 22 0 0
+21 Guadalupe 221 0 5 13 0 0
+21 Guadalupe 222 0 2 0 0 0
+21 Guadalupe 223 0 95 85 0 0
+21 Guadalupe 224 0 65 19 0 0
+21 Guadalupe 225 0 9 4 0 0
+21 Guadalupe 226 0 79 137 0 0
+21 Guadalupe 406 0 294 1254 0 0
+21 Guadalupe 407 0 302 1064 0 0
+21 Hays 110 0 870 638 0 0
+21 Hays 111 0 165 54 0 0
+21 Hays 112 0 1079 343 0 0
+21 Hays 113 0 549 200 0 0
+21 Hays 114 0 761 307 0 0
+21 Hays 115 0 964 364 0 0
+21 Hays 120 0 521 338 0 0
+21 Hays 121 0 1084 214 0 0
+21 Hays 122 0 523 127 0 0
+21 Hays 123 0 544 164 0 0
+21 Hays 125 0 1369 815 0 0
+21 Hays 126 0 1215 935 0 0
+21 Hays 127 0 400 308 0 0
+21 Hays 128 0 1098 789 0 0
+21 Hays 229 0 777 439 0 0
+21 Hays 234 0 433 322 0 0
+21 Hays 301 0 0 0 0 0
+21 Hays 316 0 698 532 0 0
+21 Hays 317 0 243 59 0 0
+21 Hays 414 0 716 235 0 0
+21 Hays 416 0 66 33 0 0
+21 Hays 417 0 932 883 0 0
+21 Hays "Lim Bal Caldwell" 0 8 5 0 0
+21 Hays "Lim Bal Guadalupe" 0 37 10 0 0
+21 Hays "Lim Bal Travis" 0 50 27 0 0
+21 "Jim Hogg" "Precinct 1" 0 0 0 0 497
+21 "Jim Hogg" "Precinct 2" 0 0 0 0 498
+21 "Jim Hogg" "Precinct 3" 0 0 0 0 432
+21 "Jim Hogg" "Precinct 4" 0 0 0 0 455
+21 "Jim Hogg" "Precinct 5" 0 0 0 0 10
+21 Karnes "Precinct 1 - BS69" 0 0 0 0 183
+21 Karnes "Precinct 1 - BS70" 0 0 0 0 243
+21 Karnes "Precinct 1 - BS71" 0 0 0 0 59
+21 Karnes "Precinct 1 - BS72" 0 0 0 0 0
+21 Karnes "Precinct 1 - BS73" 0 0 0 0 94
+21 Karnes "Precinct 1 - BS74" 0 0 0 0 280
+21 Karnes "Precinct 10 - BS15" 0 0 0 0 210
+21 Karnes "Precinct 10 - BS42" 0 0 0 0 0
+21 Karnes "Precinct 10 - BS45" 0 0 0 0 32
+21 Karnes "Precinct 11 - BS55" 0 0 0 0 98
+21 Karnes "Precinct 11 - BS59" 0 0 0 0 96
+21 Karnes "Precinct 11 - BS60" 0 0 0 0 56
+21 Karnes "Precinct 11 - BS62" 0 0 0 0 0
+21 Karnes "Precinct 11 - BS63" 0 0 0 0 166
+21 Karnes "Precinct 12 - BS15" 0 0 0 0 41
+21 Karnes "Precinct 12 - BS43" 0 0 0 0 1
+21 Karnes "Precinct 12 - BS44" 0 0 0 0 214
+21 Karnes "Precinct 12 - BS45" 0 0 0 0 101
+21 Karnes "Precinct 12 - BS46" 0 0 0 0 101
+21 Karnes "Precinct 12 - BS47" 0 0 0 0 2
+21 Karnes "Precinct 13 - BS45" 0 0 0 0 29
+21 Karnes "Precinct 14 - BS48" 0 0 0 0 104
+21 Karnes "Precinct 14 - BS49" 0 0 0 0 56
+21 Karnes "Precinct 14 - BS50" 0 0 0 0 44
+21 Karnes "Precinct 14 - BS51" 0 0 0 0 144
+21 Karnes "Precinct 14 - BS52" 0 0 0 0 28
+21 Karnes "Precinct 14 - BS53" 0 0 0 0 41
+21 Karnes "Precinct 14 - BS54" 0 0 0 0 109
+21 Karnes "Precinct 15 - BS66" 0 0 0 0 5
+21 Karnes "Precinct 15 - BS67" 0 0 0 0 67
+21 Karnes "Precinct 2 - BS15" 0 0 0 0 2
+21 Karnes "Precinct 2 - BS42" 0 0 0 0 66
+21 Karnes "Precinct 2 - BS47" 0 0 0 0 62
+21 Karnes "Precinct 3 - BS41" 0 0 0 0 106
+21 Karnes "Precinct 3 - BS68" 0 0 0 0 6
+21 Karnes "Precinct 4 - BS55" 0 0 0 0 217
+21 Karnes "Precinct 4 - BS56" 0 0 0 0 168
+21 Karnes "Precinct 4 - BS57" 0 0 0 0 0
+21 Karnes "Precinct 4 - BS58" 0 0 0 0 0
+21 Karnes "Precinct 4 - BS59" 0 0 0 0 51
+21 Karnes "Precinct 4 - BS60" 0 0 0 0 183
+21 Karnes "Precinct 4 - BS64" 0 0 0 0 11
+21 Karnes "Precinct 4 - BS65" 0 0 0 0 62
+21 Karnes "Precinct 5 - BS48" 0 0 0 0 457
+21 Karnes "Precinct 6 - BS15" 0 0 0 0 205
+21 Karnes "Precinct 6 - BS42" 0 0 0 0 7
+21 Karnes "Precinct 7 - BS15" 0 0 0 0 491
+21 Karnes "Precinct 7 - BS45" 0 0 0 0 2
+21 Karnes "Precinct 7 - BS47" 0 0 0 0 6
+21 Karnes "Precinct 8 - BS41" 0 0 0 0 132
+21 Karnes "Precinct 8 - BS66" 0 0 0 0 6
+21 Karnes "Precinct 9 - BS55" 0 0 0 0 37
+21 Karnes "Precinct 9 - BS61" 0 0 0 0 137
+21 "La Salle" 1 0 408 294 0 0
+21 "La Salle" 2 0 176 102 0 0
+21 "La Salle" 3 0 317 154 0 0
+21 "La Salle" 4 0 16 39 0 0
+21 "La Salle" 5 0 266 174 0 0
+21 "La Salle" 6 0 145 92 0 0
+21 "Live Oak" "PCT. 1 ARGENTA" 0 70 277 0 0
+21 "Live Oak" "PCT. 10 WEST THREE RIVERS" 0 90 246 0 0
+21 "Live Oak" "PCT. 11 SIMMONS" 0 9 57 0 0
+21 "Live Oak" "PCT. 12 ANNA ROSE" 0 20 100 0 0
+21 "Live Oak" "PCT. 13 SWINNEY SWITCH" 0 64 317 0 0
+21 "Live Oak" "PCT. 14 SOUTH WEST GEO. W" 0 161 548 0 0
+21 "Live Oak" "PCT. 2 LARGATO" 0 128 542 0 0
+21 "Live Oak" "PCT. 3 EAST GEORGE WEST" 0 198 272 0 0
+21 "Live Oak" "PCT. 4 WEST GEORGE WEST" 0 149 512 0 0
+21 "Live Oak" "PCT. 5 OAKVILLE" 0 35 214 0 0
+21 "Live Oak" "PCT. 6 RAY POINT" 0 48 117 0 0
+21 "Live Oak" "PCT. 7 NELL" 0 6 14 0 0
+21 "Live Oak" "PCT. 8 WHITSETT" 0 19 85 0 0
+21 "Live Oak" "PCT. 9 EAST THREE RIVERS" 0 228 370 0 0
+21 McMullen "Precinct 1" 0 18 79 0 0
+21 McMullen "Precinct 2A & 2B" 0 28 109 0 0
+21 McMullen "Precinct 3" 0 28 98 0 0
+21 McMullen "Precinct 4A & 4B" 0 32 97 0 0
+21 "San Patricio" PCT 0 9773 15160 0 0
+21 Starr "Precinct 1" 0 975 412 0 0
+21 Starr "Precinct 10" 0 2108 1005 0 0
+21 Starr "Precinct 2" 0 1401 612 0 0
+21 Starr "Precinct 3" 0 629 233 0 0
+21 Starr "Precinct 4" 0 210 137 0 0
+21 Starr "Precinct 5" 0 40 22 0 0
+21 Starr "Precinct 6" 0 2528 845 0 0
+21 Starr "Precinct 7" 0 307 97 0 0
+21 Starr "Precinct 8" 0 970 417 0 0
+21 Starr "Precinct 9" 0 1166 609 0 0
+21 Webb "PCT 122" 0 224 77 0 0
+21 Webb "PCT 124" 0 698 168 0 0
+21 Webb "PCT 125" 0 386 80 0 0
+21 Webb "PCT 128" 0 223 48 0 0
+21 Webb "PCT 129" 0 910 195 0 0
+21 Webb "PCT 130" 0 1561 311 0 0
+21 Webb "PCT 132" 0 1456 411 0 0
+21 Webb "PCT 133" 0 1508 374 0 0
+21 Webb "PCT 134" 0 642 160 0 0
+21 Webb "PCT 135" 0 404 103 0 0
+21 Webb "PCT 136" 0 163 59 0 0
+21 Webb "PCT 154" 0 483 129 0 0
+21 Webb "PCT 164" 0 372 105 0 0
+21 Webb "PCT 169" 0 465 141 0 0
+21 Webb "PCT 215" 0 526 171 0 0
+21 Webb "PCT 218" 0 795 244 0 0
+21 Webb "PCT 219" 0 602 214 0 0
+21 Webb "PCT 220" 0 466 120 0 0
+21 Webb "PCT 221" 0 441 170 0 0
+21 Webb "PCT 226" 0 463 123 0 0
+21 Webb "PCT 227" 0 1955 586 0 0
+21 Webb "PCT 231" 0 1572 466 0 0
+21 Webb "PCT 237" 0 289 76 0 0
+21 Webb "PCT 239" 0 2182 929 0 0
+21 Webb "PCT 252" 0 1249 358 0 0
+21 Webb "PCT 255" 0 980 435 0 0
+21 Webb "PCT 266" 0 540 148 0 0
+21 Webb "PCT 267" 0 723 252 0 0
+21 Webb "PCT 268" 0 116 50 0 0
+21 Webb "PCT 308" 0 381 148 0 0
+21 Webb "PCT 309" 0 1306 396 0 0
+21 Webb "PCT 310" 0 187 54 0 0
+21 Webb "PCT 311" 0 646 169 0 0
+21 Webb "PCT 312" 0 418 108 0 0
+21 Webb "PCT 338" 0 85 18 0 0
+21 Webb "PCT 340" 0 959 537 0 0
+21 Webb "PCT 341" 0 619 363 0 0
+21 Webb "PCT 342" 0 934 406 0 0
+21 Webb "PCT 343" 0 1158 463 0 0
+21 Webb "PCT 344" 0 2372 1191 0 0
+21 Webb "PCT 345" 0 1040 450 0 0
+21 Webb "PCT 349" 0 1171 723 0 0
+21 Webb "PCT 350" 0 12 23 0 0
+21 Webb "PCT 351" 0 199 48 0 0
+21 Webb "PCT 356" 0 2071 1130 0 0
+21 Webb "PCT 359" 0 1715 743 0 0
+21 Webb "PCT 360" 0 198 71 0 0
+21 Webb "PCT 361" 0 599 184 0 0
+21 Webb "PCT 362" 0 141 40 0 0
+21 Webb "PCT 363" 0 332 106 0 0
+21 Webb "PCT 401" 0 523 115 0 0
+21 Webb "PCT 402" 0 574 136 0 0
+21 Webb "PCT 403" 0 462 89 0 0
+21 Webb "PCT 404" 0 643 132 0 0
+21 Webb "PCT 405" 0 650 169 0 0
+21 Webb "PCT 406" 0 328 71 0 0
+21 Webb "PCT 407" 0 177 63 0 0
+21 Webb "PCT 413" 0 704 176 0 0
+21 Webb "PCT 414" 0 346 85 0 0
+21 Webb "PCT 416" 0 349 78 0 0
+21 Webb "PCT 417" 0 195 77 0 0
+21 Webb "PCT 423" 0 341 74 0 0
+21 Webb "PCT 446" 0 1384 501 0 0
+21 Webb "PCT 447" 0 1178 628 0 0
+21 Webb "PCT 448" 0 122 82 0 0
+21 Webb "PCT 453" 0 171 44 0 0
+21 Webb "PCT 457" 0 25 23 0 0
+21 Webb "PCT 458" 0 1494 554 0 0
+21 Webb "PCT 465" 0 281 77 0 0
+21 Wilson "Box 101" 0 684 1020 0 0
+21 Wilson "Box 102" 0 800 544 0 0
+21 Wilson "Box 103" 0 542 775 0 0
+21 Wilson "Box 104" 0 259 512 0 0
+21 Wilson "Box 205" 0 447 893 0 0
+21 Wilson "Box 206" 0 786 859 0 0
+21 Wilson "Box 207" 0 564 1057 0 0
+21 Wilson "Box 208" 0 113 342 0 0
+21 Wilson "Box 209" 0 72 297 0 0
+21 Wilson "Box 310" 0 114 455 0 0
+21 Wilson "Box 311" 0 268 1318 0 0
+21 Wilson "Box 312" 0 399 1629 0 0
+21 Wilson "Box 313" 0 544 1853 0 0
+21 Wilson "Box 414" 0 387 1303 0 0
+21 Wilson "Box 415" 0 704 2593 0 0
+21 Wilson "Box 416" 0 709 1571 0 0
+22 Bosque "Precinct 1" 0 61 486 0 0
+22 Bosque "Precinct 10" 0 178 872 0 0
+22 Bosque "Precinct 11" 0 80 567 0 0
+22 Bosque "Precinct 2" 0 107 495 0 0
+22 Bosque "Precinct 3" 0 112 674 0 0
+22 Bosque "Precinct 4" 0 53 338 0 0
+22 Bosque "Precinct 5" 0 223 992 0 0
+22 Bosque "Precinct 6" 0 149 787 0 0
+22 Bosque "Precinct 7" 0 76 452 0 0
+22 Bosque "Precinct 8" 0 288 1338 0 0
+22 Bosque "Precinct 9" 0 102 533 0 0
+22 Falls 101 0 159 176 0 0
+22 Falls 104 0 65 447 0 0
+22 Falls 105 0 201 321 0 0
+22 Falls 201 0 67 335 0 0
+22 Falls 203 0 251 35 0 0
+22 Falls 204 0 327 124 0 0
+22 Falls 301 0 51 357 0 0
+22 Falls 302 0 56 132 0 0
+22 Falls 303 0 30 416 0 0
+22 Falls 304 0 171 463 0 0
+22 Falls 403 0 183 535 0 0
+22 Falls 404 0 103 462 0 0
+22 Falls 405 0 123 357 0 0
+22 Hill "10 ITASCA" 0 120 659 0 0
+22 Hill "10 ITASCA - GISD" 0 1 13 0 0
+22 Hill "10 ITASCA - ICITY" 0 164 284 0 0
+22 Hill "12 N. WHITNEY" 0 4 24 0 0
+22 Hill "12 N. WHITNEY - WISD" 0 58 491 0 0
+22 Hill "13 S. WHITNEY" 0 1 5 0 0
+22 Hill "13 S. WHITNEY - AISD" 0 14 94 0 0
+22 Hill "13 S. WHITNEY - WISD" 0 224 1449 0 0
+22 Hill "14 AQUILLA" 0 14 157 0 0
+22 Hill "14 AQUILLA - ACITY-AISD" 0 12 148 0 0
+22 Hill "14 AQUILLA - AISD" 0 51 419 0 0
+22 Hill "15 PENELOPE" 0 34 250 0 0
+22 Hill "16 MALONE" 0 35 188 0 0
+22 Hill "18 MERTENS" 0 3 45 0 0
+22 Hill "18 MERTENS - FISD" 0 3 26 0 0
+22 Hill "18 MERTENS - MCITY-FISD" 0 1 52 0 0
+22 Hill "19 COVINGTON" 0 47 232 0 0
+22 Hill "19 COVINGTON - GISD" 0 0 3 0 0
+22 Hill "2 HILLSBORO" 0 160 487 0 0
+22 Hill "20 BLUM" 0 63 561 0 0
+22 Hill "20 BLUM - BCITY" 0 26 103 0 0
+22 Hill "21 FT. GRAHAM" 0 2 15 0 0
+22 Hill "21 FT. GRAHAM - WISD" 0 174 1065 0 0
+22 Hill "22 MCCOWN VALLEY" 0 3 4 0 0
+22 Hill "22 MCCOWN VALLEY - WISD" 0 165 945 0 0
+22 Hill "23 MT. CALM" 0 38 171 0 0
+22 Hill "23 MT. CALM - MCCITY" 0 24 89 0 0
+22 Hill "24 HUBBARD" 0 37 220 0 0
+22 Hill "24 HUBBARD - HCITY" 0 110 376 0 0
+22 Hill "27 WOODROW" 0 64 495 0 0
+22 Hill "3 HILLSBORO" 0 368 375 0 0
+22 Hill "4 HILLSBORO" 0 301 1160 0 0
+22 Hill "5 WOODBURY" 0 39 310 0 0
+22 Hill "5 WOODBURY - WISD" 0 4 41 0 0
+22 Hill "6 PEORIA" 0 45 249 0 0
+22 Hill "7 ABBOTT" 0 58 343 0 0
+22 Hill "8 BYNUM" 0 18 114 0 0
+22 Hill "8 BYNUM - BCITY" 0 15 84 0 0
+22 Hill "9 BRANDON" 0 79 269 0 0
+22 Hill "9 BRANDON - FISD" 0 0 5 0 0
+22 Hood "Precinct 1" 0 182 689 0 0
+22 Hood "Precinct 10" 0 570 3355 0 0
+22 Hood "Precinct 11" 0 246 1132 0 0
+22 Hood "Precinct 12" 0 217 955 0 0
+22 Hood "Precinct 13" 0 448 2316 0 0
+22 Hood "Precinct 14" 0 430 2110 0 0
+22 Hood "Precinct 15" 0 57 278 0 0
+22 Hood "Precinct 16" 0 726 4046 0 0
+22 Hood "Precinct 2" 0 493 2012 0 0
+22 Hood "Precinct 3" 0 377 1744 0 0
+22 Hood "Precinct 4" 0 324 1306 0 0
+22 Hood "Precinct 5" 0 135 832 0 0
+22 Hood "Precinct 6" 0 76 666 0 0
+22 Hood "Precinct 7" 0 67 620 0 0
+22 Hood "Precinct 8" 0 360 1867 0 0
+22 Hood "Precinct 9" 0 501 2857 0 0
+22 Johnson "Pct 1" 0 133 802 0 0
+22 Johnson "Pct 10" 0 562 1939 0 0
+22 Johnson "Pct 11" 0 489 2250 0 0
+22 Johnson "Pct 12" 0 370 1748 0 0
+22 Johnson "Pct 13" 0 244 1152 0 0
+22 Johnson "Pct 14" 0 38 309 0 0
+22 Johnson "Pct 15" 0 177 973 0 0
+22 Johnson "Pct 16" 0 75 331 0 0
+22 Johnson "Pct 17" 0 514 1565 0 0
+22 Johnson "Pct 18" 0 587 1944 0 0
+22 Johnson "Pct 19" 0 858 3464 0 0
+22 Johnson "Pct 2" 0 707 3011 0 0
+22 Johnson "Pct 20" 0 280 447 0 0
+22 Johnson "Pct 21" 0 166 999 0 0
+22 Johnson "Pct 22" 0 668 1899 0 0
+22 Johnson "Pct 23" 0 228 1517 0 0
+22 Johnson "Pct 24" 0 163 855 0 0
+22 Johnson "Pct 25" 0 223 706 0 0
+22 Johnson "Pct 26" 0 145 1007 0 0
+22 Johnson "Pct 27" 0 212 1550 0 0
+22 Johnson "Pct 28" 0 248 1174 0 0
+22 Johnson "Pct 29" 0 142 731 0 0
+22 Johnson "Pct 3" 0 733 2501 0 0
+22 Johnson "Pct 30" 0 126 1025 0 0
+22 Johnson "Pct 31" 0 168 870 0 0
+22 Johnson "Pct 32" 0 493 1862 0 0
+22 Johnson "Pct 33" 0 135 772 0 0
+22 Johnson "Pct 34" 0 362 1156 0 0
+22 Johnson "Pct 35" 0 554 2463 0 0
+22 Johnson "Pct 36" 0 186 434 0 0
+22 Johnson "Pct 4" 0 1071 3243 0 0
+22 Johnson "Pct 5" 0 647 2394 0 0
+22 Johnson "Pct 6" 0 66 340 0 0
+22 Johnson "Pct 7" 0 1012 3746 0 0
+22 Johnson "Pct 8" 0 2104 3335 0 0
+22 Johnson "Pct 9" 0 93 697 0 0
+22 Navarro 101 0 439 771 0 0
+22 Navarro 103 0 295 986 0 0
+22 Navarro 104 0 94 391 0 0
+22 Navarro 105 0 20 178 0 0
+22 Navarro 106 0 73 270 0 0
+22 Navarro 107 0 219 519 0 0
+22 Navarro 108 0 66 259 0 0
+22 Navarro 109 0 46 232 0 0
+22 Navarro 200 0 287 157 0 0
+22 Navarro 201 0 340 48 0 0
+22 Navarro 202 0 274 130 0 0
+22 Navarro 203 0 382 1061 0 0
+22 Navarro 204 0 62 156 0 0
+22 Navarro 205 0 162 906 0 0
+22 Navarro 206 0 61 385 0 0
+22 Navarro 300 0 518 799 0 0
+22 Navarro 301 0 75 138 0 0
+22 Navarro 303 0 162 650 0 0
+22 Navarro 304 0 62 469 0 0
+22 Navarro 305 0 77 277 0 0
+22 Navarro 306 0 34 183 0 0
+22 Navarro 307 0 50 275 0 0
+22 Navarro 308 0 43 253 0 0
+22 Navarro 400 0 274 891 0 0
+22 Navarro 401 0 127 184 0 0
+22 Navarro 402 0 264 1073 0 0
+22 Navarro 403 0 115 965 0 0
+22 Navarro 404 0 150 623 0 0
+22 Navarro 405 0 58 548 0 0
+22 Navarro 406 0 18 192 0 0
+22 Somervell "Precinct 1" 0 139 850 0 0
+22 Somervell "Precinct 2" 0 206 1243 0 0
+22 Somervell "Precinct 3" 0 186 1076 0 0
+22 Somervell "Precinct 4" 0 152 1016 0 0
+22 Tarrant "2031 - 093" 0 2485 1132 0 0
+22 Tarrant "2031 - L05" 0 0 0 0 0
+22 Tarrant "2031 - L06" 0 0 0 0 0
+22 Tarrant "2031 - L11" 0 0 0 0 0
+22 Tarrant "2267 - 112" 0 906 419 0 0
+22 Tarrant "2267 - L05" 0 0 0 0 0
+22 Tarrant "2267 - L06" 0 0 0 0 0
+22 Tarrant "2268 - 112" 0 504 406 0 0
+22 Tarrant "2268 - L05" 0 0 0 0 0
+22 Tarrant "2268 - L06" 0 0 0 0 0
+22 Tarrant "2275 - 113" 0 385 289 0 0
+22 Tarrant "2275 - L05" 0 0 0 0 0
+22 Tarrant "2275 - L06" 0 0 0 0 0
+22 Tarrant "2275 - L17" 0 0 0 0 0
+22 Tarrant "2299 - 113" 0 484 256 0 0
+22 Tarrant "2299 - 114" 0 392 182 0 0
+22 Tarrant "2299 - L05" 0 0 0 0 0
+22 Tarrant "2299 - L06" 0 0 0 0 0
+22 Tarrant "2299 - L09" 0 0 0 0 0
+22 Tarrant "2299 - L11" 0 0 0 0 0
+22 Tarrant "2299 - L17" 0 0 0 0 0
+22 Tarrant "2302 - 115" 0 769 215 0 0
+22 Tarrant "2302 - L05" 0 0 0 0 0
+22 Tarrant "2302 - L06" 0 0 0 0 0
+22 Tarrant "2314 - L11" 0 0 0 0 0
+22 Tarrant "2320 - 115" 0 789 423 0 0
+22 Tarrant "2320 - L05" 0 0 0 0 0
+22 Tarrant "2320 - L06" 0 0 0 0 0
+22 Tarrant "2341 - 120" 0 234 79 0 0
+22 Tarrant "2341 - L05" 0 0 0 0 0
+22 Tarrant "2341 - L06" 0 0 0 0 0
+22 Tarrant "2341 - L11" 0 0 0 0 0
+22 Tarrant "2349 - 113" 0 775 503 0 0
+22 Tarrant "2349 - L05" 0 0 0 0 0
+22 Tarrant "2349 - L06" 0 0 0 0 0
+22 Tarrant "2349 - L17" 0 0 0 0 0
+22 Tarrant "2353 - 115" 0 541 299 0 0
+22 Tarrant "2353 - L05" 0 0 0 0 0
+22 Tarrant "2353 - L06" 0 0 0 0 0
+22 Tarrant "2354 - 115" 0 909 552 0 0
+22 Tarrant "2354 - L05" 0 0 0 0 0
+22 Tarrant "2354 - L06" 0 0 0 0 0
+22 Tarrant "2379 - 113" 0 40 41 0 0
+22 Tarrant "2379 - 114" 0 1747 765 0 0
+22 Tarrant "2379 - L05" 0 0 0 0 0
+22 Tarrant "2379 - L06" 0 0 0 0 0
+22 Tarrant "2379 - L09" 0 0 0 0 0
+22 Tarrant "2379 - L11" 0 0 0 0 0
+22 Tarrant "2379 - L17" 0 0 0 0 0
+22 Tarrant "2383 - 093" 0 7 3 0 0
+22 Tarrant "2383 - 115" 0 1008 554 0 0
+22 Tarrant "2383 - L05" 0 0 0 0 0
+22 Tarrant "2383 - L06" 0 0 0 0 0
+22 Tarrant "2383 - L11" 0 0 0 0 0
+22 Tarrant "2438 - 113" 0 1239 544 0 0
+22 Tarrant "2438 - 115" 0 0 0 0 0
+22 Tarrant "2438 - L05" 0 0 0 0 0
+22 Tarrant "2438 - L06" 0 0 0 0 0
+22 Tarrant "2438 - L17" 0 0 0 0 0
+22 Tarrant "2448 - 115" 0 1299 701 0 0
+22 Tarrant "2448 - L05" 0 0 0 0 0
+22 Tarrant "2448 - L06" 0 0 1 0 0
+22 Tarrant "2449 - 093" 0 1 0 0 0
+22 Tarrant "2449 - 115" 0 974 517 0 0
+22 Tarrant "2449 - L05" 0 0 0 0 0
+22 Tarrant "2449 - L06" 0 0 0 0 0
+22 Tarrant "2449 - L11" 0 0 0 0 0
+22 Tarrant "2450 - 115" 0 1109 608 0 0
+22 Tarrant "2450 - L05" 0 0 0 0 0
+22 Tarrant "2450 - L06" 0 0 0 0 0
+22 Tarrant "2453 - 114" 0 1246 572 0 0
+22 Tarrant "2453 - L05" 0 0 0 0 0
+22 Tarrant "2453 - L06" 0 0 0 0 0
+22 Tarrant "2453 - L09" 0 0 0 0 0
+22 Tarrant "2453 - L11" 0 0 0 0 0
+22 Tarrant "2453 - L17" 0 0 0 0 0
+22 Tarrant "2466 - 113" 0 556 271 0 0
+22 Tarrant "2466 - L05" 0 0 0 0 0
+22 Tarrant "2466 - L06" 0 0 0 0 0
+22 Tarrant "2466 - L17" 0 0 0 0 0
+22 Tarrant "2488 - 113" 0 1055 626 0 0
+22 Tarrant "2488 - 114" 0 64 22 0 0
+22 Tarrant "2488 - L05" 0 0 0 0 0
+22 Tarrant "2488 - L06" 0 0 0 0 0
+22 Tarrant "2488 - L09" 0 0 0 0 0
+22 Tarrant "2488 - L11" 0 0 0 0 0
+22 Tarrant "2488 - L17" 0 0 0 0 0
+22 Tarrant "2523 - 115" 0 714 380 0 0
+22 Tarrant "2523 - L05" 0 0 0 0 0
+22 Tarrant "2523 - L06" 0 0 0 0 0
+22 Tarrant "2541 - 115" 0 1080 536 0 0
+22 Tarrant "2541 - L05" 0 0 0 0 0
+22 Tarrant "2541 - L06" 0 0 0 0 0
+22 Tarrant "2553 - 132" 0 451 257 0 0
+22 Tarrant "2553 - 133" 0 177 101 0 0
+22 Tarrant "2553 - L05" 0 0 0 0 0
+22 Tarrant "2553 - L06" 0 0 0 0 0
+22 Tarrant "2553 - L11" 0 0 0 0 0
+22 Tarrant "2613 - 093" 0 1082 394 0 0
+22 Tarrant "2613 - L05" 0 0 0 0 0
+22 Tarrant "2613 - L06" 0 0 0 0 0
+22 Tarrant "2613 - L09" 0 0 0 0 0
+22 Tarrant "2613 - L13" 0 0 0 0 0
+22 Tarrant "2614 - 139" 0 158 94 0 0
+22 Tarrant "2614 - L05" 0 0 0 0 0
+22 Tarrant "2614 - L06" 0 0 0 0 0
+22 Tarrant "2614 - L09" 0 0 0 0 0
+22 Tarrant "2614 - L11" 0 0 0 0 0
+22 Tarrant "2614 - L17" 0 0 0 0 0
+22 Tarrant "2635 - 093" 0 196 79 0 0
+22 Tarrant "2635 - 115" 0 662 303 0 0
+22 Tarrant "2635 - L05" 0 0 0 0 0
+22 Tarrant "2635 - L06" 0 0 0 0 0
+22 Tarrant "2635 - L11" 0 0 0 0 0
+22 Tarrant "2644 - 114" 0 1799 793 0 0
+22 Tarrant "2644 - 142" 0 0 0 0 0
+22 Tarrant "2644 - L05" 0 0 0 0 0
+22 Tarrant "2644 - L06" 0 0 0 0 0
+22 Tarrant "2644 - L09" 0 0 0 0 0
+22 Tarrant "2644 - L11" 0 0 0 0 0
+22 Tarrant "2644 - L17" 0 0 0 0 0
+22 Tarrant "2699 - 114" 0 1762 1000 0 0
+22 Tarrant "2699 - L05" 0 0 0 0 0
+22 Tarrant "2699 - L06" 0 0 0 0 0
+22 Tarrant "2699 - L09" 0 0 0 0 0
+22 Tarrant "2699 - L11" 0 0 0 0 0
+22 Tarrant "2699 - L17" 0 0 0 0 0
+22 Tarrant "2726 - 093" 0 150 84 0 0
+22 Tarrant "2726 - 115" 0 875 516 0 0
+22 Tarrant "2726 - L05" 0 0 0 0 0
+22 Tarrant "2726 - L06" 0 0 1 0 0
+22 Tarrant "2726 - L11" 0 0 0 0 0
+24 Bandera 101 0 253 1113 0 0
+24 Bandera 102 0 363 1673 0 0
+24 Bandera 203 0 368 1320 0 0
+24 Bandera 204 0 286 971 0 0
+24 Bandera 305 0 180 1060 0 0
+24 Bandera "305 CITY" 0 98 368 0 0
+24 Bandera "305 MISD" 0 29 102 0 0
+24 Bandera "306 MISD" 0 131 951 0 0
+24 Bandera 407 0 257 1255 0 0
+24 Bandera "407 FLYING L" 0 41 237 0 0
+24 Bandera "407 MISD" 0 1 7 0 0
+24 Bandera 408 0 34 87 0 0
+24 Bandera "408 MISD" 0 18 47 0 0
+24 Bandera "408 UISD" 0 14 36 0 0
+24 Bandera 409 0 133 430 0 0
+24 Bandera "410 UISD" 0 64 338 0 0
+24 Blanco "Precinct 102" 0 411 1385 0 0
+24 Blanco "Precinct 201" 0 443 1360 0 0
+24 Blanco "Precinct 302" 0 285 697 0 0
+24 Blanco "Precinct 303" 0 99 390 0 0
+24 Blanco "Precinct 304" 0 68 168 0 0
+24 Blanco "Precinct 401" 0 492 1524 0 0
+24 Brown "Precinct 101" 0 44 454 0 0
+24 Brown "Precinct 101 - BCWID" 0 185 913 0 0
+24 Brown "Precinct 101 - BISD" 0 13 75 0 0
+24 Brown "Precinct 101 - BISD BCWID" 0 5 19 0 0
+24 Brown "Precinct 105" 0 24 154 0 0
+24 Brown "Precinct 105 - BCWID" 0 138 812 0 0
+24 Brown "Precinct 105 - EISD" 0 0 7 0 0
+24 Brown "Precinct 105 - EISD BCWID" 0 0 21 0 0
+24 Brown "Precinct 109" 0 12 211 0 0
+24 Brown "Precinct 113" 0 116 800 0 0
+24 Brown "Precinct 113 - BCWID" 0 67 287 0 0
+24 Brown "Precinct 202" 0 15 131 0 0
+24 Brown "Precinct 202 - BCWID" 0 114 487 0 0
+24 Brown "Precinct 204" 0 0 8 0 0
+24 Brown "Precinct 204 - BCWID" 0 184 541 0 0
+24 Brown "Precinct 212" 0 48 549 0 0
+24 Brown "Precinct 212 - BISD" 0 0 6 0 0
+24 Brown "Precinct 214" 0 47 488 0 0
+24 Brown "Precinct 214 - EISD" 0 1 7 0 0
+24 Brown "Precinct 215" 0 0 4 0 0
+24 Brown "Precinct 215 - BISD" 0 11 188 0 0
+24 Brown "Precinct 303" 0 1 2 0 0
+24 Brown "Precinct 303 - BCWID" 0 131 643 0 0
+24 Brown "Precinct 306" 0 1 21 0 0
+24 Brown "Precinct 306 - BCWID" 0 2 17 0 0
+24 Brown "Precinct 306 - EISD" 0 42 524 0 0
+24 Brown "Precinct 306 - EISD BCWID" 0 91 638 0 0
+24 Brown "Precinct 307" 0 48 476 0 0
+24 Brown "Precinct 308" 0 34 409 0 0
+24 Brown "Precinct 308 - EISD" 0 1 12 0 0
+24 Brown "Precinct 316" 0 13 158 0 0
+24 Brown "Precinct 316 - EISD" 0 3 27 0 0
+24 Brown "Precinct 318" 0 1 20 0 0
+24 Brown "Precinct 318 - BCWID" 0 3 6 0 0
+24 Brown "Precinct 318 - EISD" 0 49 489 0 0
+24 Brown "Precinct 318 - EISD BCWID" 0 86 556 0 0
+24 Brown "Precinct 410" 0 6 35 0 0
+24 Brown "Precinct 410 - BISD" 0 83 932 0 0
+24 Brown "Precinct 410 - BISD BCWID" 0 1 9 0 0
+24 Brown "Precinct 410 - COB BISD" 0 87 543 0 0
+24 Brown "Precinct 411" 0 0 3 0 0
+24 Brown "Precinct 411 - BCWID" 0 124 563 0 0
+24 Brown "Precinct 417" 0 51 415 0 0
+24 Brown "Precinct 417 - BISD" 0 93 882 0 0
+24 Burnet 1 0 161 943 0 0
+24 Burnet 10 0 222 992 0 0
+24 Burnet 11 0 35 317 0 0
+24 Burnet 12 0 262 1070 0 0
+24 Burnet 13 0 177 640 0 0
+24 Burnet 14 0 62 357 0 0
+24 Burnet 15 0 118 535 0 0
+24 Burnet 16 0 69 345 0 0
+24 Burnet 17 0 230 1227 0 0
+24 Burnet 18 0 221 661 0 0
+24 Burnet 19 0 685 2329 0 0
+24 Burnet 2 0 486 1647 0 0
+24 Burnet 20 0 723 1874 0 0
+24 Burnet 3 0 231 604 0 0
+24 Burnet 4 0 464 1434 0 0
+24 Burnet 5 0 208 623 0 0
+24 Burnet 6 0 110 383 0 0
+24 Burnet 7 0 109 415 0 0
+24 Burnet 8 0 154 804 0 0
+24 Burnet 9 0 373 1691 0 0
+24 Callahan 1 0 67 825 0 0
+24 Callahan "1 - CLYDE CITY" 0 106 655 0 0
+24 Callahan 2 0 127 1093 0 0
+24 Callahan "2 - CLYDE CITY" 0 14 166 0 0
+24 Callahan 3 0 26 225 0 0
+24 Callahan "3 - BISD" 0 107 772 0 0
+24 Callahan "3 - CLYDE CITY" 0 32 321 0 0
+24 Callahan 4 0 39 576 0 0
+24 Callahan "4 - BISD" 0 4 79 0 0
+24 Callahan "4 - CROSS PL" 0 29 332 0 0
+24 Callahan 5 0 5 13 0 0
+24 Callahan "5 - BISD" 0 4 70 0 0
+24 Callahan 6 0 12 188 0 0
+24 Callahan "6 - BISD" 0 4 84 0 0
+24 Callahan "6 - CLYDE CITY" 0 44 245 0 0
+24 Callahan 7 0 40 315 0 0
+24 Callahan "7 - BISD" 0 0 6 0 0
+24 Coryell "101 BS2" 0 357 818 0 0
+24 Coryell "101 BS4" 0 16 120 0 0
+24 Coryell "101 BS5" 0 1067 1206 0 0
+24 Coryell "102 BS2" 0 55 376 0 0
+24 Coryell "102 BS4" 0 64 473 0 0
+24 Coryell "103 BS2" 0 25 221 0 0
+24 Coryell "104 BS2" 0 18 26 0 0
+24 Coryell "104 BS5" 0 1019 1698 0 0
+24 Coryell "205 BS3" 0 148 584 0 0
+24 Coryell "205 BS4" 0 66 592 0 0
+24 Coryell "205 BS6" 0 3 56 0 0
+24 Coryell "205 BS7" 0 20 101 0 0
+24 Coryell "206 BS2" 0 89 90 0 0
+24 Coryell "206 BS5" 0 261 369 0 0
+24 Coryell "206 BS8" 0 232 228 0 0
+24 Coryell "207 BS5" 0 975 1393 0 0
+24 Coryell "308 BS3" 0 293 1229 0 0
+24 Coryell "308 BS4" 0 125 1034 0 0
+24 Coryell "309 BS2" 0 1 31 0 0
+24 Coryell "309 BS4" 0 47 389 0 0
+24 Coryell "310 BS2" 0 20 122 0 0
+24 Coryell "310 BS4" 0 0 17 0 0
+24 Coryell "310 BS7" 0 72 349 0 0
+24 Coryell "311 BS8" 0 136 107 0 0
+24 Coryell "412 BS2" 0 75 281 0 0
+24 Coryell "412 BS5" 0 823 1057 0 0
+24 Coryell "413 BS2" 0 3 9 0 0
+24 Coryell "413 BS3" 0 176 639 0 0
+24 Coryell "413 BS4" 0 121 683 0 0
+24 Coryell "414 BS10" 0 0 8 0 0
+24 Coryell "414 BS2" 0 6 93 0 0
+24 Coryell "414 BS4" 0 14 153 0 0
+24 Coryell "414 BS9" 0 2 26 0 0
+24 Coryell "415 BS2" 0 21 125 0 0
+24 Coryell "415 BS4" 0 1 32 0 0
+24 Coryell "416 BS2" 0 7 49 0 0
+24 Coryell "416 BS5" 0 748 865 0 0
+24 Coryell LIM 0 20 81 0 0
+24 Gillespie 1 0 426 1474 0 0
+24 Gillespie 10 0 138 652 0 0
+24 Gillespie 12 0 285 1700 0 0
+24 Gillespie 13 0 216 1398 0 0
+24 Gillespie 15 0 127 532 0 0
+24 Gillespie 2 0 241 777 0 0
+24 Gillespie 3 0 196 624 0 0
+24 Gillespie 4 0 463 1596 0 0
+24 Gillespie 5 0 144 1231 0 0
+24 Gillespie 6 0 87 432 0 0
+24 Gillespie 7 0 387 1819 0 0
+24 Gillespie 8 0 39 225 0 0
+24 Gillespie 9 0 15 142 0 0
+24 Hamilton 1 0 95 605 0 0
+24 Hamilton 12 0 8 150 0 0
+24 Hamilton 14 0 15 128 0 0
+24 Hamilton 15 0 5 133 0 0
+24 Hamilton 17 0 16 120 0 0
+24 Hamilton 22 0 105 621 0 0
+24 Hamilton 23 0 99 608 0 0
+24 Hamilton 4 0 21 91 0 0
+24 Hamilton 5 0 17 94 0 0
+24 Hamilton 7 0 165 880 0 0
+24 Hamilton 9 0 22 127 0 0
+24 Kerr "101 - CKV" 0 3 10 0 0
+24 Kerr 101.0 0 408 1774 0 0
+24 Kerr "107 - SME" 0 2 9 0 0
+24 Kerr 107.0 0 120 619 0 0
+24 Kerr "109 - CKV" 0 15 30 0 0
+24 Kerr 109.0 0 181 923 0 0
+24 Kerr "113 - CKV" 0 297 951 0 0
+24 Kerr 113.0 0 2 4 0 0
+24 Kerr "118 - CKV" 0 110 226 0 0
+24 Kerr 118.0 0 0 2 0 0
+24 Kerr "119 - CKV" 0 444 1110 0 0
+24 Kerr "202 - CKV" 0 2 10 0 0
+24 Kerr 202.0 0 281 1499 0 0
+24 Kerr "211 - CKV" 0 235 514 0 0
+24 Kerr 211.0 0 26 139 0 0
+24 Kerr "215 - CKV" 0 3 4 0 0
+24 Kerr "215 - SME" 0 2 1 0 0
+24 Kerr 215.0 0 436 1846 0 0
+24 Kerr "220 - CKV" 0 370 1716 0 0
+24 Kerr 220.0 0 4 12 0 0
+24 Kerr 303.0 0 134 640 0 0
+24 Kerr 308.0 0 110 331 0 0
+24 Kerr "312 - CKV" 0 769 1929 0 0
+24 Kerr 312.0 0 7 43 0 0
+24 Kerr "314 - CKV" 0 478 852 0 0
+24 Kerr "404 - SHP" 0 49 368 0 0
+24 Kerr 404.0 0 42 347 0 0
+24 Kerr 405.0 0 307 1050 0 0
+24 Kerr "406 - CIN" 0 120 467 0 0
+24 Kerr "406 - SME" 0 0 0 0 0
+24 Kerr 406.0 0 324 1449 0 0
+24 Kerr 410.0 0 20 225 0 0
+24 Kerr 416.0 0 245 1051 0 0
+24 Kerr "417 - CKV" 0 253 1020 0 0
+24 Lampasas "Precinct 1" 0 382 1057 0 0
+24 Lampasas "Precinct 2" 0 407 2079 0 0
+24 Lampasas "Precinct 3" 0 291 963 0 0
+24 Lampasas "Precinct 4" 0 159 794 0 0
+24 Lampasas "Precinct 5" 0 58 423 0 0
+24 Lampasas "Precinct 6" 0 50 357 0 0
+24 Lampasas "Precinct 7" 0 82 492 0 0
+24 Lampasas "Precinct 8" 0 299 1096 0 0
+24 Lampasas "Precinct 9" 0 271 1004 0 0
+24 Llano "PCT 101 - LLCITY" 0 4 32 0 0
+24 Llano "PCT 101 - LLISD" 0 42 185 0 0
+24 Llano "PCT 102 - JCISD" 0 0 0 0 0
+24 Llano "PCT 102 - LLISD" 0 100 398 0 0
+24 Llano "PCT 108 - KMUD" 0 2 20 0 0
+24 Llano "PCT 108 - LLISD" 0 172 605 0 0
+24 Llano "PCT 109 - LLISD" 0 490 2276 0 0
+24 Llano "PCT 203 - BCISD" 0 5 7 0 0
+24 Llano "PCT 203 - ESD#2" 0 98 454 0 0
+24 Llano "PCT 203 - KMUD" 0 68 358 0 0
+24 Llano "PCT 203 - LLISD" 0 58 264 0 0
+24 Llano "PCT 203 - LLISDESD" 0 54 285 0 0
+24 Llano "PCT 204 - BCISD" 0 42 129 0 0
+24 Llano "PCT 204 - ESD#2" 0 56 179 0 0
+24 Llano "PCT 204 - LISDESD" 0 1 13 0 0
+24 Llano "PCT 204 - LLISD" 0 26 213 0 0
+24 Llano "PCT 205 - BCISD" 0 83 313 0 0
+24 Llano "PCT 205 - LLISD" 0 23 140 0 0
+24 Llano "PCT 307 - KMUD" 0 263 1193 0 0
+24 Llano "PCT 307 - LLISD" 0 152 631 0 0
+24 Llano "PCT 410 - LLCITY" 0 286 1198 0 0
+24 Llano "PCT 410 - LLISD" 0 211 1144 0 0
+24 Mills 1 0 70 599 0 0
+24 Mills 11 0 12 116 0 0
+24 Mills 2 0 29 294 0 0
+24 Mills 4 0 22 226 0 0
+24 Mills 6 0 18 180 0 0
+24 Mills 8 0 49 363 0 0
+24 Mills 9 0 47 407 0 0
+24 "San Saba" 1 0 73 572 0 0
+24 "San Saba" 2A 0 46 394 0 0
+24 "San Saba" 2B 0 16 178 0 0
+24 "San Saba" 3A 0 43 338 0 0
+24 "San Saba" 3B 0 31 243 0 0
+24 "San Saba" 4A 0 52 473 0 0
+24 "San Saba" 4B 0 9 72 0 0
+24 Taylor "102 - 0" 0 457 1124 0 0
+24 Taylor "103 - 0" 0 475 1184 0 0
+24 Taylor "104 - 0" 0 389 1494 0 0
+24 Taylor "105 - 0" 0 712 1385 0 0
+24 Taylor "106 - 0" 0 274 464 0 0
+24 Taylor "108 - 0" 0 0 3 0 0
+24 Taylor "108 - J" 0 25 183 0 0
+24 Taylor "108 - M" 0 3 42 0 0
+24 Taylor "108 - W" 0 79 647 0 0
+24 Taylor "109 - B" 0 1 9 0 0
+24 Taylor "109 - M" 0 15 151 0 0
+24 Taylor "109 - T" 0 1 17 0 0
+24 Taylor "110 - B" 0 7 42 0 0
+24 Taylor "110 - W4" 0 0 26 0 0
+24 Taylor "301 - 0" 0 476 1185 0 0
+24 Taylor "302 - 0" 0 376 1306 0 0
+24 Taylor "303 - 0" 0 32 377 0 0
+24 Taylor "303 - B" 0 86 1104 0 0
+24 Taylor "303 - W4" 0 0 3 0 0
+24 Taylor "304 - 0" 0 545 1357 0 0
+24 Taylor "304 - B" 0 0 1 0 0
+24 Taylor "305 - 0" 0 400 1787 0 0
+24 Taylor "306 - A" 0 29 87 0 0
+24 Taylor "306 - B" 0 1 4 0 0
+24 Taylor "306 - W" 0 616 2968 0 0
+24 Taylor "307 - 0" 0 127 1133 0 0
+24 Taylor "307 - A" 0 630 2684 0 0
+24 Taylor "308 - 0" 0 39 248 0 0
+24 Taylor "308 - B" 0 136 992 0 0
+24 Taylor "401 - 0" 0 263 431 0 0
+24 Taylor "402 - 0" 0 702 1514 0 0
+24 Taylor "403 - 0" 0 522 957 0 0
+24 Taylor "404 - 0" 0 512 850 0 0
+24 Taylor "405 - 0" 0 326 756 0 0
+24 Taylor "406 - 0" 0 553 1510 0 0
+24 Taylor "406 - L" 0 21 121 0 0
+24 Taylor "407 - 0" 0 173 585 0 0
+24 Taylor "407 - A" 0 3 33 0 0
+24 Taylor "407 - E" 0 5 66 0 0
+24 Taylor "408 - 0" 0 366 2798 0 0
+24 Taylor "409 - 0" 0 20 128 0 0
+24 Taylor "409 - C" 0 0 10 0 0
+24 Taylor "409 -B" 0 35 502 0 0
+27 Hildalgo 1 0 245 117 0 0
+27 Hildalgo 104 0 867 507 0 0
+27 Hildalgo 110 0 397 197 0 0
+27 Hildalgo 111 0 852 510 0 0
+27 Hildalgo 112 0 609 197 0 0
+27 Hildalgo 113 0 1471 817 0 0
+27 Hildalgo 114 0 1375 941 0 0
+27 Hildalgo 115 0 1050 489 0 0
+27 Hildalgo 116 0 696 399 0 0
+27 Hildalgo 117 0 1483 771 0 0
+27 Hildalgo 118 0 781 423 0 0
+27 Hildalgo 119 0 487 150 0 0
+27 Hildalgo 120 0 800 340 0 0
+27 Hildalgo 121 0 64 26 0 0
+27 Hildalgo 123 0 361 189 0 0
+27 Hildalgo 126 0 545 367 0 0
+27 Hildalgo 127 0 405 141 0 0
+27 Hildalgo 130 0 379 306 0 0
+27 Hildalgo 132 0 356 119 0 0
+27 Hildalgo 137 0 12 12 0 0
+27 Hildalgo 139 0 147 65 0 0
+27 Hildalgo 142 0 11 5 0 0
+27 Hildalgo 143 0 1 0 0 0
+27 Hildalgo 144 0 16 8 0 0
+27 Hildalgo 146 0 629 282 0 0
+27 Hildalgo 147 0 59 29 0 0
+27 Hildalgo 148 0 28 16 0 0
+27 Hildalgo 149 0 34 11 0 0
+27 Hildalgo 15 0 226 122 0 0
+27 Hildalgo 150 0 415 263 0 0
+27 Hildalgo 153 0 111 43 0 0
+27 Hildalgo 155 0 235 94 0 0
+27 Hildalgo 156 0 714 294 0 0
+27 Hildalgo 157 0 459 214 0 0
+27 Hildalgo 159 0 194 75 0 0
+27 Hildalgo 16 0 1004 221 0 0
+27 Hildalgo 169 0 168 85 0 0
+27 Hildalgo 17 0 570 168 0 0
+27 Hildalgo 171 0 6 4 0 0
+27 Hildalgo 172 0 12 11 0 0
+27 Hildalgo 173 0 436 363 0 0
+27 Hildalgo 174 0 307 138 0 0
+27 Hildalgo 175 0 433 220 0 0
+27 Hildalgo 176 0 416 209 0 0
+27 Hildalgo 177 0 231 113 0 0
+27 Hildalgo 178 0 7 9 0 0
+27 Hildalgo 179 0 150 52 0 0
+27 Hildalgo 181 0 214 360 0 0
+27 Hildalgo 184 0 14 11 0 0
+27 Hildalgo 186 0 82 18 0 0
+27 Hildalgo 189 0 477 233 0 0
+27 Hildalgo 190 0 151 126 0 0
+27 Hildalgo 191 0 182 103 0 0
+27 Hildalgo 192 0 145 98 0 0
+27 Hildalgo 196 0 290 212 0 0
+27 Hildalgo 2 0 622 394 0 0
+27 Hildalgo 202 0 262 276 0 0
+27 Hildalgo 21 0 169 68 0 0
+27 Hildalgo 213 0 66 30 0 0
+27 Hildalgo 22 0 254 97 0 0
+27 Hildalgo 225 0 109 43 0 0
+27 Hildalgo 229 0 306 181 0 0
+27 Hildalgo 23 0 691 319 0 0
+27 Hildalgo 232 0 425 185 0 0
+27 Hildalgo 235 0 88 89 0 0
+27 Hildalgo 237 0 342 114 0 0
+27 Hildalgo 238 0 32 49 0 0
+27 Hildalgo 240 0 318 187 0 0
+27 Hildalgo 242 0 9 9 0 0
+27 Hildalgo 245 0 99 48 0 0
+27 Hildalgo 249 0 146 79 0 0
+27 Hildalgo 25 0 857 556 0 0
+27 Hildalgo 250 0 51 19 0 0
+27 Hildalgo 251 0 6 0 0 0
+27 Hildalgo 252 0 4 6 0 0
+27 Hildalgo 253 0 152 74 0 0
+27 Hildalgo 255 0 94 53 0 0
+27 Hildalgo 3 0 413 124 0 0
+27 Hildalgo 32 0 889 394 0 0
+27 Hildalgo 33 0 639 192 0 0
+27 Hildalgo 35 0 1171 486 0 0
+27 Hildalgo 36 0 1211 543 0 0
+27 Hildalgo 39 0 710 302 0 0
+27 Hildalgo 4 0 1804 844 0 0
+27 Hildalgo 40 0 754 341 0 0
+27 Hildalgo 41 0 1096 446 0 0
+27 Hildalgo 42 0 1074 633 0 0
+27 Hildalgo 43 0 1529 860 0 0
+27 Hildalgo 44 0 334 141 0 0
+27 Hildalgo 45 0 529 341 0 0
+27 Hildalgo 46 0 129 67 0 0
+27 Hildalgo 5 0 614 314 0 0
+27 Hildalgo 55 0 855 354 0 0
+27 Hildalgo 56 0 969 361 0 0
+27 Hildalgo 57 0 270 140 0 0
+27 Hildalgo 58 0 1183 629 0 0
+27 Hildalgo 59 0 788 391 0 0
+27 Hildalgo 6 0 722 561 0 0
+27 Hildalgo 60 0 1044 644 0 0
+27 Hildalgo 61 0 715 329 0 0
+27 Hildalgo 7 0 1067 707 0 0
+27 Hildalgo 70 0 567 273 0 0
+27 Hildalgo 71 0 58 23 0 0
+27 Hildalgo 77 0 659 363 0 0
+27 Hildalgo 79 0 477 164 0 0
+27 Hildalgo 8 0 579 521 0 0
+27 Hildalgo 85 0 1258 525 0 0
+27 Hildalgo 87 0 1172 610 0 0
+27 Hildalgo 90 0 1677 410 0 0
+27 Hildalgo 91 0 318 192 0 0
+27 Kenedy 1 0 25 15 0 0
+27 Kenedy 2 0 20 23 0 0
+27 Kenedy 3 0 11 7 0 0
+27 Kenedy 4 0 24 9 0 0
+27 Kenedy 5 0 9 5 0 0
+27 Kenedy 6 0 14 5 0 0
+27 Kleberg "Precinct 11" 0 580 644 0 0
+27 Kleberg "Precinct 12" 0 372 522 0 0
+27 Kleberg "Precinct 13" 0 478 336 0 0
+27 Kleberg "Precinct 14" 0 159 105 0 0
+27 Kleberg "Precinct 21" 0 139 41 0 0
+27 Kleberg "Precinct 22" 0 273 239 0 0
+27 Kleberg "Precinct 23" 0 413 242 0 0
+27 Kleberg "Precinct 24" 0 423 285 0 0
+27 Kleberg "Precinct 31" 0 424 448 0 0
+27 Kleberg "Precinct 32" 0 388 289 0 0
+27 Kleberg "Precinct 33/34" 0 342 491 0 0
+27 Kleberg "Precinct 35" 0 334 333 0 0
+27 Kleberg "Precinct 41" 0 167 77 0 0
+27 Kleberg "Precinct 42" 0 297 124 0 0
+27 Kleberg "Precinct 43" 0 499 326 0 0
+27 Kleberg "Precinct 44" 0 191 95 0 0
+27 Kleberg "Precinct 45" 0 310 101 0 0
+27 Willacy "Precinct 1" 0 163 0 0 38
+27 Willacy "Precinct 10" 0 80 0 0 129
+27 Willacy "Precinct 11" 0 109 0 0 28
+27 Willacy "Precinct 11A" 0 144 0 0 45
+27 Willacy "Precinct 12" 0 39 0 0 3
+27 Willacy "Precinct 1A" 0 429 0 0 73
+27 Willacy "Precinct 2" 0 35 0 0 8
+27 Willacy "Precinct 2A" 0 607 0 0 91
+27 Willacy "Precinct 3" 0 232 0 0 43
+27 Willacy "Precinct 4" 0 597 0 0 178
+27 Willacy "Precinct 5" 0 307 0 0 68
+27 Willacy "Precinct 6" 0 179 0 0 50
+27 Willacy "Precinct 7" 0 100 0 0 17
+27 Willacy "Precinct 7A" 0 360 0 0 69
+27 Willacy "Precinct 8" 0 94 0 0 25
+27 Willacy "Precinct 8A" 0 208 0 0 59
+27 Willacy "Precinct 9" 0 276 0 0 65
+28 Baylor 1 0 0 491 0 0
+28 Baylor 2 0 0 328 0 0
+28 Baylor 3 0 0 337 0 0
+28 Baylor 4 0 0 439 0 0
+28 Borden 1A 0 0 50 0 0
+28 Borden 1B 0 0 47 0 0
+28 Borden 2A 0 0 75 0 0
+28 Borden 2B 0 0 35 0 0
+28 Borden 3A 0 0 23 0 0
+28 Borden 3B 0 0 34 0 0
+28 Borden 4 0 0 103 0 0
+28 Borden Provisional 0 0 1 0 0
+28 Coke "1 - RLISD" 0 0 139 0 0
+28 Coke "1 - RLISD CITY" 0 0 264 0 0
+28 Coke "2 - C. BRONTE" 0 0 172 0 0
+28 Coleman "Precinct 1" 0 0 953 0 0
+28 Coleman "Precinct 2" 0 0 717 0 0
+28 Coleman "Precinct 2e" 0 0 273 0 0
+28 Coleman "Precinct 3" 0 0 799 0 0
+28 Coleman "Precinct 4" 0 0 1013 0 0
+28 Concho 101 0 0 292 0 0
+28 Concho 102 0 0 67 0 0
+28 Concho 203 0 0 110 0 0
+28 Concho 204 0 0 70 0 0
+28 Concho 205 0 0 99 0 0
+28 Concho 306 0 0 190 0 0
+28 Concho 407 0 0 80 0 0
+28 Concho 408 0 0 189 0 0
+28 Cottle "Precinct 101" 0 0 201 0 0
+28 Cottle "Precinct 201" 0 0 166 0 0
+28 Cottle "Precinct 301" 0 0 103 0 0
+28 Cottle "Precinct 401" 0 0 131 0 0
+28 Crane "Precinct 1" 0 0 435 0 0
+28 Crane "Precinct 2" 0 0 357 0 0
+28 Crane "Precinct 3" 0 0 305 0 0
+28 Crane "Precinct 4" 0 0 286 0 0
+28 Crosby "Precinct 11" 0 0 0 0 284
+28 Crosby "Precinct 27" 0 0 0 0 454
+28 Crosby "Precinct 39" 0 0 0 0 352
+28 Crosby "Precinct 44" 0 0 0 0 455
+28 Dawson "Precinct 1" 0 0 0 0 424
+28 Dawson "Precinct 11" 0 0 0 0 99
+28 Dawson "Precinct 12" 0 0 0 0 51
+28 Dawson "Precinct 13" 0 0 0 0 90
+28 Dawson "Precinct 17" 0 0 0 0 60
+28 Dawson "Precinct 2" 0 0 0 0 458
+28 Dawson "Precinct 3" 0 0 0 0 944
+28 Dawson "Precinct 4" 0 0 0 0 836
+28 Dawson "Precinct 5" 0 0 0 0 95
+28 Dickens "Precinct 1" 0 0 0 0 79
+28 Dickens "Precinct 2" 0 0 0 0 80
+28 Dickens "Precinct 3" 0 0 0 0 217
+28 Dickens "Precinct 4" 0 0 0 0 126
+28 Dickens "Precinct 5" 0 0 0 0 150
+28 Dickens "Precinct 6" 0 0 0 0 210
+28 Eastland 1-Eastland 0 0 0 0 1684
+28 Eastland 1-Eastland-Cisd 0 0 0 0 1
+28 Eastland 1-Eastland-Cisd-College 0 0 0 0 11
+28 Eastland 1-Eastland-College 0 0 0 0 1
+28 Eastland 1-Eastland-Gisd 0 0 0 0 3
+28 Eastland 2-Olden 0 0 0 0 242
+28 Eastland 3-Ranger 0 0 0 0 207
+28 Eastland 3-Ranger-COR 0 0 0 0 684
+28 Eastland 4-Desdemona 0 0 0 0 16
+28 Eastland 4-Desdemona-Disd 0 0 0 0 129
+28 Eastland 4-Desdemona-Gisd 0 0 0 0 61
+28 Eastland 4-Desdemona-Lisd 0 0 0 0 17
+28 Eastland 5-Gorman 0 0 0 0 15
+28 Eastland 5-Gorman-COG-Gisd 0 0 0 0 302
+28 Eastland 5-Gorman-Gisd 0 0 0 0 93
+28 Eastland 6-Carbon 0 0 0 0 225
+28 Eastland 6-Carbon-Gisd 0 0 0 0 20
+28 Eastland "7-Rising Star" 0 0 0 0 1040
+28 Eastland "7-Rising Star-Cisd" 0 0 0 0 18
+28 Eastland "7-Rising Star-Cisd-College" 0 0 0 0 184
+28 Eastland "7-Rising Star-COC-Ciscd-College" 0 0 0 0 116
+28 Eastland "7-Rising Star-College" 0 0 0 0 0
+28 Eastland 8-Cisco 0 0 0 0 6
+28 Eastland 8-Cisco-Cisd 0 0 0 0 142
+28 Eastland 8-Cisco-Cisd-College 0 0 0 0 449
+28 Eastland 8-Cisco-COC-Cisd-College 0 0 0 0 1209
+28 Eastland 8-Cisco-College 0 0 0 0 21
+28 Eastland "9-Lake Leon" 0 0 0 0 332
+28 Eastland "9-Lake Leon-Gisd" 0 0 0 0 95
+28 Fisher "Box 1" 0 0 440 0 0
+28 Fisher "Box 10" 0 0 323 0 0
+28 Fisher "Box 12" 0 0 391 0 0
+28 Fisher "Box 4" 0 0 458 0 0
+28 Floyd 1 0 0 647 0 0
+28 Floyd "18 - CITY 4" 0 0 66 0 0
+28 Floyd "18 - CITY 5" 0 0 51 0 0
+28 Floyd "18 - CITY AL" 0 0 236 0 0
+28 Floyd "18 - CO" 0 0 207 0 0
+28 Floyd 23 0 0 272 0 0
+28 Floyd "24 - CITY 5" 0 0 8 0 0
+28 Floyd "24 - CITY AL" 0 0 62 0 0
+28 Floyd "24 - CO" 0 0 42 0 0
+28 Floyd 24B 0 0 70 0 0
+28 Floyd 9 0 0 72 0 0
+28 Foard "Precinct 101" 0 0 0 0 73
+28 Foard "Precinct 201" 0 0 0 0 127
+28 Foard "Precinct 301" 0 0 0 0 106
+28 Foard "Precinct 401" 0 0 0 0 117
+28 Garza 1 0 0 335 0 0
+28 Garza 2 0 0 425 0 0
+28 Garza 3 0 0 280 0 0
+28 Garza 4 0 0 185 0 0
+28 Garza 5 0 0 76 0 0
+28 Garza 6 0 0 97 0 0
+28 Hale 101 0 0 202 0 0
+28 Hale 102 0 0 32 0 0
+28 Hale "102 - PISD6" 0 0 16 0 0
+28 Hale 103 0 0 0 0 0
+28 Hale "103 - PISD6" 0 0 42 0 0
+28 Hale "103 - PISD7" 0 0 132 0 0
+28 Hale 104 0 0 216 0 0
+28 Hale 105 0 0 84 0 0
+28 Hale 110 0 0 253 0 0
+28 Hale 111 0 0 354 0 0
+28 Hale 112 0 0 403 0 0
+28 Hale "112 - PISD6" 0 0 0 0 0
+28 Hale "202 - PISD1" 0 0 70 0 0
+28 Hale "202 - PISD6" 0 0 24 0 0
+28 Hale 203 0 0 137 0 0
+28 Hale "203 - PISD6" 0 0 5 0 0
+28 Hale "203 - PISD7" 0 0 28 0 0
+28 Hale 204 0 0 51 0 0
+28 Hale "204 - PISD1" 0 0 3 0 0
+28 Hale "204 - PISD6" 0 0 234 0 0
+28 Hale 205 0 0 36 0 0
+28 Hale "206 - PISD1" 0 0 8 0 0
+28 Hale "206 - PISD6" 0 0 19 0 0
+28 Hale "213 - CO" 0 0 63 0 0
+28 Hale "213 - CO-PSD" 0 0 8 0 0
+28 Hale "213 - CO - CICH" 0 0 61 0 0
+28 Hale "214 - CO-CPE-PSD" 0 0 353 0 0
+28 Hale "214 - CO-PSD" 0 0 21 0 0
+28 Hale "215 - CO" 0 0 173 0 0
+28 Hale "215 - CO-PSD" 0 0 5 0 0
+28 Hale 304 0 0 365 0 0
+28 Hale "304 - PISD7" 0 0 110 0 0
+28 Hale 305 0 0 678 0 0
+28 Hale "305 - PISD6" 0 0 3 0 0
+28 Hale 306 0 0 32 0 0
+28 Hale 307 0 0 147 0 0
+28 Hale "307 - PISD7" 0 0 37 0 0
+28 Hale 308 0 0 30 0 0
+28 Hale "316 - CO" 0 0 131 0 0
+28 Hale "316 - CO-CI" 0 0 454 0 0
+28 Hale 317 0 0 91 0 0
+28 Hale 318 0 0 687 0 0
+28 Hale 406 0 0 244 0 0
+28 Hale "406 - PISD7" 0 0 30 0 0
+28 Hale 407 0 0 808 0 0
+28 Hale 408 0 0 435 0 0
+28 Hale 409 0 0 44 0 0
+28 Hale "409 - PISD7" 0 0 319 0 0
+28 Hale 419 0 0 122 0 0
+28 Hale 420 0 0 239 0 0
+28 Hardeman 1 0 0 391 0 0
+28 Hardeman 2 0 0 289 0 0
+28 Hardeman 3 0 0 316 0 0
+28 Hardeman 4 0 0 389 0 0
+28 Haskell "Pct. 1" 0 0 244 0 0
+28 Haskell "Pct. 10" 0 0 101 0 0
+28 Haskell "Pct. 2" 0 0 413 0 0
+28 Haskell "Pct. 3" 0 0 315 0 0
+28 Haskell "Pct. 4" 0 0 159 0 0
+28 Haskell "Pct. 5" 0 0 195 0 0
+28 Haskell "Pct. 6" 0 0 200 0 0
+28 Haskell "Pct. 7" 0 0 66 0 0
+28 Haskell "Pct. 8" 0 0 77 0 0
+28 Haskell "Pct. 9" 0 0 167 0 0
+28 Hockley "Precinct 11" 0 0 475 0 0
+28 Hockley "Precinct 14" 0 0 547 0 0
+28 Hockley "Precinct 15" 0 0 281 0 0
+28 Hockley "Precinct 16" 0 0 1233 0 0
+28 Hockley "Precinct 21" 0 0 1100 0 0
+28 Hockley "Precinct 24" 0 0 482 0 0
+28 Hockley "Precinct 32" 0 0 859 0 0
+28 Hockley "Precinct 33" 0 0 70 0 0
+28 Hockley "Precinct 35" 0 0 87 0 0
+28 Hockley "Precinct 36" 0 0 163 0 0
+28 Hockley "Precinct 43" 0 0 209 0 0
+28 Hockley "Precinct 44" 0 0 436 0 0
+28 Hockley "Precinct 45" 0 0 826 0 0
+28 Hockley "Precinct 46" 0 0 386 0 0
+28 Irion "Precinct 100" 0 0 190 0 0
+28 Irion "Precinct 200" 0 0 187 0 0
+28 Irion "Precinct 300" 0 0 153 0 0
+28 Irion "Precinct 400" 0 0 260 0 0
+28 Jones "PRECINCT 101" 0 0 753 0 0
+28 Jones "PRECINCT 102" 0 0 57 0 0
+28 Jones "PRECINCT 103" 0 0 258 0 0
+28 Jones "PRECINCT 201" 0 0 927 0 0
+28 Jones "PRECINCT 202" 0 0 194 0 0
+28 Jones "PRECINCT 203" 0 0 186 0 0
+28 Jones "PRECINCT 301" 0 0 194 0 0
+28 Jones "PRECINCT 302" 0 0 671 0 0
+28 Jones "PRECINCT 303" 0 0 817 0 0
+28 Jones "PRECINCT 401" 0 0 1040 0 0
+28 Jones "PRECINCT 402" 0 0 794 0 0
+28 Kent "Early Voting" 0 0 254 0 0
+28 Kent "Precinct 101" 0 0 39 0 0
+28 Kent "Precinct 202" 0 0 35 0 0
+28 Kent "Precinct 301" 0 0 17 0 0
+28 Kent "Precinct 302" 0 0 9 0 0
+28 Kent "Precinct 401" 0 0 21 0 0
+28 Kimble 1 0 0 444 0 0
+28 Kimble 2 0 0 231 0 0
+28 Kimble 3 0 0 180 0 0
+28 Kimble 4 0 0 244 0 0
+28 Kimble 6 0 0 209 0 0
+28 Kimble 7 0 0 246 0 0
+28 Kimble 9 0 0 296 0 0
+28 Kimble Mail 0 0 150 0 0
+28 King 1 0 0 41 0 0
+28 King 2 0 0 23 0 0
+28 King 3 0 0 42 0 0
+28 King 4 0 0 37 0 0
+28 Knox "Precinct 101" 0 0 366 0 0
+28 Knox "Precinct 201" 0 0 131 0 0
+28 Knox "Precinct 202" 0 0 160 0 0
+28 Knox "Precinct 301" 0 0 234 0 0
+28 Knox "Precinct 302" 0 0 52 0 0
+28 Knox "Precinct 401" 0 0 296 0 0
+28 Lubbock "001 - LISD1-LBB" 0 0 0 0 1049
+28 Lubbock "002 - IISD" 0 0 0 0 5
+28 Lubbock "002 - IISD-LBB" 0 0 0 0 5
+28 Lubbock "002 - LISD1-LBB" 0 0 0 0 437
+28 Lubbock "002 - LISD2-LBB" 0 0 0 0 320
+28 Lubbock "002 - NDSD-LBB" 0 0 0 0 4
+28 Lubbock "002 - RISD-LBB" 0 0 0 0 47
+28 Lubbock "003 - LISD1-LBB" 0 0 0 0 637
+28 Lubbock "004 - LISD1-LBB" 0 0 0 0 211
+28 Lubbock "005 - LISD1-LBB" 0 0 0 0 224
+28 Lubbock "005 - LISD2-LBB" 0 0 0 0 10
+28 Lubbock "006 - LISD2-LBB2" 0 0 0 0 204
+28 Lubbock "007 - LBB" 0 0 0 0 1227
+28 Lubbock "008 - LISD1-LBB" 0 0 0 0 1012
+28 Lubbock "009 - LBB6" 0 0 0 0 1296
+28 Lubbock "010 - LISD1-LBB" 0 0 0 0 324
+28 Lubbock "012 - LBB4" 0 0 0 0 1071
+28 Lubbock "013 - LBB" 0 0 0 0 870
+28 Lubbock "014 - LBB" 0 0 0 0 511
+28 Lubbock "015 - LBB" 0 0 0 0 732
+28 Lubbock "016 - LBB" 0 0 0 0 462
+28 Lubbock "017 - LISD1-LBB" 0 0 0 0 264
+28 Lubbock "018 - LISD1-LBB" 0 0 0 0 434
+28 Lubbock "019 - LISD1-LBB" 0 0 0 0 247
+28 Lubbock "019 - LISD2-LBB" 0 0 0 0 212
+28 Lubbock "020 - LISD1-LBB2" 0 0 0 0 6
+28 Lubbock "020 - LISD2-LBB2" 0 0 0 0 160
+28 Lubbock "020 - RISD-LBB2" 0 0 0 0 4
+28 Lubbock "021 - LBB" 0 0 0 0 848
+28 Lubbock "022 - LBB" 0 0 0 0 931
+28 Lubbock "023 - LBB" 0 0 0 0 681
+28 Lubbock "024 - LBB2" 0 0 0 0 713
+28 Lubbock "025 - LISD1-LBB2" 0 0 0 0 283
+28 Lubbock "025 - LISD2-LBB2" 0 0 0 0 236
+28 Lubbock "026 - LBB2" 0 0 0 0 0
+28 Lubbock "026 - LISD2-LBB2" 0 0 0 0 705
+28 Lubbock "027 - LBB" 0 0 0 0 1258
+28 Lubbock "028 - LBB" 0 0 0 0 1309
+28 Lubbock "029 - LISD2-LBB2" 0 0 0 0 686
+28 Lubbock "030 - LBB4" 0 0 0 0 1375
+28 Lubbock "031 - FISD" 0 0 0 0 939
+28 Lubbock "031 - FISD-LBB6" 0 0 0 0 14
+28 Lubbock "035 - RISD" 0 0 0 0 5
+28 Lubbock "036 - SLAT2" 0 0 0 0 417
+28 Lubbock "038 - RISD" 0 0 0 0 0
+28 Lubbock "038 - SLAT2" 0 0 0 0 2
+28 Lubbock "039 - RISD" 0 0 0 0 1163
+28 Lubbock "040 - LISD2-LBB2" 0 0 0 0 148
+28 Lubbock "040 - RISD-LBB2" 0 0 0 0 0
+28 Lubbock "041 - IISD" 0 0 0 0 575
+28 Lubbock "041 - IISD-IDAL" 0 0 0 0 855
+28 Lubbock "041 - NDSD" 0 0 0 0 1
+28 Lubbock "041 - RISD" 0 0 0 0 50
+28 Lubbock "043 - IISD" 0 0 0 0 101
+28 Lubbock "043 - NDSD" 0 0 0 0 202
+28 Lubbock "044 - NDSD" 0 0 0 0 778
+28 Lubbock "045 - NDSD" 0 0 0 0 0
+28 Lubbock "046 - NDSD" 0 0 0 0 125
+28 Lubbock "046 - SHSD" 0 0 0 0 1974
+28 Lubbock "047 - LBB6" 0 0 0 0 1283
+28 Lubbock "049 - LBB" 0 0 0 0 427
+28 Lubbock "050 - LBB" 0 0 0 0 466
+28 Lubbock "051 - RISD" 0 0 0 0 77
+28 Lubbock "052 - LBB4" 0 0 0 0 2744
+28 Lubbock "053 - FISD-LBB6" 0 0 0 0 1221
+28 Lubbock "053 - LBB6" 0 0 0 0 141
+28 Lubbock "054 - LBB4" 0 0 0 0 2032
+28 Lubbock "057 - FISD-LBB" 0 0 0 0 1733
+28 Lubbock "058 - FISD-LBB6" 0 0 0 0 825
+28 Lubbock "059 - LBB6" 0 0 0 0 1264
+28 Lubbock "060 - LBB4" 0 0 0 0 757
+28 Lubbock "062 - LBB" 0 0 0 0 1318
+28 Lubbock "063 - LBB6" 0 0 0 0 74
+28 Lubbock "065 - IISD" 0 0 0 0 48
+28 Lubbock "065 - LISD2" 0 0 0 0 2
+28 Lubbock "065 - RISD" 0 0 0 0 463
+28 Lubbock "066 - LBB" 0 0 0 0 1628
+28 Lubbock "067 - LBB4" 0 0 0 0 1091
+28 Lubbock "067 - LISD2-LBB4" 0 0 0 0 0
+28 Lubbock "072 - FISD-LBB6" 0 0 0 0 1425
+28 Lubbock "075 - LBB4" 0 0 0 0 781
+28 Lubbock "076 - FISD" 0 0 0 0 37
+28 Lubbock "076 - FISD-LBB6" 0 0 0 0 1106
+28 Lubbock "078 - FISD-LBB" 0 0 0 0 2128
+28 Lubbock "092 - FISD-LBB6" 0 0 0 0 202
+28 Lubbock "096 - FISD-LBB" 0 0 0 0 80
+28 Lubbock 102 0 0 0 0 48
+28 Lubbock "102 - NDSD" 0 0 0 0 89
+28 Lubbock "102 - SHSD" 0 0 0 0 258
+28 Lubbock "104 - FISD-LBB" 0 0 0 0 714
+28 Lubbock "109 - LBB4" 0 0 0 0 2544
+28 Lubbock 110 0 0 0 0 10
+28 Lubbock "110 - LBB" 0 0 0 0 2548
+28 Lubbock "111 - FISD" 0 0 0 0 1
+28 Lubbock "111 - FISD-LBB" 0 0 0 0 1411
+28 Lubbock "112 - FISD-LBB" 0 0 0 0 178
+28 Lubbock "113 - LBB6" 0 0 0 0 1189
+28 Lubbock "114 - LISD1-LBB" 0 0 0 0 271
+28 Lubbock "118 - LISD2-LBB2" 0 0 0 0 819
+28 Lubbock "119 - LISD2-LBB2" 0 0 0 0 1351
+28 Lubbock "120 - FISD" 0 0 0 0 1162
+28 Lubbock "120 - FISD-WOLF" 0 0 0 0 930
+28 Lubbock "121 - FISD" 0 0 0 0 813
+28 Lubbock "121 - FISD-WOLF" 0 0 0 0 1331
+28 Lubbock "122 - LBB4" 0 0 0 0 677
+28 Lubbock "123 - LBB4" 0 0 0 0 1050
+28 Lubbock "124 - LBB" 0 0 0 0 1216
+28 Lubbock "125 - LBB" 0 0 0 0 1317
+28 Lubbock "126 - LBB4" 0 0 0 0 886
+28 Lubbock "127 - LBB4" 0 0 0 0 1558
+28 Lubbock "128 - LBB" 0 0 0 0 1217
+28 Lubbock "129 - FISD-LBB" 0 0 0 0 1976
+28 Lubbock 135 0 0 0 0 0
+28 Lubbock "135 - FISD" 0 0 0 0 0
+28 Lubbock "135 - FISD-LBB6" 0 0 0 0 248
+28 Lubbock "135 - LBB6" 0 0 0 0 4
+28 Lubbock "135 - SHSD" 0 0 0 0 1
+28 Lubbock "135 - SHSD-LBB6" 0 0 0 0 16
+28 Lubbock 138 0 0 0 0 40
+28 Lubbock "138 - FISD-LBB" 0 0 0 0 2
+28 Lubbock "138 - LBB" 0 0 0 0 229
+28 Lubbock 140 0 0 0 0 1
+28 Lubbock "140 - LBB" 0 0 0 0 2719
+28 Lubbock "141 - LBB4" 0 0 0 0 1409
+28 Lubbock 142 0 0 0 0 32
+28 Lubbock "142 - LISD2" 0 0 0 0 33
+28 Lubbock 151 0 0 0 0 88
+28 Lubbock "151 - LISD1" 0 0 0 0 2
+28 Lubbock "151 - NDSD" 0 0 0 0 94
+28 Lubbock "151 - SHSD" 0 0 0 0 467
+28 Lubbock "152 - LBB6" 0 0 0 0 653
+28 Lubbock "153 - LISD2-LBB2" 0 0 0 0 212
+28 Lubbock "153 - RISD" 0 0 0 0 8
+28 Lubbock "153 - RISD-LBB2" 0 0 0 0 1
+28 Lubbock "154 - FISD-LBB" 0 0 0 0 2057
+28 Lubbock 155 0 0 0 0 1254
+28 Lubbock "155 - FISD" 0 0 0 0 409
+28 Lubbock "159 - NDSD" 0 0 0 0 14
+28 Lubbock "159 - NDSD-LBB" 0 0 0 0 2
+28 Lubbock 178 0 0 0 0 197
+28 Lubbock 33 0 0 0 0 2413
+28 Lubbock 34 0 0 0 0 316
+28 Lubbock 35 0 0 0 0 390
+28 Lubbock 36 0 0 0 0 656
+28 Lubbock 38 0 0 0 0 544
+28 Lubbock 39 0 0 0 0 155
+28 Lubbock 41 0 0 0 0 41
+28 Lubbock 43 0 0 0 0 50
+28 Lubbock 45 0 0 0 0 245
+28 Lubbock 51 0 0 0 0 0
+28 Lubbock 52 0 0 0 0 7
+28 Lubbock 56 0 0 0 0 284
+28 Mason 101 0 0 844 0 0
+28 Mason 210 0 0 720 0 0
+28 Mason 302 0 0 944 0 0
+28 Mason 405 0 0 974 0 0
+28 McCulloch "101 - ALL" 0 0 253 0 0
+28 McCulloch "101 - BISD" 0 0 107 0 0
+28 McCulloch "101 - CITY" 0 0 403 0 0
+28 McCulloch "101 - CNTY" 0 0 85 0 0
+28 McCulloch 102 0 0 97 0 0
+28 McCulloch "102 - BISD" 0 0 13 0 0
+28 McCulloch 201 0 0 84 0 0
+28 McCulloch "201 - CITY" 0 0 279 0 0
+28 McCulloch 202 0 0 106 0 0
+28 McCulloch "301 - ALL" 0 0 67 0 0
+28 McCulloch "301 - BISD" 0 0 1 0 0
+28 McCulloch "301 - CITY" 0 0 420 0 0
+28 McCulloch "301 - CNTY" 0 0 90 0 0
+28 McCulloch "301 - RISD" 0 0 101 0 0
+28 McCulloch 302 0 0 155 0 0
+28 McCulloch "302 - RISD" 0 0 29 0 0
+28 McCulloch 401 0 0 147 0 0
+28 McCulloch "401 - CITY" 0 0 203 0 0
+28 McCulloch "401 - RISD" 0 0 33 0 0
+28 McCulloch 402 0 0 4 0 0
+28 McCulloch "402 - RISD" 0 0 234 0 0
+28 McCulloch 403 0 0 8 0 0
+28 McCulloch "403 - RISD" 0 0 94 0 0
+28 Menard 1 0 0 151 0 0
+28 Menard 2 0 0 199 0 0
+28 Menard 3 0 0 218 0 0
+28 Menard 4 0 0 151 0 0
+28 Menard 5 0 0 40 0 0
+28 Menard 6 0 0 68 0 0
+28 Mitchell "Precinct 025" 0 0 300 0 0
+28 Mitchell "Precinct 046" 0 0 244 0 0
+28 Mitchell "Precinct 1" 0 0 600 0 0
+28 Mitchell "Precinct 2" 0 0 177 0 0
+28 Mitchell "Precinct 3" 0 0 577 0 0
+28 Mitchell "Precinct 4" 0 0 322 0 0
+28 Motley 1 0 0 176 0 0
+28 Motley 2 0 0 67 0 0
+28 Motley 3 0 0 14 0 0
+28 Motley 4 0 0 137 0 0
+28 Motley 5 0 0 110 0 0
+28 Motley 6 0 0 91 0 0
+28 Nolan "Precinct 1" 0 0 504 0 0
+28 Nolan "Precinct 2" 0 0 671 0 0
+28 Nolan "Precinct 3" 0 0 866 0 0
+28 Nolan "Precinct 4" 0 0 672 0 0
+28 Nolan "Precinct 5" 0 0 111 0 0
+28 Nolan "Precinct 6" 0 0 589 0 0
+28 Nolan "Precinct 7" 0 0 193 0 0
+28 Nolan "Precinct 8" 0 0 123 0 0
+28 Nolan "Precinct 9" 0 0 954 0 0
+28 Reagan "1 COUNTY" 0 0 10 0 0
+28 Reagan "1 COUNTY - CITY" 0 0 112 0 0
+28 Reagan "2 COUNTY" 0 0 8 0 0
+28 Reagan "2 COUNTY - CITY" 0 0 45 0 0
+28 Reagan "2 COUNTY - CITY ISD 2" 0 0 175 0 0
+28 Reagan "2 COUNTY - CITY ISD 3" 0 0 60 0 0
+28 Reagan "2 COUNTY - ISD 3" 0 0 62 0 0
+28 Reagan "3 COUNTY - CITY" 0 0 219 0 0
+28 Reagan "3 COUNTY - CITY ISD 2" 0 0 5 0 0
+28 Reagan "3 COUNTY - CITY ISD 3" 0 0 17 0 0
+28 Reagan "3 COUNTY - ISD 3" 0 0 51 0 0
+28 Reagan "4 COUNTY" 0 0 38 0 0
+28 Reagan "4 COUNTY - CITY" 0 0 183 0 0
+28 Runnels 1 0 0 798 0 0
+28 Runnels 10 0 0 297 0 0
+28 Runnels 2 0 0 70 0 0
+28 Runnels 3 0 0 835 0 0
+28 Runnels 4 0 0 229 0 0
+28 Runnels 5 0 0 122 0 0
+28 Runnels 6 0 0 95 0 0
+28 Runnels 7 0 0 520 0 0
+28 Runnels 8 0 0 477 0 0
+28 Runnels 9 0 0 508 0 0
+28 Schleicher 1 0 0 290 0 0
+28 Schleicher 2 0 0 251 0 0
+28 Schleicher 3 0 0 91 0 0
+28 Schleicher 4 0 0 371 0 0
+28 Scurry "Precinct 10" 0 0 800 0 0
+28 Scurry "Precinct 11" 0 0 106 0 0
+28 Scurry "Precinct 12" 0 0 800 0 0
+28 Scurry "Precinct 13" 0 0 310 0 0
+28 Scurry "Precinct 14" 0 0 90 0 0
+28 Scurry "Precinct 15" 0 0 774 0 0
+28 Scurry "Precinct 5" 0 0 79 0 0
+28 Scurry "Precinct 6" 0 0 173 0 0
+28 Scurry "Precinct 7" 0 0 1400 0 0
+28 Scurry "Precinct 8" 0 0 528 0 0
+28 Scurry "Precinct 9" 0 0 375 0 0
+28 Shackelford 101 0 0 341 0 0
+28 Shackelford 202 0 0 424 0 0
+28 Shackelford 303 0 0 85 0 0
+28 Shackelford "303 AISD" 0 0 12 0 0
+28 Shackelford "303 MORAN CITY" 0 0 88 0 0
+28 Shackelford 307 0 0 1 0 0
+28 Shackelford "307 AISD" 0 0 191 0 0
+28 Shackelford 404 0 0 24 0 0
+28 Shackelford "404 AISD" 0 0 3 0 0
+28 Shackelford 405 0 0 154 0 0
+28 Shackelford 406 0 0 170 0 0
+28 Sterling 1 0 0 156 0 0
+28 Sterling 2 0 0 120 0 0
+28 Sterling 3 0 0 155 0 0
+28 Sterling 4 0 0 141 0 0
+28 Stonewall "Precinct 1" 0 0 148 0 0
+28 Stonewall "Precinct 2" 0 0 149 0 0
+28 Stonewall "Precinct 3" 0 0 142 0 0
+28 Stonewall "Precinct 4" 0 0 132 0 0
+28 Taylor "101 - 0" 0 0 1963 0 0
+28 Taylor "107 - 0" 0 0 355 0 0
+28 Taylor "107 - A" 0 0 6 0 0
+28 Taylor "107 - B" 0 0 18 0 0
+28 Taylor "201 - 0" 0 0 637 0 0
+28 Taylor "202 - 0" 0 0 1106 0 0
+28 Taylor "203 - 0" 0 0 1157 0 0
+28 Taylor "203 - I" 0 0 6 0 0
+28 Taylor "204 - 0" 0 0 890 0 0
+28 Taylor "204 - B" 0 0 37 0 0
+28 Taylor "204 - C" 0 0 136 0 0
+28 Taylor "204 - D" 0 0 4 0 0
+28 Taylor "204 - E" 0 0 54 0 0
+28 Taylor "205 - 0" 0 0 1099 0 0
+28 Taylor "205 - B" 0 0 236 0 0
+28 Taylor "206 - 0" 0 0 883 0 0
+28 Taylor "206 - B" 0 0 697 0 0
+28 Taylor "207 - 0" 0 0 119 0 0
+28 Taylor "207 - B" 0 0 85 0 0
+28 Taylor "207 - M" 0 0 4 0 0
+28 Terry 101 0 0 250 0 0
+28 Terry 102 0 0 858 0 0
+28 Terry 201 0 0 347 0 0
+28 Terry 202 0 0 273 0 0
+28 Terry 301 0 0 533 0 0
+28 Terry 401 0 0 599 0 0
+28 Terry 402 0 0 146 0 0
+28 Throckmorton 1 0 0 216 0 0
+28 Throckmorton 2 0 0 189 0 0
+28 Throckmorton 3003 0 0 203 0 0
+28 Throckmorton 4005 0 0 46 0 0
+28 Throckmorton 4006 0 0 130 0 0
+28 "Tom Green" 106 0 0 554 0 0
+28 "Tom Green" 107 0 0 241 0 0
+28 "Tom Green" 108 0 0 571 0 0
+28 "Tom Green" 112 0 0 666 0 0
+28 "Tom Green" 114 0 0 220 0 0
+28 "Tom Green" 124 0 0 410 0 0
+28 "Tom Green" 137 0 0 1003 0 0
+28 "Tom Green" 144 0 0 682 0 0
+28 "Tom Green" 146 0 0 1063 0 0
+28 "Tom Green" 213 0 0 2054 0 0
+28 "Tom Green" 215 0 0 1505 0 0
+28 "Tom Green" 225 0 0 63 0 0
+28 "Tom Green" 228 0 0 1360 0 0
+28 "Tom Green" 230 0 0 3011 0 0
+28 "Tom Green" 241 0 0 3249 0 0
+28 "Tom Green" 304 0 0 1673 0 0
+28 "Tom Green" 305 0 0 24 0 0
+28 "Tom Green" 306 0 0 898 0 0
+28 "Tom Green" 308 0 0 133 0 0
+28 "Tom Green" 319 0 0 2032 0 0
+28 "Tom Green" 327 0 0 1167 0 0
+28 "Tom Green" 348 0 0 421 0 0
+28 "Tom Green" 351 0 0 242 0 0
+28 "Tom Green" 358 0 0 3012 0 0
+28 "Tom Green" 401 0 0 78 0 0
+28 "Tom Green" 402 0 0 1434 0 0
+28 "Tom Green" 420 0 0 387 0 0
+28 "Tom Green" 421 0 0 2106 0 0
+28 "Tom Green" 422 0 0 935 0 0
+28 "Tom Green" 423 0 0 733 0 0
+28 "Tom Green" 424 0 0 1253 0 0
+28 "Tom Green" 434 0 0 531 0 0
+28 "Tom Green" 435 0 0 522 0 0
+28 "Tom Green" 436 0 0 2021 0 0
+28 Upton "Precinct 1 Voting Box 1" 0 0 297 0 0
+28 Upton "Precinct 1 Voting Box 5" 0 0 60 0 0
+28 Upton "Precinct 2 Voting Box 2" 0 0 155 0 0
+28 Upton "Precinct 2 Voting Box 6" 0 0 157 0 0
+28 Upton "Precinct 3 Voting Box 3" 0 0 256 0 0
+28 Upton "Precinct 4 Voting Box 4" 0 0 332 0 0
+28 Ward 1-E 0 0 473 0 0
+28 Ward 1-W 0 0 71 0 0
+28 Ward 2 0 0 1073 0 0
+28 Ward 3-N 0 0 798 0 0
+28 Ward 3-S 0 0 195 0 0
+28 Ward 4-E 0 0 466 0 0
+28 Ward 4-M 0 0 134 0 0
+28 Ward 4-W 0 0 63 0 0
+28 Wilbarger "PCT 1 ALL" 0 0 0 0 845
+28 Wilbarger "PCT 1 GEN‐ VISD" 0 0 0 0 143
+28 Wilbarger "PCT 1 GEN ONLY" 0 0 0 0 158
+28 Wilbarger "PCT 19 ALL" 0 0 0 0 501
+28 Wilbarger "PCT 19 GEN-ONLY" 0 0 0 0 208
+28 Wilbarger "PCT 19 GEN‐VISD" 0 0 0 0 36
+28 Wilbarger "PCT 20 ALL" 0 0 0 0 371
+28 Wilbarger "PCT 20 GEN-VISD" 0 0 0 0 90
+28 Wilbarger "PCT 20 GEN ONLY" 0 0 0 0 99
+28 Wilbarger "PCT 21 ALL" 0 0 0 0 682
+28 Wilbarger "PCT 21 GEN-ONLY" 0 0 0 0 115
+28 Wilbarger "PCT 21 GEN-VISD" 0 0 0 0 449
+29 Culberson 1 0 84 49 0 0
+29 Culberson 2 0 104 60 0 0
+29 Culberson "3 ~ 3" 0 11 20 0 0
+29 Culberson "3 ~ 5" 0 95 93 0 0
+29 Culberson 4 0 99 49 0 0
+29 "El Paso" "PRECINCT 001" 0 770 370 0 0
+29 "El Paso" "PRECINCT 002" 0 1354 794 0 0
+29 "El Paso" "PRECINCT 003" 0 982 613 0 0
+29 "El Paso" "PRECINCT 004" 0 572 373 0 0
+29 "El Paso" "PRECINCT 005" 0 1130 607 0 0
+29 "El Paso" "PRECINCT 006" 0 693 881 0 0
+29 "El Paso" "PRECINCT 007" 0 1043 801 0 0
+29 "El Paso" "PRECINCT 008" 0 669 963 0 0
+29 "El Paso" "PRECINCT 009" 0 1282 1165 0 0
+29 "El Paso" "PRECINCT 010" 0 1609 620 0 0
+29 "El Paso" "PRECINCT 011" 0 1559 769 0 0
+29 "El Paso" "PRECINCT 012" 0 588 406 0 0
+29 "El Paso" "PRECINCT 013" 0 1339 793 0 0
+29 "El Paso" "PRECINCT 014" 0 1458 1273 0 0
+29 "El Paso" "PRECINCT 015" 0 999 861 0 0
+29 "El Paso" "PRECINCT 016" 0 1458 681 0 0
+29 "El Paso" "PRECINCT 017" 0 676 524 0 0
+29 "El Paso" "PRECINCT 018" 0 1147 1055 0 0
+29 "El Paso" "PRECINCT 019" 0 1426 773 0 0
+29 "El Paso" "PRECINCT 020" 0 494 275 0 0
+29 "El Paso" "PRECINCT 021" 0 772 764 0 0
+29 "El Paso" "PRECINCT 022" 0 1026 642 0 0
+29 "El Paso" "PRECINCT 023" 0 543 467 0 0
+29 "El Paso" "PRECINCT 024" 0 1254 982 0 0
+29 "El Paso" "PRECINCT 025" 0 1129 672 0 0
+29 "El Paso" "PRECINCT 026" 0 707 427 0 0
+29 "El Paso" "PRECINCT 027" 0 820 308 0 0
+29 "El Paso" "PRECINCT 028" 0 145 51 0 0
+29 "El Paso" "PRECINCT 029" 0 1088 435 0 0
+29 "El Paso" "PRECINCT 030" 0 87 14 0 0
+29 "El Paso" "PRECINCT 031" 0 657 273 0 0
+29 "El Paso" "PRECINCT 032" 0 772 328 0 0
+29 "El Paso" "PRECINCT 033" 0 962 413 0 0
+29 "El Paso" "PRECINCT 034" 0 295 96 0 0
+29 "El Paso" "PRECINCT 035" 0 920 407 0 0
+29 "El Paso" "PRECINCT 036" 0 933 213 0 0
+29 "El Paso" "PRECINCT 037" 0 792 190 0 0
+29 "El Paso" "PRECINCT 038" 0 845 212 0 0
+29 "El Paso" "PRECINCT 039" 0 240 68 0 0
+29 "El Paso" "PRECINCT 040" 0 351 70 0 0
+29 "El Paso" "PRECINCT 041" 0 400 111 0 0
+29 "El Paso" "PRECINCT 042" 0 622 178 0 0
+29 "El Paso" "PRECINCT 043" 0 743 744 0 0
+29 "El Paso" "PRECINCT 044" 0 1041 745 0 0
+29 "El Paso" "PRECINCT 045" 0 1351 802 0 0
+29 "El Paso" "PRECINCT 046" 0 531 244 0 0
+29 "El Paso" "PRECINCT 047" 0 895 655 0 0
+29 "El Paso" "PRECINCT 048" 0 736 296 0 0
+29 "El Paso" "PRECINCT 049" 0 573 363 0 0
+29 "El Paso" "PRECINCT 050" 0 892 472 0 0
+29 "El Paso" "PRECINCT 051" 0 778 526 0 0
+29 "El Paso" "PRECINCT 052" 0 812 415 0 0
+29 "El Paso" "PRECINCT 053" 0 1033 493 0 0
+29 "El Paso" "PRECINCT 054" 0 772 347 0 0
+29 "El Paso" "PRECINCT 055" 0 851 551 0 0
+29 "El Paso" "PRECINCT 056" 0 732 551 0 0
+29 "El Paso" "PRECINCT 057" 0 515 298 0 0
+29 "El Paso" "PRECINCT 058" 0 578 396 0 0
+29 "El Paso" "PRECINCT 059" 0 927 391 0 0
+29 "El Paso" "PRECINCT 060" 0 725 722 0 0
+29 "El Paso" "PRECINCT 061" 0 537 367 0 0
+29 "El Paso" "PRECINCT 062" 0 515 181 0 0
+29 "El Paso" "PRECINCT 063" 0 936 358 0 0
+29 "El Paso" "PRECINCT 064" 0 953 330 0 0
+29 "El Paso" "PRECINCT 065" 0 191 228 0 0
+29 "El Paso" "PRECINCT 066" 0 836 307 0 0
+29 "El Paso" "PRECINCT 067" 0 826 332 0 0
+29 "El Paso" "PRECINCT 068" 0 251 99 0 0
+29 "El Paso" "PRECINCT 069" 0 1562 517 0 0
+29 "El Paso" "PRECINCT 070" 0 1075 318 0 0
+29 "El Paso" "PRECINCT 071" 0 904 242 0 0
+29 "El Paso" "PRECINCT 072" 0 567 162 0 0
+29 "El Paso" "PRECINCT 073" 0 527 143 0 0
+29 "El Paso" "PRECINCT 074" 0 866 216 0 0
+29 "El Paso" "PRECINCT 075" 0 704 283 0 0
+29 "El Paso" "PRECINCT 076" 0 531 165 0 0
+29 "El Paso" "PRECINCT 077" 0 999 310 0 0
+29 "El Paso" "PRECINCT 078" 0 540 187 0 0
+29 "El Paso" "PRECINCT 079" 0 267 54 0 0
+29 "El Paso" "PRECINCT 080" 0 568 100 0 0
+29 "El Paso" "PRECINCT 081" 0 112 39 0 0
+29 "El Paso" "PRECINCT 082" 0 865 205 0 0
+29 "El Paso" "PRECINCT 083" 0 524 123 0 0
+29 "El Paso" "PRECINCT 084" 0 877 211 0 0
+29 "El Paso" "PRECINCT 085" 0 644 161 0 0
+29 "El Paso" "PRECINCT 086" 0 230 275 0 0
+29 "El Paso" "PRECINCT 087" 0 5 1 0 0
+29 "El Paso" "PRECINCT 088" 0 237 316 0 0
+29 "El Paso" "PRECINCT 089" 0 1264 437 0 0
+29 "El Paso" "PRECINCT 090" 0 796 416 0 0
+29 "El Paso" "PRECINCT 091" 0 397 156 0 0
+29 "El Paso" "PRECINCT 092" 0 1230 700 0 0
+29 "El Paso" "PRECINCT 093" 0 656 298 0 0
+29 "El Paso" "PRECINCT 094" 0 1115 462 0 0
+29 "El Paso" "PRECINCT 095" 0 1161 558 0 0
+29 "El Paso" "PRECINCT 096" 0 1248 752 0 0
+29 "El Paso" "PRECINCT 097" 0 796 362 0 0
+29 "El Paso" "PRECINCT 098" 0 834 467 0 0
+29 "El Paso" "PRECINCT 099" 0 521 247 0 0
+29 "El Paso" "PRECINCT 100" 0 1314 566 0 0
+29 "El Paso" "PRECINCT 101" 0 967 524 0 0
+29 "El Paso" "PRECINCT 102" 0 958 400 0 0
+29 "El Paso" "PRECINCT 103" 0 718 461 0 0
+29 "El Paso" "PRECINCT 104" 0 1108 628 0 0
+29 "El Paso" "PRECINCT 105" 0 1078 536 0 0
+29 "El Paso" "PRECINCT 106" 0 1196 503 0 0
+29 "El Paso" "PRECINCT 107" 0 898 392 0 0
+29 "El Paso" "PRECINCT 108" 0 767 519 0 0
+29 "El Paso" "PRECINCT 109" 0 735 403 0 0
+29 "El Paso" "PRECINCT 110" 0 1287 586 0 0
+29 "El Paso" "PRECINCT 111" 0 1018 411 0 0
+29 "El Paso" "PRECINCT 112" 0 1460 536 0 0
+29 "El Paso" "PRECINCT 113" 0 1092 477 0 0
+29 "El Paso" "PRECINCT 114" 0 1892 712 0 0
+29 "El Paso" "PRECINCT 115" 0 1018 528 0 0
+29 "El Paso" "PRECINCT 116" 0 1604 792 0 0
+29 "El Paso" "PRECINCT 117" 0 1278 551 0 0
+29 "El Paso" "PRECINCT 118" 0 1004 452 0 0
+29 "El Paso" "PRECINCT 119" 0 1190 546 0 0
+29 "El Paso" "PRECINCT 120" 0 1278 483 0 0
+29 "El Paso" "PRECINCT 121" 0 855 310 0 0
+29 "El Paso" "PRECINCT 122" 0 1542 582 0 0
+29 "El Paso" "PRECINCT 123" 0 1287 448 0 0
+29 "El Paso" "PRECINCT 124" 0 1365 465 0 0
+29 "El Paso" "PRECINCT 125" 0 2012 848 0 0
+29 "El Paso" "PRECINCT 126" 0 2086 1081 0 0
+29 "El Paso" "PRECINCT 127" 0 162 88 0 0
+29 "El Paso" "PRECINCT 128" 0 1420 834 0 0
+29 "El Paso" "PRECINCT 129" 0 1599 831 0 0
+29 "El Paso" "PRECINCT 130" 0 1613 717 0 0
+29 "El Paso" "PRECINCT 131" 0 821 350 0 0
+29 "El Paso" "PRECINCT 132" 0 159 53 0 0
+29 "El Paso" "PRECINCT 133" 0 1063 239 0 0
+29 "El Paso" "PRECINCT 134" 0 491 172 0 0
+29 "El Paso" "PRECINCT 135" 0 928 231 0 0
+29 "El Paso" "PRECINCT 136" 0 720 174 0 0
+29 "El Paso" "PRECINCT 137" 0 806 183 0 0
+29 "El Paso" "PRECINCT 138" 0 890 208 0 0
+29 "El Paso" "PRECINCT 139" 0 863 267 0 0
+29 "El Paso" "PRECINCT 140" 0 712 192 0 0
+29 "El Paso" "PRECINCT 141" 0 515 172 0 0
+29 "El Paso" "PRECINCT 142" 0 471 108 0 0
+29 "El Paso" "PRECINCT 143" 0 1020 243 0 0
+29 "El Paso" "PRECINCT 144" 0 1084 288 0 0
+29 "El Paso" "PRECINCT 145" 0 991 333 0 0
+29 "El Paso" "PRECINCT 146" 0 529 129 0 0
+29 "El Paso" "PRECINCT 147" 0 577 204 0 0
+29 "El Paso" "PRECINCT 148" 0 926 267 0 0
+29 "El Paso" "PRECINCT 149" 0 1034 307 0 0
+29 "El Paso" "PRECINCT 150" 0 717 195 0 0
+29 "El Paso" "PRECINCT 151" 0 886 241 0 0
+29 "El Paso" "PRECINCT 152" 0 835 187 0 0
+29 "El Paso" "PRECINCT 153" 0 1019 287 0 0
+29 "El Paso" "PRECINCT 154" 0 910 225 0 0
+29 "El Paso" "PRECINCT 155" 0 433 126 0 0
+29 "El Paso" "PRECINCT 156" 0 1185 318 0 0
+29 "El Paso" "PRECINCT 157" 0 642 166 0 0
+29 "El Paso" "PRECINCT 158" 0 619 446 0 0
+29 "El Paso" "PRECINCT 159" 0 616 208 0 0
+29 "El Paso" "PRECINCT 160" 0 999 328 0 0
+29 "El Paso" "PRECINCT 161" 0 428 171 0 0
+29 "El Paso" "PRECINCT 162" 0 1311 417 0 0
+29 "El Paso" "PRECINCT 163" 0 916 377 0 0
+29 "El Paso" "PRECINCT 164" 0 1203 430 0 0
+29 "El Paso" "PRECINCT 165" 0 1262 430 0 0
+29 "El Paso" "PRECINCT 166" 0 880 618 0 0
+29 "El Paso" "PRECINCT 167" 0 1243 422 0 0
+29 "El Paso" "PRECINCT 168" 0 1425 752 0 0
+29 "El Paso" "PRECINCT 169" 0 1026 399 0 0
+29 "El Paso" "PRECINCT 170" 0 1020 612 0 0
+29 "El Paso" "PRECINCT 171" 0 763 271 0 0
+29 "El Paso" "PRECINCT 172" 0 1264 492 0 0
+29 "El Paso" "PRECINCT 173" 0 471 250 0 0
+29 "El Paso" "PRECINCT 174" 0 9 0 0 0
+29 "El Paso" "PRECINCT 175" 0 108 33 0 0
+29 "El Paso" "PRECINCT 176" 0 406 282 0 0
+29 "El Paso" "PRECINCT 177" 0 206 147 0 0
+29 "El Paso" "PRECINCT 178" 0 369 273 0 0
+29 "El Paso" "PRECINCT 179" 0 237 53 0 0
+29 "El Paso" "PRECINCT 180" 0 771 265 0 0
+29 "El Paso" "PRECINCT 181" 0 1388 907 0 0
+29 "El Paso" "PRECINCT 182" 0 828 371 0 0
+29 "El Paso" "PRECINCT 183" 0 1 0 0 0
+29 "El Paso" "PRECINCT 184" 0 0 0 0 0
+29 "El Paso" "PRECINCT 185" 0 244 194 0 0
+29 "El Paso" "PRECINCT 186" 0 272 156 0 0
+29 "El Paso" "PRECINCT 187" 0 0 1 0 0
+29 "El Paso" "PRECINCT 188" 0 33 32 0 0
+29 "El Paso" "PRECINCT 189" 0 5 4 0 0
+29 "El Paso" "PRECINCT 190" 0 0 0 0 0
+29 "El Paso" "PRECINCT 191" 0 1 0 0 0
+29 "El Paso" "PRECINCT 192" 0 1518 1113 0 0
+29 "El Paso" "PRECINCT 193" 0 793 613 0 0
+29 "El Paso" "PRECINCT 194" 0 934 669 0 0
+29 "El Paso" "PRECINCT 195" 0 1050 741 0 0
+29 "El Paso" "PRECINCT 196" 0 1132 525 0 0
+29 "El Paso" "PRECINCT 197" 0 1251 511 0 0
+29 "El Paso" "PRECINCT 198" 0 1069 523 0 0
+29 "El Paso" "PRECINCT 199" 0 379 301 0 0
+29 "El Paso" "PRECINCT 200" 0 490 270 0 0
+29 "El Paso" "PRECINCT 201" 0 887 520 0 0
+29 "El Paso" "PRECINCT 202" 0 978 591 0 0
+29 "El Paso" "PRECINCT 203" 0 1930 1131 0 0
+29 "El Paso" "PRECINCT 204" 0 503 328 0 0
+29 "El Paso" "PRECINCT 205" 0 1196 460 0 0
+29 "El Paso" "PRECINCT 206" 0 254 101 0 0
+29 "El Paso" "PRECINCT 207" 0 661 204 0 0
+29 "El Paso" "PRECINCT 208" 0 499 204 0 0
+29 Hudspeth 1 0 39 117 0 0
+29 Hudspeth 2 0 86 60 0 0
+29 Hudspeth 3N 0 12 43 0 0
+29 Hudspeth 3S 0 23 35 0 0
+29 Hudspeth 4 0 20 67 0 0
+29 Hudspeth "Early Voting" 0 151 331 0 0
+29 Hudspeth Mail 0 45 28 0 0
+29 "Jeff Davis" 1 0 0 0 0 371
+29 "Jeff Davis" 2 0 0 0 0 243
+29 "Jeff Davis" 3 0 0 0 0 311
+29 "Jeff Davis" 4 0 0 0 0 134
+29 "Jeff Davis" 5 0 0 0 0 188
+29 Presidio 1 0 148 84 0 0
+29 Presidio 2 0 172 93 0 0
+29 Presidio 3 0 17 6 0 0
+29 Presidio 4 0 289 80 0 0
+29 Presidio 5 0 187 84 0 0
+29 Presidio 6 0 4 12 0 0
+29 Presidio 7 0 663 227 0 0
