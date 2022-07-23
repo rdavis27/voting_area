@@ -4032,6 +4032,7 @@ createWI_2020_House <- function(){
 }
 # Match using party instead of name if multiple races in state
 createfilep <- function(xx,col,office,party,filename){
+    xx <- xx[,col]
     names(xx) <- c("COUNTY","AREA","Office","DIST","TOTAL","Party","Name","Votes")
     xx <- xx[xx$Office == office,]
     xx$Party[is.na(xx$Party)] <- "(NA)"
@@ -4083,6 +4084,19 @@ createfilep <- function(xx,col,office,party,filename){
     write(paste(partyxx, collapse = " "), paste0(data_dir,filename))
     write_delim(xx, paste0(data_dir,filename), append = TRUE, col_names = TRUE)
 }
+# The following uses election data from https://github.com/openelections
+createWI_2018_State_Senate <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2018/","20181106__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Senate"
+    party <- c("DEM","REP","LIB","WGR","CON","IND")
+    filename <- "WI_2018_State_Senate.csv"
+    createfilep(xx,columns,office,party,filename)
+}
 createWI_2020_State_Senate <- function(){
     xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
     #                  col_types = "cindlD") #char,int,num,dbl,log,date
@@ -4105,5 +4119,88 @@ createWI_2020_State_Assembly <- function(){
     office <- "State Assembly"
     party <- c("DEM","REP","IND","CON","SCATTERING","")
     filename <- "WI_2020_State_Assembly.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+cleanTX_2020 <- function(xx){
+    #State-specific changes
+    xx$party[xx$party == "DEMR"]  <- "DEM"
+    xx$party[xx$party == "GRE"]   <- "GRN"
+    xx$party[xx$party == "GREEN"] <- "GRN"
+    xx$party[xx$party == "LBT"]   <- "LIB"
+    xx$precinct[is.na(xx$precinct)] <- "PCT"
+    xx <- xx[!grepl("OVER VOTES", xx$candidate, ignore.case = TRUE),]
+    xx <- xx[!grepl("Overvotes", xx$candidate, ignore.case = TRUE),]
+    xx <- xx[!grepl("UNDER VOTES", xx$candidate, ignore.case = TRUE),]
+    xx <- xx[!grepl("Undervotes", xx$candidate, ignore.case = TRUE),]
+    xx <- xx[!grepl("Unresolved write-in", xx$candidate, ignore.case = TRUE),]
+    xx <- xx[!grepl("Ballots Cast", xx$candidate, ignore.case = TRUE),]
+    xx$total <- 0
+    return(xx)
+}
+createTX_2020_State_House <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2020/","20201103__tx__general__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    xx <- cleanTX_2020(xx)
+
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    office <- "State Representative"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2020_State_House.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createTX_2020_State_Senate <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2020/","20201103__tx__general__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    xx <- cleanTX_2020(xx)
+    
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    office <- "State Senate"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2020_State_Senate.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createTX_2020_President_OE <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2020/","20201103__tx__general__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    xx <- cleanTX_2020(xx)
+    xx$DIST <- 0
+    
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    office <- "President"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2020_President_OE.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createTX_2020_Senate_OE <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2020/","20201103__tx__general__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    xx <- cleanTX_2020(xx)
+    xx$DIST <- 0
+    
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    office <- "U.S. Senate"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2020_Senate_OE.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createTX_2020_House_OE <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2020/","20201103__tx__general__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    xx <- cleanTX_2020(xx)
+    
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    office <- "U.S. House"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2020_House_OE.csv"
     createfilep(xx,columns,office,party,filename)
 }

@@ -450,7 +450,7 @@ shinyServer(
         doAreaPlot2 <- function(xx, xcounty, xtype){
             zzxx <<- xx #DEBUG-RM
             if (xcounty != "" & xcounty != "(all)"){
-                xx <- xx[xx$COUNTY == xcounty,]
+                xx <- xx[toupper(xx$COUNTY) == toupper(xcounty),]
             }else{
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
@@ -1060,6 +1060,7 @@ shinyServer(
                 dd[,i] <- format(round(dd[,i], dp), big.mark=",", scientific=FALSE)
             }
             row.names(dd) <- seq(1:NROW(dd))
+            cat(paste0(input$xcounty,", ",input$state2,": Race ",input$races[1],"\n\n"))
             dd
         })
         getAreas2 <- function(){
@@ -1842,17 +1843,32 @@ shinyServer(
                     else if (races[i] == "TX_2018_House_210624"){
                         createTX_2018_House_210624()
                     }
+                    else if (races[i] == "TX_2020_President_OE"){
+                        createTX_2020_President_OE()
+                    }
                     else if (races[i] == "TX_2020_President"){
                         createTX_2020_President()
                     }
+                    else if (races[i] == "TX_2020_Senate_OE"){
+                        createTX_2020_Senate_OE()
+                    }
                     else if (races[i] == "TX_2020_Senate"){
                         createTX_2020_Senate()
+                    }
+                    else if (races[i] == "TX_2020_House_OE"){
+                        createTX_2020_House_OE()
                     }
                     else if (races[i] == "TX_2020_House"){
                         createTX_2020_House()
                     }
                     else if (races[i] == "TX_2020_House_210624"){
                         createTX_2020_House_210624()
+                    }
+                    else if (races[i] == "TX_2020_State_House"){
+                        createTX_2020_State_House()
+                    }
+                    else if (races[i] == "TX_2020_State_Senate"){
+                        createTX_2020_State_Senate()
                     }
                     else if (races[i] == "TX_2016_President_210604"){
                         createTX_2016_President_210604()
@@ -1916,6 +1932,9 @@ shinyServer(
                     }
                     else if (races[i] == "WI_2018_House"){
                         createWI_2018_House()
+                    }
+                    else if (races[i] == "WI_2018_State_Senate"){
+                        createWI_2018_State_Senate()
                     }
                     else if (races[i] == "WI_2020_President"){
                         createWI_2020_President()
@@ -1998,6 +2017,9 @@ shinyServer(
                         updateSelectInput(session, "dist", NULL,
                                           choices = c("", sudist), selected = "")
                     }
+                }
+                if (input$displaydists){
+                    xx0$AREA <- xx0$DIST
                 }
                 xx0 <- xx0[,-1]
                 xxparty <- xxparty[,-1]
@@ -2142,10 +2164,18 @@ shinyServer(
                 cat("ERROR: Select two races\n")
                 return(NULL)
             }
-            yy <- getdata2()
-            if (is.null(yy)){
-                cat("ERROR: Select second race\n")
-                return(NULL)
+            if (input$displaydists){
+                xx <- xx %>%
+                    group_by(COUNTY,AREA) %>%
+                    summarize(across(where(is.numeric), sum))
+                yy <- xx
+            }
+            else{
+                yy <- getdata2()
+                if (is.null(yy)){
+                    cat("ERROR: Select second race\n")
+                    return(NULL)
+                }
             }
             namesxx <- names(xx)
             namesyy <- names(yy)
@@ -2519,7 +2549,7 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2020_President","TX_2020_Senate","TX_2020_House","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
+                files <- c("TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605",
                            "TX_2018_Senate_210605","TX_2018_House_210624","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")
             }
@@ -2527,7 +2557,7 @@ shinyServer(
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2020_State_Senate","WI_2020_State_Assembly","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
+                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2020_State_Senate","WI_2020_State_Assembly","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2018_State_Senate","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
             updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")
