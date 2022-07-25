@@ -3173,6 +3173,7 @@ createTX_House <- function(year,race,subdir){
     }
     #zzyy <<- yy #DEBUG-RM
     partyyy <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB","OTH1","OTH2")
+    yy$AREA <- sub("^0+", "", substring(yy$AREA,4))
     write(paste(partyyy, collapse = " "), paste0(data_dir,paste0(race,".csv")))
     write_delim(yy, paste0(data_dir,paste0(race,".csv")), append = TRUE, col_names = TRUE)
 }
@@ -3207,6 +3208,7 @@ createTX_2016_President <- function(){
     xx <- xx[,c(8,9,10,3:7)] #was c(7,8,9,2:6)
     names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","Writein")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President.csv"))
     write_delim(xx, paste0(data_dir,"TX_2016_President.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3228,6 +3230,7 @@ createTX_2018_AG <- function(){
     xx <- xx[,c(6,7,8,4,3,5)] #was c(5,6,7,3,2,4)
     names(xx) <- c("COUNTY","AREA","TOTAL","Nelson","Paxton","Harris")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_AG.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3249,6 +3252,7 @@ createTX_2018_Governor <- function(){
     xx <- xx[,c(6,7,8,4,3,5)] # was c(5,6,7,3,2,4)
     names(xx) <- c("COUNTY","AREA","TOTAL","Valdez","Abbott","Tippetts")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_Governor.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3270,6 +3274,7 @@ createTX_2018_Senate <- function(){
     xx <- xx[,c(6,7,8,4,3,5)] # was c(5,6,7,3,2,4)
     names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Cruz","Dikeman")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_Senate.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3291,6 +3296,7 @@ createTX_2020_President <- function(){
     xx <- xx[,c(8,9,10,3:7)] # was c(7,8,9,2:6)
     names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_President.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3312,6 +3318,7 @@ createTX_2020_Senate <- function(){
     xx <- xx[,c(7,8,9,4,3,5,6)] #was c(6,7,8,3,2,4,5)
     names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3334,6 +3341,7 @@ createTX_2016_President_210604 <- function(){
     xx <- xx[,c(7,8,9,2:6)]
     names(xx) <- c("COUNTY","AREA","TOTAL","Clinton","Trump","Johnson","Stein","Writein")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2016_President_210604.csv"))
     write_delim(xx, paste0(data_dir,"TX_2016_President_210604.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3355,6 +3363,7 @@ createTX_2018_AG_210605 <- function(){
     xx <- xx[,c(5,6,7,3,2,4)]
     names(xx) <- c("COUNTY","AREA","TOTAL","Nelson","Paxton","Harris")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_AG_210605.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_AG_210605.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3376,6 +3385,7 @@ createTX_2018_Governor_210605 <- function(){
     xx <- xx[,c(5,6,7,3,2,4)]
     names(xx) <- c("COUNTY","AREA","TOTAL","Valdez","Abbott","Tippetts")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Governor_210605.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_Governor_210605.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3397,6 +3407,7 @@ createTX_2018_Senate_210605 <- function(){
     xx <- xx[,c(5,6,7,3,2,4)]
     names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Cruz","Dikeman")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2018_Senate_210605.csv"))
     write_delim(xx, paste0(data_dir,"TX_2018_Senate_210605.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3418,6 +3429,7 @@ createTX_2020_President_210602 <- function(){
     xx <- xx[,c(7,8,9,2:6)]
     names(xx) <- c("COUNTY","AREA","TOTAL","Biden","Trump","Jorgensen","Hawkins","Writein")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_President_210602.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_President_210602.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3439,6 +3451,7 @@ createTX_2020_Senate_210603 <- function(){
     xx <- xx[,c(6,7,8,3,2,4,5)]
     names(xx) <- c("COUNTY","AREA","TOTAL","Hegar","Cornyn","McKennon","Collins")
     partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","IND1","IND2")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate_210603.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_Senate_210603.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3516,6 +3529,7 @@ createTX_2020_President_SOS <- function(){
     zzyy <<- yy #DEBUG-RM
     yy <- rbind(yy,xx)
     zyy2 <<- yy #DEBUG-RM
+    yy$AREA <- sub("^0+", "", substring(yy$AREA,4))
     partyyy <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
     write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2020_President_SOS.csv"))
     write_delim(yy, paste0(data_dir,"TX_2020_President_SOS.csv"), append = TRUE, col_names = TRUE)
@@ -3562,6 +3576,7 @@ createTX_2020_Senate_SOS <- function(){
     yy <- rbind(yy,xx)
     zyy2 <<- yy #DEBUG-RM
     partyyy <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    yy$AREA <- sub("^0+", "", substring(yy$AREA,4))
     write(paste(partyyy, collapse = " "), paste0(data_dir,"TX_2020_Senate_SOS.csv"))
     write_delim(yy, paste0(data_dir,"TX_2020_Senate_SOS.csv"), append = TRUE, col_names = TRUE)
 }
@@ -3603,6 +3618,7 @@ createTX_2020_House_SOS <- function(){
     xx <- xx[,c(5,6,1,7,2:4)]
     names(xx) <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB")
     partyxx <- c("DIST","COUNTY","AREA","TOTAL","DEM","REP","LIB")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_House_SOS.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_House_SOS.csv"), append = TRUE, col_names = TRUE)
 }

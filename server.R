@@ -576,20 +576,16 @@ shinyServer(
                 xx$LABEL <- xx$COUNTY
             }
             else if (input$label2 == "CountyID"){
-                if (input$state2 == "TX"){
-                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,1,3))
-                }
-                else{
-                    xx$LABEL <- xx$COUNTY
-                }
+                xx$LABEL <- xx$COUNTY
+                # if (input$state2 == "TX"){
+                #     xx$LABEL <- sub("^0+", "", substring(xx$AREA,1,3))
+                # }
             }
             else if (input$label2 == "Area"){
-                if (input$state2 == "TX"){
-                    xx$LABEL <- sub("^0+", "", substring(xx$AREA,4))
-                }
-                else{
-                    xx$LABEL <- xx$AREA
-                }
+                xx$LABEL <- xx$AREA
+                # if (input$state2 == "TX"){
+                #     xx$LABEL <- sub("^0+", "", substring(xx$AREA,4))
+                # }
             }
             else if (input$label2 == "CNTYVTD"){
                 xx$LABEL <- xx$AREA
