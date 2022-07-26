@@ -1839,6 +1839,9 @@ shinyServer(
                     else if (races[i] == "TX_2018_House_210624"){
                         createTX_2018_House_210624()
                     }
+                    else if (races[i] == "TX_2018_State_House"){
+                        createTX_2018_State_House()
+                    }
                     else if (races[i] == "TX_2020_President_OE"){
                         createTX_2020_President_OE()
                     }
@@ -1865,6 +1868,9 @@ shinyServer(
                     }
                     else if (races[i] == "TX_2020_State_Senate"){
                         createTX_2020_State_Senate()
+                    }
+                    else if (races[i] == "TX_2020_RR_Commission"){
+                        createTX_2020_RR_Commission()
                     }
                     else if (races[i] == "TX_2016_President_210604"){
                         createTX_2016_President_210604()
@@ -2545,9 +2551,9 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
+                files <- c("TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2020_RR_Commission","TX_2018_AG","TX_2018_Governor","TX_2018_Senate","TX_2018_House","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605",
-                           "TX_2018_Senate_210605","TX_2018_House_210624","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")
+                           "TX_2018_Senate_210605","TX_2018_House_210624","TX_2018_State_House","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")
             }
             else if (input$state2 == "VA"){
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
