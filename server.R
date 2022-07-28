@@ -463,7 +463,10 @@ shinyServer(
             xx <- xx[(is.na(xx$TOT1_N) | xx$TOT1_N >= input$minvotes2) &
                      (is.na(xx$TOT2_N) | xx$TOT2_N >= input$minvotes2),]
             row.names(xx) <- seq(1:NROW(xx)) #DEBUG-TEST NROW(xx) == 0
-            xx <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
+            xxtmp <- xx[xx$DEM1 > 0 & xx$REP1 > 0 & xx$DEM2 > 0 & xx$REP2 > 0,]
+            if (NROW(xxtmp) > 0){ # filter only if rows available
+                xx <- xxtmp
+            }
             if (input$party == "Democrat"){
                 preparty <- "DEM"
                 party1 <- "DEM1"
@@ -1669,11 +1672,29 @@ shinyServer(
                         #createFL_2020_Counties()
                         #createFL_2020_County_Codes()
                     }
+                    else if (races[i] == "FL_2020_President_OE"){
+                        createFL_2020_President_OE()
+                    }
                     else if (races[i] == "FL_2020_House"){
                         createFL_2020_House()
                     }
+                    else if (races[i] == "FL_2020_House_OE"){
+                        createFL_2020_House_OE()
+                    }
                     else if (races[i] == "FL_2020_House_CD27"){
                         createFL_2020_House_CD27()
+                    }
+                    else if (races[i] == "FL_2020_State_House"){
+                        createFL_2020_State_House()
+                    }
+                    else if (races[i] == "FL_2020_State_Senate"){
+                        createFL_2020_State_Senate()
+                    }
+                    else if (races[i] == "FL_2020_Ballots"){
+                        createFL_2020_Ballots()
+                    }
+                    else if (races[i] == "FL_2020_Registered_OE"){
+                        createFL_2020_Registered_OE()
                     }
                     else if (races[i] == "FL_2016_Registered"){
                         createFL_2016_Registered()
@@ -2524,7 +2545,7 @@ shinyServer(
                 files <- c("CO_2020_President","CO_2018_Governor","CO_2020_Registered")
             }
             else if (input$state2 == "FL"){
-                files <- c("FL_2020_President","FL_2020_House","FL_2020_House_CD27","FL_2020_Registered","FL_2018_Governor","FL_2018_Senate","FL_2018_House","FL_2018_Registered","FL_2016_President","FL_2016_Registered")
+                files <- c("FL_2020_President","FL_2020_President_OE","FL_2020_House","FL_2020_House_OE","FL_2020_House_CD27","FL_2020_State_House","FL_2020_State_Senate","FL_2020_Registered","FL_2020_Registered_OE","FL_2020_Ballots","FL_2018_Governor","FL_2018_Senate","FL_2018_House","FL_2018_Registered","FL_2016_President","FL_2016_Registered")
             }
             else if (input$state2 == "IA"){
                 files <- c("IA_2020_President","IA_2020_Senate","IA_2020_House_CD1","IA_2020_House_CD2","IA_2020_House_CD3","IA_2020_House_CD4","IA_2018_Governor","IA_2018_House_CD1","IA_2018_House_CD2","IA_2018_House_CD3","IA_2018_House_CD4","IA_2016_President")
