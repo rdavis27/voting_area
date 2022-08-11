@@ -4108,8 +4108,9 @@ createfilep <- function(xx,col,office,party,filename){
     write(paste(partyxx, collapse = " "), paste0(data_dir,filename))
     write_delim(xx, paste0(data_dir,filename), append = TRUE, col_names = TRUE)
 }
-
+###############################################################################
 # The following uses election data from https://github.com/openelections
+###############################################################################
 cleanFL_2020 <- function(xx){
     #State-specific changes
     xx$party[xx$party == "GRE"]   <- "GRN"
@@ -4208,43 +4209,7 @@ createFL_2020_Registered_OE <- function(){
     filename <- "FL_2020_Registered_OE.csv"
     createfilep(xx,columns,office,party,filename)
 }
-
-createWI_2018_State_Senate <- function(){
-    xx <- read_delim(paste0(input_dir,"WI/2018/","20181106__wi__general__ward.csv"), ',')
-    #                  col_types = "cindlD") #char,int,num,dbl,log,date
-    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
-    #                  sheet = "Sheet1", skip = 0)
-    
-    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
-    office <- "State Senate"
-    party <- c("DEM","REP","LIB","WGR","CON","IND")
-    filename <- "WI_2018_State_Senate.csv"
-    createfilep(xx,columns,office,party,filename)
-}
-createWI_2020_State_Senate <- function(){
-    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
-    #                  col_types = "cindlD") #char,int,num,dbl,log,date
-    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
-    #                  sheet = "Sheet1", skip = 0)
-    
-    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
-    office <- "State Senate"
-    party <- c("DEM","REP","IND","SCATTERING","")
-    filename <- "WI_2020_State_Senate.csv"
-    createfilep(xx,columns,office,party,filename)
-}
-createWI_2020_State_Assembly <- function(){
-    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
-    #                  col_types = "cindlD") #char,int,num,dbl,log,date
-    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
-    #                  sheet = "Sheet1", skip = 0)
-    
-    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
-    office <- "State Assembly"
-    party <- c("DEM","REP","IND","CON","SCATTERING","")
-    filename <- "WI_2020_State_Assembly.csv"
-    createfilep(xx,columns,office,party,filename)
-}
+###############################################################################
 cleanTX_2020 <- function(xx){
     #State-specific changes
     xx$party[xx$party == "DEMR"]  <- "DEM"
@@ -4352,5 +4317,42 @@ createTX_2020_RR_Commission <- function(){
     office <- "Railroad Commissioner"
     party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
     filename <- "TX_2020_RR_Commission.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+###############################################################################
+createWI_2018_State_Senate <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2018/","20181106__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Senate"
+    party <- c("DEM","REP","LIB","WGR","CON","IND")
+    filename <- "WI_2018_State_Senate.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createWI_2020_State_Senate <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Senate"
+    party <- c("DEM","REP","IND","SCATTERING","")
+    filename <- "WI_2020_State_Senate.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+createWI_2020_State_Assembly <- function(){
+    xx <- read_delim(paste0(input_dir,"WI/2020/","20201103__wi__general__ward.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    
+    columns <- c("county","ward","office","district","total votes","party","candidate","votes")
+    office <- "State Assembly"
+    party <- c("DEM","REP","IND","CON","SCATTERING","")
+    filename <- "WI_2020_State_Assembly.csv"
     createfilep(xx,columns,office,party,filename)
 }
