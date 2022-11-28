@@ -454,6 +454,7 @@ shinyServer(
             }else{
                 xx <- xx[xx$COUNTY != "" & !is.na(xx$COUNTY),]
             }
+            xx$COUNTY <- str_to_title(xx$COUNTY)
             if (!input$displaytotal){
                 xx <- xx[xx$AREA != "TOTAL",] #DEBUG-CHECK - was COUNTY
             }
@@ -1425,8 +1426,10 @@ shinyServer(
             cc <- NULL
             for (iv in input$indvar2){
                 cc <- getIndicators(pp, cc, iv, iv, input$indicator2)
+                zcc1 <<- cc #DEBUG-RM2
                 cc[[iv]] <- format(round(cc[[iv]], dp), big.mark=",", scientific=FALSE)
             }
+            zcc2 <<- cc #DEBUG-RM2
             if (!input$showcounts2){
                 cc <- subset(cc, select=-c(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9))
             }
@@ -1455,6 +1458,7 @@ shinyServer(
             pout <- 100 * nout / nall
             pout <- format(round(pout, dp), big.mark=",", scientific=FALSE)
             cat(paste0(nout," of ",nall," = ",pout," percent of values out of limits\n\n"))
+            zcc <<- as.data.frame(cc) #DEBUG-RM2
             return(as.data.frame(cc))
         })
         output$myIndPlot <- renderPlot({
@@ -1991,6 +1995,12 @@ shinyServer(
                     }
                     else if (races[i] == "WI_2020_State_Assembly"){
                         createWI_2020_State_Assembly()
+                    }
+                    else if (races[i] == "WI_2022_Governor"){
+                        createWI_2022_Governor()
+                    }
+                    else if (races[i] == "WI_2022_Senate"){
+                        createWI_2022_Senate()
                     }
                     else{
                         catmsg(paste0("Unknown race: ",races[i]))
@@ -2599,7 +2609,7 @@ shinyServer(
                 files <- c("VA_2021_Governor","VA_2020_President","VA_2018_Senate","VA_2017_Governor","VA_2016_President")
             }
             else if (input$state2 == "WI"){
-                files <- c("WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2020_State_Senate","WI_2020_State_Assembly","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2018_State_Senate","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
+                files <- c("WI_2022_Governor","WI_2022_Senate","WI_2020_President","WI_2020_SupremeCourt","WI_2020_House","WI_2020_State_Senate","WI_2020_State_Assembly","WI_2018_Governor","WI_2018_Senate","WI_2018_SupremeCourt","WI_2018_House","WI_2018_State_Senate","WI_2016_President","WI_2016_President0","WI_2016_President_Recount")
             }
             updateSelectInput(session,"races",choices = files,selected = files[1])
             updateSelectInput(session, "dist", NULL, choices = c(""), selected = "")

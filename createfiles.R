@@ -3896,6 +3896,54 @@ createWI_2018_House <- function(){
     write(paste(partyyy, collapse = " "), paste0(data_dir,"WI_2018_House.csv"))
     write_delim(yy, paste0(data_dir,"WI_2018_House.csv"), append = TRUE, col_names = TRUE)
 }
+createWI_2022_Governor <- function(){
+    catmsg("##### START createWI_2022_Governor #####")
+    xx0 <- read_excel(paste0(input_dir,"WI/2022/","Ward by Ward Report_Governor.xlsx"),
+                      sheet = "Ward by Ward Report", skip = 10)
+    xx <- xx0[,c(1,2,3,4,5,6,7,8)]
+    names(xx) <- c("COUNTY","AREA","TOTAL","Evers","Michels","Beglinger","Haskin","SCATTERING")
+    # xx <- xx[xx$AREA != "County Totals",]
+    # xx <- xx[xx$AREA != "County Totals:",]
+    # xx <- xx[xx$AREA != "Office Totals",]
+    # xx <- xx[xx$AREA != "Office Totals:",]
+    xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
+    xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
+    for (i in 1:NROW(xx)){
+        if (!is.na(xx$COUNTY[i])){
+            lastCounty <- xx$COUNTY[i]
+        }
+        else{
+            xx$COUNTY[i] <- lastCounty
+        }
+    }
+    xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+    partyxx <- names(xx)
+    partyxx[4:5] <- c("DEM","REP")
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2022_Governor.csv"))
+    write_delim(xx, paste0(data_dir,"WI_2022_Governor.csv"), append = TRUE, col_names = TRUE)
+}
+createWI_2022_Senate <- function(){
+    catmsg("##### START createWI_2022_Senate #####")
+    xx0 <- read_excel(paste0(input_dir,"WI/2022/","Ward by Ward Report_US Senate.xlsx"),
+                      sheet = "Ward by Ward Report", skip = 10)
+    xx <- xx0[,c(1,2,3,4,5,6,7)]
+    names(xx) <- c("COUNTY","AREA","TOTAL","Barnes","Johnson","Paul","SCATTERING")
+    xx <- xx[!grepl("County Totals",xx$AREA,ignore.case = TRUE),]
+    xx <- xx[!grepl("Office Totals",xx$AREA,ignore.case = TRUE),]
+    for (i in 1:NROW(xx)){
+        if (!is.na(xx$COUNTY[i])){
+            lastCounty <- xx$COUNTY[i]
+        }
+        else{
+            xx$COUNTY[i] <- lastCounty
+        }
+    }
+    xx$TOTAL <- rowSums(xx[,4:NCOL(xx)], na.rm = TRUE)
+    partyxx <- names(xx)
+    partyxx[4:5] <- c("DEM","REP")
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"WI_2022_Senate.csv"))
+    write_delim(xx, paste0(data_dir,"WI_2022_Senate.csv"), append = TRUE, col_names = TRUE)
+}
 # Assumes DEM and REP listed 1st and 2nd in match, party, and lname
 createfile <- function(xx,col,office,match,party,lname,filename){
     names(xx) <- c("COUNTY","AREA","Office","District","TOTAL","Party","Name","Votes")
