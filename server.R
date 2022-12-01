@@ -1067,7 +1067,7 @@ shinyServer(
             dd <- getdata12()
             # Move filtering to after getdata12()
             if (input$xcounty != "" & input$xcounty != "(all)"){
-                dd <- dd[dd$COUNTY == input$xcounty,]
+                dd <- dd[toupper(dd$COUNTY) == toupper(input$xcounty),] #add toupper to test
             }
             else{
                 dd <- dd[dd$COUNTY != "" & !is.na(dd$COUNTY),]
@@ -1075,7 +1075,7 @@ shinyServer(
             ddd <<- dd #DEBUG-RM
             dd <- dd[(is.na(dd$TOT1_N) | dd$TOT1_N >= input$minvotes) |
                      (is.na(dd$TOT2_N) | dd$TOT2_N >= input$minvotes),]
-            row.names(dd) <- seq(1:NROW(dd))
+            if (NROW(dd) > 0) row.names(dd) <- seq(1:NROW(dd))
             #dd <- dd[dd$DEM1 > 0 & dd$REP1 > 0 & dd$DEM2 > 0 & dd$REP2 > 0,] #keep
             if (input$units == "Percent"){
                 dd <- dd[,c(1:(NCOL(dd)-5),(NCOL(dd)-1),NCOL(dd))]
@@ -1942,6 +1942,9 @@ shinyServer(
                     else if (races[i] == "TX_2020_House_SOS"){
                         createTX_2020_House_SOS()
                     }
+                    else if (races[i] == "TX_2022_Governor_OE"){
+                        createTX_2022_Governor_OE()
+                    }
                     else if (races[i] == "VA_2016_President"){
                         createVA_2016_President()
                     }
@@ -2160,6 +2163,11 @@ shinyServer(
                                 gsub(".$","",dd$AREA[dd$COUNTY == "Miami-Dade"])
                             dd$AREA[dd$COUNTY == "Miami-Dade"] <-
                                 gsub("^[0]+","",dd$AREA[dd$COUNTY == "Miami-Dade"])
+                        }
+                        else if (input$state2 == "TX"){
+                            dogroup <- TRUE
+                            dd$AREA[dd$COUNTY == "Dallas"] <-
+                                substr(dd$AREA[dd$COUNTY == "Dallas"], 1, 4)
                         }
                     }
                     else if (ch1 == "="){
@@ -2600,7 +2608,7 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2020_RR_Commission",
+                files <- c("TX_2022_Governor_OE","TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2020_RR_Commission",
                            "TX_2018_AG","TX_2018_AG_OE","TX_2018_Governor","TX_2018_Governor_OE","TX_2018_Senate","TX_2018_Senate_OE","TX_2018_House","TX_2018_House_OE","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605",
                            "TX_2018_Senate_210605","TX_2018_House_210624","TX_2018_State_House","TX_2018_State_Senate","TX_2018_RR_Commission","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")

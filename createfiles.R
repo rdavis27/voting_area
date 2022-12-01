@@ -4098,7 +4098,8 @@ createWI_2020_House <- function(){
 createfilep <- function(xx,col,office,party,filename){
     xx <- xx[,col]
     names(xx) <- c("COUNTY","AREA","Office","DIST","TOTAL","Party","Name","Votes")
-    xx <- xx[xx$Office == office,]
+    #xx <- xx[xx$Office == office,]
+    xx <- xx[grepl(paste0("^",office),xx$Office),] #ignore extra characters at end
     xx$Party[is.na(xx$Party)] <- "(NA)"
     # Check District and TOTAL, if necessary
     xx$Name <- "Other"
@@ -4448,6 +4449,28 @@ createTX_2020_RR_Commission <- function(){
     office <- "Railroad Commissioner"
     party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
     filename <- "TX_2020_RR_Commission.csv"
+    createfilep(xx,columns,office,party,filename)
+}
+#==============================================================================
+createTX_2022_Governor_OE <- function(){
+    xx <- read_delim(paste0(input_dir,"TX/2022/","20221108__tx__general__dallas__precinct.csv"), ',')
+    #                  col_types = "cindlD") #char,int,num,dbl,log,date
+    # xx <- read_excel(paste0(input_dir,"WI/2016/20161108__wi__general__ward.xlsx"),
+    #                  sheet = "Sheet1", skip = 0)
+    yy <- read_delim(paste0(input_dir,"TX/2022/","20221108__tx__general__travis__precinct.csv"), ',')
+    xx <- rbind(xx,yy)
+    yy <- read_delim(paste0(input_dir,"TX/2022/","20221108__tx__general__tarrant__precinct.csv"), ',')
+    yy$provisional <- 0 # missing from Tarrant
+    xx <- rbind(xx,yy)
+    yy <- read_delim(paste0(input_dir,"TX/2022/","20221108__tx__general__jefferson__precinct.csv"), ',')
+    yy$provisional <- 0 # missing from Jefferson
+    xx <- rbind(xx,yy)
+    columns <- c("county","precinct","office","district","total","party","candidate","votes")
+    xx <- cleanTX_2020(xx)
+    xx$district <- 0
+    office <- "Governor"
+    party <- c("DEM","REP","LIB","GRN") #include largest parties, rest go into OTHER
+    filename <- "TX_2022_Governor_OE.csv"
     createfilep(xx,columns,office,party,filename)
 }
 ###############################################################################
