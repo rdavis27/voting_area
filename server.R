@@ -435,7 +435,14 @@ shinyServer(
         })
         output$cvtPlots <- renderPlot({
             xx <- getdata()
-            cc <- getCounties()
+            counties <- input$cvt_counties
+            if (substr(counties,1,1) %in% c("","#")){
+                cc <- getCounties()
+            }
+            else{
+                COUNTY <- unlist(strsplit(counties, ","))
+                cc <- data.frame(COUNTY)
+            }
             gcc <<- cc #DEBUG-RM
             nn <- input$cvt_cols * input$cvt_rows
             ist <- input$cvt_start

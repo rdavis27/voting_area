@@ -137,7 +137,9 @@ shinyUI(pageWithSidebar(
                          width = 2,
                          numericInput("cvt_start","Starting index",1,min = 1,step = 9),
                          numericInput("cvt_cols","Number of columns",3,min = 1),
-                         numericInput("cvt_rows","Number of rows",3,min = 1)
+                         numericInput("cvt_rows","Number of rows",3,min = 1),
+                         textInput("cvt_counties", "Counties", value =
+                                       "#Cameron,Hidalgo,Maverick,Starr,Zapata,Brooks,Jim Hogg,Kenedy,Willacy")
                          # textInput("xscale", "X From,To,Step,Tick", value = ""),
                          # textInput("yscale", "Y From,To,Step,Tick", value = ""),
                          # textInput("xcolor","Color",value = "blue3,red3,orange,green3,violet"),
