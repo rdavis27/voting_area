@@ -2608,7 +2608,7 @@ shinyServer(
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")
             }
             else if (input$state2 == "TX"){
-                files <- c("TX_2022_Governor_OE","TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2020_RR_Commission",
+                files <- c("TX_2022_Governor_OE","TX_2022_House_OE","TX_2020_President","TX_2020_President_OE","TX_2020_Senate","TX_2020_Senate_OE","TX_2020_House","TX_2020_House_OE","TX_2020_State_House","TX_2020_State_Senate","TX_2020_RR_Commission",
                            "TX_2018_AG","TX_2018_AG_OE","TX_2018_Governor","TX_2018_Governor_OE","TX_2018_Senate","TX_2018_Senate_OE","TX_2018_House","TX_2018_House_OE","TX_2016_President",
                            "TX_2020_President_210602","TX_2020_Senate_210603","TX_2020_House_210624","TX_2018_AG_210605","TX_2018_Governor_210605",
                            "TX_2018_Senate_210605","TX_2018_House_210624","TX_2018_State_House","TX_2018_State_Senate","TX_2018_RR_Commission","TX_2016_President_210604","TX_2020_President_SOS","TX_2020_Senate_SOS","TX_2020_House_SOS")
