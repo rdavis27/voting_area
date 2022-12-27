@@ -1020,6 +1020,7 @@ shinyServer(
                     dd[,i] <- format(dd[,i], big.mark=",", scientific=FALSE)
                 }
             }
+            #zcc <<- dd #DEBUG-RM
             dd
         })
         getAreas <- function(){
@@ -1838,6 +1839,12 @@ shinyServer(
                     else if (races[i] == "OH_2020_Registered"){
                         createOH_2020_Registered()
                     }
+                    else if (races[i] == "OH_2022_Governor"){
+                        createOH_2022_Governor()
+                    }
+                    else if (races[i] == "OH_2022_Senate"){
+                        createOH_2022_Senate()
+                    }
                     else if (races[i] == "SC_2016_President"){
                         createSC_2016_President()
                     }
@@ -2609,7 +2616,7 @@ shinyServer(
                 files <- c("NV_2020_President","NV_2018_Senate","NV_2016_President")
             }
             else if (input$state2 == "OH"){
-                files <- c("OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2016_Senate","OH_2020_Registered","OH_2004_President")
+                files <- c("OH_2022_Governor","OH_2022_Senate","OH_2020_President","OH_2018_Governor","OH_2018_Senate","OH_2016_President","OH_2016_Senate","OH_2020_Registered","OH_2004_President")
             }
             else if (input$state2 == "SC"){
                 files <- c("SC_2020_President","SC_2020_Senate","SC_2018_Governor","SC_2016_President","SC_2020_Registered")

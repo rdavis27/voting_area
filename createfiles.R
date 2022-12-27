@@ -2843,6 +2843,30 @@ createOH_2020_Registered <- function(){
     write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2020_Registered.csv"))
     write_delim(xx, paste0(data_dir,"OH_2020_Registered.csv"), append = TRUE, col_names = TRUE)
 }
+createOH_2022_Governor <- function(){
+    catmsg("##### START createOH_2022_Governor #####")
+    xx <- read_excel(paste0(input_dir,"OH/2022/","statewide-races-by-precinct.xlsx"),
+                     sheet = "Statewide Offices", skip = 3)
+    xx <- xx[,c(1,2,7,14,9,10,11,12,13)]
+    names(xx) <- c("COUNTY","AREA","TOTAL","Whaley","DeWine","Grady","Patton","Turner","Usher")
+    xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+    xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+    partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","WI1","WI2","WI3","WI4")
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2022_Governor.csv"))
+    write_delim(xx, paste0(data_dir,"OH_2022_Governor.csv"), append = TRUE, col_names = TRUE)
+}
+createOH_2022_Senate <- function(){
+    catmsg("##### START createOH_2022_Senate #####")
+    xx <- read_excel(paste0(input_dir,"OH/2022/","statewide-races-by-precinct.xlsx"),
+                     sheet = "U.S. Congress", skip = 3)
+    xx <- xx[,c(1,2,7,13,15,9,10,11,12,14)]
+    names(xx) <- c("COUNTY","AREA","TOTAL","Ryan","Vance","Cheng","Esh","Faris","Hoffman","Tinsley")
+    xx$AREA <- gsub("^PRECINCT ","",xx$AREA)
+    xx$AREA <- gsub("^[0-9]+[ ]+","",xx$AREA)
+    partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","WI1","WI2","WI3","WI4","WI5")
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"OH_2022_Senate.csv"))
+    write_delim(xx, paste0(data_dir,"OH_2022_Senate.csv"), append = TRUE, col_names = TRUE)
+}
 createSC_2016_President <- function(){
     #input_dir <- "input/"
     #data_dir  <- "data/"
