@@ -3432,6 +3432,29 @@ createTX_2020_Senate <- function(){
     write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2020_Senate.csv"))
     write_delim(xx, paste0(data_dir,"TX_2020_Senate.csv"), append = TRUE, col_names = TRUE)
 }
+createTX_2022_Governor <- function(){
+    catmsg("##### START createTX_2022_Governor #####")
+    # file from https://www2.census.gov/programs-surveys/popest/geographies/2022/
+    cc <- read_excel(paste0(input_dir,"all-geocodes-v2022.xlsx"), sheet = "all_geocodes_v2022", skip = 4)
+    names(cc) <- c("SummaryLevel","StateCode","CountyCode","SubdivCode","PlaceCode","CityCode","Area")
+    cctx <- cc[cc$StateCode == "48",]
+    xx <- read_csv(paste0(input_dir,"TX/2022/","governor.csv"))
+    # names(xx) <- c("CNTYVTD","VTDKEY","AbbottR_22G_Governor","BarriosG_22G_Governor","O'RourkeD_22G_Governor",
+    #                "TippettsL_22G_Governor","Write-InW_22G_Governor")
+    xx$COUNTY <- substring(xx$CNTYVTD,1,3)
+    for (i in 1:NROW(xx)){
+        xx$COUNTY[i] <- cctx$Area[cctx$CountyCode == xx$COUNTY[i]]
+        xx$COUNTY[i] <- gsub(" County","",xx$COUNTY[i])
+    }
+    xx$AREA <- xx$CNTYVTD
+    xx$TOTAL <- 0
+    xx <- xx[,c(8,9,10,5,3,6,4,7)] # was c(6,7,8,4,3,5)
+    names(xx) <- c("COUNTY","AREA","TOTAL","ORourke","Abbott","Tippetts","Barrios","WriteIn")
+    partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","Writein")
+    xx$AREA <- sub("^0+", "", substring(xx$AREA,4))
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"TX_2022_Governor.csv"))
+    write_delim(xx, paste0(data_dir,"TX_2022_Governor.csv"), append = TRUE, col_names = TRUE)
+}
 # TEXAS PRECINCT DATA DOWNLOADED IN JUNE 2021
 createTX_2016_President_210604 <- function(){
     catmsg("##### START createTX_2016_President_210604 #####")
