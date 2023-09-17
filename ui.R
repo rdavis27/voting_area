@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
     sidebarPanel(
         width = 2,
         selectInput("state2", "STATE",
-                    choices = c("AZ","CA","CO","FL","IA","ME","MN","MT","NC","NV","OH","SC","TX","VA","WI"),
+                    choices = c("AL","AZ","CA","CO","FL","IA","ME","MN","MT","NC","NV","OH","SC","TX","VA","WI"),
                     selected = "WI",
                     multiple = FALSE),
         selectInput("races", "RACE",

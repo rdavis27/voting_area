@@ -1,3 +1,190 @@
+library(tidyverse)
+library(readxl)
+input_dir <- "input/"
+data_dir  <- "data/"
+
+createAL_1998_Governor <- function(){
+    xx <- read_excel(paste0(input_dir,"AL/co-est2022-pop-01.xlsx"),
+                     sheet = "CO-EST2022-POP-01", skip = 4)
+    cc <- xx$Alabama[1:67]
+    cc <- gsub("^\\.","",cc)
+    cc <- gsub(" County, Alabama$","",cc)
+    COUNTY <- character(0)
+    AREA <- character(0)
+    TOTAL <- character(0)
+    DEM <- numeric(0)
+    REP <- numeric(0)
+    WI <- numeric(0)
+    
+    xx <- data.frame(COUNTY,AREA,TOTAL,DEM,REP,WI)
+    for (i in cc){
+        print(paste("COUNTY=",i)) #DEBUG-RM
+        ifile <- str_to_upper(i)
+        if (ifile == "ST. CLAIR") ifile <- "STCLAIR"
+        dd <- read_excel(paste0(input_dir,"AL/1998/98g-prec/98g-prec/",ifile,".XLS"),
+                         sheet = "Sheet1", skip = 1)
+        dd <- dd[,1:4]
+        dd$COUNTY <- i
+        dd$TOTAL <- 0
+        dd <- dd[,c(5,1,6,2,3,4)]
+        names(dd) <- c("COUNTY","AREA","TOTAL","DEM","REP","WI")
+        dd <- dd[!(dd$AREA %in% c("Total Votes","Calculated Total","Calculated Totals")),]
+        dd <- dd[!(dd$AREA %in% c("Totals","TOTAL")),]
+        xx <- rbind(xx,dd)
+    }
+    zxx <<- xx #DEBUG-RM
+    partyxx <- names(xx)
+    names(xx) <- c("COUNTY","AREA","TOTAL","Siegelman","James","WRITEIN")
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"AL_1998_Governor.csv"))
+    write_delim(xx, paste0(data_dir,"AL_1998_Governor.csv"), append = TRUE, col_names = TRUE)
+}
+createAL_2000_President <- function(){
+    # xx <- read_excel(paste0(input_dir,"AL/co-est2022-pop-01.xlsx"),
+    #                  sheet = "CO-EST2022-POP-01", skip = 4)
+    # cc <- xx$Alabama[1:67]
+    # cc <- gsub("^\\.","",cc)
+    # cc <- gsub(" County, Alabama$","",cc)
+    
+    dd <- read_csv(paste0(input_dir,"AL/2000/al/AL.csv"))
+    xx <- data.frame(dd$CTYNAME,dd$PRECNAME,dd$BALLOTS,dd$GORE,dd$BUSH,dd$BROWNE,dd$NADER,dd$BUCHANAN,
+                     dd$HAGELIN,dd$PHILLIPS,dd$PRESWI, stringsAsFactors = FALSE) # dd$PRESOVER,dd$PRESUND
+    for (i in 1:NROW(xx)){ #set non-numeric entries to zero
+        for (j in 4:NCOL(xx)){
+            if (is.na(as.numeric(xx[i,j]))){
+                xx[i,j] <- "0"
+            }
+        }
+    }
+    partyxx <- c("COUNTY","AREA","TOTAL","DEM","REP","LIB","GRN","REF","NLP","CON","WI")
+    names(xx) <- c("COUNTY","AREA","TOTAL","Gore","Bush","Browne","Nader","Buchanan",
+                   "Hagelin","Phillips","WRITEIN")
+    xx$TOTAL <- 0
+    zxx <<- xx #DEBUG-RM
+    write(paste(partyxx, collapse = " "), paste0(data_dir,"AL_2000_President.csv"))
+    write_delim(xx, paste0(data_dir,"AL_2000_President.csv"), append = TRUE, col_names = TRUE)
+}
+createAL_2002 <- function(office, outfile, final = TRUE){
+    xx <- read_excel(paste0(input_dir,"AL/co-est2022-pop-01.xlsx"),
+                     sheet = "CO-EST2022-POP-01", skip = 4)
+    cc <- xx$Alabama[1:67]
+    cc <- gsub("^\\.","",cc)
+    cc <- gsub(" County, Alabama$","",cc) # cc=AL counties
+    COUNTY <- character(0)
+    AREA <- character(0)
+    TOTAL <- character(0)
+    yy <- data.frame(COUNTY,AREA,TOTAL)
+    dd <- read_excel(paste0(input_dir,"AL/2002/2002-GeneralElection-PrecinctLevel_0.xls"),
+                     sheet = "BALDWIN", skip = 1)
+    for (j in dd[["Party"]]){ # add parties, should be same for all counties
+        yy[[j]] <- numeric(0)
+    }
+    #for (i in "Jefferson"){ #DEBUG-TEST
+    for (i in cc){
+        print(paste("COUNTY=",i)) #DEBUG-RM
+        if (i %in% c("Jefferson")){
+            dd <- read_excel(paste0(input_dir,"AL/2002/2002-GeneralElection-PrecinctLevel_0.xls"),
+                             sheet = "JEFFERSON", skip = 0)
+            ww <- which(dd[2,] == office)
+            parties <- as.character(dd[3,ww])
+            cnames <- as.character(dd[4,ww])
+            rvotes <- as.numeric(dd[5,ww])
+            cvotes <- as.numeric(dd[6,ww])
+            dd <- dd[9:NROW(dd),c(1,ww)]
+            names(dd) <- c("AREA",parties)
+            dd$COUNTY <- i
+            dd$TOTAL <- 0
+            xx <- dd[,c(NCOL(dd)-1,1,NCOL(dd),seq(2,NCOL(dd)-2))]
+            yy <- rbind(yy,xx)
+            next()
+        }
+        startcol <- 7
+        if (i %in% c("Calhoun","Chambers","Mobile","Monroe","Washington")){
+            startcol <- 8 # 7 = Calculated Number of Votes
+        }
+        isheet <- str_to_upper(i)
+        if (isheet == "ST. CLAIR") isheet <- "STCLAIR"
+        dd <- read_excel(paste0(input_dir,"AL/2002/2002-GeneralElection-PrecinctLevel_0.xls"),
+                         sheet = isheet, skip = 1)
+        dd <- dd[2:NROW(dd),] # skip second header
+        if (i == "Marshall"){ # remove missing column for Marshall
+            names(dd)[1:7] <- c("Code","Missing","County","Contest","Party","Candidate","Total")
+            dd <- subset(dd,select = -Missing)
+        }
+        else{
+            names(dd)[1:6] <- c("Code","County","Contest","Party","Candidate","Total")
+        }
+        dd <- dd[!is.na(dd$Contest),] # needed for Marshall
+        zdd0 <<- dd #DEBUG-RM
+        dd <- dd[dd$Contest == office,]
+        zdd <<- dd #DEBUG-RM
+        btot <- 0
+        for (k in startcol:NCOL(dd)){
+            COUNTY <- i
+            AREA <- names(dd)[k]
+            TOTAL <- 0
+            xx <- data.frame(COUNTY,AREA,TOTAL)
+            for (j in dd[["Party"]]){
+                if (final){
+                    xx[[j]] <- as.numeric(dd[dd[["Party"]] == j,k])
+                }
+                else{
+                    num <- as.numeric(dd[dd[["Party"]] == j,k])
+                    if (i == "Baldwin" & office == "GOVERNOR" & j == "DEM"){
+                        if (!is.na(num)){
+                            num <- round(num * 19070/12736, 0)
+                            btot <- btot + num
+                        }
+                    }
+                    xx[[j]] <- num
+                }
+            }
+            yy <- rbind(yy,xx)
+        }
+        for (j in dd[["Party"]]){ # check totals 
+            total <- 0
+            stotal <- as.numeric(dd[dd[["Party"]] == j,6])
+            for (k in startcol:NCOL(dd)){
+                str <- dd[dd[["Party"]] == j,k]
+                num <- as.numeric(str)
+                if (!is.na(num)){
+                    total <- total + as.numeric(dd[dd[["Party"]] == j,k])
+                }
+                else{
+                    if (i != "Marshall") print(paste0("***** WARNING - FOUND NA=|",str,"|"))
+                }
+            }
+            if (total != stotal){
+                print(paste0("***** WARNING: CALCULATED TOTAL ",total," != ",stotal))
+            }
+        }
+    }
+    xx <- yy[,c(1,2,3,4,6,5,7)]
+    partyxx <- names(xx)
+    for (i in 4:NCOL(xx)){
+        candidate <- dd$Candidate[dd$Party == partyxx[i]]
+        mm <- str_match(candidate,"^([A-Za-z_-]+)")
+        names(xx)[i] <- gsub("-","",mm[1])
+    }
+    zxx <<- xx #DEBUG-RM
+    write(paste(partyxx, collapse = " "), paste0(data_dir,outfile))
+    write_delim(xx, paste0(data_dir,outfile), append = TRUE, col_names = TRUE)
+}
+createAL_2002_Governor <- function(){
+    createAL_2002("GOVERNOR","AL_2002_Governor.csv")
+}
+createAL_2002_Gov_Count1 <- function(){
+    createAL_2002("GOVERNOR","AL_2002_Gov_Count1.csv",FALSE)
+}
+createAL_2002_LtGovernor <- function(){
+    createAL_2002("LIEUTENANT GOVERNOR","AL_2002_LtGovernor.csv")
+}
+createAL_2002_Senate <- function(){
+    createAL_2002("UNITED STATES SENATOR","AL_2002_Senate.csv")
+}
+createAL_2002_SOS <- function(){
+    createAL_2002("SECRETARY OF STATE","AL_2002_SOS.csv")
+}
+########## ARIZONA ##########
 ## All ElectionWare (EW) counties and filenames
 # az_ew_counties <- c(
 #     "Apache","Cochise",

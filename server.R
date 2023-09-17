@@ -1613,7 +1613,28 @@ shinyServer(
         createfiles <- function(races){
             if (input$createfiles){
                 for (i in 1:length(races)){
-                    if (races[i] == "AZ_2018_Senate"){
+                    if (races[i] == "AL_1998_Governor"){
+                        createAL_1998_Governor()
+                    }
+                    else if (races[i] == "AL_2000_President"){
+                        createAL_2000_President()
+                    }
+                    else if (races[i] == "AL_2002_Governor"){
+                        createAL_2002_Governor()
+                    }
+                    else if (races[i] == "AL_2002_Gov_Count1"){
+                        createAL_2002_Gov_Count1()
+                    }
+                    else if (races[i] == "AL_2002_LtGovernor"){
+                        createAL_2002_LtGovernor()
+                    }
+                    else if (races[i] == "AL_2002_Senate"){
+                        createAL_2002_Senate()
+                    }
+                    else if (races[i] == "AL_2002_SOS"){
+                        createAL_2002_SOS()
+                    }
+                    else if (races[i] == "AZ_2018_Senate"){
                         createAZ_2018_Senate()
                     }
                     else if (races[i] == "AZ_2020_President"){
@@ -2586,7 +2607,11 @@ shinyServer(
             }
         })
         observeEvent(input$state2,{
-            if (input$state2 == "AZ"){
+            if (input$state2 == "AL"){
+                files <- c("AL_2002_Governor","AL_2002_Gov_Count1","AL_2002_LtGovernor","AL_2002_Senate",
+                           "AL_2002_SOS","AL_2000_President","AL_1998_Governor")
+            }
+            else if (input$state2 == "AZ"){
                 files <- c("AZ_2020_President","AZ_2020_President_Early","AZ_2020_President_Polls","AZ_2020_President_Prov",
                            "AZ_2020_Senate","AZ_2020_Senate_Early","AZ_2020_Senate_Polls","AZ_2020_Senate_Prov",
                            "AZ_2018_Senate")
