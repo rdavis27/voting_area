@@ -28,7 +28,8 @@ createAL_1998_Governor <- function(){
         dd$TOTAL <- 0
         dd <- dd[,c(5,1,6,2,3,4)]
         names(dd) <- c("COUNTY","AREA","TOTAL","DEM","REP","WI")
-        dd <- dd[!(dd$AREA %in% c("Total Votes","Calculated Total","Calculated Totals")),]
+        dd <- dd[!(dd$AREA == "Total Votes" & str_to_upper(dd$COUNTY) != "SUMTER"),]
+        dd <- dd[!(dd$AREA %in% c("Calculated Total","Calculated Totals")),]
         dd <- dd[!(dd$AREA %in% c("Totals","TOTAL")),]
         xx <- rbind(xx,dd)
     }
@@ -183,6 +184,33 @@ createAL_2002_Senate <- function(){
 }
 createAL_2002_SOS <- function(){
     createAL_2002("SECRETARY OF STATE","AL_2002_SOS.csv")
+}
+createAL_2002_Registered <- function(month = "October", activeonly = TRUE){
+    dd <- read_excel(paste0(input_dir,"AL/2002/ALVR-2002.xls"), sheet = month, skip = 5)
+    names(dd) <- c("COUNTY","WHITE","BLACK","OTHER","ACTIVE","VOTING_AGE","INACTIVE")
+    xx <- data.frame(dd$COUNTY,dd$ACTIVE,dd$INACTIVE, stringsAsFactors = FALSE)
+    xx$AREA <- "All"
+    xx$TOTAL <- 0
+    xx <- xx[,c(1,4,5,2,3)]
+    names(xx) <- c("COUNTY","AREA","TOTAL","DEM","REP")
+    xx <- xx[!is.na(xx$COUNTY),]
+    xx <- xx[xx$COUNTY != "TOTAL:",]
+    xx$COUNTY[xx$COUNTY == "ST CLAIR"] <- "ST. CLAIR"
+    outfile <- "AL_2002_Registered.csv"
+    if (activeonly){
+        xx$REP <- 0
+        outfile <- "AL_2002_Active.csv"
+    }
+    partyxx <- names(xx)
+    zxx <<- xx #DEBUG-RM
+    write(paste(partyxx, collapse = " "), paste0(data_dir,outfile))
+    write_delim(xx, paste0(data_dir,outfile), append = TRUE, col_names = TRUE)
+}
+createAL_2002_Registered_1031 <- function(){
+    createAL_2002_Registered("October", FALSE)
+}
+createAL_2002_Active_1031 <- function(){
+    createAL_2002_Registered("October", TRUE)
 }
 ########## ARIZONA ##########
 ## All ElectionWare (EW) counties and filenames

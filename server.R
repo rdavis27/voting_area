@@ -1634,6 +1634,12 @@ shinyServer(
                     else if (races[i] == "AL_2002_SOS"){
                         createAL_2002_SOS()
                     }
+                    else if (races[i] == "AL_2002_Registered"){
+                        createAL_2002_Registered_1031()
+                    }
+                    else if (races[i] == "AL_2002_Active"){
+                        createAL_2002_Active_1031()
+                    }
                     else if (races[i] == "AZ_2018_Senate"){
                         createAZ_2018_Senate()
                     }
@@ -2609,7 +2615,8 @@ shinyServer(
         observeEvent(input$state2,{
             if (input$state2 == "AL"){
                 files <- c("AL_2002_Governor","AL_2002_Gov_Count1","AL_2002_LtGovernor","AL_2002_Senate",
-                           "AL_2002_SOS","AL_2000_President","AL_1998_Governor")
+                           "AL_2002_SOS","AL_2002_Registered","AL_2002_Active",
+                           "AL_2000_President","AL_1998_Governor")
             }
             else if (input$state2 == "AZ"){
                 files <- c("AZ_2020_President","AZ_2020_President_Early","AZ_2020_President_Polls","AZ_2020_President_Prov",
